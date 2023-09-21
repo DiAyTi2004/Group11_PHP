@@ -78,6 +78,7 @@
 }
 
 .content-but {
+    box-shadow: #333 outset 4px;
     background-color: #f16321;
     color: #fff;
     font-size: 16px;
@@ -89,6 +90,11 @@
     padding: 0 24px;
     border: none;
     border-radius: 5px;
+}
+
+.content-but:hover {
+    cursor: pointer;
+    opacity: 0.8;
 }
 
 .content-but i {
