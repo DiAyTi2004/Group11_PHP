@@ -214,12 +214,56 @@
                         </td>
                     </tr>
 
+                    <tr class="bc-ccc">
+                        <td>91</td>
+                        <td>Hoàng Anh Thư</td>
+                        <td>31/08/2023 09:54</td>
+                        <td>Phòng khám 1</td>
+                        <td>Khám bác sĩ thông thường</td>
+                        <td>Khám mắt</td>
+                        <td>
+                            <i class="fa-solid fa-print"></i>
+                            <i class="fa-solid fa-pencil"></i>
+                            <i class="fa-solid fa-trash"></i>
+                        </td>
+                    </tr>
+
                 </table>
+
+                <section class="paginiton m-4 flex justify-right align-center">
+                    <div class="paginiton-container">
+                        Trình bày 90-100 trong số 414
+                    </div>
+
+                    <div class="paginiton-page-size ml-3">
+                        Số hàng mỗi trang                  
+                        <select>
+                            <option value="">5</option>
+                            <option value="">10</option>
+                            <option value="">25</option>
+                            <option value="">50</option>
+                        </select>                      
+                    </div>
+
+                    <ul class="paginition-direction flex-center ml-3">
+                        <li><i class="fa-solid fa-angles-left"></i></li>
+                        <li><i class="fa-solid fa-angle-left"></i></li>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>...</li>
+                        <li>43</li>
+                        <li><i class="fa-solid fa-chevron-right"></i></li>
+                        <li><i class="fa-solid fa-angles-right"></i></li>
+                    </ul>
+                </section>
             </div>
         </div>
     </div>
 </div>
 
 <div class="footer">
-
+    <p>&copy; <?php echo date("Y"); ?> Nhóm 11 PHP. Bảo lưu mọi quyền.</p>
 </div>
