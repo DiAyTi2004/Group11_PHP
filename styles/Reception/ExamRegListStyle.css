@@ -7,6 +7,12 @@
 .header {
     border-bottom: 2px solid var(--pr-color);
     font-family: sans-serif;
+    background-color: white;
+    /* position: fixed;
+    top: 0;
+    right: 0;
+    left: 0; */
+    z-index: 99;
 }
 
 .header-logo label {
@@ -96,7 +102,7 @@
 }
 
 .list-table {
-    height: 800px;
+    /* height: 800px; */
 }
 
 .list-table table {
@@ -104,6 +110,7 @@
     border-collapse: collapse; /* Xoá khoảng trống */
     border-spacing: 0; /* Xoá khoảng trống */
     border: 1px solid var(--pr-color);
+    /* overflow: hidden; */
 }
 
 .list-table table .heading{

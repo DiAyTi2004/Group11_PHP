@@ -3,7 +3,10 @@ html {
     margin: unset;
     box-sizing: border-box;
     scroll-behavior: smooth;
-    overflow: hidden;
+}
+
+body {
+    min-height: 100vh;
 }
 
 :root {
@@ -1332,6 +1335,10 @@ html {
     min-height: 100% !important;
 }
 
+.mh-100vh {
+    min-height: 100vh !important;
+}
+
 .h-150 {
     height: 150px !important;
 }
@@ -1469,4 +1476,3 @@ html {
 .br-50 {
     border-radius: 50px !important;
 }
-
