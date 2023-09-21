@@ -1,9 +1,132 @@
-html {
-    background-color: black;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-.icon {
-    height: 30px;
-    width: 30px;
-    color: white;
+.header {
+    border-bottom: 2px solid var(--pr-color);
+    font-family: sans-serif;
 }
+
+.header-logo label {
+    font-size: 16px;
+    color: var(--pr-color);
+}
+
+.header-logo-icon {
+    display: inline-block;
+    padding: 10px;
+    background-color: var(--pr-color);
+    color: #fff;
+}
+
+.header-title {
+    color: var(--pr-color);
+}
+
+.content-search-heading {
+    border-bottom: 1px solid var(--pr-color);
+}
+
+.content-list-heading label,
+.content-search-heading label{
+    color: #006778;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.content {
+    background-color: #ccc;
+}
+
+.content-search,
+.content-list {
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.form_input {
+    width: calc(100%/3);
+    margin-left: 8px;
+}
+
+.input-date {
+    border: 1px solid var(--pr-color);
+    width: 95%;
+    padding: 4px;
+}
+
+.input-date i {
+    float: right;
+    line-height: 40px;
+}
+
+.form_input span {
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+}
+
+.form_input input {
+    min-height: 40px;
+    border: none;
+    width: 80%;
+    font-size: 18px;
+    outline: none;
+}
+
+.content-but {
+    background-color: #f16321;
+    color: #fff;
+    font-size: 16px;
+    display: inline-block;
+    min-width: 200px;
+    text-align: center;
+    line-height: 32px;
+    margin-right: 8px;
+    padding: 0 24px;
+    border: none;
+    border-radius: 5px;
+}
+
+.content-but i {
+    margin-right: 4px;
+}
+
+.list-table {
+    height: 800px;
+}
+
+.list-table table {
+    width: 100%;
+    border-collapse: collapse; /* Xoá khoảng trống */
+    border-spacing: 0; /* Xoá khoảng trống */
+    border: 1px solid var(--pr-color);
+}
+
+.list-table table .heading{
+    padding: 8px;
+    color: #fff;
+    background-color: #006778;
+}
+
+.list-table table td {
+    padding: 8px;
+}
+
+th, td {
+    text-align: left; /* Căn trái dữ liệu và heading */
+}
+
+.bc-ccc {
+    background-color: #ccc;
+}
+
+.bc-fff {
+    background-color: #fff;
+}
+
+
+

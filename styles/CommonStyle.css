@@ -6,6 +6,10 @@ html {
     overflow: hidden;
 }
 
+:root {
+    --pr-color: rgb(62, 148, 163);
+}
+
 .m-0 {
     margin: 0 !important;
 }
@@ -1465,3 +1469,4 @@ html {
 .br-50 {
     border-radius: 50px !important;
 }
+
