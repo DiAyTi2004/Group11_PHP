@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<div>
     this is exam registration list
-</body>
-</html>
+
+    <i class="fa-solid fa-earth-asia"></i>
+    <i class="fa fa-car fa-lg"></i>
+    <i class="fas fa-search"></i>
+</div>
+
