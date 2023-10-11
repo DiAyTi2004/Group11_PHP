@@ -141,5 +141,37 @@ th, td {
     background-color: #fff;
 }
 
+.paginition {
+
+}
+
+.paginiton-page-size select {
+    height: 30px;
+}
+
+.paginition-direction {
+    list-style-type: none;
+}
+
+.paginition-direction li{
+    padding: 12px;
+    cursor: pointer;
+    min-height: 30px;
+    border-radius: 10px;
+}
+
+.paginition-direction li:hover {
+    background-color: #006778;
+    color: #fff;
+}
+
+.footer {
+    height: 32px;
+    background-color: #006778;
+    color: #fff;
+    font-size: 18px;
+    text-align: left;
+}
+
 
 
