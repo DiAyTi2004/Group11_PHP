@@ -1,5 +1,5 @@
 Cài đặt MySQL
-Chạy nhập file bandongho.sql
+Chạy nhập file shoesland.sql
 
 Đăng nhập với quyền quản trị bằng tài khoản
 	Tài khoản: admin
