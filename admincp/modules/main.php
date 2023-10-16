@@ -1,5 +1,5 @@
 <div class="clear"></div>
-<div class="main">
+<div class="main container">
     <?php 
                         
         if(isset($_GET['action']) && $_GET['query']){                        

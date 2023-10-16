@@ -1,1 +1,1 @@
- <p>Footer Admincp</p>
+ <p>Team 11 PHP</p>
