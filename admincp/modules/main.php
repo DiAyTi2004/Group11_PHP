@@ -17,8 +17,8 @@
             include("modules/quanlydanhmucsp/sua.php");
 
         }elseif($bientam=='quanlysanpham' && $query=='them'){
-            include("modules/quanlysp/them.php");
             include("modules/quanlysp/lietke.php");
+            include("modules/quanlysp/them.php");
 
         }elseif($bientam=='quanlysanpham' && $query=='sua'){
             include("modules/quanlysp/sua.php");
