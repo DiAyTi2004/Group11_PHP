@@ -17,29 +17,25 @@
                         </a>
                     </li>
                     <li>
-                        <a href="index.php?action=quanlydonhang&query=them"
-                            class="nav-link text-white flex-column flex-center">
+                        <a href="index.php?action=quanlydonhang&query=them" class="nav-link text-white flex-column flex-center">
                             <i class="fa-solid fa-gauge-high text-white mb-2"></i>
                             Đơn hàng
                         </a>
                     </li>
                     <li>
-                        <a href="index.php?action=quanlysanpham&query=them"
-                            class="nav-link text-white flex-column flex-center">
+                        <a href="index.php?action=quanlysanpham&query=them" class="nav-link text-white flex-column flex-center">
                             <i class="fa-solid fa-table text-white mb-2"></i>
                             Sản phẩm
                         </a>
                     </li>
                     <li>
-                        <a href="index.php?action=quanlydanhmucsanpham&query=them"
-                            class="nav-link text-white flex-column flex-center">
+                        <a href="index.php?action=quanlydanhmucsanpham&query=them" class="nav-link text-white flex-column flex-center">
                             <i class="fa-solid fa-sitemap text-white mb-2"></i>
                             Danh mục
                         </a>
                     </li>
                     <li>
-                        <a href="index.php?action=quanlynguoidung&query=them"
-                            class="nav-link text-white flex-column flex-center">
+                        <a href="index.php?action=quanlynguoidung&query=them" class="nav-link text-white flex-column flex-center">
                             <i class="fa-solid fa-users-gear text-white mb-2"></i>
                             Người dùng
                         </a>
@@ -48,7 +44,7 @@
                         <a href="index.php?dangxuat=1" class="nav-link text-white flex-column flex-center">
                             <div class="text-end">
                                 <?php
-                                if(isset($_GET['dangxuat'])&&$_GET['dangxuat']==1){
+                                if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
                                     unset($_SESSION['dangnhap']);
                                     header('Location:login.php');
                                 }
@@ -56,10 +52,10 @@
                                 <button type="button" class="btn btn-primary">
                                     <i class="fa-solid fa-right-from-bracket mr-1"></i>
                                     Đăng xuất
-                                <?php if(isset($_SESSION['dangnhap'])){
-		                        echo $_SESSION['dangnhap'];
-	                            }
-                                ?>
+                                    <?php if (isset($_SESSION['dangnhap'])) {
+                                        echo $_SESSION['dangnhap'];
+                                    }
+                                    ?>
                                 </button>
                             </div>
                         </a>
