@@ -10,6 +10,7 @@ if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
 <div class="menu">
     <div class="menu_list">
         <ul class="menu_list-left">
+            <li><img style="width:50px;height:auto;" src="./images/logo.svg" alt="logo"> </li>
             <li> <a href="index.php">Home</a></li>
             <li> <a href="index.php?quanly=contact">Liên hệ </a></li>
             <li> <a href="index.php?quanly=giohang">Giỏ hàng</a></li>
