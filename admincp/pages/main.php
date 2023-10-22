@@ -15,10 +15,10 @@
     } elseif ($bientam == 'quanlydanhmucsanpham' && $query == 'sua') {
         include("pages/quanlydanhmucsp/sua.php");
     } elseif ($bientam == 'quanlysanpham' && $query == 'them') {
-        include("pages/quanlysp/lietke.php");
-        include("pages/quanlysp/them.php");
+        include("pages/Product/ProductIndex.php");
+        include("pages/Product/AddProductPopup.php");
     } elseif ($bientam == 'quanlysanpham' && $query == 'sua') {
-        include("pages/quanlysp/sua.php");
+        include("pages/Product/EditProductPopup.php");
     } elseif ($bientam == 'quanlynguoidung' && $query == 'them') {
         include("pages/quanlynguoidung/lietke.php");
     } elseif ($bientam == 'quanlynguoidung' && $query == 'sua') {

@@ -1,1 +1,0 @@
- <p>Welcome to Administrator Page</p>
