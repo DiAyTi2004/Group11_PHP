@@ -21,7 +21,17 @@ if (!isset($_SESSION['dangnhap'])) {
 </head>
 
 <body>
-    <div class="wrapper">
+    <style>
+        .configWrapper{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .configWrapper > .main{
+            flex: 1;
+        }
+    </style>
+    <div class="wrapper configWrapper">
         <?php
         include("config/connect.php");
         include("modules/menu.php");
