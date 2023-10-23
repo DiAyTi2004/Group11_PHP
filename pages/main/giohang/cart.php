@@ -30,7 +30,7 @@
     ?>
     <tr>
         <td><b><?php echo $cart_item['tensanpham'] ?></b></td>
-        <td><img class="img-cart" src="admincp/modules/quanlysp/uploads/<?php echo $cart_item['hinhanh'] ?>"></td>
+        <td><img class="img-cart" src="admin/modules/quanlysp/uploads/<?php echo $cart_item['hinhanh'] ?>"></td>
         <td>
             <div class="soluong-sp-dem">
                     <a class="soluong-sp-dem-icon" href="pages/main/giohang/suasoluong.php?tru=<?php echo $cart_item['id'] ?>"><i class="fa-solid fa-minus"></i></a>

@@ -7,7 +7,7 @@
  ?>
  <div class="warpper_deital"> 
  <div class="hinhanh_sanpham">
-        <img src="admincp/modules/quanlysp/uploads/<?php echo $row_chitiet['hinhanh']?>">
+        <img src="admin/modules/quanlysp/uploads/<?php echo $row_chitiet['hinhanh']?>">
  </div>
     <form class="form-sp" action="pages/main/giohang/themgiohang.php?idsanpham=<?php echo $row_chitiet['id_sanpham'] ?>" method="POST">
         <div class="chitiet_sanpham">

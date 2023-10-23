@@ -10,7 +10,7 @@
     ?>
         <li>
             <a href="index.php?quanly=sanpham&id=<?php echo $row['id_sanpham'] ?>">
-                <img src="admincp/modules/quanlysp/uploads/<?php echo $row['hinhanh'] ?>">
+                <img src="admin/modules/quanlysp/uploads/<?php echo $row['hinhanh'] ?>">
                 <p></p>
                 <h5 class="title_product"> <?php echo $row['tensanpham'] ?></h5>
                 <h5 class="price_product">Giá: <?php echo number_format($row['giasanpham'],0,',','.').' VNĐ' ?></h5>

@@ -64,7 +64,7 @@
             <td><?php echo $i ?></td>
             <td><?php echo $cart_item['masp']?></td>
             <td><?php echo $cart_item['tensanpham'] ?></td>
-            <td><img src="../../../admincp/modules/quanlysp/uploads/<?php echo $cart_item['hinhanh'] ?>" width="150px"></td>
+            <td><img src="../../../admin/modules/quanlysp/uploads/<?php echo $cart_item['hinhanh'] ?>" width="150px"></td>
             <td>
                 <a href="pages/main/giohang/suasoluong.php?cong=<?php echo $cart_item['id'] ?>"><i class="fa-solid fa-plus"></i></a>
                 <?php echo $cart_item['soluong'] ?>

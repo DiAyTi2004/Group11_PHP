@@ -22,7 +22,7 @@
     <div class="wrapper">
         <?php
         session_start();
-        include("admincp/config/connect.php");
+        include("admin/config/connect.php");
         include("pages/menu.php");
         #include("pages/header.php");
         include("pages/main.php");

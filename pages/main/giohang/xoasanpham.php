@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include "../../../admincp/config/connect.php";
+    include "../../../admin/config/connect.php";
    
     //XÓA SẢN PHẨM
     if(isset($_SESSION['cart'])&& isset($_GET['xoa'])){

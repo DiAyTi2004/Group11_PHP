@@ -13,7 +13,7 @@ if (isset($_POST['dangnhap'])) {
         $_SESSION['id_khachhang'] = $row_data['id_khachhang'];
         header("Location:index.php");
     } elseif ($taikhoan == 'admin') {
-        header("Location:admincp/login.php");
+        header("Location:admin/login.php");
     } else {
         $message = "Tài khoản mật khẩu không đúng";
         echo "<script type='text/javascript'>alert('$message');</script>";

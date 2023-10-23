@@ -61,7 +61,7 @@
         <div>
             <?php
             session_start();
-            include('../admincp/config/connect.php');
+            include('../admin/config/connect.php');
             if (isset($_POST['dangky'])) {
                 $tenkhachhang = $_POST['hovaten'];
                 $taikhoan = $_POST['taikhoan'];
