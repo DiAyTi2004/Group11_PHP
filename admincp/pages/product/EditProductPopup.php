@@ -4,7 +4,7 @@ $result_sua_sp = mysqli_query($connect, $sql_sua_sp);
 ?>
 <p>Thêm danh mục sản phẩm</p>
 <table border="1" width="50%" style="border-collapse: collapse;">
-    <form method="POST" action="modules/quanlysp/xuly.php?idsanpham=<?php echo $_GET['idsanpham'] ?>" enctype="multipart/form-data">
+    <form method="POST" action="pages/Product/ProductLogic.php?idsanpham=<?php echo $_GET['idsanpham'] ?>" enctype="multipart/form-data">
         <?php
         while ($row = mysqli_fetch_array($result_sua_sp)) {
 
@@ -33,7 +33,7 @@ $result_sua_sp = mysqli_query($connect, $sql_sua_sp);
             <tr>
                 <td>Hình ảnh</td>
                 <td><input type="file" name="hinhanh">
-                    <img src="modules/quanlysp/uploads/<?php echo $row['hinhanh'] ?> " width="150px">
+                    <img src="pages/Product/ProductImages/<?php echo $row['hinhanh'] ?> " width="150px">
                 </td>
             </tr>
             <tr>

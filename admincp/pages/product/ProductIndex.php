@@ -47,7 +47,7 @@ $result_lietke_sp = mysqli_query($connect, $sql_lietke_sp);
                     </td>
 
                     <td style="width:150px;height:150px;">
-                        <img src="modules/quanlysp/uploads/<?php echo $row['hinhanh'] ?> " width="100%">
+                        <img src="pages/Product/ProductImages/<?php echo $row['hinhanh'] ?> " width="100%">
                     </td>
 
                     <td style="width:150px;text-align: center;">
@@ -74,8 +74,8 @@ $result_lietke_sp = mysqli_query($connect, $sql_lietke_sp);
                         ?>
                     </td>
                     <td>
-                        <a href="modules/quanlysp/xuly.php?idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
                         <a href="?action=quanlysanpham&query=sua&idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-pencil"></i></a>
+                        <a href="pages/Product/ProductLogic?idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
                     </td>
                 </tr>
 
@@ -114,8 +114,8 @@ $result_lietke_sp = mysqli_query($connect, $sql_lietke_sp);
                 } ?>
             </td>
             <td>
-                <a href="modules/quanlysp/xuly.php?idsanpham=<?php echo $row['id_sanpham'] ?>">Xóa</a>|
                 <a href="?action=quanlysanpham&query=sua&idsanpham=<?php echo $row['id_sanpham'] ?>">Sửa</a>
+                <a href="pages/Product/ProductLogic.php?idsanpham=<?php echo $row['id_sanpham'] ?>">Xóa</a>|
             </td>
         </tr>
 

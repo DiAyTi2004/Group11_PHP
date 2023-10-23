@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <table border="1" width="100%" padding="10px" style="border-collapse: collapse;">
-                    <form id="productForm" method="POST" action="modules/quanlysp/xuly.php" enctype="multipart/form-data">
+                    <form id="productForm" method="POST" action="pages/Product/ProductLogic.php" enctype="multipart/form-data">
                         <legend style="text-align: center;">Thêm sản phẩm</legend>
                         <tr>
                             <td>
