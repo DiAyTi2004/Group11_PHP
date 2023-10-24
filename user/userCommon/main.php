@@ -1,6 +1,6 @@
 <div class="main">
     <?php
-    #include ("sidebar/sidebar.php");
+    // include("sidebar/sidebar.php");
     ?>
     <div class="maincontent">
 
@@ -10,23 +10,24 @@
         } else {
             $bientam = "";
         }
+
         if ($bientam == 'danhmuclist') {
             include("main/danhmuc.php");
-        } elseif ($bientam == 'giohang') {
+        } else if ($bientam == 'giohang') {
             include("main/giohang/cart.php");
-        } elseif ($bientam == 'dangky') {
+        } else if ($bientam == 'dangky') {
             // include("main/dangky.php");
             header("Location:signin/signin.php");
-        } elseif ($bientam == 'contact') {
+        } else if ($bientam == 'contact') {
             include("main/contact.php");
-        } elseif ($bientam == 'sanpham') {
+        } else if ($bientam == 'sanpham') {
             include("main/sanpham.php");
-        } elseif ($bientam == 'dangnhap') {
+        } else if ($bientam == 'dangnhap') {
             // include("user/loginuser.php");
-            header("Location:user/loginuser.php");
-        } elseif ($bientam == 'thongtin') {
+            header("Location: UserLogin.php");
+        } else if ($bientam == 'thongtin') {
             include("main/info.php");
-        } elseif ($bientam == 'timkiem') {
+        } else if ($bientam == 'timkiem') {
             include("main/timkiem.php");
         } else { ?>
 

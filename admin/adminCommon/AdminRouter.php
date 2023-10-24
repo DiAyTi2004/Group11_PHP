@@ -1,26 +1,26 @@
 <div class="container my-4">
     <?php
-    if ($bientam == 'quanlydanhmucsanpham' && $query == 'them') {
+    if ($workingPage == 'quanlydanhmucsanpham' && $query == 'them') {
         include("./pages/quanlydanhmucsp/them.php");
         include("./pages/quanlydanhmucsp/lietke.php");
-    } else if ($bientam == 'quanlydanhmucsanpham' && $query == 'sua') {
+    } else if ($workingPage == 'quanlydanhmucsanpham' && $query == 'sua') {
         include("./pages/quanlydanhmucsp/sua.php");
-    } else if ($bientam == 'product' && $query == 'them') {
+    } else if ($workingPage == 'product' && $query == 'them') {
         include("./pages/Product/ProductIndex.php");
         include("./pages/Product/AddProductPopup.php");
-    } else if ($bientam == 'product' && $query == 'sua') {
+    } else if ($workingPage == 'product' && $query == 'sua') {
         include("./pages/Product/EditProductPopup.php");
-    } else if ($bientam == 'quanlynguoidung' && $query == 'them') {
+    } else if ($workingPage == 'quanlynguoidung' && $query == 'them') {
         include("./pages/quanlynguoidung/lietke.php");
-    } else if ($bientam == 'quanlynguoidung' && $query == 'sua') {
+    } else if ($workingPage == 'quanlynguoidung' && $query == 'sua') {
         include("./pages/quanlynguoidung/sua.php");
-    } else if ($bientam == 'order' && $query == 'them') {
+    } else if ($workingPage == 'order' && $query == 'them') {
         include("./pages/quanlydonhang/lietke.php");
-    } else if ($bientam == 'order' && $query == 'sua') {
+    } else if ($workingPage == 'order' && $query == 'sua') {
         include("./pages/quanlydonhang/sua.php");
-    } else if ($bientam == 'order' && $query == 'xemdonhang') {
+    } else if ($workingPage == 'order' && $query == 'xemdonhang') {
         include("./pages/quanlydonhang/xemdonhang.php");
-    } else if ($bientam == 'dangxuat') {
+    } else if ($workingPage == 'dangxuat') {
         include("Login.php");
     } else {
         include("Dashboard.php");

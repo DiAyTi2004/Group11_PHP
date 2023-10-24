@@ -10,10 +10,10 @@
 
                 <?php
                 if (isset($_GET['action']) && $_GET['query']) {
-                    $bientam = $_GET['action'];
+                    $workingPage = $_GET['action'];
                     $query = $_GET['query'];
                 } else {
-                    $bientam = '';
+                    $workingPage = '';
                     $query = '';
                 }
 
@@ -22,7 +22,7 @@
                 <?php
                 function getHeaderTextColor($currentPage)
                 {
-                    if ($currentPage == $GLOBALS['bientam']) echo 'text-secondary';
+                    if ($currentPage == $GLOBALS['workingPage']) echo 'text-secondary';
                     else echo 'text-white';
                 }
                 ?>

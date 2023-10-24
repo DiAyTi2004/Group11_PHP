@@ -1,6 +1,0 @@
-Cài đặt MySQL
-Chạy nhập file shoes_land.sql
-
-Đăng nhập với quyền quản trị bằng tài khoản
-	Tài khoản: admin
-	Mật khẩu: 1
