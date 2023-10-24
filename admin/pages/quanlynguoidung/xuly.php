@@ -1,5 +1,5 @@
 <?php
-    include "../../config/connect.php";
+    include "../../../common/config/Connect.php";
     $name=$_POST['hovatens'];
     $account = $_POST['taikhoans'];
     $email = $_POST['emails'];

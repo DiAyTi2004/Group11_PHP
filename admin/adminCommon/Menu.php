@@ -11,37 +11,37 @@
 
                 <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
                     <li>
-                        <a href="index.php" class="nav-link text-secondary flex-column flex-center">
+                        <a href="AdminIndex.php" class="nav-link text-secondary flex-column flex-center">
                             <i class="fa-solid fa-house text-white mb-2 "></i>
                             Home
                         </a>
                     </li>
                     <li>
-                        <a href="index.php?action=quanlydonhang&query=them" class="nav-link text-white flex-column flex-center">
+                        <a href="AdminIndex.php?action=quanlydonhang&query=them" class="nav-link text-white flex-column flex-center">
                             <i class="fa-solid fa-gauge-high text-white mb-2"></i>
                             Đơn hàng
                         </a>
                     </li>
                     <li>
-                        <a href="index.php?action=quanlysanpham&query=them" class="nav-link text-white flex-column flex-center">
+                        <a href="AdminIndex.php?action=quanlysanpham&query=them" class="nav-link text-white flex-column flex-center">
                             <i class="fa-solid fa-table text-white mb-2"></i>
                             Sản phẩm
                         </a>
                     </li>
                     <li>
-                        <a href="index.php?action=quanlydanhmucsanpham&query=them" class="nav-link text-white flex-column flex-center">
+                        <a href="AdminIndex.php?action=quanlydanhmucsanpham&query=them" class="nav-link text-white flex-column flex-center">
                             <i class="fa-solid fa-sitemap text-white mb-2"></i>
                             Danh mục
                         </a>
                     </li>
                     <li>
-                        <a href="index.php?action=quanlynguoidung&query=them" class="nav-link text-white flex-column flex-center">
+                        <a href="AdminIndex.php?action=quanlynguoidung&query=them" class="nav-link text-white flex-column flex-center">
                             <i class="fa-solid fa-users-gear text-white mb-2"></i>
                             Người dùng
                         </a>
                     </li>
                     <li>
-                        <a href="index.php?dangxuat=1" class="pr-0 nav-link text-white flex-column flex-center">
+                        <a href="AdminIndex.php?dangxuat=1" class="pr-0 nav-link text-white flex-column flex-center">
                             <div class="text-end">
                                 <?php
                                 if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {

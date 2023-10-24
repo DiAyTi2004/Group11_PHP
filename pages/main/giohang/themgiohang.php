@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include "../../../admin/config/connect.php";
+    include "../../../common/config/Connect.php";
     //them so luong
 
     //tru so luong

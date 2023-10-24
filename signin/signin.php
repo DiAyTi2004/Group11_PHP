@@ -61,7 +61,9 @@
         <div>
             <?php
             session_start();
-            include('../admin/config/connect.php');
+
+            include('../common/config/Connect.php');
+
             if (isset($_POST['dangky'])) {
                 $tenkhachhang = $_POST['hovaten'];
                 $taikhoan = $_POST['taikhoan'];
@@ -75,10 +77,9 @@
                 } elseif ($matkhau != $rematkhau) {
                     echo "mat khau chua trung";
                 } else {
-
-
                     $sql_dangky = "INSERT INTO tbl_dangky(hovaten,taikhoan,matkhau,sodienthoai,email,diachi) VALUE('" . $tenkhachhang . "','" . $taikhoan . "','" . $matkhau . "','" . $dienthoai . "','" . $email . "','" . $diachi . "')";
                     $query_dangky = mysqli_query($connect, $sql_dangky);
+                    
                     if ($query_dangky) {
                         echo '<script>alert("Đăng ký thành công")</script>';
                         $_SESSION['dangky'] = $taikhoan;

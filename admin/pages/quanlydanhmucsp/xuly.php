@@ -1,5 +1,5 @@
 <?php
-include "../../config/connect.php";
+include "../../../common/config/Connect.php";
 $tendanhmuc = $_POST['tendanhmuc'];
 $thutu = $_POST['thutu'];
 if (isset($_POST['themdanhmuc'])) {

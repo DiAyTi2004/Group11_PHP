@@ -2,7 +2,7 @@
  <?php
 	
 	session_start();
-	include('../../../admin/config/connect.php');
+	include('../../../common/config/Connect.php');
 	if(isset($_POST['redirect'])){
 	$id_khachhang = $_SESSION['id_khachhang'];
 	$code_order = rand(0,9999);// random tuwf 0 den 4 so

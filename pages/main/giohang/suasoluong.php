@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include "../../../admin/config/connect.php";
+    include "../../../common/config/Connect.php";
     //TĂNG SỐ LUONG
     if(isset($_GET['cong'])){
 		$id=$_GET['cong'];

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../admin/config/connect.php');
+include('../common/config/Connect.php');
 if (isset($_POST['dangnhap'])) {
   $taikhoan = $_POST['taikhoan'];
   $matkhau = md5($_POST['password']);
@@ -14,7 +14,7 @@ if (isset($_POST['dangnhap'])) {
     $_SESSION['id_khachhang'] = $row_data['id_khachhang'];
     header("Location:../index.php");
   } elseif ($taikhoan == 'admin') {
-    header("Location:../admin/login.php");
+    header("Location:../admin/adminCommon/Login.php");
   } else {
     $message = "Tài khoản mật khẩu không đúng";
     echo "<script type='text/javascript'>alert('$message');</script>";
@@ -180,7 +180,12 @@ if (isset($_POST['dangnhap'])) {
   <section class="login">
     <div class="login_box">
       <div class="left">
-        <div class="top_link"><a href="../index.php"><img src="https://drive.google.com/u/0/uc?id=16U__U5dJdaTfNGobB_OpwAJ73vM50rPV&export=download" alt="">Về trang chủ</a></div>
+        <div class="top_link">
+          <a href="../index.php">
+            <img src="https://drive.google.com/u/0/uc?id=16U__U5dJdaTfNGobB_OpwAJ73vM50rPV&export=download" alt="">
+            Về trang chủ
+          </a>
+        </div>
         <div class="contact">
           <form action="" method="POST">
             <h3>ĐĂNG NHẬP</h3>

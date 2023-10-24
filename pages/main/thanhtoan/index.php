@@ -1,6 +1,6 @@
 <?php
         session_start();
-        include "../../../admin/config/connect.php";
+        include "../../../common/config/Connect.php";
 
         if(isset($_SESSION['dangky'])){
             echo 'xin chào: '.'<span style="color:red">'.$_SESSION['dangky'].'</span>';

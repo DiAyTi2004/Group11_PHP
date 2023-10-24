@@ -1,5 +1,5 @@
 <?php
-    include "../../config/connect.php";
+    include "../../../common/config/Connect.php";
     if(isset($_GET['code'])){
 		$code_cart = $_GET['code'];
 		$sql_update ="UPDATE tbl_giohang SET cart_status=0 WHERE code_cart='".$code_cart."'";
