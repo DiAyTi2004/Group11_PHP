@@ -82,6 +82,7 @@ $result_lietke_sp = mysqli_query($connect, $sql_lietke_sp);
         </tbody>
 
     </table>
+    
     <?php
     $i = 0;
     while ($row = mysqli_fetch_array($result_lietke_sp)) {
@@ -94,7 +95,7 @@ $result_lietke_sp = mysqli_query($connect, $sql_lietke_sp);
             </td>
 
             <td style="width:150px;height:150px;">
-                <img src="modules/quanlysp/uploads/<?php echo $row['hinhanh'] ?> " width="100%">
+                <img src="./ProductImages/<?php echo $row['hinhanh'] ?> " width="100%">
             </td>
 
             <td style="width:150px;text-align: center;">
