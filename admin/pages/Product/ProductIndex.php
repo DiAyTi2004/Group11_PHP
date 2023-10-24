@@ -2,21 +2,18 @@
 $sql_lietke_sp = "SELECT * FROM tbl_sanpham ,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc ORDER BY id_sanpham DESC";
 $result_lietke_sp = mysqli_query($connect, $sql_lietke_sp);
 ?>
+<link rel="stylesheet" href="./styles/ProductStyles.css">
 <!-- Button trigger modal -->
-<div class="text-left mt-2">
+<div class="text-left">
     <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Thêm sản phẩm
     </button>
 </div>
 
-<div class="container p-0">
-    <style>
-        .noWrap {
-            white-space: nowrap;
-        }
-    </style>
+<div class="container p-0 pb-4">
     <table>
-        <legend style="text-align: center;"><b>Quản lý sản phẩm</b></legend>
+        <legend class="text-center"><b>Quản lý sản phẩm</b></legend>
+
         <thead class="table-head w-100">
             <tr class="table-heading">
                 <th class="noWrap">ID</th>
@@ -74,7 +71,7 @@ $result_lietke_sp = mysqli_query($connect, $sql_lietke_sp);
                         ?>
                     </td>
                     <td>
-                        <a href="?action=quanlysanpham&query=sua&idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-pencil"></i></a>
+                        <a href="?action=product&query=sua&idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-pencil"></i></a>
                         <a href="pages/Product/ProductLogic?idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
                     </td>
                 </tr>
@@ -114,7 +111,7 @@ $result_lietke_sp = mysqli_query($connect, $sql_lietke_sp);
                 } ?>
             </td>
             <td>
-                <a href="?action=quanlysanpham&query=sua&idsanpham=<?php echo $row['id_sanpham'] ?>">Sửa</a>
+                <a href="?action=product&query=sua&idsanpham=<?php echo $row['id_sanpham'] ?>">Sửa</a>
                 <a href="pages/Product/ProductLogic.php?idsanpham=<?php echo $row['id_sanpham'] ?>">Xóa</a>|
             </td>
         </tr>

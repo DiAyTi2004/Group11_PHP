@@ -33,29 +33,13 @@ if (isset($_POST['dangnhap'])) {
 </head>
 
 <body>
-    <!-- <div class="warpper">
-    <form action="" method="POST">
-        <h1>LOGIN</h1>
-       <div class="taikhoan">
-           <label for=""> Tài Khoản</label><br>
-           <input type="text" name="usernamez">
-       </div>
-
-       <div class="matkhau">
-           <label for=""> Mật khẩu</label><br>
-           <input type="password" name="password">
-       </div>
-       <div>
-           <input type="submit" name="dangnhap" value="Đăng Nhập">
-       </div>
-    </form>
-    </div> -->
     <div class="top_link">
         <a href="../../index.php">
             <img src="https://drive.google.com/u/0/uc?id=16U__U5dJdaTfNGobB_OpwAJ73vM50rPV&export=download" alt="">Về
             Trang chủ
         </a>
     </div>
+    
     <form class="login" action="" method="POST">
         <h2 style="text-align: center">ADMIN LOGIN</h2>
         <input type="text" placeholder="Username" name="usernamez">

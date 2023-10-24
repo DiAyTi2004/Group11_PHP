@@ -31,15 +31,15 @@
          <td><?php echo $row['sodienthoai']?></td>
          <td>
     	<?php if($row['cart_status']==1){
-    		echo '<a href="modules/quanlydonhang/xuly.php?code='.$row['code_cart'].'">Đơn hàng mới</a>';
+    		echo '<a href="modules/order/xuly.php?code='.$row['code_cart'].'">Đơn hàng mới</a>';
     	}else{
     		echo 'Đã xem';
     	}
     	?>
     </td>
          <td>
-            <a href="index.php?action=quanlydonhang&query=xemdonhang&code=<?php echo $row['code_cart']?>">Xem đơn hàng</a>|
-            <th><a href="modules/quanlydonhang/xuly.php?iddonhang=<?php echo $row['code_cart']?>">Xóa</a></th>
+            <a href="index.php?action=order&query=xemdonhang&code=<?php echo $row['code_cart']?>">Xem đơn hàng</a>|
+            <th><a href="modules/order/xuly.php?iddonhang=<?php echo $row['code_cart']?>">Xóa</a></th>
          </td>
      </tr>
      
