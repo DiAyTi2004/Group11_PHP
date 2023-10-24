@@ -13,11 +13,7 @@ if ($page == '' || $page == 1) {
 $sql_show = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc ORDER BY tbl_sanpham.id_sanpham DESC LIMIT $begin,10";
 $query_show = mysqli_query($connect, $sql_show);
 
-
 ?>
-
-
-
 
 <ul class="product_list">
 
@@ -25,8 +21,8 @@ $query_show = mysqli_query($connect, $sql_show);
 	while ($row = mysqli_fetch_array($query_show)) {
 	?>
 		<li>
-			<a href="index.php?quanly=sanpham&id=<?php echo $row['id_sanpham'] ?>">
-				<img src="admin/pages/Product/ProductImages/<?php echo $row['hinhanh'] ?>">
+			<a href="UserIndex.php?quanly=sanpham&id=<?php echo $row['id_sanpham'] ?>">
+				<img src="../../admin/pages/Product/ProductImages/<?php echo $row['hinhanh'] ?>">
 				<p></p>
 				<h5 class="title_product"> <?php echo $row['tensanpham'] ?></h5>
 				<h5 class="price_product">Giá: <?php echo number_format($row['giasanpham'], 0, ',', '.') . ' VNĐ' ?></h5>
@@ -64,6 +60,7 @@ $query_show = mysqli_query($connect, $sql_show);
 
 	}
 </style>
+
 <?php
 $sql_trang = mysqli_query($connect, "SELECT * FROM tbl_sanpham");
 $row_count = mysqli_num_rows($sql_trang);
@@ -80,7 +77,11 @@ $trang = ceil($row_count / 10);
 				echo 'style="background: brown;"';
 			} else {
 				echo '';
-			}  ?>><a href="index.php?trang=<?php echo $i ?>"><?php echo $i ?></a></li>
+			}  ?>>
+			<a href="UserIndex.php?trang=<?php echo $i ?>">
+				<?php echo $i ?>
+			</a>
+		</li>
 	<?php
 	}
 	?>

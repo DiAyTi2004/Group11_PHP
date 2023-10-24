@@ -10,6 +10,7 @@
         } else {
             $bientam = "";
         }
+
         if ($bientam == 'danhmuclist') {
             include("main/danhmuc.php");
         } else if ($bientam == 'giohang') {
@@ -23,7 +24,7 @@
             include("main/sanpham.php");
         } else if ($bientam == 'dangnhap') {
             // include("user/loginuser.php");
-            header("Location:user/loginuser.php");
+            header("Location: UserLogin.php");
         } else if ($bientam == 'thongtin') {
             include("main/info.php");
         } else if ($bientam == 'timkiem') {

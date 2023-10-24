@@ -7,9 +7,9 @@ while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
 ?>
    <div class="warpper_deital">
       <div class="hinhanh_sanpham">
-         <img src="admin/pages/Product/ProductImages/<?php echo $row_chitiet['hinhanh'] ?>">
+         <img src="../../admin/pages/Product/ProductImages/<?php echo $row_chitiet['hinhanh'] ?>">
       </div>
-      <form class="form-sp" action="pages/main/giohang/themgiohang.php?idsanpham=<?php echo $row_chitiet['id_sanpham'] ?>" method="POST">
+      <form class="form-sp" action="./main/giohang/themgiohang.php?idsanpham=<?php echo $row_chitiet['id_sanpham'] ?>" method="POST">
          <div class="chitiet_sanpham">
             <h3 style="margin: 0;"><?php echo $row_chitiet['tensanpham'] ?></h3>
             <div class="rating">
