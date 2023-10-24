@@ -51,7 +51,7 @@ if (isset($_POST['dangnhap'])) {
     </form>
     </div> -->
     <div class="top_link">
-        <a href="../index.php">
+        <a href="../../index.php">
             <img src="https://drive.google.com/u/0/uc?id=16U__U5dJdaTfNGobB_OpwAJ73vM50rPV&export=download" alt="">Về
             Trang chủ
         </a>

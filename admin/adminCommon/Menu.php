@@ -46,7 +46,7 @@
                                 <?php
                                 if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
                                     unset($_SESSION['dangnhap']);
-                                    header('Location:login.php');
+                                    header('Location: ./adminCommon/Login.php');
                                 }
                                 ?>
                                 <button type="button" class="btn btn-primary">
