@@ -12,21 +12,21 @@
         }
 
         if ($bientam == 'danhmuclist') {
-            include("main/danhmuc.php");
+            include("../pages/danhmuc.php");
         } else if ($bientam == 'giohang') {
-            include("main/giohang/cart.php");
+            include("../pages/giohang/cart.php");
         } else if ($bientam == 'dangky') {
             header("Location: ./UserSignUp.php");
         } else if ($bientam == 'contact') {
-            include("main/contact.php");
+            include("../pages/contact.php");
         } else if ($bientam == 'sanpham') {
-            include("main/sanpham.php");
+            include("../pages/sanpham.php");
         } else if ($bientam == 'dangnhap') {
             header("Location: UserLogin.php");
         } else if ($bientam == 'thongtin') {
-            include("main/info.php");
+            include("../pages/info.php");
         } else if ($bientam == 'timkiem') {
-            include("main/timkiem.php");
+            include("../pages/timkiem.php");
         } else { ?>
 
             <div class="slideshow-container">
