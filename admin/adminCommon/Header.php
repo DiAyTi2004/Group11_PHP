@@ -1,8 +1,8 @@
 <header>
     <div class="px-3 bg-dark text-white">
-        <div class="container">
+        <div class="container px-0">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                <a href="/" class="d-flex align-items-center my-lg-0 me-lg-auto text-white text-decoration-none">
                     <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
                         <use xlink:href="#bootstrap"></use>
                     </svg>
@@ -27,7 +27,7 @@
                 }
                 ?>
 
-                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small flex-middle align-items-center">
+                <ul class="nav my-1 col-12 col-lg-auto justify-content-center my-md-0 text-small flex-middle align-items-center">
                     <li class="flex-center">
                         <a href="AdminIndex.php" class="nav-link <?php getHeaderTextColor(''); ?> flex-column flex-center">
                             <i class="fa-solid fa-house text-white mb-2 "></i>
