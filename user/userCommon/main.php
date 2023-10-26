@@ -16,14 +16,12 @@
         } else if ($bientam == 'giohang') {
             include("main/giohang/cart.php");
         } else if ($bientam == 'dangky') {
-            // include("main/dangky.php");
             header("Location: ./UserSignUp.php");
         } else if ($bientam == 'contact') {
             include("main/contact.php");
         } else if ($bientam == 'sanpham') {
             include("main/sanpham.php");
         } else if ($bientam == 'dangnhap') {
-            // include("user/loginuser.php");
             header("Location: UserLogin.php");
         } else if ($bientam == 'thongtin') {
             include("main/info.php");

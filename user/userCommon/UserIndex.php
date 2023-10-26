@@ -27,10 +27,10 @@
         <?php
         session_start();
         include("../../common/config/Connect.php");
-        include("./menu.php");
-        include("./main.php");
+        include("./Menu.php");
+        include("./Main.php");
         include("./show_product.php");
-        include("./footer.php");
+        include("./Footer.php");
         ?>
     </div>
 
