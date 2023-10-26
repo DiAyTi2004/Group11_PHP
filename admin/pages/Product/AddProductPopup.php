@@ -7,9 +7,9 @@
                 <button type="button" class="btn-close btn-close-white" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table border="1" width="100%" padding="10px" style="border-collapse: collapse;">
-                    <form id="productForm" method="POST" action="pages/Product/ProductLogic.php"
-                        enctype="multipart/form-data">
+                <form id="productForm" method="POST" action="pages/Product/ProductLogic.php"
+                    enctype="multipart/form-data">
+                    <table border="1" width="100%" padding="10px" style="border-collapse: collapse;">
                         <tr>
                             <td class="row">
                                 <div class="mb-2 col">
@@ -122,14 +122,14 @@
                                 </div>
                             </td>
                         </tr>
-                    </form>
-                </table>
+                    </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Đóng</button>
-
+                
                 <button type="submit" class="btn btn-primary" name="themsanpham">Thêm sản phẩm</button>
             </div>
+        </form>
         </div>
     </div>
 </div>
