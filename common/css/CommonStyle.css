@@ -1476,3 +1476,7 @@ body {
 .br-50 {
     border-radius: 50px !important;
 }
+
+.custom-line-height {
+    line-height: 100%;
+}

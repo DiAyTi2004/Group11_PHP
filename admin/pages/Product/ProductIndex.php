@@ -6,7 +6,8 @@ $result_lietke_sp = mysqli_query($connect, $sql_lietke_sp);
 <!-- Button trigger modal -->
 <div class="text-left">
     <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Thêm sản phẩm
+    <i class="fa-solid fa-plus"></i>    
+    Thêm sản phẩm
     </button>
 </div>
 
@@ -121,4 +122,25 @@ $result_lietke_sp = mysqli_query($connect, $sql_lietke_sp);
     }
     ?>
     </table>
+    
+    <!-- Pagination table -->
+    <!-- <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+?> -->
 </div>

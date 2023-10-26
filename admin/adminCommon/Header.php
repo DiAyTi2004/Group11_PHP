@@ -27,7 +27,7 @@
                 }
                 ?>
 
-                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small flex-middle align-items-center">
                     <li class="flex-center">
                         <a href="AdminIndex.php" class="nav-link <?php getHeaderTextColor(''); ?> flex-column flex-center">
                             <i class="fa-solid fa-house text-white mb-2 "></i>
