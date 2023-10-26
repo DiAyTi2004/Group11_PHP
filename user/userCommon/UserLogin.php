@@ -34,7 +34,7 @@ if (isset($_POST['dangnhap'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../styles//LoginStyles.css">
+  <link rel="stylesheet" href="../styles//UserLoginStyles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>ĐĂNG NHẬP</title>
 
@@ -45,7 +45,7 @@ if (isset($_POST['dangnhap'])) {
     <div class="login_box">
       <div class="left">
         <div class="top_link">
-          <a href="../UserIndex.php">
+          <a href="./UserIndex.php">
             <img src="https://drive.google.com/u/0/uc?id=16U__U5dJdaTfNGobB_OpwAJ73vM50rPV&export=download" alt="">
             Về trang chủ
           </a>

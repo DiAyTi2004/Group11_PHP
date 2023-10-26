@@ -1,3 +1,35 @@
+<?php
+session_start();
+
+include('../../common/config/Connect.php');
+
+if (isset($_POST['dangky'])) {
+    $tenkhachhang = $_POST['hovaten'];
+    $taikhoan = $_POST['taikhoan'];
+    $matkhau = md5($_POST['matkhau']);
+    $rematkhau =  md5($_POST['rematkhau']);
+    $email = $_POST['email'];
+    $dienthoai = $_POST['dienthoai'];
+    $diachi = $_POST['diachi'];
+    if (!$tenkhachhang || !$taikhoan || !$matkhau || !$rematkhau || !$email || !$dienthoai || !$diachi) {
+        echo "Vui lòng nhập đầy đủ thông tin.";
+    } elseif ($matkhau != $rematkhau) {
+        echo "mat khau chua trung";
+    } else {
+        $sql_dangky = "INSERT INTO tbl_dangky(hovaten,taikhoan,matkhau,sodienthoai,email,diachi) VALUE('" . $tenkhachhang . "','" . $taikhoan . "','" . $matkhau . "','" . $dienthoai . "','" . $email . "','" . $diachi . "')";
+        $query_dangky = mysqli_query($connect, $sql_dangky);
+
+        if ($query_dangky) {
+            echo '<script>alert("Đăng ký thành công")</script>';
+            $_SESSION['dangky'] = $taikhoan;
+            $_SESSION['email'] = $email;
+            $_SESSION['id_khachhang'] = mysqli_insert_id($connect);
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,8 +37,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./sign_in.css" />
-    <title>FORM</title>
+    <link rel="stylesheet" href="../styles//UserSignUpStyles.css" />
+    <title>ĐĂNG KÝ</title>
 </head>
 
 <body>
@@ -55,41 +87,10 @@
                 <input id="fullname" name="diachi" type="text" placeholder="Địa chỉ" class="form-control" />
                 <span class="form-message"></span>
                 <input class="form-submit" type="submit" name="dangky" value="Đăng ký">
-                <!-- <button class="form-submit" name="dangky" >Đăng ký</button> -->
                 <a style="margin-top:12px; font-size:14px;" href="../index.php?quanly=dangnhap">Đăng nhập nếu có tài khoản</a>
         </form>
         <div>
-            <?php
-            session_start();
 
-            include('../common/config/Connect.php');
-
-            if (isset($_POST['dangky'])) {
-                $tenkhachhang = $_POST['hovaten'];
-                $taikhoan = $_POST['taikhoan'];
-                $matkhau = md5($_POST['matkhau']);
-                $rematkhau =  md5($_POST['rematkhau']);
-                $email = $_POST['email'];
-                $dienthoai = $_POST['dienthoai'];
-                $diachi = $_POST['diachi'];
-                if (!$tenkhachhang || !$taikhoan || !$matkhau || !$rematkhau || !$email || !$dienthoai || !$diachi) {
-                    echo "Vui lòng nhập đầy đủ thông tin.";
-                } elseif ($matkhau != $rematkhau) {
-                    echo "mat khau chua trung";
-                } else {
-                    $sql_dangky = "INSERT INTO tbl_dangky(hovaten,taikhoan,matkhau,sodienthoai,email,diachi) VALUE('" . $tenkhachhang . "','" . $taikhoan . "','" . $matkhau . "','" . $dienthoai . "','" . $email . "','" . $diachi . "')";
-                    $query_dangky = mysqli_query($connect, $sql_dangky);
-                    
-                    if ($query_dangky) {
-                        echo '<script>alert("Đăng ký thành công")</script>';
-                        $_SESSION['dangky'] = $taikhoan;
-                        $_SESSION['email'] = $email;
-                        $_SESSION['id_khachhang'] = mysqli_insert_id($connect);
-                    }
-                }
-            }
-
-            ?>
         </div>
     </div>
 </body>
