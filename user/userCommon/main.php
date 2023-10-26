@@ -17,7 +17,7 @@
             include("main/giohang/cart.php");
         } else if ($bientam == 'dangky') {
             // include("main/dangky.php");
-            header("Location:signin/signin.php");
+            header("Location: ./UserSignUp.php");
         } else if ($bientam == 'contact') {
             include("main/contact.php");
         } else if ($bientam == 'sanpham') {
