@@ -306,3 +306,150 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--Code xây dựng CSDL cho mysql
+create Table product(
+  product_id varchar(36) primary key,
+  code nvarchar(50),
+  names nvarchar(50),
+  descriptions nvarchar(50),
+  price float,
+  fake_price float,
+  category_id varchar(36),
+  event_id varchar(36)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+create Table users(
+  users_id varchar(36) primary key,
+  code nvarchar(50),
+  fullname nvarchar(50),
+  username nvarchar(50),
+  passwords nvarchar(50),
+  addresss nvarchar(50)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+create Table cart(
+  cart_id varchar(36) primary key,
+  product_id varchar(36),
+  quantity int
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+create table cart_detail(
+  cart_id varchar(36) foreign key references cart(cart_id),
+  product_id varchar(36) foreign key references product(product_id),
+  quantity int,
+  unit_price float,
+  primary key (cart_id,product_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+create table orders(
+  order_id varchar(36) primary key,
+  users_id varchar(36) foreign key references users(users_id),
+  payment_type_id varchar(36),
+  create_date datetime,
+  receive_phone nvarchar(50),
+  receive_address nvarchar(50),
+  delivery_cost float,
+  descriptions nvarchar(50),
+  status_id varchar(36)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+create table statuss(
+  status_id varchar(36)  primary key, 
+  code nvarchar(50),
+  names nvarchar(50),
+  descriptions nvarchar(50)
+ 
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--ref: order.status_id < status.id
+
+
+
+create table order_detail(
+  order_id varchar(36) foreign key references orders(order_id),
+  product_id varchar(36) foreign key references product(product_id),
+  quantity int,
+  unit_price float,
+  primary key (order_id,product_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--ref: product.id < order_detail.product_id
+--ref: order.id < order_detail.order_id
+
+
+
+create table payment_type(
+  payment_type_id varchar(36)  primary key,
+  names nvarchar(50),
+  code nvarchar(50),
+  descriptions nvarchar(50)
+  
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+--ref: payment_type.id < order.payment_type_id
+--ref: user.id - cart.id______________________________________________________________
+--ref: user.id < order.user_id
+
+create table category(
+  category_id varchar(36)  primary key, 
+  code nvarchar(50),
+  names nvarchar(50),
+  descriptions nvarchar(50)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--ref: category.id < product.category_id
+
+
+
+create table eventt(
+  event_id varchar(36) primary key,
+  start_dates datetime,
+  end_date datetime,
+  discount float,
+  banner image
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--ref: event.id < product.event_id
+
+
+
+create table product_image(
+  id varchar(36) primary key,
+  product_id varchar(36) foreign key references product(product_id),
+  descriptions nvarchar(50),
+  content image,
+  main_image bit
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--ref: product.id < product_image.product_id
+
+
+
+create table size(
+  size_id varchar(36) primary key,
+  code nvarchar(50),
+  names nvarchar(50),
+  descriptions nvarchar(50)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+create table product_size(
+  product_id varchar(36) foreign key references product(product_id),
+  size_id varchar(36) foreign key references size(size_id),
+  quantity int,
+  primary key (product_id, size_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
