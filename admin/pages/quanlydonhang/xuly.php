@@ -10,7 +10,7 @@ if (isset($_GET['iddonhang'])) {
     $id = $_GET['iddonhang'];
     $sql_delete = "DELETE FROM tbl_giohang WHERE  code_cart='$id'";
     mysqli_query($connect, $sql_delete);
-    $sql_delete_cart_detail = "DELETE FROM tbl_cart_detail WHERE  code_cart='$id'";
+    $sql_delete_cart_detail = "DELETE FROM tbl_cart_old_detail WHERE  code_cart='$id'";
     mysqli_query($connect, $sql_delete_cart_detail);
     header('Location:../../index.php?action=order&query=them');
 }

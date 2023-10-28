@@ -15,7 +15,7 @@
 			$id_sanpham=$value['id'];
 			$soluong=$value['soluong'];
 			
-			$insert_order_details = "INSERT INTO tbl_cart_detail(id_sanpham,code_cart,soluongmua) VALUE('".$id_sanpham."','".$code_order."','".$soluong."')";
+			$insert_order_details = "INSERT INTO tbl_cart_old_detail(id_sanpham,code_cart,soluongmua) VALUE('".$id_sanpham."','".$code_order."','".$soluong."')";
 			mysqli_query($connect,$insert_order_details);
 		}
 	}

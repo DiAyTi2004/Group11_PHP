@@ -1,9 +1,9 @@
  <p>Xem đơn hàng</p>
  <?php
     $code = $_GET['code'];
-    $sql_lietke_dh = "SELECT * FROM tbl_cart_detail ,tbl_sanpham  WHERE tbl_cart_detail.id_sanpham=tbl_sanpham.id_sanpham 
-        AND tbl_cart_detail.code_cart=$code
-        ORDER BY tbl_cart_detail.id_cart_detail DESC";
+    $sql_lietke_dh = "SELECT * FROM tbl_cart_old_detail ,tbl_sanpham  WHERE tbl_cart_old_detail.id_sanpham=tbl_sanpham.id_sanpham 
+        AND tbl_cart_old_detail.code_cart=$code
+        ORDER BY tbl_cart_old_detail.id_cart_detail DESC";
     $result_lietke_dh = mysqli_query($connect, $sql_lietke_dh);
     ?>
  <p>Liệt kê danh mục sản phẩm</p>
