@@ -3,8 +3,6 @@ $sql_lietke_sp = "SELECT * FROM tbl_sanpham ,tbl_danhmuc WHERE tbl_sanpham.id_da
 $result_lietke_sp = mysqli_query($connect, $sql_lietke_sp);
 ?> -->
 
-<!-- Tailwind css -->
-
 <!-- PHP logic paganition pages -->
 <?php
 // Tìm tổng số bản ghi
@@ -37,13 +35,24 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
 ?>
 
 <link rel="stylesheet" href="./styles/ProductStyles.css">
-<!-- Button trigger modal -->
+<!-- Button trigger modal and search btn -->
 <div class="text-left">
     <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <i class="fa-solid fa-plus"></i>
         Thêm sản phẩm
     </button>
+
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username"
+            aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Search
+        </button>
+    </div>
 </div>
+
+
 
 <div class="container p-0 pb-4">
     <table>
@@ -127,87 +136,74 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
         <nav class="row" aria-label="Page navigation example">
 
             <div class="paganation-infor col mt-4">
-                <label class="mr-4">Rows per page</label>
-                <select class="select_size mr-4" name="limit" id="limitSelect">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                </select>
+                <form action="" method="GET">
+                    <label for="limitSelect">Rows per page:</label>
+                    <select name="limit" id="limitSelect" onchange="updatePageAndLimit()">
+                        <option value="5" <?php if ($limit == 5) echo 'selected'; ?>>5</option>
+                        <option value="10" <?php if ($limit == 10) echo 'selected'; ?>>10</option>
+                        <option value="15" <?php if ($limit == 15) echo 'selected'; ?>>15</option>
+                    </select>
+                </form>
+
+                <script>
+                function updatePageAndLimit() {
+                    const selectedLimit = document.getElementById("limitSelect").value;
+
+                    // Tạo một URL mới với giá trị page và limit mới
+                    const url = new URL(window.location.href);
+                    url.searchParams.set("page", "1"); // Đặt page thành 1
+                    url.searchParams.set("limit", selectedLimit);
+
+                    // Chuyển hướng đến URL mới
+                    window.location.href = url.toString();
+                }
+                </script>
 
                 <label class="mr-4">Showing
                     <?php
                         echo $stt . " of " . $total_records . " results";
                     ?>
                 </label>
-
-                <script>
-                const limitSelect = document.getElementById('limitSelect');
-
-                // Kiểm tra xem đã lưu giá trị trong localStorage chưa
-                const selectedLimit = localStorage.getItem('selectedLimit');
-                if (selectedLimit) {
-                    limitSelect.value = selectedLimit;
-                }
-
-                limitSelect.addEventListener('change', function() {
-                    const selectedLimit = limitSelect.value;
-
-                    // Lưu giá trị đã chọn vào localStorage
-                    localStorage.setItem('selectedLimit', selectedLimit);
-
-                    const currentURL = window.location.href;
-                    const updatedURL = updateURLParameter(currentURL, 'limit', selectedLimit);
-                    window.location.href = updatedURL;
-                });
-
-                function updateURLParameter(url, param, paramVal) {
-                    const pattern = new RegExp('(' + param + '=).*?(&|$)');
-                    if (url.search(pattern) >= 0) {
-                        return url.replace(pattern, '$1' + paramVal + '$2');
-                    }
-                    return url + (url.indexOf('?') > 0 ? '&' : '?') + param + '=' + paramVal;
-                }
-                </script>
             </div>
+    </form>
 
 
-            <ul class="pagination justify-content-end mt-4 col">
-                <li class="page-item">
-                    <?php
+    <ul class="pagination justify-content-end mt-4 col">
+        <li class="page-item">
+            <?php
                     if ($current_page > 1 && $total_page > 1) {
-                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?action=product&query=them&page=' . ($current_page - 1) . '">
+                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?action=product&query=them&limit='.($limit).'&page=' . ($current_page - 1) . '">
                         Previous
                         </a>';
                     }
                     ?>
-                </li>
+        </li>
 
-                <?php
+        <?php
                 for ($i = 1; $i <= $total_page; $i++) {
                     // Nếu là trang hiện tại thì hiển thị thẻ span
                     // ngược lại hiển thị thẻ a
                     if ($i == $current_page) {
                         echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-dark" href="?action=product&query=them&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-dark" href="?action=product&query=them&limit='.($limit).'&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                     } else {
                         echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?action=product&query=them&page=' . ($i) . '"> ' . ($i) . ' </a>
+                        <a name="page" class="page-link text-reset text-black" href="?action=product&query=them&limit='.($limit).'&page=' . ($i) . '"> ' . ($i) . ' </a>
                         </li>';
                     }
                 }
                 ?>
 
-                <?php
+        <?php
                 if ($current_page < $total_page && $total_page > 1) {
                     echo '<li class="page-item light">
-                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?action=product&query=them&page=' . ($current_page + 1) . '">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?action=product&query=them&limit='.($limit).'&page=' . ($current_page + 1) . '">
                     Next
                     </a>
                     </li>';
                 }
                 ?>
-            </ul>
-        </nav>
-    </form>
+    </ul>
+    </nav>
 </div>
