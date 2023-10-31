@@ -9,8 +9,9 @@ $result_lietke_sp = mysqli_query($connect, $sql_lietke_sp);
 $total_records = mysqli_num_rows($result_lietke_sp);
 //Tìm limit và current_page
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-$limit = isset($_GET['limit']) ? $_GET['limit'] : 5 ;
-
+$limit = isset($_GET['limit']) ? $_GET['limit'] : 5 ;     
+$i = 0;
+$stt = $i + ($current_page-1)*$limit;
 //Tính toán total_page và start
 // tổng số trang
 $total_page = ceil($total_records / $limit);
@@ -27,7 +28,11 @@ $start = ($current_page - 1) * $limit;
 
 // BƯỚC 5: TRUY VẤN LẤY DANH SÁCH TIN TỨC
 // Có limit và start rồi thì truy vấn CSDL lấy danh sách tin tức
-$sql_lietke_sp_2 = "SELECT * FROM tbl_sanpham ,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc ORDER BY id_sanpham  DESC LIMIT $start, $limit";
+$sql_lietke_sp_2 = "SELECT * FROM tbl_sanpham ,tbl_danhmuc 
+                    WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
+                    ORDER BY id_sanpham  
+                    DESC 
+                    LIMIT $start, $limit";
 $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
 //Hiển thị
 
@@ -36,20 +41,69 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
 
 <link rel="stylesheet" href="./styles/ProductStyles.css">
 <!-- Button trigger modal and search btn -->
-<div class="text-left">
+<div class="text-left flex justify-between">
     <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <i class="fa-solid fa-plus"></i>
         Thêm sản phẩm
     </button>
 
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username"
-            aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+
+    <div class="input-group mb-3 align-center mt-3 w-40">
+        <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" name="search"
+            id="search-input" aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" id="search-button" onclick="performSearch()" name="ok">
             <i class="fa-solid fa-magnifying-glass"></i>
             Search
         </button>
     </div>
+<?php
+$search = ''; // Initialize the search variable
+
+if (isset($_GET['search']) && !empty($_GET['search'])) {
+    $search = $_GET['search'];
+}
+
+?>
+
+    <script>
+    function performSearch() {
+        var searchValue = document.getElementById('search-input').value;
+        var limit = <?php echo $limit; ?>;
+        var page = <?php echo $current_page; ?>;
+        var url = '?action=product&query=them'; // Thay 'your_current_page.php' bằng tên trang hiện tại của bạn
+       // echo '<a href="?action=product&query=them&limit='.($limit).'&page=' . ($current_page - 1) . '">
+        if (searchValue.trim() !== '') {
+            url += '&search=' + encodeURIComponent(searchValue)  + '&limit=' + limit + '&page=' + page;
+            
+        } else {
+            url += '&limit=' + limit + '&page=' + page;
+            
+        }
+        <?php
+    ?>
+        window.location.href = url;
+    }
+    </script>
+
+
+
+
+    <!-- Logic PHP search -->
+    <?php
+    // Câu truy vấn để tìm kiếm sản phẩm
+        $query = "SELECT * FROM tbl_sanpham 
+        INNER JOIN tbl_danhmuc ON tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc 
+        WHERE
+            tbl_sanpham.tensanpham LIKE N'%$search%'
+            OR tbl_sanpham.masanpham LIKE N'%$search%'
+            OR tbl_danhmuc.tendanhmuc LIKE N'%$search'
+        ORDER BY tbl_sanpham.id_sanpham DESC
+        LIMIT $start, $limit";
+
+// Thực thi câu truy vấn
+$result_lietke_sp_2 = isset($_GET['search']) ? mysqli_query($connect, $query) : mysqli_query($connect, $sql_lietke_sp_2);  
+?>
+
 </div>
 
 
@@ -75,8 +129,6 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
 
         <tbody class="table-body">
             <?php
-            $i = 0;
-            $stt = $i + ($current_page-1)*$limit;
             while ($row = mysqli_fetch_array($result_lietke_sp_2)) {
                 $i++;
                 $stt++;
@@ -85,15 +137,15 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
                 <td>
                     <?php echo  $stt?>
                 </td>
-                <td style="width:100px;height:150px; text-align: center;">
+                <td class="tensanpham">
                     <?php echo $row['tensanpham'] ?>
                 </td>
 
-                <td style="width:150px;height:150px;">
+                <td class="hinhanh">
                     <img src="pages/Product/ProductImages/<?php echo $row['hinhanh'] ?> " width="100%">
                 </td>
 
-                <td style="width:150px;text-align: center;">
+                <td class="giasanpham">
                     <?php echo number_format($row['giasanpham'], 0, ',', '.') . 'VNĐ' ?>
                 </td>
                 <td>

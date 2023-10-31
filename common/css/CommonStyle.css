@@ -1291,6 +1291,14 @@ body {
     margin-top: auto !important;
 }
 
+.w-40 {
+    width: 40%;
+}
+
+.w-50 {
+    width: 50%;
+}
+
 .w-80 {
     width: 80%;
 }
@@ -1415,7 +1423,7 @@ body {
 }
 
 .align-start {
-    align-items: flex-end;
+    align-items: flex-start;
 }
 
 .align-end {

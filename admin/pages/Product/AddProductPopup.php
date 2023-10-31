@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header bg-dark">
                 <h5 class="text-center text-white">Thêm sản phẩm</h5>
-                <button type="button" class="btn-close btn-close-white" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="productForm" method="POST" action="pages/Product/ProductLogic.php"
