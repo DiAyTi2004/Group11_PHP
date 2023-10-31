@@ -53,7 +53,7 @@
                         </a>
                     </li>
                     <li class="flex-center">
-                        <a href="AdminIndex.php?action=quanlynguoidung&query=them" class="nav-link <?php getHeaderTextColor('quanlynguoidung'); ?> flex-column flex-center">
+                        <a href="AdminIndex.php?action=user&query=them" class="nav-link <?php getHeaderTextColor('quanlynguoidung'); ?> flex-column flex-center">
                             <i class="fa-solid fa-users-gear text-white mb-2"></i>
                             Người dùng
                         </a>

@@ -10,16 +10,16 @@
         include("./pages/Product/AddProductPopup.php");
     } else if ($workingPage == 'product' && $query == 'sua') {
         include("./pages/Product/EditProductPopup.php");
-    } else if ($workingPage == 'quanlynguoidung' && $query == 'them') {
-        include("./pages/quanlynguoidung/lietke.php");
-    } else if ($workingPage == 'quanlynguoidung' && $query == 'sua') {
-        include("./pages/quanlynguoidung/sua.php");
+    } else if ($workingPage == 'user' && $query == 'them') {
+        include("./pages/User/UserIndex.php");
+    } else if ($workingPage == 'user' && $query == 'sua') {
+        include("./pages/User/EditUserPopup.php");
     } else if ($workingPage == 'order' && $query == 'them') {
-        include("./pages/quanlydonhang/lietke.php");
+        include("./pages/Order/OrderIndex.php");
     } else if ($workingPage == 'order' && $query == 'sua') {
-        include("./pages/quanlydonhang/sua.php");
+        include("./pages/Order/OrderLogicPopup.php");
     } else if ($workingPage == 'order' && $query == 'xemdonhang') {
-        include("./pages/quanlydonhang/xemdonhang.php");
+        include("./pages/Order/CheckOrderPopUp.php");
     } else if ($workingPage == 'dangxuat') {
         include("Login.php");
     } else {
