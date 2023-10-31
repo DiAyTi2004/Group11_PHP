@@ -27,8 +27,8 @@
         <?php
         session_start();
         include("../../common/config/Connect.php");
-        include("./Menu.php");
-        include("./Main.php");
+        include("./Header.php");
+        include("./UserRouter.php");
         include("./show_product.php");
         include("./Footer.php");
         ?>

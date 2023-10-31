@@ -1,7 +1,4 @@
 <div class="main">
-    <?php
-    // include("sidebar/sidebar.php");
-    ?>
     <div class="maincontent">
 
         <?php //lấy qiamly từ menu truyền vào bằng phuongư thức GET
