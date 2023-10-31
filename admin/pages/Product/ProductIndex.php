@@ -84,10 +84,6 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
         window.location.href = url;
     }
     </script>
-
-
-
-
     <!-- Logic PHP search -->
     <?php
     // Câu truy vấn để tìm kiếm sản phẩm
@@ -105,8 +101,6 @@ $result_lietke_sp_2 = isset($_GET['search']) ? mysqli_query($connect, $query) : 
 ?>
 
 </div>
-
-
 
 <div class="container p-0 pb-4">
     <table>
@@ -169,7 +163,7 @@ $result_lietke_sp_2 = isset($_GET['search']) ? mysqli_query($connect, $query) : 
                         ?>
                 </td>
                 <td>
-                    <a href="?action=product&query=themq&uery=sua&idsanpham=<?php echo $row['id_sanpham'] ?>"><i
+                    <a href="?action=product&query=them&query=sua&idsanpham=<?php echo $row['id_sanpham'] ?>"><i
                             class="fa-solid fa-pencil"></i></a>
                     <a href="pages/Product/ProductLogic?idsanpham=<?php echo $row['id_sanpham'] ?>"><i
                             class="fa-solid fa-trash mr-1"></i></a>
