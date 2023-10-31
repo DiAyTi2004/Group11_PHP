@@ -1,12 +1,12 @@
 <!-- <?php
-        $sql_lietke_sp = "SELECT * FROM tbl_sanpham ,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc ORDER BY id_sanpham DESC";
-        $result_lietke_sp = mysqli_query($connect, $sql_lietke_sp);
+        $sql_lietke_event = "SELECT * FROM tbl_event ORDER BY id DESC";
+        $result_lietke_event = mysqli_query($connect, $sql_lietke_event);
         ?> -->
 
 <!-- PHP logic paganition pages -->
 <?php
 // Tìm tổng số bản ghi
-$total_records = mysqli_num_rows($result_lietke_sp);
+$total_records = mysqli_num_rows($result_lietke_event);
 //Tìm limit và current_page
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = isset($_GET['limit']) ? $_GET['limit'] : 5;
@@ -25,21 +25,23 @@ if ($current_page > $total_page) {
 
 // Tìm Start
 $start = ($current_page - 1) * $limit;
+if ($start < 0) {
+    $start = 0;
+}
 
 // BƯỚC 5: TRUY VẤN LẤY DANH SÁCH TIN TỨC
 // Có limit và start rồi thì truy vấn CSDL lấy danh sách tin tức
-$sql_lietke_sp_2 = "SELECT * FROM tbl_sanpham ,tbl_danhmuc 
-                    WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
-                    ORDER BY id_sanpham  
+$sql_lietke_event_2 = "SELECT * FROM tbl_event
+                    ORDER BY id 
                     DESC 
                     LIMIT $start, $limit";
-$result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
+$result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
 //Hiển thị
 
 // PHẦN HIỂN THỊ PHÂN TRANG
 ?>
 
-<link rel="stylesheet" href="./styles/eventStyles.css">
+<link rel="stylesheet" href="./styles/EventStyles.css">
 <!-- Button trigger modal and search btn -->
 <div class="text-left flex justify-between">
     <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -69,7 +71,7 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
             var searchValue = document.getElementById('search-input').value;
             var limit = <?php echo $limit; ?>;
             var page = <?php echo $current_page; ?>;
-            var url = '?workingPage=event'; // Thay 'your_current_page.php' bằng tên trang hiện tại của bạn
+            var url = '?workingPage=event&query=them'; // Thay 'your_current_page.php' bằng tên trang hiện tại của bạn
             // echo '<a href="?workingPage=event&limit='.($limit).'&page=' . ($current_page - 1) . '">
             if (searchValue.trim() !== '') {
                 url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
@@ -86,43 +88,34 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
     <!-- Logic PHP search -->
     <?php
     // Câu truy vấn để tìm kiếm sự kiện
-    $query = "SELECT * FROM tbl_sanpham 
-        INNER JOIN tbl_danhmuc ON tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc 
-        WHERE
-            tbl_sanpham.tensanpham LIKE N'%$search%'
-            OR tbl_sanpham.masanpham LIKE N'%$search%'
-            OR tbl_danhmuc.tendanhmuc LIKE N'%$search'
-        ORDER BY tbl_sanpham.id_sanpham DESC
+    $query = "SELECT * FROM tbl_event
+        WHERE tbl_event.start_dates LIKE N'%$search%'
+        ORDER BY tbl_event.end_date DESC
         LIMIT $start, $limit";
 
     // Thực thi câu truy vấn
-    $result_lietke_sp_2 = isset($_GET['search']) ? mysqli_query($connect, $query) : mysqli_query($connect, $sql_lietke_sp_2);
+    $result_lietke_event_2 = isset($_GET['search']) ? mysqli_query($connect, $query) : mysqli_query($connect, $sql_lietke_event_2);
     ?>
 
 </div>
 
 <div class="container p-0 pb-4">
-    <table>
+    <table class="table-container">
         <legend class="text-center"><b>Quản lý sự kiện</b></legend>
-
         <thead class="table-head w-100">
             <tr class="table-heading">
                 <th class="noWrap">ID</th>
-                <th class="noWrap">Tên sản phảm</th>
-                <th class="noWrap">Hình ảnh </th>
-                <th class="noWrap">Giá sự kiện</th>
-                <th class="noWrap">Số lượng</th>
-                <th class="noWrap">Danh mục</th>
-                <th class="noWrap">Mã sự kiện</th>
-                <th class="noWrap">Tóm tăt</th>
-                <th class="noWrap">Trạng thái</th>
+                <th class="noWrap">Ngày bắt đầu</th>
+                <th class="noWrap">ngày kết thúc </th>
+                <th class="noWrap">Giảm giá</th>
+                <th class="noWrap">Banner</th>
                 <th class="noWrap">Quản lý</th>
             </tr>
         </thead>
 
         <tbody class="table-body">
             <?php
-            while ($row = mysqli_fetch_array($result_lietke_sp_2)) {
+            while ($row = mysqli_fetch_array($result_lietke_event_2)) {
                 $i++;
                 $stt++;
             ?>
@@ -130,43 +123,23 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
                     <td>
                         <?php echo  $stt ?>
                     </td>
-                    <td class="tensanpham">
-                        <?php echo $row['tensanpham'] ?>
+                    <td class="ngaybatdau">
+                        <?php echo $row['start_dates'] ?>
                     </td>
-
-                    <td class="hinhanh">
-                        <img src="pages/Event/EventImages/<?php echo $row['hinhanh'] ?> " width="100%">
+                    <td class="ngayketthuc">
+                        <?php echo $row['end_date'] ?>
                     </td>
-
-                    <td class="giasanpham">
-                        <?php echo number_format($row['giasanpham'], 0, ',', '.') . 'VNĐ' ?>
+                    <td class="giamgia">
+                        <?php echo number_format($row['discount'], 0, ',', '.') . 'VNĐ' ?>
                     </td>
-                    <td>
-                        <?php echo $row['soluong'] ?>
+                    <td class="banner">
+                        <?php echo $row['banner'] ?>
                     </td>
                     <td>
-                        <?php echo $row['tendanhmuc'] ?>
-                    </td>
-                    <td>
-                        <?php echo $row['masanpham'] ?>
-                    </td>
-                    <td>
-                        <?php echo $row['tomtat'] ?>
-                    </td>
-                    <td>
-                        <?php if ($row['trangthai'] == 1) {
-                            echo "Mới";
-                        } else {
-                            echo "Cũ";
-                        }
-                        ?>
-                    </td>
-                    <td>
-                        <a href="?workingPage=event&idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-pencil"></i></a>
-                        <a href="?workingPage=event&query=edit&idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
+                        <a href="?workingPage=event&query=them&query=sua&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-pencil"></i></a>
+                        <a href="?workingPage=event&&query=themquery=sua&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
                     </td>
                 </tr>
-
             <?php
             }
             ?>
@@ -215,7 +188,7 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
         <li class="page-item">
             <?php
             if ($current_page > 1 && $total_page > 1) {
-                echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=event&limit=' . ($limit) . '&page=' . ($current_page - 1) . '">
+                echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=event&query=them&limit=' . ($limit) . '&page=' . ($current_page - 1) . '">
                         Previous
                         </a>';
             }
@@ -228,11 +201,11 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
             // ngược lại hiển thị thẻ a
             if ($i == $current_page) {
                 echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=event&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=event&query=them&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
             } else {
                 echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?workingPage=event&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                        <a name="page" class="page-link text-reset text-black" href="?workingPage=event&query=them&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                         </li>';
             }
         }
@@ -241,7 +214,7 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
         <?php
         if ($current_page < $total_page && $total_page > 1) {
             echo '<li class="page-item light">
-                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=event&limit=' . ($limit) . '&page=' . ($current_page + 1) . '">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=event&query=them&limit=' . ($limit) . '&page=' . ($current_page + 1) . '">
                     Next
                     </a>
                     </li>';

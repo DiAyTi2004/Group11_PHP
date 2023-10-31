@@ -53,7 +53,7 @@
                         </a>
                     </li>
                     <li class="flex-center">
-                        <a href="AdminIndex.php?workingPage=event" class="nav-link <?php getHeaderTextColor('event'); ?> flex-column flex-center">
+                        <a href="AdminIndex.php?workingPage=event&query=them" class="nav-link <?php getHeaderTextColor('event'); ?> flex-column flex-center">
                             <i class="fa-solid fa-sitemap text-white mb-2"></i>
                             Sự kiện
                         </a>
