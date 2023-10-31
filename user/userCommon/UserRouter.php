@@ -1,7 +1,4 @@
 <div class="main">
-    <?php
-    // include("sidebar/sidebar.php");
-    ?>
     <div class="maincontent">
 
         <?php //lấy qiamly từ menu truyền vào bằng phuongư thức GET
@@ -17,8 +14,6 @@
             include("../pages/giohang/cart.php");
         } else if ($bientam == 'dangky') {
             header("Location: ./UserSignUp.php");
-        } else if ($bientam == 'contact') {
-            include("../pages/contact.php");
         } else if ($bientam == 'sanpham') {
             include("../pages/sanpham.php");
         } else if ($bientam == 'dangnhap') {

@@ -1,5 +1,3 @@
-<div style="clear:both;"></div>
-
 <div class="show_new">
     <?php //lấy qiamly từ menu truyền vào bằng phuongư thức GET
     if (isset($_GET['quanly'])) {
@@ -18,8 +16,6 @@
     ?>
 
 </div>
-
-<div style="clear:both;"></div>
 
 <div class="show">
     <?php //lấy qiamly từ menu truyền vào bằng phuong thức GET
@@ -78,7 +74,7 @@
         }
         ?>
     </ul>
-    <div style="clear:both;"></div>
+
     <style type="text/css">
         ul.list_trang {
             padding: 0;
