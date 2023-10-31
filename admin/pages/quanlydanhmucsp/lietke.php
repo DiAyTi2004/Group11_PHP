@@ -21,7 +21,7 @@ $result_lietke = mysqli_query($connect, $sql_lietke);
             <td><?php echo $row['thutu'] ?></td>
             <td>
                 <a href="modules/quanlydanhmucsp/xuly.php?iddanhmuc=<?php echo $row['id_danhmuc'] ?>">Xóa</a>|
-                <a href="?action=quanlydanhmucsanpham&query=sua&iddanhmuc=<?php echo $row['id_danhmuc'] ?>">Sửa</a>
+                <a href="?workingPage=quanlydanhmucsanpham&query=sua&iddanhmuc=<?php echo $row['id_danhmuc'] ?>">Sửa</a>
             </td>
         </tr>
 

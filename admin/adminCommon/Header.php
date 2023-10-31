@@ -9,12 +9,12 @@
                 </a>
 
                 <?php
-                if (isset($_GET['action']) && $_GET['query']) {
-                    $workingPage = $_GET['action'];
+                $workingPage = '';
+                $query = '';
+
+                if (isset($_GET['workingPage']) && isset($_GET['query'])) {
+                    $workingPage = $_GET['workingPage'];
                     $query = $_GET['query'];
-                } else {
-                    $workingPage = '';
-                    $query = '';
                 }
 
                 ?>
@@ -35,25 +35,31 @@
                         </a>
                     </li>
                     <li class="flex-center">
-                        <a href="AdminIndex.php?action=order&query=them" class="nav-link <?php getHeaderTextColor('order'); ?> flex-column flex-center">
+                        <a href="AdminIndex.php?workingPage=order&query=them" class="nav-link <?php getHeaderTextColor('order'); ?> flex-column flex-center">
                             <i class="fa-solid fa-gauge-high text-white mb-2"></i>
                             Đơn hàng
                         </a>
                     </li>
                     <li class="flex-center">
-                        <a href="AdminIndex.php?action=product&query=them" class="nav-link <?php getHeaderTextColor('product'); ?> flex-column flex-center">
+                        <a href="AdminIndex.php?workingPage=product&query=them" class="nav-link <?php getHeaderTextColor('product'); ?> flex-column flex-center">
                             <i class="fa-solid fa-table text-white mb-2"></i>
                             Sản phẩm
                         </a>
                     </li>
                     <li class="flex-center">
-                        <a href="AdminIndex.php?action=quanlydanhmucsanpham&query=them" class="nav-link <?php getHeaderTextColor('quanlydanhmucsanpham'); ?> flex-column flex-center">
+                        <a href="AdminIndex.php?workingPage=quanlydanhmucsanpham&query=them" class="nav-link <?php getHeaderTextColor('quanlydanhmucsanpham'); ?> flex-column flex-center">
                             <i class="fa-solid fa-sitemap text-white mb-2"></i>
                             Danh mục
                         </a>
                     </li>
                     <li class="flex-center">
-                        <a href="AdminIndex.php?action=user&query=them" class="nav-link <?php getHeaderTextColor('quanlynguoidung'); ?> flex-column flex-center">
+                        <a href="AdminIndex.php?workingPage=event" class="nav-link <?php getHeaderTextColor('event'); ?> flex-column flex-center">
+                            <i class="fa-solid fa-sitemap text-white mb-2"></i>
+                            Sự kiện
+                        </a>
+                    </li>
+                    <li class="flex-center">
+                        <a href="AdminIndex.php?workingPage=user&query=them" class="nav-link <?php getHeaderTextColor('user'); ?> flex-column flex-center">
                             <i class="fa-solid fa-users-gear text-white mb-2"></i>
                             Người dùng
                         </a>

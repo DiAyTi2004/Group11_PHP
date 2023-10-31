@@ -35,7 +35,7 @@
                     <td class="noWrap"> <?php echo $row['sodienthoai'] ?></td>
                     <td class="noWrap" style="width:150px;"> <?php echo $row['diachi'] ?></td>
                     <td>
-                        <a href="?action=user&query=sua&idnguoidung=<?php echo $row['id_khachhang'] ?>"> Sửa </a>
+                        <a href="?workingPage=user&query=sua&idnguoidung=<?php echo $row['id_khachhang'] ?>"> Sửa </a>
                     </td>
                     <td>
                         <a href="modules/User/UserLogic.php?idnguoidung=<?php echo $row['id_khachhang'] ?>">Xóa</a>
