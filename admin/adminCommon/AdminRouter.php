@@ -8,6 +8,7 @@
     } else if ($workingPage == 'product' && $query == 'them') {
         include("./pages/Product/ProductIndex.php");
         include("./pages/Product/AddProductPopup.php");
+        include("./pages/Product/ProductConfirmDeletePopup.php");
     } else if ($workingPage == 'product' && $query == 'sua') {
         include("./pages/Product/EditProductPopup.php");
     } else if ($workingPage == 'user' && $query == 'them') {
