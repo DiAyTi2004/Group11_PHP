@@ -12,10 +12,14 @@
                 $workingPage = '';
                 $query = '';
 
-                if (isset($_GET['workingPage']) && isset($_GET['query'])) {
+                if (isset($_GET['workingPage'])) {
                     $workingPage = $_GET['workingPage'];
+                }
+
+                if (isset($_GET['query'])) {
                     $query = $_GET['query'];
                 }
+
 
                 ?>
 

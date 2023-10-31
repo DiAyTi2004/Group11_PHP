@@ -1,4 +1,5 @@
 <div class="container my-4">
+
     <?php
     if ($workingPage == 'quanlydanhmucsanpham' && $query == 'them') {
         include("./pages/quanlydanhmucsp/them.php");
@@ -16,7 +17,7 @@
         include("./pages/Event/AddEventPopup.php");
         include("./pages/Event/EventConfirmDeletePopup.php");
     } else if ($workingPage == 'event' && $query == 'edit') {
-        include("./pages/Product/EditProductPopup.php");
+        include("./pages/Event/EditEventPopup.php");
     } else if ($workingPage == 'user' && $query == 'them') {
         include("./pages/User/UserIndex.php");
     } else if ($workingPage == 'user' && $query == 'sua') {
