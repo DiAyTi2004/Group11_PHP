@@ -1,4 +1,4 @@
-<div class="container my-4">
+<div class="container my-4 h-100">
 
     <?php
     if ($workingPage == 'quanlydanhmucsanpham' && $query == 'them') {
@@ -31,7 +31,7 @@
     } else if ($workingPage == 'dangxuat') {
         include("Login.php");
     } else {
-        include("Dashboard.php");
+        include("./pages/Dashboard/DashboardIndex.php");
     }
 
     ?>
