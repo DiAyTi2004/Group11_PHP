@@ -315,7 +315,7 @@ create table tbl_product (
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  int quantity,
+  quantity int,
   price float ,
   fake_price float ,
   category_id varchar(36) not null,
