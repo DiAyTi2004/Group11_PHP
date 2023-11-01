@@ -307,6 +307,9 @@ create table tbl_event (
   start_date datetime ,
   end_date datetime ,
   discount float ,
+  code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   banner varchar(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
