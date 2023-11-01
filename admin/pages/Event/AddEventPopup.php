@@ -13,7 +13,7 @@
                             <td class="row">
                                 <div class="mb-2 col">
                                     <label for="date" class="form-label">ngày bắt đầu</label>
-                                    <input name="start_dates" type="date" class="form-control" id="datepicker">
+                                    <input name="start_date" type="date" class="form-control" id="datepicker">
                                     <span class="input-group-append">
                                         <span class="input-group-text bg-light d-block">
                                             <i class="fa fa-calendar"></i>
@@ -41,7 +41,7 @@
                             <td>
                                 <label for="exampleFormControlInput1" class="form-label">giảm giá</label>
                                 <div class="input-group mb-2">
-                                    <input name="discount" type="number" class="form-control" id="exampleFormControlInput1">
+                                    <input name="discount" type="decimal" class="form-control" id="exampleFormControlInput1">
                                 </div>
                             </td>
                         </tr>

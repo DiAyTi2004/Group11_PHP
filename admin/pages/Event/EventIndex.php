@@ -71,7 +71,7 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
             var searchValue = document.getElementById('search-input').value;
             var limit = <?php echo $limit; ?>;
             var page = <?php echo $current_page; ?>;
-            var url = '?workingPage=event&query=them'; // Thay 'your_current_page.php' bằng tên trang hiện tại của bạn
+            var url = '?workingPage=event'; // Thay 'your_current_page.php' bằng tên trang hiện tại của bạn
             // echo '<a href="?workingPage=event&limit='.($limit).'&page=' . ($current_page - 1) . '">
             if (searchValue.trim() !== '') {
                 url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
@@ -89,7 +89,7 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
     <?php
     // Câu truy vấn để tìm kiếm sự kiện
     $query = "SELECT * FROM tbl_event
-        WHERE tbl_event.start_dates LIKE N'%$search%'
+        WHERE tbl_event.start_date LIKE N'%$search%'
         ORDER BY tbl_event.end_date DESC
         LIMIT $start, $limit";
 
@@ -124,7 +124,7 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
                         <?php echo  $stt ?>
                     </td>
                     <td class="ngaybatdau">
-                        <?php echo $row['start_dates'] ?>
+                        <?php echo $row['start_date'] ?>
                     </td>
                     <td class="ngayketthuc">
                         <?php echo $row['end_date'] ?>
@@ -136,7 +136,7 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
                         <?php echo $row['banner'] ?>
                     </td>
                     <td>
-                        <a href="?workingPage=event&query=them&query=sua&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-pencil"></i></a>
+                        <a href="?workingPage=event&query=sua&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-pencil"></i></a>
                         <a href="?workingPage=event&&query=themquery=sua&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
                     </td>
                 </tr>
@@ -188,7 +188,7 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
         <li class="page-item">
             <?php
             if ($current_page > 1 && $total_page > 1) {
-                echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=event&query=them&limit=' . ($limit) . '&page=' . ($current_page - 1) . '">
+                echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=event&limit=' . ($limit) . '&page=' . ($current_page - 1) . '">
                         Previous
                         </a>';
             }
@@ -201,11 +201,11 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
             // ngược lại hiển thị thẻ a
             if ($i == $current_page) {
                 echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=event&query=them&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=event&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
             } else {
                 echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?workingPage=event&query=them&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                        <a name="page" class="page-link text-reset text-black" href="?workingPage=event&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                         </li>';
             }
         }
@@ -214,7 +214,7 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
         <?php
         if ($current_page < $total_page && $total_page > 1) {
             echo '<li class="page-item light">
-                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=event&query=them&limit=' . ($limit) . '&page=' . ($current_page + 1) . '">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=event&limit=' . ($limit) . '&page=' . ($current_page + 1) . '">
                     Next
                     </a>
                     </li>';

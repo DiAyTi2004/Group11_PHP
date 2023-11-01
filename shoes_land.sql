@@ -282,48 +282,49 @@ ALTER TABLE `tbl_shipping`
 COMMIT;
 
 create table tbl_payment_type (
-  id varchar(36) primary key,
+  id varchar(36) primary key not null,
   name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_size (
-  id varchar(36) primary key,
+  id varchar(36) primary key not null,
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_category (
-  id varchar(36) primary key, 
+  id varchar(36) primary key not null, 
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_event (
-  id varchar(36) primary key,
-  start_dates datetime ,
+  id varchar(36) primary key not null,
+  start_date datetime ,
   end_date datetime ,
   discount float ,
   banner varchar(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_product (
-  id varchar(36) primary key,
+  id varchar(36) primary key not null,
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  int quantity,
   price float ,
   fake_price float ,
-  category_id varchar(36),
-  event_id varchar(36),
+  category_id varchar(36) not null,
+  event_id varchar(36) not null,
   foreign key (event_id) references tbl_event(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_user (
-  id varchar(36) primary key,
+  id varchar(36) primary key not null,
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   fullname varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   username varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
@@ -332,14 +333,14 @@ create table tbl_user (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_cart (
-  id varchar(36) primary key,
-  user_id varchar(36),
+  id varchar(36) primary key not null,
+  user_id varchar(36) not null,
   foreign key (user_id) references tbl_user(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_cart_detail (
-  cart_id varchar(36),
-  product_id varchar(36),
+  cart_id varchar(36) not null,
+  product_id varchar(36) not null,
   quantity int,
   unit_price float ,
   primary key (cart_id, product_id),
@@ -348,17 +349,17 @@ create table tbl_cart_detail (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_status (
-  id varchar(36) primary key, 
+  id varchar(36) primary key not null, 
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_order (
-  id varchar(36) primary key,
-  user_id varchar(36),
-  payment_type_id varchar(36),
-  status_id varchar(36),
+  id varchar(36) primary key not null,
+  user_id varchar(36) not null,
+  payment_type_id varchar(36) not null,
+  status_id varchar(36) not null,
   create_date datetime ,
   receive_phone varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   receive_address varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
@@ -370,8 +371,8 @@ create table tbl_order (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_order_detail (
-  order_id varchar(36),
-  product_id varchar(36),
+  order_id varchar(36) not null,
+  product_id varchar(36) not null,
   quantity int,
   unit_price float ,
   primary key (order_id, product_id),
@@ -380,8 +381,8 @@ create table tbl_order_detail (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_product_image (
-  id varchar(36) primary key,
-  product_id varchar(36),
+  id varchar(36) primary key not null,
+  product_id varchar(36) not null,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   content varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   main_image bit ,
@@ -389,8 +390,8 @@ create table tbl_product_image (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_product_size (
-  product_id varchar(36),
-  size_id varchar(36),
+  product_id varchar(36) not null,
+  size_id varchar(36) not null,
   quantity int,
   primary key (product_id, size_id),
   foreign key (product_id) references tbl_product(id),

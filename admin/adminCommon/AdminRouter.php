@@ -12,11 +12,11 @@
         include("./pages/Product/ProductConfirmDeletePopup.php");
     } else if ($workingPage == 'product' && $query == 'sua') {
         include("./pages/Product/EditProductPopup.php");
-    } else if ($workingPage == 'event' && $query == 'them') {
+    } else if ($workingPage == 'event') {
         include("./pages/Event/EventIndex.php");
         include("./pages/Event/AddEventPopup.php");
         include("./pages/Event/EventConfirmDeletePopup.php");
-    } else if ($workingPage == 'event' && $query == 'sua') {
+    } else if ($workingPage == 'event' && $query == 'edit') {
         include("./pages/Event/EditEventPopup.php");
     } else if ($workingPage == 'user' && $query == 'them') {
         include("./pages/User/UserIndex.php");

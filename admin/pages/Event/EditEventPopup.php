@@ -16,7 +16,7 @@ $result_sua_sp = mysqli_query($connect, $sql_sua_event);
             <tr>
                 <td>ngày bắt đầu</td>
                 <td>
-                    <input type="date" name="start_dates" value="<?php echo $row['start_dates'] ?>">
+                    <input type="date" name="start_date" value="<?php echo $row['start_date'] ?>">
                     <span class="input-group-append">
                         <span class="input-group-text bg-light d-block">
                             <i class="fa fa-calendar"></i>
