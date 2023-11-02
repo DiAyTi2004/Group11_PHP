@@ -2,25 +2,25 @@
             <div class="maincontent">
                 
                     <?php //lấy qiamly từ menu truyền vào bằng phuongư thức GET
-                        if(isset($_GET['quanly'])){
-                            $bientam=$_GET['quanly'];
+                        if(isset($_GET['usingPage'])){
+                            $usingPage=$_GET['usingPage'];
 
                         }else{
-                            $bientam="";
+                            $usingPage="";
                         }
                        
                             
-                        if($bientam=='vanchuyen'){
+                        if($usingPage=='vanchuyen'){
                             include("vanchuyen.php");
                         }
-                        elseif($bientam=='thongtinthanhtoan'){
+                        elseif($usingPage=='thongtinthanhtoan'){
                             include("thongtinthanhtoan.php");
 
-                        }elseif($bientam=='thanhtoan'){
+                        }elseif($usingPage=='thanhtoan'){
                             include("thanhtoan.php");
 
                         }
-                        elseif($bientam=='donhangdadat'){
+                        elseif($usingPage=='donhangdadat'){
                             include("donhangdadat.php");
                         }else{
                            echo "Cảm ơn bạn đã đặt hàng";

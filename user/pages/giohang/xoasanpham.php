@@ -12,7 +12,7 @@
                 
             }
         $_SESSION['cart']=$product;
-        header('Location:../../../index.php?quanly=giohang');
+        header('Location:../../../UserIndex.php?usingPage=giohang');
         }
 		
 	}

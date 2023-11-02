@@ -1,3 +1,3 @@
-<div class="flex-center w-100 h-100">
+<div class="flex-center">
     <p>Welcome to Administrator Page</p>
 </div>

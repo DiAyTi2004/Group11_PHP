@@ -53,12 +53,12 @@
                         if (isset($_SESSION['dangky'])) {
 
                         ?>
-                           <p class="btn-dathang"><a class="btn-dathang-a" href="pages/main/thanhtoan/index.php?quanly=vanchuyen">Đặt hàng</a></p>
+                           <p class="btn-dathang"><a class="btn-dathang-a" href="pages/main/thanhtoan/index.php?usingPage=vanchuyen">Đặt hàng</a></p>
                        <?php
                         } else {
 
                         ?>
-                           <p><a href="index.php?quanly=dangnhap">Đăng nhập đặt hàng</a></p>
+                           <p><a href="index.php?usingPage=dangnhap">Đăng nhập đặt hàng</a></p>
                        <?php
                         }
 

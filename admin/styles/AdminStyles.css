@@ -1,19 +1,25 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
 .wrapper {
+    flex: 1;
     width: 100%;
     display: flex;
     flex-direction: column;
     font-family: "Roboto", sans-serif;
     /* padding: 20px; */
     overflow-x: hidden;
-    min-height: 100vh;
     background-color: rgb(225, 225, 225);
 }
 
-.wrapper>.container {
-    flex: 1;
+.wrapper>.flex-grow-1>.container {
     background-color: white;
     border-radius: 10px;
 }
+
+.sectionCard {}
 
 .footer {
     background-color: black !important;

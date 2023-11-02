@@ -4,7 +4,7 @@
     ?>
     <link rel="stylesheet" href="./styles/UserStyles.css">
 
-    <div class="container p-0 pb-4">
+    <div class="container p-0">
         <table style="width: 100%">
             <legend class="text-center"><b>Danh sách người dùng</b></legend>
 
