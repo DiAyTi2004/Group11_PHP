@@ -176,9 +176,9 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
 
     <!-- Pagination table -->
     <form action="" method="GET">
-        <nav class="row" aria-label="Page navigation example">
+        <nav class="row py-2" aria-label="Page navigation example">
 
-            <div class="paganation-infor col mt-4">
+            <div class="paganation-infor col py-2">
                 <form action="" method="GET">
                     <label for="limitSelect">Rows per page:</label>
                     <select name="limit" id="limitSelect" onchange="updatePageAndLimit()">
@@ -208,45 +208,44 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
                     ?>
                 </label>
             </div>
-    </form>
 
-
-    <ul class="pagination justify-content-end mt-4 col">
-        <li class="page-item">
-            <?php
-            if ($current_page > 1 && $total_page > 1) {
-                echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=product&query=them&limit=' . ($limit) . '&page=' . ($current_page - 1) . '">
+            <ul class="m-0 pagination justify-content-end py-2 col">
+                <li class="page-item">
+                    <?php
+                    if ($current_page > 1 && $total_page > 1) {
+                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=product&query=them&limit=' . ($limit) . '&page=' . ($current_page - 1) . '">
                         Previous
                         </a>';
-            }
-            ?>
-        </li>
+                    }
+                    ?>
+                </li>
 
-        <?php
-        for ($i = 1; $i <= $total_page; $i++) {
-            // Nếu là trang hiện tại thì hiển thị thẻ span
-            // ngược lại hiển thị thẻ a
-            if ($i == $current_page) {
-                echo '<li class="page-item light">
+                <?php
+                for ($i = 1; $i <= $total_page; $i++) {
+                    // Nếu là trang hiện tại thì hiển thị thẻ span
+                    // ngược lại hiển thị thẻ a
+                    if ($i == $current_page) {
+                        echo '<li class="page-item light">
                         <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=product&query=them&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
-            } else {
-                echo '<li class="page-item light">
+                    } else {
+                        echo '<li class="page-item light">
                         <a name="page" class="page-link text-reset text-black" href="?workingPage=product&query=them&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                         </li>';
-            }
-        }
-        ?>
+                    }
+                }
+                ?>
 
-        <?php
-        if ($current_page < $total_page && $total_page > 1) {
-            echo '<li class="page-item light">
+                <?php
+                if ($current_page < $total_page && $total_page > 1) {
+                    echo '<li class="page-item light">
                     <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=product&query=them&limit=' . ($limit) . '&page=' . ($current_page + 1) . '">
                     Next
                     </a>
                     </li>';
-        }
-        ?>
-    </ul>
+                }
+                ?>
+            </ul>
+    </form>
     </nav>
 </div>
