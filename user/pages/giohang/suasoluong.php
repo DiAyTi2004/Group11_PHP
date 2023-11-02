@@ -24,7 +24,7 @@
             }
 
         }
-        header('Location:../../../index.php?quanly=giohang');
+        header('Location:../../../UserIndex.php?usingPage=giohang');
 	}
     //TRỪ SỐ LƯỢNG
     if(isset($_GET['tru'])){
@@ -49,7 +49,7 @@
             }
 
         }
-        header('Location:../../../index.php?quanly=giohang');
+        header('Location:../../../UserIndex.php?usingPage=giohang');
 	}
 
 ?>

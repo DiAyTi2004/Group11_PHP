@@ -87,7 +87,7 @@ if (isset($_POST['dangky'])) {
                 <input id="fullname" name="diachi" type="text" placeholder="Địa chỉ" class="form-control" />
                 <span class="form-message"></span>
                 <input class="form-submit" type="submit" name="dangky" value="Đăng ký">
-                <a style="margin-top:12px; font-size:14px;" href="../index.php?quanly=dangnhap">Đăng nhập nếu có tài khoản</a>
+                <a style="margin-top:12px; font-size:14px;" href="./UserIndex.php?usingPage=dangnhap">Đăng nhập nếu có tài khoản</a>
         </form>
         <div>
 

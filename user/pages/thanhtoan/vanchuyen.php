@@ -1,9 +1,9 @@
 <p>Thông tin vận chuyển</p>
 <div class="container">
     <div class="arrow-steps clearfix">
-        <div class="step "> <span> <a href="../../../index.php?quanly=giohang">Giỏ hàng</a></span> </div>
-        <div class="step current"> <span><a href="index.php?quanly=vanchuyen">Kiểm tra </a></span> </div>
-        <div class="step"> <span><a href="index.php?quanly=thongtinthanhtoan">Thanh toán</a><span> </div>
+        <div class="step "> <span> <a href="../../../UserIndex.php?usingPage=giohang">Giỏ hàng</a></span> </div>
+        <div class="step current"> <span><a href="UserIndex.php?usingPage=vanchuyen">Kiểm tra </a></span> </div>
+        <div class="step"> <span><a href="UserIndex.php?usingPage=thongtinthanhtoan">Thanh toán</a><span> </div>
 
     </div>
 
@@ -89,12 +89,12 @@
                         if (isset($_SESSION['dangky'])) {
 
                         ?>
-                            <p><a href="index.php?quanly=thongtinthanhtoan" class="btn btn-success">Hình thức thanh toán</a></p>
+                            <p><a href="UserIndex.php?usingPage=thongtinthanhtoan" class="btn btn-success">Hình thức thanh toán</a></p>
                         <?php
                         } else {
 
                         ?>
-                            <p><a href="index.php?quanly=dangky">Đăng kí đặt hàng</a></p>
+                            <p><a href="UserIndex.php?usingPage=dangky">Đăng kí đặt hàng</a></p>
                         <?php
                         }
                         ?>

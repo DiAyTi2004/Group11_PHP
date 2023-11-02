@@ -24,7 +24,7 @@ $row_title = mysqli_fetch_array($query_cate);
     while ($row_pro = mysqli_fetch_array($query_show)) {
     ?>
         <li>
-            <a href="UserIndex.php?quanly=sanpham&id=<?php echo $row_pro['id_sanpham'] ?>">
+            <a href="UserIndex.php?usingPage=sanpham&id=<?php echo $row_pro['id_sanpham'] ?>">
                 <img src="../../admin/pages/Product/ProductImages/<?php echo $row_pro['hinhanh'] ?>">
                 <p></p>
                 <h5 class="title_product"> <?php echo $row_pro['tensanpham'] ?></h5>

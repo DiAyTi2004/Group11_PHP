@@ -2,25 +2,25 @@
     <div class="maincontent">
 
         <?php //lấy qiamly từ menu truyền vào bằng phuongư thức GET
-        if (isset($_GET['quanly'])) {
-            $bientam = $_GET['quanly'];
+        if (isset($_GET['usingPage'])) {
+            $usingPage = $_GET['usingPage'];
         } else {
-            $bientam = "";
+            $usingPage = "";
         }
 
-        if ($bientam == 'danhmuclist') {
+        if ($usingPage == 'danhmuclist') {
             include("../pages/danhmuc.php");
-        } else if ($bientam == 'giohang') {
+        } else if ($usingPage == 'giohang') {
             include("../pages/giohang/cart.php");
-        } else if ($bientam == 'dangky') {
+        } else if ($usingPage == 'dangky') {
             header("Location: ./UserSignUp.php");
-        } else if ($bientam == 'sanpham') {
+        } else if ($usingPage == 'sanpham') {
             include("../pages/sanpham.php");
-        } else if ($bientam == 'dangnhap') {
+        } else if ($usingPage == 'dangnhap') {
             header("Location: UserLogin.php");
-        } else if ($bientam == 'thongtin') {
+        } else if ($usingPage == 'thongtin') {
             include("../pages/info.php");
-        } else if ($bientam == 'timkiem') {
+        } else if ($usingPage == 'timkiem') {
             include("../pages/timkiem.php");
         } else { ?>
 

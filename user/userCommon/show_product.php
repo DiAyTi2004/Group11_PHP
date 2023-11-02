@@ -1,11 +1,11 @@
 <div class="show_new">
     <?php //lấy qiamly từ menu truyền vào bằng phuongư thức GET
-    if (isset($_GET['quanly'])) {
-        $bientam = $_GET['quanly'];
+    if (isset($_GET['usingPage'])) {
+        $usingPage = $_GET['usingPage'];
     } else {
-        $bientam = "";
+        $usingPage = "";
     }
-    if ($bientam == "") { ?>
+    if ($usingPage == "") { ?>
 
         <div class="new_product">
             <h3>SẢN PHẨM MỚI</h3>
@@ -19,12 +19,12 @@
 
 <div class="show">
     <?php //lấy qiamly từ menu truyền vào bằng phuong thức GET
-    if (isset($_GET['quanly'])) {
-        $bientam = $_GET['quanly'];
+    if (isset($_GET['usingPage'])) {
+        $usingPage = $_GET['usingPage'];
     } else {
-        $bientam = "";
+        $usingPage = "";
     }
-    if ($bientam == "") {
+    if ($usingPage == "") {
     ?>
         <div class="new_product">
             <h3>TẤT CẢ SẢN PHẨM</h3>
@@ -60,7 +60,7 @@
         while ($row = mysqli_fetch_array($query_show)) {
         ?>
             <li>
-                <a href="UserIndex.php?quanly=sanpham&id=<?php echo $row['id_sanpham'] ?>">
+                <a href="UserIndex.php?usingPage=sanpham&id=<?php echo $row['id_sanpham'] ?>">
                     <img src="../../admin/pages/Product/ProductImages/<?php echo $row['hinhanh'] ?>">
                     <p></p>
                     <h5 class="title_product"> <?php echo $row['tensanpham'] ?></h5>

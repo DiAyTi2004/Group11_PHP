@@ -4,9 +4,9 @@
     if(isset($_SESSION['id_khachhang'])){
 ?>
     <div class="arrow-steps clearfix">
-        <div class="step "> <span> <a href="../../../index.php?quanly=giohang" >Giỏ hàng</a></span> </div>
-         <div class="step"> <span><a href="index.php?quanly=vanchuyen" >Kiểm tra</a></span> </div>
-        <div class="step current"> <span><a href="index.php?quanly=thongtinthanhtoan" >Thanh toán</a><span> </div>
+        <div class="step "> <span> <a href="../../../UserIndex.php?usingPage=giohang" >Giỏ hàng</a></span> </div>
+         <div class="step"> <span><a href="UserIndex.php?usingPage=vanchuyen" >Kiểm tra</a></span> </div>
+        <div class="step current"> <span><a href="UserIndex.php?usingPage=thongtinthanhtoan" >Thanh toán</a><span> </div>
        
     </div>
     <?php
