@@ -29,7 +29,6 @@
         include("../../common/config/Connect.php");
         include("./Header.php");
         include("./UserRouter.php");
-        include("./show_product.php");
         include("./Footer.php");
         ?>
     </div>
