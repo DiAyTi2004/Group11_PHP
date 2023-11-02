@@ -101,7 +101,7 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
 
 </div>
 
-<div class="container p-0 pb-4">
+<div class="container p-0">
     <table>
         <legend class="text-center"><b>Quản lý sản phẩm</b></legend>
 

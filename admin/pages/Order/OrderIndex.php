@@ -4,7 +4,7 @@ $result_lietke_dh = mysqli_query($connect, $sql_lietke_dh);
 ?>
 <link rel="stylesheet" href="./styles/OrderStyles.css">
 
-<div class="container p-0 pb-4">
+<div class="container p-0">
 
 <legend class="text-center"><b>Danh sách đơn hàng của người dùng</b></legend>
     <table style="width: 100%;" border="1" style="border-collapse:collapse;">

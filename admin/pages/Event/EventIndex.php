@@ -99,7 +99,7 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
 
 </div>
 
-<div class="container p-0 pb-4">
+<div class="container p-0">
     <table class="table-container">
         <legend class="text-center"><b>Quản lý sự kiện</b></legend>
         <thead class="table-head w-100">
