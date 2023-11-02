@@ -1,11 +1,12 @@
 <div class="flex-grow-1">
     <div class="container my-4">
         <?php
-        if ($workingPage == 'quanlydanhmucsanpham' && $query == 'them') {
-            include("./pages/quanlydanhmucsp/them.php");
-            include("./pages/quanlydanhmucsp/lietke.php");
-        } else if ($workingPage == 'quanlydanhmucsanpham' && $query == 'sua') {
-            include("./pages/quanlydanhmucsp/sua.php");
+        if ($workingPage == 'category' && $query == 'them') {
+            include("./pages/Category/AddCategoryPopup.php");
+            include("./pages/Category/CategoryIndex.php");
+            include("./pages/Category/CategoryConfirmDeletePopup.php");
+        } else if ($workingPage == 'category' && $query == 'sua') {
+            include("./pages/Category/EditCategoryPopup.php");
         } else if ($workingPage == 'product' && $query == 'them') {
             include("./pages/Product/ProductIndex.php");
             include("./pages/Product/AddProductPopup.php");
