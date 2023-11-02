@@ -299,6 +299,7 @@ create table tbl_category (
   id varchar(36) primary key not null, 
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  category_image varchar(100),
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

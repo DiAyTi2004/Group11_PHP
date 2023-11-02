@@ -50,7 +50,7 @@
                         </a>
                     </li>
                     <li class="flex-center">
-                        <a href="AdminIndex.php?workingPage=quanlydanhmucsanpham&query=them" class="nav-link <?php getHeaderTextColor('quanlydanhmucsanpham'); ?> flex-column flex-center">
+                        <a href="AdminIndex.php?workingPage=category&query=them" class="nav-link <?php getHeaderTextColor('category'); ?> flex-column flex-center">
                             <i class="fa-solid fa-sitemap text-white mb-2"></i>
                             Danh mục
                         </a>
