@@ -6,6 +6,12 @@ $query_danhmuc = mysqli_query($connect, $sql_danhmuc);
 if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
     unset($_SESSION['dangky']);
 }
+
+$usingPage = "";
+
+if (isset($_GET['usingPage'])) {
+    $usingPage = $_GET['usingPage'];
+}
 ?>
 <div class="menu">
     <div class="menu_list">

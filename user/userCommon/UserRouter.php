@@ -2,12 +2,6 @@
     <div class="maincontent">
 
         <?php
-        $usingPage = "";
-
-        if (isset($_GET['usingPage'])) {
-            $usingPage = $_GET['usingPage'];
-        }
-
         if ($usingPage == 'danhmuclist') {
             include("../pages/danhmuc.php");
         } else if ($usingPage == 'giohang') {
