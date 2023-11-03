@@ -7,9 +7,9 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="productForm" method="POST" action="pages/Category/CategoryLogic.php" enctype="multipart/form-data">
+                <form id="categoryForm" method="POST" action="pages/Category/CategoryLogic.php" enctype="multipart/form-data">
                     <table border="1" width="100%" padding="10px" style="border-collapse: collapse;">
-                        Bạn có chắc chắn muốn xóa sản phẩm này?
+                        Bạn có chắc chắn muốn xóa danh mục này?
                     </table>
             </div>
 

@@ -198,7 +198,7 @@ option {
   border-radius: 5px;
 }
 
-.tensanpham {
+.tendanhmuc {
   width: 350px;
   height: 150px;
   text-align: center;
@@ -207,9 +207,4 @@ option {
 .hinhanh {
   width: 150px;
   height: 150px;
-}
-
-.giasanpham {
-  width: 150px;
-  text-align: center;
 }
