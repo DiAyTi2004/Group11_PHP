@@ -13,7 +13,7 @@
         } else if ($usingPage == 'dangnhap') {
             header("Location: UserLogin.php");
         } else if ($usingPage == 'thongtin') {
-            include("../pages/info.php");
+            include("../pages/Account/AccountIndex.php");
         } else if ($usingPage == 'timkiem') {
             include("../pages/timkiem.php");
         } else {

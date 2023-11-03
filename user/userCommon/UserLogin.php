@@ -16,7 +16,7 @@ if (isset($_POST['dangnhap'])) {
     $_SESSION['email'] = $row_data['email'];
     $_SESSION['id_khachhang'] = $row_data['id_khachhang'];
 
-    header("Location: ../UserIndex.php");
+    header("Location: ./UserIndex.php");
   } elseif ($taikhoan == 'admin') {
     header("Location: ../../admin/adminCommon/Login.php");
   } else {

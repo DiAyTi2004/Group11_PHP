@@ -5,7 +5,7 @@ $sql_chitiet = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhm
 $query_chitiet = mysqli_query($connect, $sql_chitiet);
 while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
 ?>
-   <div class="warpper_deital">
+   <div class="warpper_deital"> 
       <div class="hinhanh_sanpham">
          <img src="../../admin/pages/Product/ProductImages/<?php echo $row_chitiet['hinhanh'] ?>">
       </div>
@@ -59,7 +59,6 @@ while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
    var demPlus = document.querySelector('.soluong-sp-dem-icon .fa-plus');
    var demMins = document.querySelector('.soluong-sp-dem-icon .fa-minus');
    var soluongMax = document.querySelector('.soluong-sp-cosan').innerHTML;
-   console.log(soluongMax);
 
    demPlus.addEventListener('click', function() {
       // console.log("hi");

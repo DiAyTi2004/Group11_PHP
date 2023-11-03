@@ -6,7 +6,7 @@
 }
 .infor-main-text {
     margin: 12px 0;
-    display: flex;
+    display: flex; 
     justify-content: space-between;
 }
 .infor-main-text label {
