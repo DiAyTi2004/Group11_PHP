@@ -9,7 +9,7 @@ $query_show_new = mysqli_query($connect, $sql_show_new);
     while ($row = mysqli_fetch_array($query_show_new)) {
     ?>
         <li>
-            <a href="UserIndex.php?usingPage=sanpham&id=<?php echo $row['id_sanpham'] ?>">
+            <a href="UserIndex.php?usingPage=product&id=<?php echo $row['id_sanpham'] ?>">
                 <img src="../../admin/pages/Product/ProductImages/<?php echo $row['hinhanh'] ?>">
                 <p></p>
                 <h5 class="title_product"> <?php echo $row['tensanpham'] ?></h5>

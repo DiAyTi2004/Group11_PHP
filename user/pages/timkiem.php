@@ -13,7 +13,7 @@ $query_pro = mysqli_query($connect, $sql_pro);
 	while ($row = mysqli_fetch_array($query_pro)) {
 	?>
 		<li>
-			<a href="UserIndex.php?usingPage=sanpham&id=<?php echo $row['id_sanpham'] ?>">
+			<a href="UserIndex.php?usingPage=product&id=<?php echo $row['id_sanpham'] ?>">
 				<img src="../../admin/pages/Product/ProductImages/<?php echo $row['hinhanh'] ?>">
 				<p class="title_product">Tên sản phẩm : <?php echo $row['tensanpham'] ?></p>
 				<p class="price_product">Giá : <?php echo number_format($row['giasanpham'], 0, ',', '.') . 'vnđ' ?></p>

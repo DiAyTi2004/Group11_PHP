@@ -25,7 +25,7 @@ if (isset($_GET['usingPage'])) {
                     while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
 
                     ?>
-                        <li> <a href="UserIndex.php?usingPage=danhmuclist&id=<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['tendanhmuc'] ?></a></li>
+                        <li> <a href="UserIndex.php?usingPage=category&id=<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['tendanhmuc'] ?></a></li>
 
                     <?php
                     }

@@ -2,13 +2,13 @@
     <div class="maincontent">
 
         <?php
-        if ($usingPage == 'danhmuclist') {
-            include("../pages/danhmuc.php");
+        if ($usingPage == 'category') {
+            include("../pages/Category/CategoryIndex.php");
         } else if ($usingPage == 'cart') {
             include("../pages/Cart/CartIndex.php");
         } else if ($usingPage == 'signup') {
             header("Location: ./UserSignUp.php");
-        } else if ($usingPage == 'sanpham') {
+        } else if ($usingPage == 'product') {
             include("../pages/ProductDetail/ProductDetail.php");
         } else if ($usingPage == 'login') {
             header("Location: UserLogin.php");
@@ -16,6 +16,8 @@
             include("../pages/Account/AccountIndex.php");
         } else if ($usingPage == 'timkiem') {
             include("../pages/timkiem.php");
+        } else if ($usingPage == 'payment') {
+            include("../pages/Payment/PaymentIndex.php");
         } else {
             include("../pages/Home/HomeIndex.php");
         }
