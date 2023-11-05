@@ -5,7 +5,7 @@
 ?>
 <h3>SỬA NGƯỜI DÙNG</h3>
 
-<form action="modules/User/xuly.php?idnguoidung=<?php echo $_GET['idnguoidung'] ?>" method="POST" enctype="multipart/form-data">
+<form action="modules/User/UserLogic.php?idnguoidung=<?php echo $_GET['idnguoidung'] ?>" method="POST" enctype="multipart/form-data">
 <table   width="50%" style="border-collapse: collapse;">
 	<?php
 	
