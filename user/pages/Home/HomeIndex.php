@@ -63,7 +63,7 @@
             <h3>SẢN PHẨM MỚI</h3>
         </div>
     <?php
-        include("../pages/sanphammoi.php");
+        include("../pages/Home/NewProductSection.php");
     }
     ?>
 
@@ -126,31 +126,6 @@
         }
         ?>
     </ul>
-
-    <style type="text/css">
-        ul.list_trang {
-            padding: 0;
-            margin: 0;
-            list-style: none;
-            display: flex;
-            justify-content: center;
-        }
-
-        ul.list_trang li {
-            float: left;
-            padding: 5px 13px;
-            margin: 5px;
-            background: burlywood;
-            display: block;
-        }
-
-        ul.list_trang li a {
-            color: #000;
-            text-align: center;
-            text-decoration: none;
-
-        }
-    </style>
 
     <?php
     $sql_trang = mysqli_query($connect, "SELECT * FROM tbl_sanpham");

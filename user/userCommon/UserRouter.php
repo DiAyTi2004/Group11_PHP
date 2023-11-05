@@ -9,7 +9,7 @@
         } else if ($usingPage == 'signup') {
             header("Location: ./UserSignUp.php");
         } else if ($usingPage == 'product') {
-            include("../pages/ProductDetail/ProductDetail.php");
+            include("../pages/ProductDetail/ProductDetailIndex.php");
         } else if ($usingPage == 'login') {
             header("Location: UserLogin.php");
         } else if ($usingPage == 'thongtin') {
