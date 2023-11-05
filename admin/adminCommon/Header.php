@@ -72,15 +72,15 @@
                             <div class="text-end">
                                 <?php
                                 if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
-                                    unset($_SESSION['dangnhap']);
+                                    unset($_SESSION['login']);
                                     header('Location: ./adminCommon/Login.php');
                                 }
                                 ?>
                                 <button type="button" class="btn btn-primary">
                                     <i class="fa-solid fa-right-from-bracket mr-1"></i>
                                     Đăng xuất
-                                    <?php if (isset($_SESSION['dangnhap'])) {
-                                        echo $_SESSION['dangnhap'];
+                                    <?php if (isset($_SESSION['login'])) {
+                                        echo $_SESSION['login'];
                                     }
                                     ?>
                                 </button>

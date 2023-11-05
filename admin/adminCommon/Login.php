@@ -2,7 +2,7 @@
 session_start();
 include('../../common/config/Connect.php');
 
-if (isset($_POST['dangnhap'])) {
+if (isset($_POST['login'])) {
     $taikhoan = $_POST['username'];
     $matkhau = md5($_POST['password']);
     $sql_nguoidung = "SELECT * FROM tbl_dangky ,tbl_admin WHERE (tbl_dangky.taikhoan='" . $taikhoan . "' AND tbl_dangky.matkhau='" . $matkhau . "' AND tbl_dangky.chucvu=1) OR (tbl_admin.username='" . $taikhoan . "' AND tbl_admin.password='" . $matkhau . "' ) LIMIT 1";
@@ -10,7 +10,7 @@ if (isset($_POST['dangnhap'])) {
     $count = mysqli_num_rows($row_nguoidung);
 
     if ($count > 0) {
-        $_SESSION['dangnhap'] = $taikhoan;
+        $_SESSION['login'] = $taikhoan;
         header("Location: ../AdminIndex.php");
     } else {
         $message = "Tài khoản mật khẩu không đúng";
@@ -49,7 +49,7 @@ if (isset($_POST['dangnhap'])) {
         <label for="password">Password: </label>
         <input type="password" placeholder="Password" name="password" id="password">
         <div class="flex-center justify-right">
-            <button type="submit" name="dangnhap">Login</button>
+            <button type="submit" name="login">Login</button>
         </div>
     </form>
 

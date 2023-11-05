@@ -3,7 +3,7 @@ session_start();
 
 include('../../common/config/Connect.php');
 
-if (isset($_POST['dangky'])) {
+if (isset($_POST['signup'])) {
     $tenkhachhang = $_POST['hovaten'];
     $taikhoan = $_POST['taikhoan'];
     $matkhau = md5($_POST['matkhau']);
@@ -21,7 +21,7 @@ if (isset($_POST['dangky'])) {
 
         if ($query_dangky) {
             echo '<script>alert("Đăng ký thành công")</script>';
-            $_SESSION['dangky'] = $taikhoan;
+            $_SESSION['signup'] = $taikhoan;
             $_SESSION['email'] = $email;
             $_SESSION['id_khachhang'] = mysqli_insert_id($connect);
         }
@@ -86,8 +86,8 @@ if (isset($_POST['dangky'])) {
                 <label for="fullname" class="form-label">Địa chỉ</label>
                 <input id="fullname" name="diachi" type="text" placeholder="Địa chỉ" class="form-control" />
                 <span class="form-message"></span>
-                <input class="form-submit" type="submit" name="dangky" value="Đăng ký">
-                <a style="margin-top:12px; font-size:14px;" href="./UserIndex.php?usingPage=dangnhap">Đăng nhập nếu có tài khoản</a>
+                <input class="form-submit" type="submit" name="signup" value="Đăng ký">
+                <a style="margin-top:12px; font-size:14px;" href="./UserIndex.php?usingPage=login">Đăng nhập nếu có tài khoản</a>
         </form>
         <div>
 

@@ -1,6 +1,6 @@
        <p>
            <?php
-            if (isset($_SESSION['dangky'])) {
+            if (isset($_SESSION['signup'])) {
             }
             ?>
        </p>
@@ -50,7 +50,7 @@
                        <p style="float: left; color: red;font-weight: bold;font-size: 16px;"> Tổng tiền : <?php echo number_format($tongtien, 0, ',', '.') . ' VNĐ'  ?></p>
                        <div style="clear:both;"> </div>
                        <?php
-                        if (isset($_SESSION['dangky'])) {
+                        if (isset($_SESSION['signup'])) {
 
                         ?>
                            <p class="btn-dathang"><a class="btn-dathang-a" href="pages/main/thanhtoan/index.php?usingPage=vanchuyen">Đặt hàng</a></p>
@@ -58,14 +58,14 @@
                         } else {
 
                         ?>
-                           <p><a href="index.php?usingPage=dangnhap">Đăng nhập đặt hàng</a></p>
+                           <p><a href="UserIndex.php?usingPage=login">Đăng nhập đặt hàng</a></p>
                        <?php
                         }
 
                         ?>
                    </td>
                    <td>
-                       <p style="text-align: center"><a href="pages/main/giohang/xoahetgiohang.php?xoatatca=xoahet">Xóa hết</a></p>
+                       <p style="text-align: center"><a href="../pages/Cart/DeleteAllFromCart.php?deleteAll=true">Xóa hết</a></p>
                    </td>
                </tr>
            <?php

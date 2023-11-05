@@ -82,11 +82,11 @@
                 <tr>
                     <td colspan="8">
                         <p style="float: left;"> Tổng tiền : <?php echo number_format($tongtien, 0, ',', '.') . ' VNĐ'  ?></p>
-                        <p style="float: right;"><a href="pages/main/giohang/xoahetgiohang.php?xoatatca=xoahet" class="btn btn-success">Xóa Hêt</a></p>
+                        <p style="float: right;"><a href="pages/main/giohang/xoahetgiohang.php?deleteAll=true" class="btn btn-success">Xóa Hêt</a></p>
                         <div style="clear: both;"> </div>
 
                         <?php
-                        if (isset($_SESSION['dangky'])) {
+                        if (isset($_SESSION['signup'])) {
 
                         ?>
                             <p><a href="UserIndex.php?usingPage=thongtinthanhtoan" class="btn btn-success">Hình thức thanh toán</a></p>
@@ -94,7 +94,7 @@
                         } else {
 
                         ?>
-                            <p><a href="UserIndex.php?usingPage=dangky">Đăng kí đặt hàng</a></p>
+                            <p><a href="UserIndex.php?usingPage=signup">Đăng kí đặt hàng</a></p>
                         <?php
                         }
                         ?>

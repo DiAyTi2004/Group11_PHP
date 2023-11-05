@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="../styles/AccountStyles.css">
 <p><?php
-    if (isset($_SESSION['dangky'])) {
-        // echo 'Xin chào: '.'<span style="color:red">'.$_SESSION['dangky'].'</span>';
-        $id = $_SESSION['dangky'];
+    if (isset($_SESSION['signup'])) {
+        // echo 'Xin chào: '.'<span style="color:red">'.$_SESSION['signup'].'</span>';
+        $id = $_SESSION['signup'];
         $sql_thongtin = "SELECT * FROM tbl_dangky WHERE taikhoan='$id' LIMIT 1";
         $query_thongtin = mysqli_query($connect, $sql_thongtin);
 

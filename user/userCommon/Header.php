@@ -4,7 +4,7 @@ $query_danhmuc = mysqli_query($connect, $sql_danhmuc);
 ?>
 <?php
 if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
-    unset($_SESSION['dangky']);
+    unset($_SESSION['signup']);
 }
 
 $usingPage = "";
@@ -42,7 +42,7 @@ if (isset($_GET['usingPage'])) {
         </ul>
         <ul class="menu_list-right">
             <?php
-            if (isset($_SESSION['dangky'])) {
+            if (isset($_SESSION['signup'])) {
             ?>
 
                 <li><a href="UserIndex.php?usingPage=thongtin"> Thông tin</a></li>
@@ -50,8 +50,8 @@ if (isset($_GET['usingPage'])) {
             <?php
             } else {
             ?>
-                <li> <a href="UserIndex.php?usingPage=dangnhap">Đăng nhập</a></li>
-                <li> <a href="UserIndex.php?usingPage=dangky">Đăng ký</a></li>
+                <li> <a href="UserIndex.php?usingPage=login">Đăng nhập</a></li>
+                <li> <a href="UserIndex.php?usingPage=signup">Đăng ký</a></li>
             <?php
             }
             ?>

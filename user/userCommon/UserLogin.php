@@ -3,7 +3,7 @@ session_start();
 
 include('../../common/config/Connect.php');
 
-if (isset($_POST['dangnhap'])) {
+if (isset($_POST['login'])) {
   $taikhoan = $_POST['taikhoan'];
   $matkhau = md5($_POST['password']);
   $sql = "SELECT * FROM tbl_dangky ,tbl_admin WHERE tbl_dangky.taikhoan='" . $taikhoan . "' AND tbl_dangky.matkhau='" . $matkhau . "'  LIMIT 1";
@@ -12,7 +12,7 @@ if (isset($_POST['dangnhap'])) {
   if ($count > 0) {
     $row_data = mysqli_fetch_array($row);
 
-    $_SESSION['dangky'] = $row_data['taikhoan'];
+    $_SESSION['signup'] = $row_data['taikhoan'];
     $_SESSION['email'] = $row_data['email'];
     $_SESSION['id_khachhang'] = $row_data['id_khachhang'];
 
@@ -55,7 +55,7 @@ if (isset($_POST['dangnhap'])) {
             <h3>ĐĂNG NHẬP</h3>
             <input type="text" name="taikhoan" placeholder="USERNAME">
             <input type="password" name="password" placeholder="PASSWORD">
-            <button class="submit" name="dangnhap">ĐĂNG NHẬP</button>
+            <button class="submit" name="login">ĐĂNG NHẬP</button>
           </form>
         </div>
       </div>

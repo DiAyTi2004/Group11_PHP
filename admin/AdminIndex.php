@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['dangnhap'])) {
+if (!isset($_SESSION['login'])) {
     header('Location: adminCommon/Login.php');
 }
 

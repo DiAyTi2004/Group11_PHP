@@ -2,8 +2,8 @@
 session_start();
 include "../../../common/config/Connect.php";
 
-if (isset($_SESSION['dangky'])) {
-    echo 'xin chào: ' . '<span style="color:red">' . $_SESSION['dangky'] . '</span>';
+if (isset($_SESSION['signup'])) {
+    echo 'xin chào: ' . '<span style="color:red">' . $_SESSION['signup'] . '</span>';
 
 
 ?>
