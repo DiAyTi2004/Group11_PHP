@@ -31,12 +31,12 @@ if (isset($_POST['themdanhmuc'])) {
             move_uploaded_file($hinhanh_tmp, 'CategoryImages/' . $hinhanh);
 
             $sql_themdanhmuc = "INSERT INTO tbl_category(id,name,category_image) 
-                VALUE ('" . $categoryId . "' , '". $tendanhmuc . "','" . $hinhanh . "' )";
+                VALUE ('" . $categoryId . "' , '" . $tendanhmuc . "','" . $hinhanh . "' )";
             mysqli_query($connect, $sql_themdanhmuc);
-            header('Location:../../AdminIndex.php?workingPage=category&query=them');
+            header('Location:../../AdminIndex.php?workingPage=category');
         } else {
             $hinhanh = '';
-            header('Location:../../AdminIndex.php?workingPage=category&query=them');
+            header('Location:../../AdminIndex.php?workingPage=category');
         }
     }
 } else if (isset($_POST['suadanhmuc'])) {
@@ -52,7 +52,7 @@ if (isset($_POST['themdanhmuc'])) {
         $sql_sua = "UPDATE tbl_category SET name ='" . $tendanhmuc . "' WHERE id='$_GET[id]'";
     }
     mysqli_query($connect, $sql_sua);
-    header('Location:../../AdminIndex.php?workingPage=category&query=them');
+    header('Location:../../AdminIndex.php?workingPage=category');
 } else {
 
     $id = $_GET['id'];
@@ -63,5 +63,5 @@ if (isset($_POST['themdanhmuc'])) {
     }
     $sql_xoa = "DELETE FROM tbl_category WHERE id ='" . $id . "';";
     mysqli_query($connect, $sql_xoa);
-    header('Location:../../AdminIndex.php?workingPage=category&query=them');
+    header('Location:../../AdminIndex.php?workingPage=category');
 }

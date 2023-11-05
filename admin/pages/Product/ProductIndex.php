@@ -69,8 +69,8 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
             var searchValue = document.getElementById('search-input').value;
             var limit = <?php echo $limit; ?>;
             var page = <?php echo $current_page; ?>;
-            var url = '?workingPage=product&query=them'; // Thay 'your_current_page.php' bằng tên trang hiện tại của bạn
-            // echo '<a href="?workingPage=product&query=them&limit='.($limit).'&page=' . ($current_page - 1) . '">
+            var url = '?workingPage=product'; // Thay 'your_current_page.php' bằng tên trang hiện tại của bạn
+            // echo '<a href="?workingPage=product&limit='.($limit).'&page=' . ($current_page - 1) . '">
             if (searchValue.trim() !== '') {
                 url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
 
@@ -162,8 +162,8 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
                         ?>
                     </td>
                     <td>
-                        <a href="?workingPage=product&query=them&query=sua&idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-pencil"></i></a>
-                        <a href="?workingPage=product&query=them&query=sua&idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
+                        <a href="?workingPage=product&query=edit&idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-pencil"></i></a>
+                        <a href="?workingPage=product&query=edit&idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
                     </td>
                 </tr>
 
@@ -213,7 +213,7 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
                 <li class="page-item">
                     <?php
                     if ($current_page > 1 && $total_page > 1) {
-                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=product&query=them&limit=' . ($limit) . '&page=' . ($current_page - 1) . '">
+                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=product&limit=' . ($limit) . '&page=' . ($current_page - 1) . '">
                         Previous
                         </a>';
                     }
@@ -226,11 +226,11 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
                     // ngược lại hiển thị thẻ a
                     if ($i == $current_page) {
                         echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=product&query=them&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=product&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                     } else {
                         echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?workingPage=product&query=them&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                        <a name="page" class="page-link text-reset text-black" href="?workingPage=product&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                         </li>';
                     }
                 }
@@ -239,7 +239,7 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
                 <?php
                 if ($current_page < $total_page && $total_page > 1) {
                     echo '<li class="page-item light">
-                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=product&query=them&limit=' . ($limit) . '&page=' . ($current_page + 1) . '">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=product&limit=' . ($limit) . '&page=' . ($current_page + 1) . '">
                     Next
                     </a>
                     </li>';

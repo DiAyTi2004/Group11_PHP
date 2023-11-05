@@ -136,8 +136,8 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
                         <?php echo $row['banner'] ?>
                     </td>
                     <td>
-                        <a href="?workingPage=event&query=sua&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-pencil"></i></a>
-                        <a href="?workingPage=event&&query=themquery=sua&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
+                        <a href="?workingPage=event&query=edit&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-pencil"></i></a>
+                        <a href="?workingPage=event&query=edit&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
                     </td>
                 </tr>
             <?php

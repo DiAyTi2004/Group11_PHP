@@ -38,19 +38,19 @@
                         </a>
                     </li>
                     <li class="flex-center">
-                        <a href="AdminIndex.php?workingPage=order&query=them" class="nav-link <?php getHeaderTextColor('order'); ?> flex-column flex-center">
+                        <a href="AdminIndex.php?workingPage=order" class="nav-link <?php getHeaderTextColor('order'); ?> flex-column flex-center">
                             <i class="fa-solid fa-gauge-high text-white mb-2"></i>
                             Đơn hàng
                         </a>
                     </li>
                     <li class="flex-center">
-                        <a href="AdminIndex.php?workingPage=product&query=them" class="nav-link <?php getHeaderTextColor('product'); ?> flex-column flex-center">
+                        <a href="AdminIndex.php?workingPage=product" class="nav-link <?php getHeaderTextColor('product'); ?> flex-column flex-center">
                             <i class="fa-solid fa-table text-white mb-2"></i>
                             Sản phẩm
                         </a>
                     </li>
                     <li class="flex-center">
-                        <a href="AdminIndex.php?workingPage=category&query=them" class="nav-link <?php getHeaderTextColor('category'); ?> flex-column flex-center">
+                        <a href="AdminIndex.php?workingPage=category" class="nav-link <?php getHeaderTextColor('category'); ?> flex-column flex-center">
                             <i class="fa-solid fa-sitemap text-white mb-2"></i>
                             Danh mục
                         </a>

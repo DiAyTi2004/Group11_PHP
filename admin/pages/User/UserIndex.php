@@ -32,7 +32,7 @@ $sql_lietke_nguoidung_2 = "SELECT * FROM tbl_dangky
                     ORDER BY id_sanpham  
                     DESC 
                     LIMIT $start, $limit";
-$result_lietke_nguoidung_2= mysqli_query($connect, $sql_lietke_nguoidung_2);
+$result_lietke_nguoidung_2 = mysqli_query($connect, $sql_lietke_nguoidung_2);
 //Hiển thị
 
 // PHẦN HIỂN THỊ PHÂN TRANG
@@ -92,13 +92,13 @@ $result_lietke_nguoidung_2= mysqli_query($connect, $sql_lietke_nguoidung_2);
         LIMIT $start, $limit";
 
     // Thực thi câu truy vấn
-    $result_lietke_nguoidung= isset($_GET['search']) ? mysqli_query($connect, $query) : mysqli_query($connect, $sql_lietke_nguoidung);
+    $result_lietke_nguoidung = isset($_GET['search']) ? mysqli_query($connect, $query) : mysqli_query($connect, $sql_lietke_nguoidung);
     ?>
 
 </div>
 
-<div class="container p-0"  style="width: 100%;">
-    <table  style="width: 100%;">
+<div class="container p-0" style="width: 100%;">
+    <table style="width: 100%;">
         <legend class="text-center"><b>Quản lý sản phẩm</b></legend>
 
         <thead class="table-head w-100">
@@ -128,7 +128,7 @@ $result_lietke_nguoidung_2= mysqli_query($connect, $sql_lietke_nguoidung_2);
                 <td class="noWrap"> <?php echo $row['sodienthoai'] ?></td>
                 <td class="noWrap" style="width:150px;"> <?php echo $row['diachi'] ?></td>
                 <td>
-                    <a href="?workingPage=user&query=sua&idnguoidung=<?php echo $row['id_khachhang'] ?>"> Sửa </a>
+                    <a href="?workingPage=user&query=edit&idnguoidung=<?php echo $row['id_khachhang'] ?>"> Sửa </a>
                 </td>
                 <td>
                     <a href="modules/User/UserLogic.php?idnguoidung=<?php echo $row['id_khachhang'] ?>">Xóa</a>

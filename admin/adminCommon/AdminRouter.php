@@ -1,17 +1,17 @@
 <div class="flex-grow-1">
     <div class="container my-4">
         <?php
-        if ($workingPage == 'category' && $query == 'them') {
+        if ($workingPage == 'category') {
             include("./pages/Category/AddCategoryPopup.php");
             include("./pages/Category/CategoryIndex.php");
             include("./pages/Category/CategoryConfirmDeletePopup.php");
-        } else if ($workingPage == 'category' && $query == 'sua') {
+        } else if ($workingPage == 'category' && $query == 'edit') {
             include("./pages/Category/EditCategoryPopup.php");
-        } else if ($workingPage == 'product' && $query == 'them') {
+        } else if ($workingPage == 'product') {
             include("./pages/Product/ProductIndex.php");
             include("./pages/Product/AddProductPopup.php");
             include("./pages/Product/ProductConfirmDeletePopup.php");
-        } else if ($workingPage == 'product' && $query == 'sua') {
+        } else if ($workingPage == 'product' && $query == 'edit') {
             include("./pages/Product/EditProductPopup.php");
         } else if ($workingPage == 'event') {
             include("./pages/Event/EventIndex.php");
@@ -22,11 +22,11 @@
         } else if ($workingPage == 'user') {
             include("./pages/User/UserIndex.php");
             include("./pages/User/AddUserPopup.php");
-        } else if ($workingPage == 'user' && $query == 'sua') {
+        } else if ($workingPage == 'user' && $query == 'edit') {
             include("./pages/User/EditUserPopup.php");
-        } else if ($workingPage == 'order' && $query == 'them') {
+        } else if ($workingPage == 'order') {
             include("./pages/Order/OrderIndex.php");
-        } else if ($workingPage == 'order' && $query == 'sua') {
+        } else if ($workingPage == 'order' && $query == 'edit') {
             include("./pages/Order/OrderLogicPopup.php");
         } else if ($workingPage == 'order' && $query == 'xemdonhang') {
             include("./pages/Order/CheckOrderPopUp.php");

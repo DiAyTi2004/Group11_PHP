@@ -23,10 +23,10 @@ if (isset($_POST['themsanpham'])) {
             $sql_themsp = "INSERT INTO tbl_sanpham(tensanpham,masanpham,giasanpham,soluong,hinhanh,tomtat,noidung,trangthai,id_danhmuc) 
                 VALUE ('" . $tensanpham . "','" . $masanpham . "','" . $giasanpham . "','" . $soluong . "','" . $hinhanh . "','" . $tomtat . "','" . $noidung . "'," . $hienthi . ",'" . $danhmuc . "')";
             mysqli_query($connect, $sql_themsp);
-            header('Location:../../AdminIndex.php?workingPage=product&query=them');
+            header('Location:../../AdminIndex.php?workingPage=product');
         } else {
             $hinhanh = '';
-            header('Location:../../AdminIndex.php?workingPage=product&query=them');
+            header('Location:../../AdminIndex.php?workingPage=product');
         }
     }
 } else if (isset($_POST['suasanpham'])) {
@@ -47,7 +47,7 @@ if (isset($_POST['themsanpham'])) {
             noidung='" . $noidung . "',trangthai='" . $hienthi . "',id_danhmuc='" . $danhmuc . "' WHERE id_sanpham='$_GET[idsanpham]'";
     }
     mysqli_query($connect, $sql_sua);
-    header('Location:../../AdminIndex.php?workingPage=product&query=them');
+    header('Location:../../AdminIndex.php?workingPage=product');
 } else {
 
     $id = $_GET['idsanpham'];
@@ -58,5 +58,5 @@ if (isset($_POST['themsanpham'])) {
     }
     $sql_xoa = "DELETE FROM tbl_sanpham WHERE id_sanpham ='" . $id . "';";
     mysqli_query($connect, $sql_xoa);
-    header('Location:../../AdminIndex.php?workingPage=product&query=them');
+    header('Location:../../AdminIndex.php?workingPage=product');
 }

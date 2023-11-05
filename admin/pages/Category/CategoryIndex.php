@@ -128,8 +128,8 @@ $result_lietke_category_2 = mysqli_query($connect, $sql_lietke_category_2);
                         <img src="pages/Category/CategoryImages/<?php echo $row['hinhanh'] ?> " width="100%">
                     </td>
                     <td>
-                        <a href="?workingPage=category&query=them&query=sua&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-pencil"></i></a>
-                        <a href="?workingPage=category&query=them&query=sua&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
+                        <a href="?workingPage=category&query=edit&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-pencil"></i></a>
+                        <a href="?workingPage=category&query=edit&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
                     </td>
                 </tr>
             <?php

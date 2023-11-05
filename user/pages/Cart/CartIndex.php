@@ -39,7 +39,7 @@
                        </td>
                        <td><?php echo number_format($cart_item['giasanpham'], 0, ',', '.') . ' VNĐ' ?></td>
                        <td class="giasp-cart"><?php echo number_format($thanhtien, 0, ',', '.') . ' VNĐ' ?></td>
-                       <td style="text-align: center"><a href="pages/main/giohang/xoasanpham.php?xoa=<?php echo $cart_item['id'] ?>">Xóa sản phẩm</a></td>
+                       <td style="text-align: center"><a href="../pages/Cart/DeleteFromCart.php?id=<?php echo $cart_item['id'] ?>">Xóa sản phẩm</a></td>
                    </tr>
                <?php
                 }
