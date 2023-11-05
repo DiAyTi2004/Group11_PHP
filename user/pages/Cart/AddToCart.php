@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../../../../common/config/Connect.php";
+include "../../../common/config/Connect.php";
 //them so luong
 
 //tru so luong
@@ -10,11 +10,11 @@ if (isset($_SESSION['cart']) && $_GET['xoa']) {
 }
 
 //them 
-if (isset($_POST['themgiohang']) && isset($_POST['soluong'])) {
+if (isset($_POST['addToCart']) && isset($_POST['soluong'])) {
 	//session_destroy();
 	$soluongsp = $_POST['soluong'];
 	$soluong = (int)$soluongsp;
-	$id = $_GET['idsanpham'];
+	$id = $_GET['id'];
 	// $soluong=1;
 	$sql = "SELECT * FROM tbl_sanpham WHERE id_sanpham='" . $id . "' LIMIT 1";
 	$query = mysqli_query($connect, $sql);
@@ -45,5 +45,5 @@ if (isset($_POST['themgiohang']) && isset($_POST['soluong'])) {
 			$_SESSION['cart'] = $new_product;
 		}
 	}
-	header('Location: ../../../userCommon/UserIndex.php?quanly=giohang');
+	header('Location: ../../../user/userCommon/UserIndex.php?usingPage=cart');
 }

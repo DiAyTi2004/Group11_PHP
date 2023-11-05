@@ -5,11 +5,11 @@ $sql_chitiet = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhm
 $query_chitiet = mysqli_query($connect, $sql_chitiet);
 while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
 ?>
-   <div class="warpper_deital"> 
+   <div class="warpper_deital">
       <div class="hinhanh_sanpham">
          <img src="../../admin/pages/Product/ProductImages/<?php echo $row_chitiet['hinhanh'] ?>">
       </div>
-      <form class="form-sp" action="./main/giohang/themgiohang.php?idsanpham=<?php echo $row_chitiet['id_sanpham'] ?>" method="POST">
+      <form class="form-sp" action="../pages/Cart/AddToCart.php?id=<?php echo $row_chitiet['id_sanpham'] ?>" method="POST">
          <div class="chitiet_sanpham">
             <h3 style="margin: 0;"><?php echo $row_chitiet['tensanpham'] ?></h3>
             <div class="rating">
@@ -46,7 +46,7 @@ while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
             </div>
             <div class="input-themcart">
                <i class="fa-solid fa-cart-plus"></i>
-               <input class="themgiohang" type="submit" name="themgiohang" value="Thêm Giỏ Hàng">
+               <input class="themgiohang" type="submit" name="addToCart" value="Thêm Giỏ Hàng">
             </div>
          </div>
       </form>

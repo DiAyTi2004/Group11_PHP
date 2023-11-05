@@ -18,7 +18,7 @@ if (isset($_GET['usingPage'])) {
         <ul class="menu_list-left">
             <li><img style="width:50px;height:auto;" src="./images/logo.svg" alt="logo"> </li>
             <li> <a href="UserIndex.php">Home</a></li>
-            <li> <a href="UserIndex.php?usingPage=giohang">Giỏ hàng</a></li>
+            <li> <a href="UserIndex.php?usingPage=cart">Giỏ hàng</a></li>
             <li><a href="">Danh mục</a>
                 <ul class="menu_danhmuc">
                     <?php

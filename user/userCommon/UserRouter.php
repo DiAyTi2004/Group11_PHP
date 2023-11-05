@@ -4,12 +4,12 @@
         <?php
         if ($usingPage == 'danhmuclist') {
             include("../pages/danhmuc.php");
-        } else if ($usingPage == 'giohang') {
-            include("../pages/giohang/cart.php");
+        } else if ($usingPage == 'cart') {
+            include("../pages/Cart/CartIndex.php");
         } else if ($usingPage == 'dangky') {
             header("Location: ./UserSignUp.php");
         } else if ($usingPage == 'sanpham') {
-            include("../pages/sanpham.php");
+            include("../pages/ProductDetail/ProductDetail.php");
         } else if ($usingPage == 'dangnhap') {
             header("Location: UserLogin.php");
         } else if ($usingPage == 'thongtin') {

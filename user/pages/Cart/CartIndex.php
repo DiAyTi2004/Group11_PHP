@@ -29,12 +29,12 @@
             ?>
                    <tr>
                        <td><b><?php echo $cart_item['tensanpham'] ?></b></td>
-                       <td><img class="img-cart" src="admin/modules/quanlysp/uploads/<?php echo $cart_item['hinhanh'] ?>"></td>
+                       <td><img class="img-cart" src="../../admin/pages/Product/ProductImages/<?php echo $cart_item['hinhanh'] ?>"></td>
                        <td>
                            <div class="soluong-sp-dem">
-                               <a class="soluong-sp-dem-icon" href="pages/main/giohang/suasoluong.php?tru=<?php echo $cart_item['id'] ?>"><i class="fa-solid fa-minus"></i></a>
+                               <a class="soluong-sp-dem-icon" href="../pages/Cart/EditQuantity.php?minus=<?php echo $cart_item['id'] ?>"><i class="fa-solid fa-minus"></i></a>
                                <input class="soluong-sp-input" type="text" name="soluong" value="<?php echo $cart_item['soluong'] ?>">
-                               <a class="soluong-sp-dem-icon" href="pages/main/giohang/suasoluong.php?cong=<?php echo $cart_item['id'] ?>"><i class="fa-solid fa-plus"></i></a>
+                               <a class="soluong-sp-dem-icon" href="../pages/Cart/EditQuantity.php?plus=<?php echo $cart_item['id'] ?>"><i class="fa-solid fa-plus"></i></a>
                            </div>
                        </td>
                        <td><?php echo number_format($cart_item['giasanpham'], 0, ',', '.') . ' VNĐ' ?></td>
