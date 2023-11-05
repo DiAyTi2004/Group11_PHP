@@ -43,7 +43,7 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
 <!-- Button trigger modal and search btn -->
 <div class="text-left flex justify-between">
     <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <i class="fa-solid fa-plus"></i>
+        <i class="fa-solid fa-plus"></i> 
         Thêm sản phẩm
     </button>
 

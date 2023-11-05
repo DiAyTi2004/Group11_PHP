@@ -19,8 +19,9 @@
             include("./pages/Event/EventConfirmDeletePopup.php");
         } else if ($workingPage == 'event' && $query == 'edit') {
             include("./pages/Event/EditEventPopup.php");
-        } else if ($workingPage == 'user' && $query == 'them') {
+        } else if ($workingPage == 'user') {
             include("./pages/User/UserIndex.php");
+            include("./pages/User/AddUserPopup.php");
         } else if ($workingPage == 'user' && $query == 'sua') {
             include("./pages/User/EditUserPopup.php");
         } else if ($workingPage == 'order' && $query == 'them') {

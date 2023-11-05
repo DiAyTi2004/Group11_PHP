@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../styles/Account.css">
+<link rel="stylesheet" href="../styles/AccountStyles.css">
 <p><?php
     if (isset($_SESSION['dangky'])) {
         // echo 'Xin chào: '.'<span style="color:red">'.$_SESSION['dangky'].'</span>';

@@ -68,8 +68,8 @@ $result_lietke_nguoidung_2= mysqli_query($connect, $sql_lietke_nguoidung_2);
             var searchValue = document.getElementById('search-input').value;
             var limit = <?php echo $limit; ?>;
             var page = <?php echo $current_page; ?>;
-            var url = '?workingPage=user&query=them'; // Thay 'your_current_page.php' bằng tên trang hiện tại của bạn
-            // echo '<a href="?workingPage=product&query=them&limit='.($limit).'&page=' . ($current_page - 1) . '">
+            var url = '?workingPage=user'; // Thay 'your_current_page.php' bằng tên trang hiện tại của bạn
+            // echo '<a href="?workingPage=product&limit='.($limit).'&page=' . ($current_page - 1) . '">
             if (searchValue.trim() !== '') {
                 url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
 
@@ -128,7 +128,7 @@ $result_lietke_nguoidung_2= mysqli_query($connect, $sql_lietke_nguoidung_2);
                 <td class="noWrap"> <?php echo $row['sodienthoai'] ?></td>
                 <td class="noWrap" style="width:150px;"> <?php echo $row['diachi'] ?></td>
                 <td>
-                    <a href="?workingPage=user&query=them&query=sua&idnguoidung=<?php echo $row['id_khachhang'] ?>"> Sửa </a>
+                    <a href="?workingPage=user&query=sua&idnguoidung=<?php echo $row['id_khachhang'] ?>"> Sửa </a>
                 </td>
                 <td>
                     <a href="modules/User/UserLogic.php?idnguoidung=<?php echo $row['id_khachhang'] ?>">Xóa</a>
@@ -188,7 +188,7 @@ $result_lietke_nguoidung_2= mysqli_query($connect, $sql_lietke_nguoidung_2);
                 <li class="page-item">
                     <?php
                     if ($current_page > 1 && $total_page > 1) {
-                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=product&query=them&limit=' . ($limit) . '&page=' . ($current_page - 1) . '">
+                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=product&limit=' . ($limit) . '&page=' . ($current_page - 1) . '">
                         Previous
                         </a>';
                     }
@@ -201,11 +201,11 @@ $result_lietke_nguoidung_2= mysqli_query($connect, $sql_lietke_nguoidung_2);
                     // ngược lại hiển thị thẻ a
                     if ($i == $current_page) {
                         echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=product&query=them&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=product&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                     } else {
                         echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?workingPage=product&query=them&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                        <a name="page" class="page-link text-reset text-black" href="?workingPage=product&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                         </li>';
                     }
                 }
@@ -214,7 +214,7 @@ $result_lietke_nguoidung_2= mysqli_query($connect, $sql_lietke_nguoidung_2);
                 <?php
                 if ($current_page < $total_page && $total_page > 1) {
                     echo '<li class="page-item light">
-                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=product&query=them&limit=' . ($limit) . '&page=' . ($current_page + 1) . '">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=product&limit=' . ($limit) . '&page=' . ($current_page + 1) . '">
                     Next
                     </a>
                     </li>';

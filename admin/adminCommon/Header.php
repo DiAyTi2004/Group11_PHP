@@ -62,7 +62,7 @@
                         </a>
                     </li>
                     <li class="flex-center">
-                        <a href="AdminIndex.php?workingPage=user&query=them" class="nav-link <?php getHeaderTextColor('user'); ?> flex-column flex-center">
+                        <a href="AdminIndex.php?workingPage=user" class="nav-link <?php getHeaderTextColor('user'); ?> flex-column flex-center">
                             <i class="fa-solid fa-users-gear text-white mb-2"></i>
                             Người dùng
                         </a>
