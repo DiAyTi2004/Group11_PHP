@@ -1486,9 +1486,14 @@ body {
 }
 
 .text-white {
-    color: #fff !important; 
+    color: #fff !important;
 }
 
 .text-black {
-    color: #000 !important; 
+    color: #000 !important;
+}
+
+
+.bg-transparent {
+    background-color: transparent !important;
 }

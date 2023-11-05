@@ -1,5 +1,5 @@
 <div class="flex-grow-1">
-    <div class="container my-4">
+    <div class="container my-4 <?php if (!isset($_GET['workingPage'])) echo "bg-transparent"; ?>">
         <?php
         if ($workingPage == 'category' && $query == 'edit') {
             include("./pages/Category/EditCategoryPopup.php");
