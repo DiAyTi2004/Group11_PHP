@@ -14,8 +14,8 @@
             header("Location: UserLogin.php");
         } else if ($usingPage == 'thongtin') {
             include("../pages/Account/AccountIndex.php");
-        } else if ($usingPage == 'timkiem') {
-            include("../pages/timkiem.php");
+        } else if ($usingPage == 'search') {
+            include("../pages/Searching/SearchingIndex.php");
         } else if ($usingPage == 'payment') {
             include("../pages/Payment/PaymentIndex.php");
         } else {

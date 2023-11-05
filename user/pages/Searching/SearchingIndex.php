@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['timkiem'])) {
+if (isset($_POST['search'])) {
 	$tukhoa = $_POST['tukhoa'];
 }
 $sql_pro = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 

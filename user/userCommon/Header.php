@@ -34,9 +34,9 @@ if (isset($_GET['usingPage'])) {
                 </ul>
             </li>
             <li>
-                <Form method="POST" action="UserIndex.php?usingPage=timkiem">
+                <Form method="POST" action="UserIndex.php?usingPage=search">
                     <input type="text" class="menu-input-text" placeholder="Tìm kiếm....." name="tukhoa">
-                    <input type="submit" class="menu-input-submit" name="timkiem" value="Tìm Kiếm">
+                    <input type="submit" class="menu-input-submit" name="search" value="Tìm Kiếm">
                 </Form>
             </li>
         </ul>
