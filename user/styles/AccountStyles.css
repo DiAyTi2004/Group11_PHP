@@ -1,14 +1,17 @@
 .info-header {
     border-bottom: 1px #e3e3e3 solid;
 }
+
 .infor-main {
     margin-top: 24px;
 }
+
 .infor-main-text {
     margin: 12px 0;
-    display: flex; 
+    display: flex;
     justify-content: space-between;
 }
+
 .infor-main-text label {
     color: rgba(85, 85, 85, 0.8);
     display: inline-block;
@@ -16,35 +19,23 @@
     width: 15%;
     text-align: right;
 }
+
 .infor-main-text span.infor-text-sql {
     width: 85%;
     margin-left: 24px;
 }
+
 .container-info {
     max-width: 100%;
     height: calc(100vh - 330px - 48px);
     display: flex;
     justify-content: space-between;
 }
+
 .wrapper-info {
     width: 70%;
 }
-.sidebar-info {
-    width: 30%;
-}
-.sidebar-list-item .sidebar-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    text-align: center;
-}
-.sidebar-list-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-/* test */
 .container-info-left {
     display: flex;
     width: 30%;
@@ -92,6 +83,7 @@ img {
     transform: unset;
     transition: 0.25s;
 }
+
 .card-item-name {
     color: #fff;
     margin-top: 48px;
@@ -118,15 +110,4 @@ img {
     font-size: 22px;
     color: #fff;
     margin: 20px;
-}
-
-.contact {
-    display: flex;
-    justify-content: center;
-}
-.card-item-contact {
-    color: #fff;
-    border: 1px solid #f2726a;
-    padding: 12px 18px;
-    border-radius: 12px;
 }

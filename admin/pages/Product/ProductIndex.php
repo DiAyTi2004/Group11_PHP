@@ -17,15 +17,20 @@ if ($pageIndex > $total_page) {
 
 $start = ($pageIndex - 1) * $pageSize;
 
+$search = '';
+
+if (isset($_GET['search']) && !empty($_GET['search'])) {
+    $search = $_GET['search'];
+}
+
 $getTableDataSql = "";
 
 if (isset($_GET['search'])) {
-    $getTableDataSql = "SELECT * FROM tbl_sanpham 
-    INNER JOIN tbl_danhmuc ON tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc 
+    $getTableDataSql = "SELECT * FROM tbl_sanpham INNER JOIN tbl_danhmuc ON tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc 
     WHERE
-        tbl_sanpham.tensanpham LIKE N'%$search%'
-        OR tbl_sanpham.masanpham LIKE N'%$search%'
-        OR tbl_danhmuc.tendanhmuc LIKE N'%$search'
+        tbl_sanpham.tensanpham LIKE N'%" . $search . "%'
+        OR tbl_sanpham.masanpham LIKE N'%" . $search . "%'
+        OR tbl_danhmuc.tendanhmuc LIKE N'%" . $search . "'
     ORDER BY tbl_sanpham.id_sanpham DESC
     LIMIT $start, $pageSize";
 } else {
@@ -53,15 +58,6 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             Search
         </button>
     </div>
-
-    <?php
-    $search = '';
-
-    if (isset($_GET['search']) && !empty($_GET['search'])) {
-        $search = $_GET['search'];
-    }
-
-    ?>
 
 </div>
 
