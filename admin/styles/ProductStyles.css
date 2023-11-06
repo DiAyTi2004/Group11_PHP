@@ -9,6 +9,7 @@
 .clear {
   clear: both;
 }
+
 table {
   border-radius: 10px;
 }
@@ -60,7 +61,7 @@ table {
   text-align: center;
 }
 
-.table-head > th {
+.table-head>th {
   white-space: nowrap;
   padding: 12px;
   text-align: center;
@@ -212,4 +213,10 @@ option {
 .giasanpham {
   width: 150px;
   text-align: center;
+}
+
+
+.imageInPopup {
+  width: 100%;
+  height: auto;
 }

@@ -1,24 +1,21 @@
+<link rel="stylesheet" href="./styles/ProductStyles.css">
+
 <?php
 $countAllSql = "SELECT * FROM tbl_sanpham;";
-
 $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
 
-$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+$pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
+$pageSize = isset($_GET['limit']) ? $_GET['limit'] : 5;
 
-$limit = isset($_GET['limit']) ? $_GET['limit'] : 5;
+$total_page = ceil($total_records / $pageSize);
 
-$i = 0;
-
-$stt = $i + ($current_page - 1) * $limit;
-$total_page = ceil($total_records / $limit);
-
-if ($current_page > $total_page) {
-    $current_page = $total_page;
-} else if ($current_page < 1) {
-    $current_page = 1;
+if ($pageIndex > $total_page) {
+    $pageIndex = $total_page;
+} else if ($pageIndex < 1) {
+    $pageIndex = 1;
 }
 
-$start = ($current_page - 1) * $limit;
+$start = ($pageIndex - 1) * $pageSize;
 
 $getTableDataSql = "";
 
@@ -30,20 +27,17 @@ if (isset($_GET['search'])) {
         OR tbl_sanpham.masanpham LIKE N'%$search%'
         OR tbl_danhmuc.tendanhmuc LIKE N'%$search'
     ORDER BY tbl_sanpham.id_sanpham DESC
-    LIMIT $start, $limit";
+    LIMIT $start, $pageSize";
 } else {
     $getTableDataSql = "SELECT * FROM tbl_sanpham ,tbl_danhmuc 
     WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
     ORDER BY id_sanpham  
     DESC 
-    LIMIT $start, $limit";
+    LIMIT $start, $pageSize";
 }
-
 
 $tableData = mysqli_query($connect, $getTableDataSql);
 ?>
-
-<link rel="stylesheet" href="./styles/ProductStyles.css">
 
 <div class="text-left flex justify-between">
     <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -61,15 +55,13 @@ $tableData = mysqli_query($connect, $getTableDataSql);
     </div>
 
     <?php
-    $search = ''; // Initialize the search variable
+    $search = '';
 
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $_GET['search'];
     }
 
     ?>
-
-
 
 </div>
 
@@ -94,13 +86,13 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
         <tbody class="table-body">
             <?php
+            $displayOrder = 0;
             while ($row = mysqli_fetch_array($tableData)) {
-                $i++;
-                $stt++;
+                $displayOrder++;
             ?>
                 <tr>
                     <td>
-                        <?php echo  $stt ?>
+                        <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                     </td>
                     <td class="tensanpham">
                         <?php echo $row['tensanpham'] ?>
@@ -133,35 +125,23 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         }
                         ?>
                     </td>
-                    <td class="action_<?php echo $row['id_sanpham']; ?>">
-
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal_1">
+                    <td>
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id_sanpham']; ?>">
                             <i class="fa-solid fa-pencil"></i>
                         </button>
 
                         <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id_sanpham']; ?>">
-                            <i class="fa-solid fa-trash mr-1">
+                            <i class="fa-solid fa-trash mr-1"></i>
                         </button>
-
-
-
-
-                        <!-- <a href="?workingPage=product&query=edit&idsanpham=<?php echo $getID; ?>"><i class="fa-solid fa-pencil"></i></a>
-                        <a href="?workingPage=product&query=edit&idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-trash mr-1"></i></a> -->
                     </td>
                 </tr>
-
-
-
             <?php
-
             }
             ?>
         </tbody>
 
     </table>
 
-    <!-- Pagination table -->
     <form action="" method="GET">
         <nav class="row py-2" aria-label="Page navigation example">
 
@@ -169,9 +149,9 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <form action="" method="GET">
                     <label for="limitSelect">Rows per page:</label>
                     <select name="limit" id="limitSelect" onchange="updatePageAndLimit()">
-                        <option value="5" <?php if ($limit == 5) echo 'selected'; ?>>5</option>
-                        <option value="10" <?php if ($limit == 10) echo 'selected'; ?>>10</option>
-                        <option value="15" <?php if ($limit == 15) echo 'selected'; ?>>15</option>
+                        <option value="5" <?php if ($pageSize == 5) echo 'selected'; ?>>5</option>
+                        <option value="10" <?php if ($pageSize == 10) echo 'selected'; ?>>10</option>
+                        <option value="15" <?php if ($pageSize == 15) echo 'selected'; ?>>15</option>
                     </select>
                 </form>
 
@@ -191,7 +171,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
                 <label class="mr-4">Showing
                     <?php
-                    echo $stt . " of " . $total_records . " results";
+                    echo $pageSize . " of " . $total_records . " results";
                     ?>
                 </label>
             </div>
@@ -199,8 +179,8 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             <ul class="m-0 pagination justify-content-end py-2 col">
                 <li class="page-item">
                     <?php
-                    if ($current_page > 1 && $total_page > 1) {
-                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=product&limit=' . ($limit) . '&page=' . ($current_page - 1) . '">
+                    if ($pageIndex > 1 && $total_page > 1) {
+                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=product&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
                         Previous
                         </a>';
                     }
@@ -209,24 +189,22 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
                 <?php
                 for ($i = 1; $i <= $total_page; $i++) {
-                    // Nếu là trang hiện tại thì hiển thị thẻ span
-                    // ngược lại hiển thị thẻ a
-                    if ($i == $current_page) {
+                    if ($i == $pageIndex) {
                         echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=product&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=product&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                     } else {
                         echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?workingPage=product&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                        <a name="page" class="page-link text-reset text-black" href="?workingPage=product&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                         </li>';
                     }
                 }
                 ?>
 
                 <?php
-                if ($current_page < $total_page && $total_page > 1) {
+                if ($pageIndex < $total_page && $total_page > 1) {
                     echo '<li class="page-item light">
-                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=product&limit=' . ($limit) . '&page=' . ($current_page + 1) . '">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=product&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
                     Next
                     </a>
                     </li>';
@@ -237,27 +215,30 @@ $tableData = mysqli_query($connect, $getTableDataSql);
     </nav>
 </div>
 
+<!-- pre display all edit popup -->
 <?php
 $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
-    // echo var_dump($row) . "<br>";
-
-    include "./pages/Product/ProductConfirmDeletePopup.php";
+    include "./pages/Product/EditProductPopup.php";
+}
 ?>
 
+<!-- pre display all confirm delete popup -->
 <?php
+$tableData = mysqli_query($connect, $getTableDataSql);
 
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/Product/ProductConfirmDeletePopup.php";
 }
 ?>
 
 <script>
     function performSearch() {
         var searchValue = document.getElementById('search-input').value;
-        var limit = <?php echo $limit; ?>;
-        var page = <?php echo $current_page; ?>;
-        var url = '?workingPage=product'; // Thay 'your_current_page.php' bằng tên trang hiện tại của bạn
-        // echo '<a href="?workingPage=product&limit='.($limit).'&page=' . ($current_page - 1) . '">
+        var limit = <?php echo $pageSize; ?>;
+        var page = <?php echo $pageIndex; ?>;
+        var url = '?workingPage=product';
         if (searchValue.trim() !== '') {
             url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
 

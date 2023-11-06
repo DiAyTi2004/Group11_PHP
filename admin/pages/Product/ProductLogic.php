@@ -34,9 +34,9 @@ if (isset($_POST['addProduct'])) {
         move_uploaded_file($hinhanh_tmp, 'ProductImages/' . $hinhanh);
         $sql_sua = "UPDATE tbl_sanpham SET tensanpham='" . $tensanpham . "',masanpham='" . $masanpham . "',
             giasanpham='" . $giasanpham . "',soluong='" . $soluong . "',hinhanh='" . $hinhanh . "',
-            tomtat='" . $tomtat . "',noidung='" . $noidung . "',trangthai='" . $hienthi . "',id_danhmuc='" . $danhmuc . "' WHERE id_sanpham='$_GET[idsanpham]'";
+            tomtat='" . $tomtat . "',noidung='" . $noidung . "',trangthai='" . $hienthi . "',id_danhmuc='" . $danhmuc . "' WHERE id_sanpham='$_GET[productId]'";
 
-        $sql = "SELECT*FROM tbl_sanpham WHERE id_sanpham='$_GET[idsanpham]' LIMIT 1";
+        $sql = "SELECT*FROM tbl_sanpham WHERE id_sanpham='$_GET[productId]' LIMIT 1";
         $query = mysqli_query($connect, $sql);
         while ($row = mysqli_fetch_array($query)) {
             unlink('ProductImages/' . $row['hinhanh']);
@@ -44,7 +44,7 @@ if (isset($_POST['addProduct'])) {
     } else {
         $sql_sua = "UPDATE tbl_sanpham SET tensanpham='" . $tensanpham . "',masanpham='" . $masanpham . "',
             giasanpham='" . $giasanpham . "',soluong='" . $soluong . "',tomtat='" . $tomtat . "',
-            noidung='" . $noidung . "',trangthai='" . $hienthi . "',id_danhmuc='" . $danhmuc . "' WHERE id_sanpham='$_GET[idsanpham]'";
+            noidung='" . $noidung . "',trangthai='" . $hienthi . "',id_danhmuc='" . $danhmuc . "' WHERE id_sanpham='$_GET[productId]'";
     }
     mysqli_query($connect, $sql_sua);
     header('Location:../../AdminIndex.php?workingPage=product');
