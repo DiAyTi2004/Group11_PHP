@@ -7,14 +7,8 @@
             include("./pages/Category/AddCategoryPopup.php");
             include("./pages/Category/CategoryIndex.php");
             include("./pages/Category/CategoryConfirmDeletePopup.php");
-        } else if ($workingPage == 'product' && $query == 'edit') {
-            include("./pages/Product/ProductIndex.php");
-            include("./pages/Product/EditProductPopup.php");
-            include("./pages/Product/AddProductPopup.php");
-            include("./pages/Product/ProductConfirmDeletePopup.php");
         } else if ($workingPage == 'product') {
             include("./pages/Product/ProductIndex.php");
-            include("./pages/Product/EditProductPopup.php");
             include("./pages/Product/AddProductPopup.php");
             include("./pages/Product/ProductConfirmDeletePopup.php");
         } else if ($workingPage == 'event' && $query == 'edit') {

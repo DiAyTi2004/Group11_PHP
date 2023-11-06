@@ -163,11 +163,16 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
                     </td>
                     <td>
 
-                        <button onclick="<?php echo "handleEdit(" . $row['id_sanpham'] . ");" ?>" type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal_1">
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal_1">
                             <i class="fa-solid fa-pencil"></i>
                         </button>
-                        <a href="?workingPage=product&query=edit&idsanpham=<?php echo $getID; ?>"><i class="fa-solid fa-pencil"></i></a>
-                        <a href="?workingPage=product&query=edit&idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
+
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDelete">
+                        <i class="fa-solid fa-trash mr-1">
+                        </button>
+                        
+                        <!-- <a href="?workingPage=product&query=edit&idsanpham=<?php echo $getID; ?>"><i class="fa-solid fa-pencil"></i></a>
+                        <a href="?workingPage=product&query=edit&idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-trash mr-1"></i></a> -->
                     </td>
                 </tr>
 
@@ -255,46 +260,3 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
     </form>
     </nav>
 </div>
-
-<script>
-    function handleEdit(productId) {
-        console.log("checking: ", productId);
-        createCookie("productId", productId, 1);
-
-    }
-
-    function createCookie(name, value, days) {
-        var expires = "";
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toGMTString();
-        }
-
-        // Check if the cookie already exists
-        var existingCookie = getCookie(name);
-
-        if (existingCookie) {
-            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-        }
-
-        // Create a new cookie with the specified value and expiration
-        document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
-    }
-
-    function getCookie(name) {
-        var nameEQ = name + "=";
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i];
-            while (cookie.charAt(0) === ' ') {
-                cookie = cookie.substring(1, cookie.length);
-            }
-            if (cookie.indexOf(nameEQ) === 0) {
-                return unescape(cookie.substring(nameEQ.length, cookie.length));
-            }
-        }
-        return null;
-    }
-    // Usage example:
-</script>

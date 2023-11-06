@@ -16,7 +16,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Hủy</button>
 
-                <button type="submit" class="btn btn-primary" name="themsanpham">Xác nhận</button>
+                <button type="submit" class="btn btn-primary" name="addProduct">Xác nhận</button>
             </div>
             </form>
         </div>

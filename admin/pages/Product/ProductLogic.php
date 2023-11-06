@@ -14,7 +14,7 @@ $noidung = $_POST['noidung'];
 $hienthi = $_POST['hienthi'];
 $danhmuc = $_POST['danhmuc'];
 
-if (isset($_POST['themsanpham'])) {
+if (isset($_POST['addProduct'])) {
     if (isset($_FILES['hinhanh'])) {
         if ($file['type'] == 'image/jpeg' || $file['type'] == 'imgae/jpg' || $file['type'] == 'image/png') {
 
