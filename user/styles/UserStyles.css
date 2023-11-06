@@ -6,7 +6,6 @@
 body {
     margin: 0;
     padding: 0;
-    /* background-image: url(../images/background_body.jpg); */
 }
 
 a {
@@ -19,7 +18,6 @@ a {
     margin: 0 auto;
 }
 
-/* HEADER*/
 .header {
     height: 400px;
     width: 100%;
@@ -32,9 +30,7 @@ a {
     height: 400px;
 }
 
-/* MENU */
 .menu {
-    /* margin-top: 10px; */
     height: auto;
     border-radius: 0px;
     background-color: rgb(32, 33, 36);
@@ -169,23 +165,12 @@ ul.menu_list li a {
     color: #fff;
 }
 
-*/
-
-/* MAIN */
 .main {
     height: auto;
     width: 100%;
 }
 
-.maincontent img {
-    width: 100%;
-    /* height: 100%; */
-    height: 600px;
-}
-
 .new_product {
-    /* background-color: #ffccff;
-    border: 1px solid black; */
     border-radius: 15px;
     margin-bottom: 10px;
 }
@@ -202,7 +187,6 @@ ul.menu_list li a {
     width: 19%;
 }
 
-/* Hiển thị sản phẩm */
 ul.product_list {
     padding: 0;
     margin: 0;
@@ -248,52 +232,4 @@ h5.title_product {
     color: #000;
     font-size: 16px;
     font-weight: bold;
-}
-
-/* FOOTER */
-.clear {
-    clear: both;
-    /* khong cho do , gat cai float left */
-}
-
-/* Mobie */
-@media screen and (min-width: 600px) {
-    .wrapper {
-        max-width: 100%;
-    }
-
-    .menu {
-        max-width: 100%;
-        flex-direction: column;
-        text-align: center;
-
-        clear: both;
-    }
-
-    .main:before,
-    .main:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-    .main {
-        max-width: 100%;
-    }
-
-    .maincontent {
-        width: 100%;
-        /* margin-top: 5px; */
-        margin-left: 5px;
-        float: right;
-        min-height: 64vh;
-    }
-}
-
-/* Desktop */
-@media screen and (min-width: 1024px) {
-    .wrapper {
-        max-width: 1600px;
-        margin: 0 auto;
-    }
 }

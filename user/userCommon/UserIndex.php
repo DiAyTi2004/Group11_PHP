@@ -20,9 +20,10 @@
 
 <body>
 
-    <div class="wrapper">
+    <div class="flex-column">
         <?php
         session_start();
+
         include("../../common/config/Connect.php");
         include("./Header.php");
         include("./UserRouter.php");

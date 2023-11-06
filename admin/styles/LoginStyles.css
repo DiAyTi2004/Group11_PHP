@@ -27,17 +27,10 @@ body {
     bottom: 10px;
     font-size: 15px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    width: 116px;
     background-color: white;
     font-weight: bold;
     border-radius: 10px;
-}
-
-.top_link img {
-    width: 24px;
-    height: 24px;
 }
 
 .login {

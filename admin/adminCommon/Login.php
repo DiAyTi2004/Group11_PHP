@@ -32,12 +32,13 @@ if (isset($_POST['login'])) {
     <title>ĐĂNG NHẬP</title>
 </head>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="../../common//css/CommonStyle.css">
 
 <body>
     <div class="top_link flex-center">
         <a href="../../index.php" class="p-2 bg-white">
-            <img src="https://drive.google.com/u/0/uc?id=16U__U5dJdaTfNGobB_OpwAJ73vM50rPV&export=download" alt="">
+            <i class="fa-solid fa-circle-chevron-left"></i>
             Về trang chủ
         </a>
     </div>
