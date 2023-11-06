@@ -1,46 +1,50 @@
-<!-- <?php
-        $sql_lietke_sp = "SELECT * FROM tbl_sanpham ,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc ORDER BY id_sanpham DESC";
-        $result_lietke_sp = mysqli_query($connect, $sql_lietke_sp);
-        ?> -->
-
-<!-- PHP logic paganition pages -->
 <?php
-// Tìm tổng số bản ghi
-$total_records = mysqli_num_rows($result_lietke_sp);
-//Tìm limit và current_page
+$countAllSql = "SELECT * FROM tbl_sanpham;";
+
+$total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
+
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
 $limit = isset($_GET['limit']) ? $_GET['limit'] : 5;
+
 $i = 0;
+
 $stt = $i + ($current_page - 1) * $limit;
-//Tính toán total_page và start
-// tổng số trang
 $total_page = ceil($total_records / $limit);
 
-// Giới hạn current_page trong khoảng 1 đến total_page
 if ($current_page > $total_page) {
     $current_page = $total_page;
 } else if ($current_page < 1) {
     $current_page = 1;
 }
 
-// Tìm Start
 $start = ($current_page - 1) * $limit;
 
-// BƯỚC 5: TRUY VẤN LẤY DANH SÁCH TIN TỨC
-// Có limit và start rồi thì truy vấn CSDL lấy danh sách tin tức
-$sql_lietke_sp_2 = "SELECT * FROM tbl_sanpham ,tbl_danhmuc 
-                    WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
-                    ORDER BY id_sanpham  
-                    DESC 
-                    LIMIT $start, $limit";
-$result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
-//Hiển thị
+$getTableDataSql = "";
 
-// PHẦN HIỂN THỊ PHÂN TRANG
+if (isset($_GET['search'])) {
+    $getTableDataSql = "SELECT * FROM tbl_sanpham 
+    INNER JOIN tbl_danhmuc ON tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc 
+    WHERE
+        tbl_sanpham.tensanpham LIKE N'%$search%'
+        OR tbl_sanpham.masanpham LIKE N'%$search%'
+        OR tbl_danhmuc.tendanhmuc LIKE N'%$search'
+    ORDER BY tbl_sanpham.id_sanpham DESC
+    LIMIT $start, $limit";
+} else {
+    $getTableDataSql = "SELECT * FROM tbl_sanpham ,tbl_danhmuc 
+    WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
+    ORDER BY id_sanpham  
+    DESC 
+    LIMIT $start, $limit";
+}
+
+
+$tableData = mysqli_query($connect, $getTableDataSql);
 ?>
 
 <link rel="stylesheet" href="./styles/ProductStyles.css">
-<!-- Button trigger modal and search btn -->
+
 <div class="text-left flex justify-between">
     <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <i class="fa-solid fa-plus"></i>
@@ -55,6 +59,7 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
             Search
         </button>
     </div>
+
     <?php
     $search = ''; // Initialize the search variable
 
@@ -64,40 +69,7 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
 
     ?>
 
-    <script>
-        function performSearch() {
-            var searchValue = document.getElementById('search-input').value;
-            var limit = <?php echo $limit; ?>;
-            var page = <?php echo $current_page; ?>;
-            var url = '?workingPage=product'; // Thay 'your_current_page.php' bằng tên trang hiện tại của bạn
-            // echo '<a href="?workingPage=product&limit='.($limit).'&page=' . ($current_page - 1) . '">
-            if (searchValue.trim() !== '') {
-                url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
 
-            } else {
-                url += '&limit=' + limit + '&page=' + page;
-
-            }
-            <?php
-            ?>
-            window.location.href = url;
-        }
-    </script>
-    <!-- Logic PHP search -->
-    <?php
-    // Câu truy vấn để tìm kiếm sản phẩm
-    $query = "SELECT * FROM tbl_sanpham 
-        INNER JOIN tbl_danhmuc ON tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc 
-        WHERE
-            tbl_sanpham.tensanpham LIKE N'%$search%'
-            OR tbl_sanpham.masanpham LIKE N'%$search%'
-            OR tbl_danhmuc.tendanhmuc LIKE N'%$search'
-        ORDER BY tbl_sanpham.id_sanpham DESC
-        LIMIT $start, $limit";
-
-    // Thực thi câu truy vấn
-    $result_lietke_sp_2 = isset($_GET['search']) ? mysqli_query($connect, $query) : mysqli_query($connect, $sql_lietke_sp_2);
-    ?>
 
 </div>
 
@@ -107,7 +79,7 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
 
         <thead class="table-head w-100">
             <tr class="table-heading">
-                <th class="noWrap">ID</th>
+                <th class="noWrap">STT</th>
                 <th class="noWrap">Tên sản phảm</th>
                 <th class="noWrap">Hình ảnh </th>
                 <th class="noWrap">Giá sản phẩm</th>
@@ -122,7 +94,7 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
 
         <tbody class="table-body">
             <?php
-            while ($row = mysqli_fetch_array($result_lietke_sp_2)) {
+            while ($row = mysqli_fetch_array($tableData)) {
                 $i++;
                 $stt++;
             ?>
@@ -161,16 +133,19 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
                         }
                         ?>
                     </td>
-                    <td>
+                    <td class="action_<?php echo $row['id_sanpham']; ?>">
 
                         <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal_1">
                             <i class="fa-solid fa-pencil"></i>
                         </button>
 
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDelete">
-                        <i class="fa-solid fa-trash mr-1">
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id_sanpham']; ?>">
+                            <i class="fa-solid fa-trash mr-1">
                         </button>
-                        
+
+
+
+
                         <!-- <a href="?workingPage=product&query=edit&idsanpham=<?php echo $getID; ?>"><i class="fa-solid fa-pencil"></i></a>
                         <a href="?workingPage=product&query=edit&idsanpham=<?php echo $row['id_sanpham'] ?>"><i class="fa-solid fa-trash mr-1"></i></a> -->
                     </td>
@@ -179,6 +154,7 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
 
 
             <?php
+
             }
             ?>
         </tbody>
@@ -260,3 +236,37 @@ $result_lietke_sp_2 = mysqli_query($connect, $sql_lietke_sp_2);
     </form>
     </nav>
 </div>
+
+<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
+
+while ($row = mysqli_fetch_array($tableData)) {
+    // echo var_dump($row) . "<br>";
+
+    include "./pages/Product/ProductConfirmDeletePopup.php";
+?>
+
+<?php
+
+}
+?>
+
+<script>
+    function performSearch() {
+        var searchValue = document.getElementById('search-input').value;
+        var limit = <?php echo $limit; ?>;
+        var page = <?php echo $current_page; ?>;
+        var url = '?workingPage=product'; // Thay 'your_current_page.php' bằng tên trang hiện tại của bạn
+        // echo '<a href="?workingPage=product&limit='.($limit).'&page=' . ($current_page - 1) . '">
+        if (searchValue.trim() !== '') {
+            url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
+
+        } else {
+            url += '&limit=' + limit + '&page=' + page;
+
+        }
+        <?php
+        ?>
+        window.location.href = url;
+    }
+</script>

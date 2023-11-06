@@ -29,7 +29,7 @@ if (isset($_POST['addProduct'])) {
             header('Location:../../AdminIndex.php?workingPage=product');
         }
     }
-} else if (isset($_POST['suasanpham'])) {
+} else if (isset($_POST['editProduct'])) {
     if ($hinhanh != '') {
         move_uploaded_file($hinhanh_tmp, 'ProductImages/' . $hinhanh);
         $sql_sua = "UPDATE tbl_sanpham SET tensanpham='" . $tensanpham . "',masanpham='" . $masanpham . "',
@@ -48,15 +48,15 @@ if (isset($_POST['addProduct'])) {
     }
     mysqli_query($connect, $sql_sua);
     header('Location:../../AdminIndex.php?workingPage=product');
-} else {
-
-    $id = $_GET['idsanpham'];
-    $sql = "SELECT *FROM tbl_sanpham WHERE id_sanpham = '$id' LIMIT 1";
+} else if (isset($_POST['deleteProduct'])) {
+    $id = $_GET['productId'];
+    $sql = "SELECT *FROM tbl_sanpham WHERE id_sanpham = '$id'";
     $query = mysqli_query($connect, $sql);
     while ($row = mysqli_fetch_array($query)) {
         unlink('ProductImages/' . $row['hinhanh']);
     }
     $sql_xoa = "DELETE FROM tbl_sanpham WHERE id_sanpham ='" . $id . "';";
     mysqli_query($connect, $sql_xoa);
+
     header('Location:../../AdminIndex.php?workingPage=product');
 }

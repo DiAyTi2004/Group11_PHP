@@ -10,9 +10,8 @@
         } else if ($workingPage == 'product') {
             include("./pages/Product/ProductIndex.php");
             include("./pages/Product/AddProductPopup.php");
-            include("./pages/Product/ProductConfirmDeletePopup.php");
         } else if ($workingPage == 'event' && $query == 'edit') {
-            include("./pages/Event/EditEventPopup.php");
+            include("./pages/Event/EditEventPopup.php"); 
         } else if ($workingPage == 'event') {
             include("./pages/Event/EventIndex.php");
             include("./pages/Event/AddEventPopup.php");
