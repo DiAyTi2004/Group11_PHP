@@ -16,18 +16,17 @@
             include("./pages/Event/EventIndex.php");
             include("./pages/Event/AddEventPopup.php");
             include("./pages/Event/EventConfirmDeletePopup.php");
-        } else if ($workingPage == 'user' && $query == 'edit') {
-            include("./pages/User/EditUserPopup.php");
-        } else if ($workingPage == 'user') {
+        }
+         else if ($workingPage == 'user') {
             include("./pages/User/UserIndex.php");
             include("./pages/User/AddUserPopup.php");
+            include("./pages/User/EditUserPopup.php");
+            include("./pages/User/UserConfirmDeletePopup.php");
         } else if ($workingPage == 'order') {
             include("./pages/Order/OrderIndex.php");
-        } else if ($workingPage == 'order' && $query == 'edit') {
-            include("./pages/Order/OrderLogicPopup.php");
-        } else if ($workingPage == 'order' && $query == 'xemdonhang') {
-            include("./pages/Order/CheckOrderPopUp.php");
-        } else if ($workingPage == 'dangxuat') {
+            include("./pages/Order/AddOrderPopup.php");
+        }
+         else if ($workingPage == 'dangxuat') {
             include("Login.php");
         } else {
             include("./pages/Dashboard/DashboardIndex.php");

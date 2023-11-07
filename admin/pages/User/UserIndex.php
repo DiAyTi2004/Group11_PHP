@@ -2,7 +2,10 @@
 $sql_lietke_nguoidung = "SELECT * FROM tbl_dangky ORDER BY id_khachhang DESC";
 $result_lietke_nguoidung = mysqli_query($connect, $sql_lietke_nguoidung);
 ?>
-
+<?php
+ $getTableDataSql = "SELECT * FROM tbl_dangky";
+ $tableData = mysqli_query($connect,$getTableDataSql);
+?>
 <!-- PHP logic paganition pages -->
 <?php
 // Tìm tổng số bản ghi
@@ -29,7 +32,7 @@ $start = ($current_page - 1) * $limit;
 // BƯỚC 5: TRUY VẤN LẤY DANH SÁCH TIN TỨC
 // Có limit và start rồi thì truy vấn CSDL lấy danh sách tin tức
 $sql_lietke_nguoidung_2 = "SELECT * FROM tbl_dangky
-                    ORDER BY id_sanpham  
+                    ORDER BY id_khachhang
                     DESC 
                     LIMIT $start, $limit";
 $result_lietke_nguoidung_2 = mysqli_query($connect, $sql_lietke_nguoidung_2);
@@ -41,7 +44,7 @@ $result_lietke_nguoidung_2 = mysqli_query($connect, $sql_lietke_nguoidung_2);
 <link rel="stylesheet" href="./styles/UserStyles.css">
 <!-- Button trigger modal and search btn -->
 <div class="text-left flex justify-between">
-    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal_2">
         <i class="fa-solid fa-plus"></i>
         Thêm người dùng
     </button>
@@ -99,11 +102,11 @@ $result_lietke_nguoidung_2 = mysqli_query($connect, $sql_lietke_nguoidung_2);
 
 <div class="container p-0" style="width: 100%;">
     <table style="width: 100%;">
-        <legend class="text-center"><b>Quản lý sản phẩm</b></legend>
+        <legend class="text-center"><b>Quản lý người dùng</b></legend>
 
         <thead class="table-head w-100">
             <tr class="table-heading">
-                <th class="noWrap">ID</th>
+                <th class="noWrap" >ID</th>
                 <th class="noWrap">Name</th>
                 <th class="noWrap">Account</th>
                 <th class="noWrap">Email</th>
@@ -128,10 +131,15 @@ $result_lietke_nguoidung_2 = mysqli_query($connect, $sql_lietke_nguoidung_2);
                 <td class="noWrap"> <?php echo $row['sodienthoai'] ?></td>
                 <td class="noWrap" style="width:150px;"> <?php echo $row['diachi'] ?></td>
                 <td>
-                    <a href="?workingPage=user&query=edit&idnguoidung=<?php echo $row['id_khachhang'] ?>"> Sửa </a>
+                <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id_khachhang'];?>">
+                            <i class="fa-solid fa-pencil"></i>
+                        </button>
+                    <!-- <a href="?workingPage=user&query=edit&idnguoidung=<?php echo $row['id_khachhang'] ?>"> Sửa </a> -->
                 </td>
                 <td>
-                    <a href="modules/User/UserLogic.php?idnguoidung=<?php echo $row['id_khachhang'] ?>">Xóa</a>
+                <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id_khachhang']; ?>">
+                            <i class="fa-solid fa-trash mr-1"></i>
+                        </button>
                 </td>
 
                 </td>
@@ -148,7 +156,6 @@ $result_lietke_nguoidung_2 = mysqli_query($connect, $sql_lietke_nguoidung_2);
         </tbody>
 
     </table>
-
     <!-- Pagination table -->
     <form action="" method="GET">
         <nav class="row py-2" aria-label="Page navigation example">
@@ -224,3 +231,15 @@ $result_lietke_nguoidung_2 = mysqli_query($connect, $sql_lietke_nguoidung_2);
     </form>
     </nav>
 </div>
+<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/User/EditUserPopup.php";
+}
+?>
+<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/User/UserConfirmDeletePopup.php";
+}
+?>
