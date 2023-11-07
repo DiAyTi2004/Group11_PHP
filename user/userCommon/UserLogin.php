@@ -4,9 +4,9 @@ session_start();
 include('../../common/config/Connect.php');
 
 if (isset($_POST['login'])) {
-  $taikhoan = $_POST['taikhoan'];
-  $matkhau = md5($_POST['password']);
-  $sql = "SELECT * FROM tbl_dangky ,tbl_admin WHERE tbl_dangky.taikhoan='" . $taikhoan . "' AND tbl_dangky.matkhau='" . $matkhau . "'  LIMIT 1";
+  $username = $_POST['username'];
+  $password = md5($_POST['password']);
+  $sql = "SELECT * FROM tbl_dangky ,tbl_admin WHERE tbl_dangky.taikhoan='" . $username . "' AND tbl_dangky.matkhau='" . $password . "'  LIMIT 1";
   $row = mysqli_query($connect, $sql);
   $count = mysqli_num_rows($row);
   if ($count > 0) {
@@ -17,7 +17,7 @@ if (isset($_POST['login'])) {
     $_SESSION['id_khachhang'] = $row_data['id_khachhang'];
 
     header("Location: ./UserIndex.php");
-  } elseif ($taikhoan == 'admin') {
+  } elseif ($username == 'admin') {
     header("Location: ../../admin/adminCommon/Login.php");
   } else {
     $message = "Tài khoản mật khẩu không đúng";
@@ -55,8 +55,8 @@ if (isset($_POST['login'])) {
         <div class="contact">
           <form action="" method="POST">
             <h3>ĐĂNG NHẬP</h3>
-            <input type="text" name="taikhoan" placeholder="USERNAME">
-            <input type="password" name="password" placeholder="PASSWORD">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
             <button class="submit" name="login">ĐĂNG NHẬP</button>
           </form>
         </div>
