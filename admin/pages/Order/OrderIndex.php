@@ -39,9 +39,9 @@ $result_lietke_dh_2 = mysqli_query($connect, $sql_lietke_dh);
 <link rel="stylesheet" href="./styles/ProductStyles.css">
 <!-- Button trigger modal and search btn -->
 <div class="text-left flex justify-between">
-    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal_4">
         <i class="fa-solid fa-plus"></i>
-        Thêm sản phẩm
+        Thêm đơn hàng
     </button>
 
 
