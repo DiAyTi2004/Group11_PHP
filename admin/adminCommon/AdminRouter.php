@@ -31,7 +31,6 @@
         } else {
             include("./pages/Dashboard/DashboardIndex.php");
         }
-
         ?>
     </div>
 </div>

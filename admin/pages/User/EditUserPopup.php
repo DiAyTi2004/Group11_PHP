@@ -42,42 +42,34 @@
 										<option value="0">Không</option>
 
 									<?php
-									} else {
+									}else
 									?>
 										<option value="1"> Bán hàng</option>
 										<option value="0" selected>Không</option>
 								</select>
-
-
 							</td>
 						</tr>
-					<?php
-									}
-					?>
-					<tr>
-						<td>
-							<div class="col-12">
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-									<label class="form-check-label" for="invalidCheck">
-										Bạn chắc chắn về thông tin sửa thông tin người dùng?
-									</label>
-									<div class="invalid-feedback">
-										You must agree before submitting.
-									</div>
-								</div>
-							</div>
-						</td>
-					</tr>
-					</table>
-				</div>
-
-				<div class="modal-footer">
-					<button type="button"  class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Đóng</button>
-					<button type="submit" name="suanguoidung" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id_khachhang'];?>">
-						Sửa
-					</button>
-				</div>
+						<tr>
+                            <td>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                        <label class="form-check-label" for="invalidCheck">
+                                            Bạn chắc chắn về thông tin sửa người dùng?
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            You must agree before submitting.
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary" name="suanguoidung">Sửa </button>
+                </div>
 			</div>
 		</form>
 	</div>
