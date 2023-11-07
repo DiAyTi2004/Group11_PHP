@@ -20,7 +20,7 @@
 
 <body>
 
-    <div class="flex-column mh-100vh">
+    <div class="flex-column mh-100vh mainApp">
         <?php
         session_start();
 

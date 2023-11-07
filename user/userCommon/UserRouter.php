@@ -1,4 +1,4 @@
-<div class="container flex-grow-1">
+<div class="container flex-grow-1 py-6">
     <?php
     if ($usingPage == 'category') {
         include("../pages/Category/CategoryIndex.php");

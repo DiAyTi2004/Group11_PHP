@@ -32,10 +32,10 @@ if (isset($_GET['usingPage'])) {
                 <div class="category__section pr-4">
                     <div class="category__button flex-center">
                         <i class="fa-solid fa-bars"></i>
-                        <p class="m-0 px-3">
-                            Danh mục <br> Sản Phẩm
+                        <p class="m-0 px-2">
+                            Danh mục
                         </p>
-                        <i class="fa-solid fa-sort-down"></i>
+                        <i class="fa-solid fa-sort-down pb-1"></i>
 
                         <div class="sub__category br-10 over-hidden">
                             <ul class="m-0 p-0 w-100">

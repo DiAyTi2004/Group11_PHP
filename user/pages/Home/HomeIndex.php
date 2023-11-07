@@ -2,7 +2,7 @@
 // include "../pages/Home/HomeBanner.php";
 ?>
 
-<div class="show_new">
+<div class="show_new appCard">
     <?php //lấy qiamly từ menu truyền vào bằng phuongư thức GET
     if (isset($_GET['usingPage'])) {
         $usingPage = $_GET['usingPage'];
@@ -21,7 +21,7 @@
 
 </div>
 
-<div class="show">
+<div class="show appCard">
     <?php //lấy qiamly từ menu truyền vào bằng phuong thức GET
     if (isset($_GET['usingPage'])) {
         $usingPage = $_GET['usingPage'];
