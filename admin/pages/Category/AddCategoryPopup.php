@@ -16,12 +16,19 @@
                                     <input name="tendanhmuc" type="text" class="form-control" 
                                         id="exampleFormControlInput1">
                                 </div>
+
                                 <label for="exampleFormControlInput1" class="form-label">Hình ảnh</label>
                                 <div class="input-group mb-2">
                                     <input name="hinhanh" type="file" class="form-control" id="inputGroupFile02">
                                 </div>
+                                <div class="mb-2 col">
+                                    <label for="exampleFormControlInput1" class="form-label">ID</label>
+                                    <input name="id" type="text" class="form-control" 
+                                        id="exampleFormControlInput1">
+                                </div>
                           
                             </td>
+
                         </tr>
                         <tr>
                             <td>

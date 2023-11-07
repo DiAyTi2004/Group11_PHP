@@ -6,6 +6,15 @@ $file = $_FILES['hinhanh'];
 $hinhanh = $file['name'];
 $hinhanh_tmp = $_FILES['hinhanh']['tmp_name'];
 $hinhanhgio = time() . '_' . $hinhanh;
+$id=$_POST['id'];
+
+$sua_tendanhmuc = $_POST['sua_tendanhmuc'];
+//xử lý hình anh
+$file = $_FILES['sua_hinhanh'];
+$sua_hinhanh = $file['name'];
+$sua_hinhanh_tmp = $_FILES          ['hinhanh']['tmp_name'];
+$hinhanhgio = time() . '_' . $hinhanh;
+$id=$_POST['id'];
 
 function generateUuid()
 {
@@ -31,7 +40,7 @@ if (isset($_POST['themdanhmuc'])) {
             move_uploaded_file($hinhanh_tmp, 'CategoryImages/' . $hinhanh);
 
             $sql_themdanhmuc = "INSERT INTO tbl_category(id,name,category_image) 
-                VALUE ('" . $categoryId . "' , '" . $tendanhmuc . "','" . $hinhanh . "' )";
+                VALUE ('" . $id . "' , '" . $tendanhmuc . "','" . $hinhanh . "' )";
             mysqli_query($connect, $sql_themdanhmuc);
             header('Location:../../AdminIndex.php?workingPage=category');
         } else {
@@ -42,7 +51,7 @@ if (isset($_POST['themdanhmuc'])) {
 } else if (isset($_POST['suadanhmuc'])) {
     if ($hinhanh != '') {
         move_uploaded_file($hinhanh_tmp, 'CategoryImages/' . $hinhanh);
-        $sql_sua = "UPDATE tbl_category SET name='" . $tendanhmuc . "',hinhanh='" . $hinhanh . "' WHERE id='$_GET[id]'";
+        $sql_sua = "UPDATE tbl_category SET name='" . $tendanhmuc . "',category_image='" . $hinhanh . "' WHERE id='$_GET[id]'";
         $sql = "SELECT*FROM tbl_category WHERE id='$_GET[id]' LIMIT 1";
         $query = mysqli_query($connect, $sql);
         while ($row = mysqli_fetch_array($query)) {

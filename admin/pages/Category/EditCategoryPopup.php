@@ -1,6 +1,6 @@
 <?php
 $sql_sua_danh_muc = "SELECT * FROM tbl_category WHERE id='$_GET[id]' LIMIT 1";
-$result_sua_danh_muc = mysqli_query($connect, $sql_sua_sp);
+$result_sua_danh_muc = mysqli_query($connect, $sql_sua_danh_muc);
 ?>
 <p>Sửa danh mục sản phẩm</p>
 <table border="1" width="50%" style="border-collapse: collapse;">
@@ -16,12 +16,12 @@ $result_sua_danh_muc = mysqli_query($connect, $sql_sua_sp);
             </tr>
             <tr>
                 <td>Tên danh mục</td>
-                <td><input type="text" value="<?php echo $row['tendanhmuc'] ?>" name="tendanhmuc"></td>
+                <td><input type="text" value="<?php echo $row['name'] ?>" name="tendanhmuc"></td>
             </tr>
             <tr>
                 <td>Hình ảnh</td>
                 <td><input type="file" name="hinhanh">
-                    <img src="pages/Product/ProductImages/<?php echo $row['hinhanh'] ?> " width="150px">
+                    <img src="pages/Product/ProductImages/<?php echo $row['category_image'] ?> " width="150px">
                 </td>
             </tr>
 

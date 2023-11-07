@@ -189,6 +189,10 @@ textarea {
 .noWrap {
   white-space: nowrap;
 }
+.id{
+  white-space: nowrap;
+  width: 10px;
+}
 
 select,
 option {

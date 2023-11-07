@@ -100,11 +100,11 @@ $result_lietke_category_2 = mysqli_query($connect, $sql_lietke_category_2);
 </div>
 
 <div class="container p-0">
-    <table class="table-container">
+    <table class="w-100">
         <legend class="text-center"><b>Quản lý danh mục</b></legend>
         <thead class="table-head w-100">
             <tr class="table-heading">
-                <th class="noWrap">ID</th>
+                <th class="id">ID</th>
                 <th class="noWrap">Tên danh mục</th>
                 <th class="noWrap">Hình ảnh </th>
                 <th class="noWrap">Quản lý</th>
@@ -119,17 +119,17 @@ $result_lietke_category_2 = mysqli_query($connect, $sql_lietke_category_2);
             ?>
                 <tr>
                     <td>
-                        <?php echo  $stt ?>
+                        <?php echo $row['id'] ?>
                     </td>
                     <td class="tendanhmuc">
-                        <?php echo $row['tendanhmuc'] ?>
+                        <?php echo $row['name'] ?>
                     </td>
                     <td class="hinhanh">
-                        <img src="pages/Category/CategoryImages/<?php echo $row['hinhanh'] ?> " width="100%">
+                        <img src="pages/Category/CategoryImages/<?php echo $row['category_image'] ?> " width="100%">
                     </td>
                     <td>
                         <a href="?workingPage=category&query=edit&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-pencil"></i></a>
-                        <a href="?workingPage=category&query=edit&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
+                        <a href="?workingPage=category&query=delete&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
                     </td>
                 </tr>
             <?php

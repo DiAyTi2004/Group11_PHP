@@ -302,6 +302,8 @@ create table tbl_category (
   category_image varchar(100),
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO tbl_category (id, code, name, category_image , description) VALUES
+(100, 'abc', 'Dong ho thong ming','befit-b3-vang-1.jpg', 'test');
 
 create table tbl_event (
   id varchar(36) primary key not null,
