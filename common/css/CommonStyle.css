@@ -1414,6 +1414,10 @@ body {
     align-items: center;
 }
 
+.flex-1 {
+    flex: 1;
+}
+
 .flex-grow-1 {
     flex-grow: 1;
 }
