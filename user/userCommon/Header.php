@@ -1,9 +1,13 @@
 <?php
 $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc DESC";
 $query_danhmuc = mysqli_query($connect, $sql_danhmuc);
-?>
-<?php
-if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
+
+$keyword = "";
+if (isset($_POST['search'])) {
+    $keyword = $_POST['keyword'];
+}
+
+if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == "true") {
     unset($_SESSION['signup']);
 }
 
@@ -13,48 +17,94 @@ if (isset($_GET['usingPage'])) {
     $usingPage = $_GET['usingPage'];
 }
 ?>
-<div class="menu">
-    <div class="menu_list">
-        <ul class="menu_list-left">
-            <li><img style="width:50px;height:auto;" src="./images/logo.svg" alt="logo"> </li>
-            <li> <a href="UserIndex.php">Home</a></li>
-            <li> <a href="UserIndex.php?usingPage=cart">Giỏ hàng</a></li>
-            <li><a href="">Danh mục</a>
-                <ul class="menu_danhmuc">
-                    <?php
-                    while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
 
-                    ?>
-                        <li> <a href="UserIndex.php?usingPage=category&id=<?php echo $row_danhmuc['id_danhmuc'] ?>"><?php echo $row_danhmuc['tendanhmuc'] ?></a></li>
+<header class="header w-100">
+    <div class="container flex">
+        <a href="UserIndex.php">
+            <img class="header__logo" style="height:70px;" src="./images/logo.svg" alt="logo">
+        </a>
 
-                    <?php
-                    }
+        <div class="flex-center justify-between py-2 w-100">
+            <div class="header__logo__wrapper">
+            </div>
 
-                    ?>
-                </ul>
-            </li>
-            <li>
-                <Form method="POST" action="UserIndex.php?usingPage=search">
-                    <input type="text" class="menu-input-text" placeholder="Tìm kiếm....." name="tukhoa">
-                    <input type="submit" class="menu-input-submit" name="search" value="Tìm Kiếm">
-                </Form>
-            </li>
-        </ul>
-        <ul class="menu_list-right">
-            <?php
-            if (isset($_SESSION['signup'])) {
-            ?>
+            <div class="search__input__wrapper flex-center flex-grow-1">
+                <div class="category__section pr-4">
+                    <div class="category__button flex-center">
+                        <i class="fa-solid fa-bars"></i>
+                        <p class="m-0 px-3">
+                            Danh mục <br> Sản Phẩm
+                        </p>
+                        <i class="fa-solid fa-sort-down"></i>
 
-                <li><a href="UserIndex.php?usingPage=thongtin"> Thông tin</a></li>
-                <li> <a href="UserIndex.php?dangxuat=1">Đăng xuất</a></li>
-            <?php
-            } else {
-            ?>
-                <li> <a href="UserIndex.php?usingPage=login">Đăng nhập</a></li>
-                <li> <a href="UserIndex.php?usingPage=signup">Đăng ký</a></li>
-            <?php
-            }
-            ?>
-        </ul>
+                        <div class="sub__category br-10 over-hidden">
+                            <ul class="m-0 p-0 w-100">
+                                <?php
+                                while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
+                                ?>
+                                    <li class="sub__category__item w-100">
+                                        <a href="UserIndex.php?usingPage=category&id=<?php echo $row_danhmuc['id_danhmuc'] ?>" class="w-100 p-2 py-3">
+                                            <?php echo $row_danhmuc['tendanhmuc'] ?>
+                                        </a>
+                                    </li>
+                                <?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="search__section bg-white br-10 over-hidden px-1 flex-center">
+                    <form method="POST" action="UserIndex.php?usingPage=search">
+                        <input class="p-2" type="text" placeholder="Tìm kiếm nhanh sản phẩm...?" name="keyword" value="<?php echo $keyword; ?>" />
+                        <button type="submit" class="br-10 py-1 px-3 flex-grow-1" name="search" value="Tìm Kiếm">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="cart__wrapper flex-center">
+                <div class="cart__section">
+                    <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?usingPage=cart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                </div>
+                <?php
+                if (isset($_SESSION['signup'])) {
+                ?>
+                    <div class="user__section">
+                        <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?usingPage=thongtin">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </a>
+
+                    </div>
+
+                    <div class="user__section">
+                        <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?dangxuat=true">
+                            <i class="fa-solid fa-right-to-bracket">
+
+                            </i>
+                        </a>
+                    </div>
+                <?php
+                } else {
+                ?>
+                    <div class="user__section">
+                        <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserLogin.php">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                        </a>
+                    </div>
+
+                    <div class="user__section">
+                        <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserSignUp.php">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </a>
+                    </div>
+                <?php
+                }
+                ?>
+            </div>
+        </div>
     </div>
-</div>
+</header>

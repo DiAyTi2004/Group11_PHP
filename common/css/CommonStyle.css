@@ -1493,7 +1493,10 @@ body {
     color: #000 !important;
 }
 
-
 .bg-transparent {
     background-color: transparent !important;
+}
+
+.over-hidden {
+    overflow: hidden;
 }

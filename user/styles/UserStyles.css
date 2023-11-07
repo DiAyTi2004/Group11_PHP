@@ -1,168 +1,8 @@
-.footer {
-    background-color: black !important;
-    color: white;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-}
-
-a {
-    text-decoration: none;
-}
-
-.wrapper {
-    height: auto;
-    width: auto;
-    margin: 0 auto;
-}
-
-.header {
-    height: 400px;
-    width: 100%;
-}
-
-.header img {
-    border: 1px solid black;
-    border-radius: 15px;
-    width: 100%;
-    height: 400px;
-}
-
-.menu {
-    height: auto;
-    border-radius: 0px;
-    background-color: rgb(32, 33, 36);
-}
-
-.menu_list {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-}
-
-.menu_list-left li a:hover,
-.menu_list-right li a:hover {
-    color: #fff;
-}
-
-ul.menu_list-left {
-    display: flex;
-    list-style: none;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0;
-}
-
-ul.menu_list-left li {
-    margin: 0 20px;
-    /* color: #fff; */
-}
-
-ul.menu_list-left li a {
-    color: #ccc;
-}
-
-ul.menu_danhmuc {
-    z-index: 1;
-}
-
-ul.menu_danhmuc::before {
-    position: absolute;
-    width: 100%;
-    height: 20px;
-    top: -15px;
-    left: 0;
-    content: "";
-    display: block;
-}
-
-ul.menu_danhmuc::after {
-    content: "";
-    display: block;
-    position: absolute;
-    border-left: 1px solid #bf2222;
-    height: 12px;
-    top: 50%;
-    right: -9px;
-    transform: translateY(-50%);
-}
-
-ul.menu_list-left li>.menu_danhmuc {
-    display: none;
-    list-style: none;
-    background-color: #fff;
-    padding-left: 0;
-    margin-top: 12px;
-    /* padding: 0 10px; */
-}
-
-ul.menu_list-left li>.menu_danhmuc a {
-    color: #000;
-    text-decoration: none;
-}
-
-ul.menu_list-left li>.menu_danhmuc li:hover a {
-    color: #fff;
-    text-decoration: none;
-}
-
-ul.menu_list-left li>.menu_danhmuc li {
-    padding: 10px;
-    text-align: left;
-    margin: 0;
-}
-
-ul.menu_list-left li>.menu_danhmuc li:hover {
-    background-color: #999;
-}
-
-ul.menu_list-left li:hover .menu_danhmuc {
-    display: block;
-    position: absolute;
-}
-
-ul.menu_list-right {
-    display: flex;
-    justify-content: space-between;
-    list-style: none;
-    align-items: center;
-    margin-right: 20px;
-    margin-bottom: 0;
-}
-
-ul.menu_list-right li {
-    /* margin-right: 20px; */
-    margin: 0 20px;
-}
-
-ul.menu_list-right li a {
-    text-decoration: none;
-    color: #ccc;
-}
-
-.menu-input-text {
-    width: 400px;
-    padding-left: 8px;
-    height: 32px;
-    outline: none;
-}
-
-.menu-input-submit {
-    height: 34px;
-    width: 89px;
-}
-
-ul.menu_list li:hover {
-    background-color: antiquewhite;
-}
-
-ul.menu_list li a {
-    display: block;
-    text-decoration: none;
-    text-align: center;
-    color: #fff;
+html {
+    margin: unset;
+    padding: unset;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 .main {
@@ -232,4 +72,89 @@ h5.title_product {
     color: #000;
     font-size: 16px;
     font-weight: bold;
+}
+
+.footer {
+    background-color: black !important;
+    color: white;
+}
+
+
+/* refactored header code */
+.header {
+    background-color: rgb(0, 96, 0);
+    /* position: fixed; */
+    z-index: 100;
+}
+
+.category__button {
+    color: white;
+    position: relative;
+}
+
+.sub__category {
+    z-index: 100;
+    display: none;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: white;
+    width: 220px;
+    color: black !important;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.category__button:hover .sub__category {
+    display: flex;
+}
+
+.sub__category__item {
+    transition: all linear 0.1s;
+    list-style-type: none;
+}
+
+.sub__category__item a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    transition: all linear 0.1s;
+}
+
+.sub__category__item:hover {
+    background-color: #ececec;
+}
+
+.search__section input {
+    border: unset;
+    outline: unset;
+    min-width: 320px;
+}
+
+.search__section button {
+    border: unset;
+    background-color: rgb(0, 96, 0);
+    color: white;
+    transition: all linear 0.1s;
+}
+
+.search__section button:hover{
+    background-color: rgb(73, 122, 0);
+}
+
+.header__btn {
+    border: 2px solid white;
+    background-color: rgb(0, 58, 0);
+    color: white;
+    transition: all linear 0.1s;
+    text-decoration: none;
+}
+
+.header__btn:hover {
+    color: white;
+    background-color: rgb(73, 122, 0);
+}
+
+.user__section {
+    margin-left: 8px;
 }
