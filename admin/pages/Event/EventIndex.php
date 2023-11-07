@@ -104,11 +104,14 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
         <legend class="text-center"><b>Quản lý sự kiện</b></legend>
         <thead class="table-head w-100">
             <tr class="table-heading">
-                <th class="noWrap">ID</th>
-                <th class="noWrap">Ngày bắt đầu</th>
-                <th class="noWrap">ngày kết thúc </th>
-                <th class="noWrap">Giảm giá</th>
+                <th class="noWrap">STT</th>
+                <th class="noWrap">Mã sự kiện</th>
+                <th class="noWrap">Tên sự kiện</th>
                 <th class="noWrap">Banner</th>
+                <th class="noWrap">Giảm giá</th>
+                <th class="noWrap">Ngày bắt đầu</th>
+                <th class="noWrap">Ngày kết thúc</th>
+                <th class="noWrap">Mô tả</th>
                 <th class="noWrap">Quản lý</th>
             </tr>
         </thead>
@@ -123,21 +126,36 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
                     <td>
                         <?php echo  $stt ?>
                     </td>
-                    <td class="ngaybatdau">
-                        <?php echo $row['start_date'] ?>
+                    <td class="code">
+                        <?php echo $row['code'] ?>
                     </td>
-                    <td class="ngayketthuc">
-                        <?php echo $row['end_date'] ?>
-                    </td>
-                    <td class="giamgia">
-                        <?php echo number_format($row['discount'], 0, ',', '.') . 'VNĐ' ?>
+                    <td class="name">
+                        <?php echo $row['name'] ?>
                     </td>
                     <td class="banner">
-                        <?php echo $row['banner'] ?>
+                    <img src="pages/Event/EventImages/<?php echo $row['banner'] ?> " width="40%">
+                    </td>
+                    <td class="discount">
+                        <?php echo $row['discount'] ?>
+                    </td>
+                    <td class="start_date">
+                        <?php echo $row['start_date'] ?>
+                    </td>
+                    <td class="end_date">
+                        <?php echo $row['end_date'] ?>
+                    </td>
+                    <td class="description">
+                        <?php echo $row['description'] ?>
                     </td>
                     <td>
-                        <a href="?workingPage=event&query=edit&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-pencil"></i></a>
-                        <a href="?workingPage=event&query=edit&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
+                        <div style="display: flex;">
+                            <button style="margin-right: 5px;" type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editEventPopup_<?php echo $row['id']; ?>">
+                                <i class="fa-solid fa-pencil"></i>
+                            </button>
+                            <button style="margin-left: 5px;" type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmEventPopup_<?php echo $row['id']; ?>">
+                                <i class="fa-solid fa-trash mr-1"></i>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             <?php
