@@ -27,14 +27,14 @@ function generateUuid()
 
 if (isset($_POST['themdanhmuc'])) {
     $id=$_POST['id'];
-    $categoryId =  generateUuid();
+    
     if (isset($_FILES['hinhanh'])) {
         if ($file['type'] == 'image/jpeg' || $file['type'] == 'imgae/jpg' || $file['type'] == 'image/png') {
 
             move_uploaded_file($hinhanh_tmp, 'CategoryImages/' . $hinhanh);
-
+            $categoryId =  generateUuid();
             $sql_themdanhmuc = "INSERT INTO tbl_category(id,name,category_image) 
-                VALUE ('" . $id . "' , '" . $tendanhmuc . "','" . $hinhanh . "' )";
+                VALUE ('" . $categoryId . "' , '" . $tendanhmuc . "','" . $hinhanh . "' )";
             mysqli_query($connect, $sql_themdanhmuc);
             header('Location:../../AdminIndex.php?workingPage=category');
         } else {
