@@ -95,7 +95,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo $row['name'] ?>
                     </td>
                     <td class="banner">
-                    <img src="pages/Event/EventImages/<?php echo $row['banner'] ?> " width="40%">
+                    <img  src="pages/Event/EventImages/<?php echo $row['banner'] ?> " width="40%">
                     </td>
                     <td class="discount">
                         <?php echo $row['discount'] ?>
@@ -110,13 +110,14 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo $row['description'] ?>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editEventPopup_<?php echo $row['id']; ?>">
-                            <i class="fa-solid fa-pencil"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteEventPopup_<?php echo $row['id']; ?>">
-                            <i class="fa-solid fa-trash mr-1"></i>
-                        </button>
+                        <div style="min-width: 150px;">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editEventPopup_<?php echo $row['id']; ?>">
+                                <i class="fa-solid fa-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteEventPopup_<?php echo $row['id']; ?>">
+                                <i class="fa-solid fa-trash mr-1"></i>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             <?php
