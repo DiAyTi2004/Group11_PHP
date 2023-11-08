@@ -61,7 +61,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
 <div class="container p-0">
     <table class="w-100">
-        <legend class="text-center"><b>Quản lý sản phẩm</b></legend>
+        <legend class="text-center"><b>Quản lý danh mục</b></legend>
 
         <thead class="table-head w-100">
             <tr class="table-heading">
