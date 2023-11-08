@@ -1,16 +1,16 @@
 <?php
 include "../../../common/config/Connect.php";
-if (isset($_GET['code'])) {
-    $code_cart = $_GET['code'];
-    $sql_update = "UPDATE tbl_giohang SET cart_status=0 WHERE code_cart='" . $code_cart . "'";
-    $query = mysqli_query($connect, $sql_update);
-    header('Location:../../index.php?action=order');
+$madonhang = $_POST['madonhang'];
+$idkhachhang = $_POST['idkhachhang'];;
+$hinhthucthanhtoan = $_POST['hinhthucthanhtoan'];
+if(isset($_POST['addOrder'])){
+    $add = "INSERT INTO tbl_giohang(code_cart,id_khachhang,cart_payment) VALUES ('".$madonhang. "','".$idkhachhang."','".$hinhthucthanhtoan."')";  
+    mysqli_query($connect, $add);
+    header('Location:../../AdminIndex.php?workingPage=order');
 }
-if (isset($_GET['iddonhang'])) {
-    $id = $_GET['iddonhang'];
-    $sql_delete = "DELETE FROM tbl_giohang WHERE  code_cart='$id'";
-    mysqli_query($connect, $sql_delete);
-    $sql_delete_cart_detail = "DELETE FROM tbl_cart_old_detail WHERE  code_cart='$id'";
-    mysqli_query($connect, $sql_delete_cart_detail);
-    header('Location:../../index.php?action=order');
+if (isset($_POST['deleteOrder'])) {
+    $id = $_GET['orderId'];
+    $sql_xoa = "DELETE FROM tbl_giohang WHERE id_cart ='" . $id . "'";
+    mysqli_query($connect, $sql_xoa);
+    header('Location:../../AdminIndex.php?workingPage=order');
 }
