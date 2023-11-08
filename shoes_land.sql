@@ -15,26 +15,7 @@ CREATE TABLE `tbl_admin` (
 --
 -- Đang đổ dữ liệu cho bảng `tbl_admin`
 --
-
-INSERT INTO `tbl_admin` (`id_admin`, `username`, `password`) VALUES
-(1, 'admin', 'c4ca4238a0b923820dcc509a6f75849b');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `tbl_cart_old_detail`
---
-
-CREATE TABLE `tbl_cart_old_detail` (
-  `id_cart_detail` int(11) NOT NULL,
-  `code_cart` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_sanpham` int(11) NOT NULL,
-  `soluongmua` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `tbl_cart_old_detail`
---
+====
 
 INSERT INTO `tbl_cart_old_detail` (`id_cart_detail`, `code_cart`, `id_sanpham`, `soluongmua`) VALUES
 (28, '4095', 8, 2),

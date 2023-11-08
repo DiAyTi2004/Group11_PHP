@@ -23,9 +23,10 @@
             include("./pages/User/EditUserPopup.php");
             include("./pages/User/UserConfirmDeletePopup.php");
         } else if ($workingPage == 'order') {
-            include("./pages/Order/OrderIndex.php");
-            include("./pages/Order/AddOrderPopup.php");
-        }
+             include("./pages/Order/OrderIndex.php"); 
+             include("./pages/Order/AddOrderPopup.php");  
+             include("./pages/Order/OrderConfirmDelete.php");
+            }
          else if ($workingPage == 'dangxuat') {
             include("Login.php");
         } else {
