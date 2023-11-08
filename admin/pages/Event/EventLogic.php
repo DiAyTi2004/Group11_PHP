@@ -49,7 +49,7 @@ if (isset($_POST['addEvent'])) {
 
         $sql_editEvent = "UPDATE tbl_event SET code='" . $code . "', name='" . $name . "', banner='" . $banner . "', discount='" . $discount . "', start_date='" . $start_date . "',end_date='" . $end_date . "',
         description='" . $description . "' WHERE id='$_GET[id]'";
-        $sql = "SELECT*FROM tbl_event WHERE id='$_GET[Id]' LIMIT 1";
+        $sql = "SELECT*FROM tbl_event WHERE id='$_GET[id]'";
         $query = mysqli_query($connect, $sql);
         while ($row = mysqli_fetch_array($query)) {
             unlink('EventImages/' . $row['banner']);
@@ -62,7 +62,8 @@ if (isset($_POST['addEvent'])) {
     header('Location:../../AdminIndex.php?workingPage=event');
 } else if (isset($_POST['deleteEvent'])) {
     $id = $_GET['id'];
-    $sql = "SELECT *FROM tbl_event WHERE id = '$id' LIMIT 1";
+    echo $id;
+    $sql = "SELECT *FROM tbl_event WHERE id = '$id'";
     $query = mysqli_query($connect, $sql);
     while ($row = mysqli_fetch_array($query)) {
         unlink('EventtImages/' . $row['banner']);
