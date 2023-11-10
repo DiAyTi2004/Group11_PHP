@@ -9,12 +9,6 @@ $pageSize = isset($_GET['limit']) ? $_GET['limit'] : 5;
 
 $total_page = ceil($total_records / $pageSize);
 
-if ($pageIndex > $total_page) {
-    $pageIndex = $total_page;
-} else if ($pageIndex < 1) {
-    $pageIndex = 1;
-}
-
 $start = ($pageIndex - 1) * $pageSize;
 
 $search = '';
@@ -95,7 +89,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo $row['name'] ?>
                     </td>
                     <td class="banner">
-                    <img  src="pages/Event/EventImages/<?php echo $row['banner'] ?> " width="40%">
+                        <img src="pages/Event/EventImages/<?php echo $row['banner'] ?> " width="40%">
                     </td>
                     <td class="discount">
                         <?php echo $row['discount'] ?>

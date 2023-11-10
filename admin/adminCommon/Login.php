@@ -7,6 +7,7 @@ if (isset($_POST['login'])) {
     $matkhau = md5($_POST['password']);
     $sql_nguoidung = "SELECT * FROM tbl_dangky ,tbl_admin WHERE (tbl_dangky.taikhoan='" . $taikhoan . "' AND tbl_dangky.matkhau='" . $matkhau . "' AND tbl_dangky.chucvu=1) OR (tbl_admin.username='" . $taikhoan . "' AND tbl_admin.password='" . $matkhau . "' ) LIMIT 1";
     $row_nguoidung = mysqli_query($connect, $sql_nguoidung);
+    var_dump($row_nguoidung);
     $count = mysqli_num_rows($row_nguoidung);
 
     if ($count > 0) {

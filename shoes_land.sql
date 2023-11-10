@@ -33,6 +33,7 @@ CREATE TABLE `tbl_cart_old_detail` (
 -- Đang đổ dữ liệu cho bảng `tbl_cart_old_detail`
 --
 
+
 INSERT INTO `tbl_cart_old_detail` (`id_cart_detail`, `code_cart`, `id_sanpham`, `soluongmua`) VALUES
 (28, '4095', 8, 2),
 (29, '4095', 7, 1),
