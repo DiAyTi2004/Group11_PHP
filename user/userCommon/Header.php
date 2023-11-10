@@ -21,16 +21,16 @@ if (isset($_GET['usingPage'])) {
 <header class="header w-100">
     <div class="container flex">
         <a href="UserIndex.php">
-            <img class="header__logo" style="height:70px;" src="./images/logo.svg" alt="logo">
+            <img class="header__logo" style="height:70px; scale: 1.2;" src="./images/logo.svg" alt="logo">
         </a>
 
         <div class="flex-center justify-between py-2 w-100">
             <div class="header__logo__wrapper">
             </div>
 
-            <div class="search__input__wrapper flex-center flex-grow-1">
-                <div class="category__section pr-4">
-                    <div class="category__button flex-center">
+            <div class="search__input__wrapper h-100 flex-center flex-grow-1">
+                <div class="category__section pr-4 h-100">
+                    <div class="category__button h-100 flex-center">
                         <i class="fa-solid fa-bars"></i>
                         <p class="m-0 px-2">
                             Danh mục

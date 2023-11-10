@@ -1,12 +1,9 @@
 <div class="flex-grow-1">
     <div class="container my-4 appCard   <?php if (!isset($_GET['workingPage'])) echo "bg-transparent"; ?>">
         <?php
-        if ($workingPage == 'category' && $query == 'edit') {
-            include("./pages/Category/EditCategoryPopup.php");
-        } else if ($workingPage == 'category') {
-            include("./pages/Category/AddCategoryPopup.php");
+        if ($workingPage == 'category') {
             include("./pages/Category/CategoryIndex.php");
-            include("./pages/Category/CategoryConfirmDeletePopup.php");
+            include("./pages/Category/AddCategoryPopup.php");
         } else if ($workingPage == 'product') {
             include("./pages/Product/ProductIndex.php");
             include("./pages/Product/AddProductPopup.php");
@@ -22,11 +19,10 @@
             include("./pages/User/EditUserPopup.php");
             include("./pages/User/UserConfirmDeletePopup.php");
         } else if ($workingPage == 'order') {
-             include("./pages/Order/OrderIndex.php"); 
-             include("./pages/Order/AddOrderPopup.php");  
-             include("./pages/Order/OrderConfirmDelete.php");
-            }
-            else if ($workingPage == 'dangxuat') {
+            include("./pages/Order/OrderIndex.php");
+            include("./pages/Order/AddOrderPopup.php");
+            include("./pages/Order/OrderConfirmDelete.php");
+        } else if ($workingPage == 'dangxuat') {
             include("Login.php");
         } else {
             include("./pages/Dashboard/DashboardIndex.php");

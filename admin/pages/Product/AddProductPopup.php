@@ -13,11 +13,11 @@
                             <td class="row">
                                 <div class="mb-2 col">
                                     <label for="exampleFormControlInput1" class="form-label">Tên sản phẩm</label>
-                                    <input name="tensanpham" type="text" class="form-control" id="exampleFormControlInput1">
+                                    <input name="name" type="text" class="form-control" id="exampleFormControlInput1">
                                 </div>
                                 <div class="mb-2 col">
                                     <label for="exampleFormControlInput1" class="form-label">Mã sản phẩm</label>
-                                    <input name="masp" type="text" class="form-control" id="exampleFormControlInput1">
+                                    <input name="code" type="text" class="form-control" id="exampleFormControlInput1">
                                 </div>
                             </td>
                         </tr>
@@ -26,12 +26,12 @@
                             <td class="row">
                                 <div class="mb-2 col">
                                     <label for="exampleFormControlInput1" class="form-label">Giá</label>
-                                    <input name="giasp" type="text" class="form-control" id="exampleFormControlInput1">
+                                    <input name="price" type="text" class="form-control" id="exampleFormControlInput1">
                                 </div>
 
                                 <div class="mb-2 col">
                                     <label for="exampleFormControlInput1" class="form-label">Số lượng</label>
-                                    <input name="soluong" type="text" class="form-control" id="exampleFormControlInput1">
+                                    <input name="quantity" type="text" class="form-control" id="exampleFormControlInput1">
                                 </div>
                             </td>
                         </tr>
@@ -46,20 +46,15 @@
                                     <label for="exampleFormControlInput1" class="form-label">
                                         Hình ảnh
                                     </label>
-                                    <input type="file" name="hinhanh" class="form-control" id="exampleFormControlInput1">
+                                    <input type="file" name="image" class="form-control" id="exampleFormControlInput1">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td class="row">
                                 <div class="mb-2 col">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Tóm tắt</label>
-                                    <textarea name="tomtat" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                </div>
-
-                                <div class="mb-2 col">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Nội dung</label>
-                                    <textarea name="noidung" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <label for="exampleFormControlTextarea1" class="form-label">Mô tả</label>
+                                    <textarea name="des" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 </div>
                             </td>
                         </tr>
@@ -68,15 +63,15 @@
                             <td class="row">
                                 <div class="mb-2 col">
                                     <label for="exampleFormControlInput1" class="form-label">Danh mục</label>
-                                    <select name="danhmuc" class="form-select" aria-label="Default select example">
+                                    <select name="categoryname" class="form-select" aria-label="Default select example">
                                         <?php
-                                        $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc DESC";
+                                        $sql_danhmuc = "SELECT * FROM tbl_category ORDER BY id DESC";
                                         $query_danhmuc = mysqli_query($connect, $sql_danhmuc);
                                         while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
                                         ?>
                                             <!--dùng value thêm danh mục dựa vào địa chỉ id_danhmuc -->
-                                            <option value="<?php echo $row_danhmuc['id_danhmuc'] ?>">
-                                                <?php echo $row_danhmuc['tendanhmuc'] ?>
+                                            <option value="<?php echo $row_danhmuc['id'] ?>">
+                                                <?php echo $row_danhmuc['name'] ?>
                                             </option>
 
 
@@ -87,19 +82,17 @@
                                 </div>
 
                                 <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">Tình trạng</label>
-                                    <select name="hienthi" class="form-select" aria-label="Default select example">
+                                    <label for="exampleFormControlInput1" class="form-label">Size</label>
+                                    <select name="size" class="form-select" aria-label="Default select example" multiple>
                                         <?php
-                                        $sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc DESC";
-                                        $query_danhmuc = mysqli_query($connect, $sql_danhmuc);
-                                        while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
+                                        $sql_size = "SELECT * FROM tbl_size ORDER BY id DESC";
+                                        $query_size = mysqli_query($connect, $sql_size);
+                                        while ($row_size = mysqli_fetch_array($query_size)) {
                                         ?>
-                                            <!--dùng value thêm danh mục dựa vào địa chỉ id_danhmuc -->
-                                            <option value="<?php echo $row_danhmuc['id_danhmuc'] ?>">
-                                                <?php echo $row_danhmuc['tendanhmuc'] ?>
+                                            <!--dùng value thêm danh mục dựa vào địa chỉ id_size -->
+                                            <option value="<?php echo $row_size['quantity'] ?>">
+                                                <?php echo $row_size['name'] ?>
                                             </option>
-
-
                                         <?php
                                         }
                                         ?>

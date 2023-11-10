@@ -9,6 +9,7 @@
 .clear {
   clear: both;
 }
+
 table {
   border-radius: 10px;
 }
@@ -60,7 +61,7 @@ table {
   text-align: center;
 }
 
-.table-head > th {
+.table-head>th {
   white-space: nowrap;
   padding: 12px;
   text-align: center;
@@ -189,10 +190,6 @@ textarea {
 .noWrap {
   white-space: nowrap;
 }
-.id{
-  white-space: nowrap;
-  width: 10px;
-}
 
 select,
 option {
@@ -203,7 +200,7 @@ option {
 }
 
 .tendanhmuc {
-  width: 350px;
+  width: 100px;
   height: 150px;
   text-align: center;
 }
@@ -211,4 +208,11 @@ option {
 .hinhanh {
   width: 150px;
   height: 150px;
+}
+
+
+
+.imageInPopup {
+  width: 100%;
+  height: auto;
 }

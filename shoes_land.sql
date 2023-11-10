@@ -33,6 +33,7 @@ CREATE TABLE `tbl_cart_old_detail` (
 -- Đang đổ dữ liệu cho bảng `tbl_cart_old_detail`
 --
 
+
 INSERT INTO `tbl_cart_old_detail` (`id_cart_detail`, `code_cart`, `id_sanpham`, `soluongmua`) VALUES
 (28, '4095', 8, 2),
 (29, '4095', 7, 1),
@@ -321,7 +322,8 @@ create table tbl_product (
   fake_price float ,
   category_id varchar(36) not null,
   event_id varchar(36) not null,
-  foreign key (event_id) references tbl_event(id)
+  foreign key (event_id) references tbl_event(id),
+  foreign key (category_id) references tbl_category(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_user (

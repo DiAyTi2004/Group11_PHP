@@ -9,12 +9,11 @@
             <div class="modal-body">
                 <form id="categoryForm" method="POST" action="pages/Category/CategoryLogic.php" enctype="multipart/form-data">
                     <table border="1" width="100%" padding="10px" style="border-collapse: collapse;">
-                    <tr>
+                        <tr>
                             <td class="row">
                                 <div class="mb-2 col">
                                     <label for="exampleFormControlInput1" class="form-label">Tên danh mục</label>
-                                    <input name="tendanhmuc" type="text" class="form-control" 
-                                        id="exampleFormControlInput1">
+                                    <input name="tendanhmuc" type="text" class="form-control" id="exampleFormControlInput1">
                                 </div>
 
                                 <label for="exampleFormControlInput1" class="form-label">Hình ảnh</label>
@@ -23,10 +22,9 @@
                                 </div>
                                 <div class="mb-2 col">
                                     <label for="exampleFormControlInput1" class="form-label">ID</label>
-                                    <input name="id" type="text" class="form-control" 
-                                        id="exampleFormControlInput1">
+                                    <input name="id" type="text" class="form-control" id="exampleFormControlInput1">
                                 </div>
-                          
+
                             </td>
 
                         </tr>

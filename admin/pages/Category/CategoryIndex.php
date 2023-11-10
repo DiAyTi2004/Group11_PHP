@@ -8,12 +8,6 @@ $pageSize = isset($_GET['limit']) ? $_GET['limit'] : 5;
 
 $total_page = ceil($total_records / $pageSize);
 
-if ($pageIndex > $total_page) {
-    $pageIndex = $total_page;
-} else if ($pageIndex < 1) {
-    $pageIndex = 1;
-}
-
 $start = ($pageIndex - 1) * $pageSize;
 
 $search = '';
@@ -79,10 +73,10 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 $displayOrder++;
             ?>
                 <tr>
-                     <td class="id">
+                    <td class="id">
                         <?php echo $row['id'] ?>
                     </td>
-                 
+
                     <td class="tendanhmuc">
                         <?php echo $row['name'] ?>
                     </td>
