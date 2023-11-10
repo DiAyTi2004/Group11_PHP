@@ -29,43 +29,44 @@ function generateUuid()
 
 if (isset($_POST['themnguoidung'])) {
     if (isset($_FILES['hinhanh'])) {
-        move_uploaded_file($hinhanh_tmp, 'UserImages/' . $hinhanh);
-        $sql_sua = "UPDATE tbl_user SET code='". $code ."' fullname='" . $tennguoidung . "',username='" . $taikhoan . "',
-            email='" . $email . "',phonenumber='" . $phonenumber . "',user_image='" . $hinhanh . "',
-            chucvu='" . $chucvu . "',diachi='" . $diachi . "' WHERE id_sanpham='$_GET[productId]'";
-
-        $sql = "SELECT*FROM tbl_user WHERE id='$_GET[userId]' LIMIT 1";
-        $query = mysqli_query($connect, $sql);
-        while ($row = mysqli_fetch_array($query)) {
-            unlink('UserImages/' . $row['hinhanh']);
+        if ($file['type'] == 'image/jpeg' || $file['type'] == 'imgae/jpg' || $file['type'] == 'image/png') {
+            move_uploaded_file($banner_tmp, 'UserImages/' . $banner);
+            $userId =  generateUuid();
+            $sql_addUser = "INSERT INTO tbl_user(id, code, fullname,username, email, phonenumber,chucvu, address) 
+                 VALUE ('" . $userId . "','" . $code . "','" . $tennguoidung . "','" . $taikhoan . "','" . $email . "','" . $phonenumber . "','" . $chucvu . "','" . $address . "')";
+            mysqli_query($connect, $sql_addUser);
+            header('Location:../../AdminIndex.php?workingPage=user');
+        }
+        else {
+            $hinhanh = '';
+            header('Location:../../AdminIndex.php?workingPage=user');
         }
     }
-}
- else if (isset($_POST['editUser'])) {
+} else if (isset($_POST['editUser'])) {
     if ($file != '') {
         move_uploaded_file($hinhanh_tmp, 'UserImages/' . $hinhanh);
         $sql_editUser = "UPDATE tbl_user SET code='" . $code . "', fullname='" . $tennguoidung . "', user_image='" . $hinhanh . "', username='" . $taikhoan . "', email='" . $email . "',phonenumber='" . $phonenumber . "',
         chucvu='" . $chucvu . "',address = '". $diachi ."' WHERE id='$_GET[userId]'";
-        $query = mysqli_query($connect, $sql_editUser);
+        $sql = "SELECT * FROM tbl_user WHERE id='$_GET[userId]'";
+        $query = mysqli_query($connect, $sql);
         while ($row = mysqli_fetch_array($query)) {
-            unlink('UserImages/' . $row['hinhanh']);   
+            unlink('UserImages/' . $row['hinhanh']);
         }
     } else {
-        $sql_editUser = "UPDATE tbl_user SET code='" . $code . "', fullname='" . $tennguoidung . "', user_image='" . $hinhanh . "', username='" . $taikhoan . "', email='" . $email . "',phonenumber='" . $phonenumber . "',
+        $sql_editUser = "UPDATE tbl_user SET code='" . $code . "', fullname='" . $tennguoidung . "', user_image='" . $file . "', username='" . $taikhoan . "', email='" . $email . "',phonenumber='" . $phonenumber . "',
         chucvu='" . $chucvu . "',address = '". $diachi ."' WHERE id='$_GET[userId]'";
     }
     mysqli_query($connect, $sql_editUser);
     header('Location:../../AdminIndex.php?workingPage=user');
-    } 
-else if (isset($_POST['deleteEvent'])) {
-    $id = $_GET['id'];
+} else if (isset($_POST['deleteUser'])) {
+    $id = $_GET['userId'];
     echo $id;
-    $sql = "SELECT *FROM tbl_event WHERE id = '$id'";
+    $sql = "SELECT *FROM tbl_user WHERE id = '$id'";
     $query = mysqli_query($connect, $sql);
     while ($row = mysqli_fetch_array($query)) {
-        unlink('EventtImages/' . $row['banner']);
+        unlink('UserImages/' . $row['hinhanh']);
     }
-    $sql_deleteEvent = "DELETE FROM tbl_event WHERE id ='" . $id . "';";
-    mysqli_query($connect, $sql_deleteEvent);
-    header('Location:../../AdminIndex.php?workingPage=event');
+    $sql_deleteUser = "DELETE FROM tbl_user WHERE id ='" . $id . "';";
+    mysqli_query($connect, $sql_deleteUser);
+    header('Location:../../AdminIndex.php?workingPage=user');
 }

@@ -87,7 +87,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     </td>
 
                     <td class="hinhanh">
-                        <img src="pages/User/UserImages/<?php echo $row['user_image'] ?> " width="100%">
+                        <img src="pages/User/UserImages/<?php echo $row['user_image']?>" width="100%">
                     </td>
                     
                     <td>
