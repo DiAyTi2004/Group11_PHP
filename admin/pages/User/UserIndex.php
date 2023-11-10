@@ -1,16 +1,24 @@
+<link rel="stylesheet" href="./styles/ProductStyles.css">
+
 <?php
-$countAllSql = "SELECT * FROM tbl_dangky;";
+$countAllSql = "SELECT * FROM tbl_user;";
 $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
+
 $pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
 $pageSize = isset($_GET['limit']) ? $_GET['limit'] : 5;
+
 $total_page = ceil($total_records / $pageSize);
+
 if ($pageIndex > $total_page) {
     $pageIndex = $total_page;
 } else if ($pageIndex < 1) {
     $pageIndex = 1;
 }
+
 $start = ($pageIndex - 1) * $pageSize;
+
 $search = '';
+
 if (isset($_GET['search']) && !empty($_GET['search'])) {
     $search = $_GET['search'];
 }
@@ -18,81 +26,55 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
 $getTableDataSql = "";
 
 if (isset($_GET['search'])) {
-    $getTableDataSql = "SELECT * FROM tbl_dangky
+    $getTableDataSql = "SELECT * FROM tbl_user
     WHERE
-        tbl_dangky.id_khachhang LIKE N'%" . $search . "%'
-    ORDER BY tbl_dangky.id_khachhang DESC
+        tbl_user.fullname LIKE N'%" . $search . "%'
+    ORDER BY tbl_user.id DESC
     LIMIT $start, $pageSize";
 } else {
-    $getTableDataSql = "SELECT * FROM tbl_dangky
-    ORDER BY id_khachhang  
+    $getTableDataSql = "SELECT * FROM tbl_user
+    ORDER BY id
     DESC 
     LIMIT $start, $pageSize";
 }
 
 $tableData = mysqli_query($connect, $getTableDataSql);
 ?>
-<link rel="stylesheet" href="./styles/UserStyles.css">
-<!-- Button trigger modal and search btn -->
+
 <div class="text-left flex justify-between">
-    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal_2">
+    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addUser">
         <i class="fa-solid fa-plus"></i>
         Thêm người dùng
     </button>
 
 
     <div class="input-group mb-3 align-center mt-3 w-40">
-        <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" name="search" id="search-input" aria-describedby="button-addon2">
+        <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" name="search"
+            id="search-input" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" id="search-button" onclick="performSearch()" name="ok">
             <i class="fa-solid fa-magnifying-glass"></i>
             Search
         </button>
     </div>
-    <?php
-    $search = ''; // Initialize the search variable
 
-    if (isset($_GET['search']) && !empty($_GET['search'])) {
-        $search = $_GET['search'];
-    }
-
-    ?>
-
-    <script>
-        function performSearch() {
-            var searchValue = document.getElementById('search-input').value;
-            var limit = <?php echo $pageSize; ?>;
-            var page = <?php echo $pageIndex; ?>;
-            var url = '?workingPage=user'; // Thay 'pageIndex.php' bằng tên trang hiện tại của bạn
-            // echo '<a href="?workingPage=product&limit='.($pageSize).'&page=' . ($pageIndex - 1) . '">
-            if (searchValue.trim() !== '') {
-                url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
-
-            } else {
-                url += '&limit=' + limit + '&page=' + page;
-
-            }
-            <?php
-            ?>
-            window.location.href = url;
-        }
-    </script>
 </div>
 
-<div class="container p-0" style="width: 100%;">
-    <table style="width: 100%;">
-        <legend class="text-center"><b>Quản lý người dùng</b></legend>
+<div class="container p-0">
+    <table class="w-100">
+        <legend class="text-center"><b>Quản lý sản phẩm</b></legend>
 
         <thead class="table-head w-100">
             <tr class="table-heading">
                 <th class="noWrap">ID</th>
-                <th class="noWrap">Name</th>
-                <th class="noWrap">Account</th>
+                <th class="noWrap">Họ tên</th>
+                <th class="noWrap">Hình ảnh </th>
                 <th class="noWrap">Email</th>
-                <th class="noWrap">NumberPhone</th>
-                <th class="noWrap">Address</th>
-                <th class="noWrap">Edit</th>
-                <th class="noWrap">Delete</th>
+                <th class="noWrap">Số điện thoại</th>
+                <th class="noWrap">Tài khoản</th>
+                <th class="noWrap">Địa chỉ</th>
                 <th class="noWrap">Chức vụ</th>
+                <th class="noWrap">Sửa </th>
+                <th class="noWrap">Xoá</th>
             </tr>
         </thead>
 
@@ -101,40 +83,60 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             $displayOrder = 0;
             while ($row = mysqli_fetch_array($tableData)) {
                 $displayOrder++;
-            ?>
-                <td style="height:100px;" class="noWrap"> <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?></td>
-                <td class="noWrap"> <?php echo $row['hovaten'] ?></td>
-                <td class="noWrap"> <?php echo $row['taikhoan'] ?></td>
-                <td class="noWrap"> <?php echo $row['email'] ?></td>
-                <td class="noWrap"> <?php echo $row['sodienthoai'] ?></td>
-                <td class="noWrap" style="width:150px;"> <?php echo $row['diachi'] ?></td>
-                <td>
-                    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id_khachhang']; ?>">
-                        <i class="fa-solid fa-pencil"></i>
-                    </button>
-                    <!-- <a href="?workingPage=user&query=edit&idnguoidung=<?php echo $row['id_khachhang'] ?>"> Sửa </a> -->
-                </td>
-                <td>
-                    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id_khachhang']; ?>">
-                        <i class="fa-solid fa-trash mr-1"></i>
-                    </button>
-                </td>
+                ?>
+                <tr>
+                    <td>
+                        <?php echo $displayOrder + ($pageIndex - 1) * $pageSize; ?>
+                    </td>
+                    <td class="tensanpham">
+                        <?php echo $row['fullname'] ?>
+                    </td>
 
-                </td>
-                <td><?php if ($row['chucvu'] == 1) {
+                    <td class="hinhanh">
+                        <img src="pages/User/UserImages/<?php echo $row['user_image'] ?> " width="100%">
+                    </td>
+                    
+                    <td>
+                        <?php echo $row['email'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['phonenumber'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['username'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['address'] ?>
+                    </td>
+                    <td>
+                    <?php if ($row['chucvu'] == 1) {
                         echo "Bán hàng";
                     } else {
                         echo "Không";
                     } ?>
-                </td>
+                    </td>
+                    <td>
+                    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal"
+                            data-bs-target="#editPopup_<?php echo $row['id']; ?>">
+                            <i class="fa-solid fa-pencil"></i>
+                        </button>
+                    </td>
+                    <td>
+                        
+
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal"
+                            data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
+                            <i class="fa-solid fa-trash mr-1"></i>
+                        </button>
+                    </td>
                 </tr>
-            <?php
+                <?php
             }
             ?>
         </tbody>
 
     </table>
-    <!-- Pagination table -->
+
     <form action="" method="GET">
         <nav class="row py-2" aria-label="Page navigation example">
 
@@ -142,9 +144,12 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <form action="" method="GET">
                     <label for="limitSelect">Rows per page:</label>
                     <select name="limit" id="limitSelect" onchange="updatePageAndLimit()">
-                        <option value="5" <?php if ($pageSize == 5) echo 'selected'; ?>>5</option>
-                        <option value="10" <?php if ($pageSize == 10) echo 'selected'; ?>>10</option>
-                        <option value="15" <?php if ($pageSize == 15) echo 'selected'; ?>>15</option>
+                        <option value="5" <?php if ($pageSize == 5)
+                            echo 'selected'; ?>>5</option>
+                        <option value="10" <?php if ($pageSize == 10)
+                            echo 'selected'; ?>>10</option>
+                        <option value="15" <?php if ($pageSize == 15)
+                            echo 'selected'; ?>>15</option>
                     </select>
                 </form>
 
@@ -173,7 +178,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <li class="page-item">
                     <?php
                     if ($pageIndex > 1 && $total_page > 1) {
-                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=product&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
+                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=user&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
                         Previous
                         </a>';
                     }
@@ -182,15 +187,13 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
                 <?php
                 for ($i = 1; $i <= $total_page; $i++) {
-                    // Nếu là trang hiện tại thì hiển thị thẻ span
-                    // ngược lại hiển thị thẻ a
                     if ($i == $pageIndex) {
                         echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=product&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=user&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                     } else {
                         echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?workingPage=product&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                        <a name="page" class="page-link text-reset text-black" href="?workingPage=user&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                         </li>';
                     }
                 }
@@ -199,7 +202,9 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <?php
                 if ($pageIndex < $total_page && $total_page > 1) {
                     echo '<li class="page-item light">
-                    <a name="page" class="page-link text-reset text-black" href="?workingPage=product&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=user&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
+                    Next
+                    </a>
                     </li>';
                 }
                 ?>
@@ -207,15 +212,40 @@ $tableData = mysqli_query($connect, $getTableDataSql);
     </form>
     </nav>
 </div>
+
+<!-- pre display all edit popup -->
 <?php
 $tableData = mysqli_query($connect, $getTableDataSql);
+
 while ($row = mysqli_fetch_array($tableData)) {
     include "./pages/User/EditUserPopup.php";
 }
 ?>
+
+<!-- pre display all confirm delete popup -->
 <?php
 $tableData = mysqli_query($connect, $getTableDataSql);
+
 while ($row = mysqli_fetch_array($tableData)) {
     include "./pages/User/UserConfirmDeletePopup.php";
 }
 ?>
+
+<script>
+    function performSearch() {
+        var searchValue = document.getElementById('search-input').value;
+        var limit = <?php echo $pageSize; ?>;
+        var page = <?php echo $pageIndex; ?>;
+        var url = '?workingPage=user';
+        if (searchValue.trim() !== '') {
+            url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
+
+        } else {
+            url += '&limit=' + limit + '&page=' + page;
+
+        }
+        <?php
+        ?>
+        window.location.href = url;
+    }
+</script>

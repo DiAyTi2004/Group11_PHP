@@ -1,28 +1,71 @@
 <?php
 include "../../../common/config/Connect.php";
-$name = $_POST['hovatens'];
-$account = $_POST['taikhoans'];
-$email = $_POST['emails'];
-$numberphone = $_POST['dienthoais'];
-$address = $_POST['diachis'];
-$chucvu = $_POST['chucvus'];
+$tennguoidung = $_POST['tennguoidung'];
+$taikhoan = $_POST['taikhoan'];
+$email = $_POST['email'];
+$diachi = $_POST['diachi'];
+$code = $_POST['code'];
+$phonenumber = $_POST['phonenumber'];
+//xử lý hình anh
+$file = $_FILES['hinhanh'];
+$hinhanh = $file['name'];
+$hinhanh_tmp = $_FILES['hinhanh']['tmp_name'];
+$chucvu = $_POST['chucvu'];
+function generateUuid()
+{
+    $data = random_bytes(16);
+
+    // Set the version (4) and variant bits (2)
+    $data[6] = chr(ord($data[6]) & 0x0F | 0x40);
+    $data[8] = chr(ord($data[8]) & 0x3F | 0x80);
+
+    // Format the UUID string
+    $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+
+    return $uuid;
+}
+
+// Example usage
 
 if (isset($_POST['themnguoidung'])) {
-    $sql_them_nguoidung = "INSERT INTO tbl_dangky (hovaten, taikhoan,email,sodienthoai,diachi,chucvu ) 
-                VALUES ('".$name."','". $account."','".$email."','".$numberphone."','".$address."' ,'".$chucvu."')";
-    mysqli_query($connect, $sql_them_nguoidung);
-    header('Location:../../AdminIndex.php?workingPage=user');
+    if (isset($_FILES['hinhanh'])) {
+        move_uploaded_file($hinhanh_tmp, 'UserImages/' . $hinhanh);
+        $sql_sua = "UPDATE tbl_user SET code='". $code ."' fullname='" . $tennguoidung . "',username='" . $taikhoan . "',
+            email='" . $email . "',phonenumber='" . $phonenumber . "',user_image='" . $hinhanh . "',
+            chucvu='" . $chucvu . "',diachi='" . $diachi . "' WHERE id_sanpham='$_GET[productId]'";
 
-} else if (isset($_POST['suanguoidung'])) {
-    $sql_sua_nd = "UPDATE tbl_dangky SET hovaten='" . $name . "',taikhoan='" . $account . "',email='" . $email . "',sodienthoai='" . $numberphone . "',diachi='" . $address . "',chucvu='" . $chucvu . "' WHERE id_khachhang='$_GET[userId]'";
-    mysqli_query($connect, $sql_sua_nd);
-    header('Location:../../AdminIndex.php?workingPage=user');
+        $sql = "SELECT*FROM tbl_user WHERE id='$_GET[userId]' LIMIT 1";
+        $query = mysqli_query($connect, $sql);
+        while ($row = mysqli_fetch_array($query)) {
+            unlink('UserImages/' . $row['hinhanh']);
+        }
+    }
 }
-// else if(isset($_POST['xoanguoidung'])){
-else if (isset($_POST['xoanguoidung'])) {
-    $id = $_GET['userId'];
-    $sql_xoa_nd = "DELETE FROM tbl_dangky WHERE id_khachhang ='" . $id . "';";
-    mysqli_query($connect, $sql_xoa_nd);
+ else if (isset($_POST['editUser'])) {
+    if ($file != '') {
+        move_uploaded_file($hinhanh_tmp, 'UserImages/' . $hinhanh);
+        $sql_editUser = "UPDATE tbl_user SET code='" . $code . "', fullname='" . $tennguoidung . "', user_image='" . $hinhanh . "', username='" . $taikhoan . "', email='" . $email . "',phonenumber='" . $phonenumber . "',
+        chucvu='" . $chucvu . "',address = '". $diachi ."' WHERE id='$_GET[userId]'";
+        $query = mysqli_query($connect, $sql_editUser);
+        while ($row = mysqli_fetch_array($query)) {
+            unlink('UserImages/' . $row['hinhanh']);   
+        }
+    } else {
+        $sql_editUser = "UPDATE tbl_user SET code='" . $code . "', fullname='" . $tennguoidung . "', user_image='" . $hinhanh . "', username='" . $taikhoan . "', email='" . $email . "',phonenumber='" . $phonenumber . "',
+        chucvu='" . $chucvu . "',address = '". $diachi ."' WHERE id='$_GET[userId]'";
+    }
+    mysqli_query($connect, $sql_editUser);
     header('Location:../../AdminIndex.php?workingPage=user');
-} else {
+    } 
+else if (isset($_POST['deleteEvent'])) {
+    $id = $_GET['id'];
+    echo $id;
+    $sql = "SELECT *FROM tbl_event WHERE id = '$id'";
+    $query = mysqli_query($connect, $sql);
+    while ($row = mysqli_fetch_array($query)) {
+        unlink('EventtImages/' . $row['banner']);
+    }
+    $sql_deleteEvent = "DELETE FROM tbl_event WHERE id ='" . $id . "';";
+    mysqli_query($connect, $sql_deleteEvent);
+    header('Location:../../AdminIndex.php?workingPage=event');
 }

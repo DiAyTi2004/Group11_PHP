@@ -61,11 +61,9 @@ CREATE TABLE `tbl_dangky` (
   `diachi` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `chucvu` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Đang đổ dữ liệu cho bảng `tbl_dangky`
 --
-
 INSERT INTO `tbl_dangky` (`id_khachhang`, `hovaten`, `taikhoan`, `matkhau`, `sodienthoai`, `email`, `diachi`, `chucvu`) VALUES
 (1, 'Nguyễn Minh Tâm', 'maki', 'c4ca4238a0b923820dcc509a6f75849b', 569029353, 'mikuohandsome@gmail.com', '																																																																																																																																										13/C																																																																																																																			', 1),
 (9, 'Lê Văn Hùng', 'lehung', '202cb962ac59075b964b07152d234b70', 123456, 'lehung@gmail.com', 'Thanh Hóa', 0);
@@ -329,9 +327,13 @@ create table tbl_product (
 create table tbl_user (
   id varchar(36) primary key not null,
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  user_image varchar(100),
   fullname varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   username varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   password varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  email varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  phonenumber int(11) NOT NULL,
+  chucvu int(11) NOT NULL,
   address LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

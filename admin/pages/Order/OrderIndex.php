@@ -82,7 +82,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             while ($row = mysqli_fetch_array($tableData)) {
                 $displayOrder++;
             ?>
-                <td class="noWrap"><?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?></td>
+                <td class="noWrap"><?php echo $row['id_cart'] ?></td>
                 <td class="noWrap"><?php echo $row['code_cart'] ?></td>
                 <td class="noWrap"><?php echo $row['hovaten'] ?></td>
                 <td class="noWrap"><?php echo $row['diachi'] ?></td>
@@ -91,7 +91,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <td class="noWrap"><?php echo $row['sodienthoai'] ?></td>
                 <td class="noWrap">
                     <?php if ($row['cart_status'] == 1) {
-                        echo '<a href="modules/order/OrderLogic.php?code=' . $row['code_cart'] . '">Đơn hàng mới</a>';
+                        echo '<a href="modules/order/OrderLogic.php?orderId='.$row['code_cart'].'">Đơn hàng mới</a>';
                     } else {
                         echo 'Đã xem';
                     }
