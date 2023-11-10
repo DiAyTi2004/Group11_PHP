@@ -1,19 +1,13 @@
 <link rel="stylesheet" href="./styles/ProductStyles.css">
 
 <?php
-$countAllSql = "SELECT * FROM tbl_sanpham;";
+$countAllSql = "SELECT * FROM tbl_product";
 $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
 
 $pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
 $pageSize = isset($_GET['limit']) ? $_GET['limit'] : 5;
 
 $total_page = ceil($total_records / $pageSize);
-
-if ($pageIndex > $total_page) {
-    $pageIndex = $total_page;
-} else if ($pageIndex < 1) {
-    $pageIndex = 1;
-}
 
 $start = ($pageIndex - 1) * $pageSize;
 
@@ -24,21 +18,22 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
 }
 
 $getTableDataSql = "";
-
+// LIMIT $start, $pageSize thêm sau khi có dữ liệu
 if (isset($_GET['search'])) {
-    $getTableDataSql = "SELECT * FROM tbl_sanpham INNER JOIN tbl_danhmuc ON tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc 
+    $getTableDataSql = "SELECT * FROM tbl_product INNER JOIN tbl_category ON tbl_product.category_id = tbl_category.id
     WHERE
-        tbl_sanpham.tensanpham LIKE N'%" . $search . "%'
-        OR tbl_sanpham.masanpham LIKE N'%" . $search . "%'
-        OR tbl_danhmuc.tendanhmuc LIKE N'%" . $search . "'
-    ORDER BY tbl_sanpham.id_sanpham DESC
-    LIMIT $start, $pageSize";
+        tbl_product.name LIKE N'%" . $search . "%'
+        OR tbl_product.code LIKE N'%" . $search . "%'
+        OR tbl_category.name LIKE N'%" . $search . "'
+    ORDER BY tbl_product.id DESC
+    ";
 } else {
-    $getTableDataSql = "SELECT * FROM tbl_sanpham ,tbl_danhmuc 
-    WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
-    ORDER BY id_sanpham  
+// LIMIT $start, $pageSize thêm sau khi có dữ liệu
+    $getTableDataSql = "SELECT * FROM tbl_product, tbl_category
+    WHERE tbl_product.category_id = tbl_category.id
+    ORDER BY tbl_product.category_id
     DESC 
-    LIMIT $start, $pageSize";
+    ";
 }
 
 $tableData = mysqli_query($connect, $getTableDataSql);
@@ -68,14 +63,12 @@ $tableData = mysqli_query($connect, $getTableDataSql);
         <thead class="table-head w-100">
             <tr class="table-heading">
                 <th class="noWrap">STT</th>
-                <th class="noWrap">Tên sản phảm</th>
-                <th class="noWrap">Hình ảnh </th>
-                <th class="noWrap">Giá sản phẩm</th>
-                <th class="noWrap">Số lượng</th>
-                <th class="noWrap">Danh mục</th>
                 <th class="noWrap">Mã sản phẩm</th>
-                <th class="noWrap">Tóm tăt</th>
-                <th class="noWrap">Trạng thái</th>
+                <th class="noWrap">Tên sản phẩm</th>
+                <th class="noWrap">Hình ảnh</th>
+                <th class="noWrap">Mô tả</th>
+                <th class="noWrap">Giá gốc</th>
+                <th class="noWrap">Danh mục</th>
                 <th class="noWrap">Quản lý</th>
             </tr>
         </thead>
@@ -90,37 +83,28 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     <td>
                         <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                     </td>
+                    <td>
+                        <?php echo $row['code'] ?>
+                    </td>
                     <td class="tensanpham">
-                        <?php echo $row['tensanpham'] ?>
+                        <?php echo $row['name'] ?>
                     </td>
 
                     <td class="hinhanh">
                         <img src="pages/Product/ProductImages/<?php echo $row['hinhanh'] ?> " width="100%">
                     </td>
+                    <td>
+                        <?php echo $row['description'] ?>
+                    </td>
 
                     <td class="giasanpham">
-                        <?php echo number_format($row['giasanpham'], 0, ',', '.') . 'VNĐ' ?>
+                        <?php echo number_format($row['price'], 0, ',', '.') . 'VNĐ' ?>
                     </td>
+    
                     <td>
-                        <?php echo $row['soluong'] ?>
+                        <?php echo $row['category_name'] ?>
                     </td>
-                    <td>
-                        <?php echo $row['tendanhmuc'] ?>
-                    </td>
-                    <td>
-                        <?php echo $row['masanpham'] ?>
-                    </td>
-                    <td>
-                        <?php echo $row['tomtat'] ?>
-                    </td>
-                    <td>
-                        <?php if ($row['trangthai'] == 1) {
-                            echo "Mới";
-                        } else {
-                            echo "Cũ";
-                        }
-                        ?>
-                    </td>
+            
                     <td>
                         <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id_sanpham']; ?>">
                             <i class="fa-solid fa-pencil"></i>
