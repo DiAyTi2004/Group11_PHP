@@ -7,11 +7,6 @@ $pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
 $pageSize = isset($_GET['limit']) ? $_GET['limit'] : 5;
 
 $total_page = ceil($total_records / $pageSize);
-if ($pageIndex > $total_page) {
-    $pageIndex = $total_page;
-} else if ($pageIndex < 1) {
-    $pageIndex = 1;
-}
 
 $start = ($pageIndex - 1) * $pageSize;
 
@@ -64,15 +59,15 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
         <thead class="table-head w-100">
             <tr class="table-heading">
-            <th class="noWrap">ID</th>
-            <th class="noWrap">Mã đơn hàng</th>
-            <th class="noWrap">Tên khách hàng</th>
-            <th class="noWrap">Địa chỉ</th>
-            <th class="noWrap">Tài khoản</th>
-            <th class="noWrap">Hình thức thanh toán</th>
-            <th class="noWrap">Điện thoại</th>
-            <th class="noWrap"> Tinh Trạng </th>
-            <th colspan="2">Quản lý </th>
+                <th class="noWrap">ID</th>
+                <th class="noWrap">Mã đơn hàng</th>
+                <th class="noWrap">Tên khách hàng</th>
+                <th class="noWrap">Địa chỉ</th>
+                <th class="noWrap">Tài khoản</th>
+                <th class="noWrap">Hình thức thanh toán</th>
+                <th class="noWrap">Điện thoại</th>
+                <th class="noWrap"> Tinh Trạng </th>
+                <th colspan="2">Quản lý </th>
             </tr>
         </thead>
 
@@ -97,11 +92,11 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     }
                     ?>
                 </td>
-                    <td>
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id_cart'];?>">
-                            <i class="fa-solid fa-trash mr-1"></i>
-                        </button>
-                    </td>
+                <td>
+                    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id_cart']; ?>">
+                        <i class="fa-solid fa-trash mr-1"></i>
+                    </button>
+                </td>
                 </tr>
             <?php
             }

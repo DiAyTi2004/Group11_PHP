@@ -4,11 +4,7 @@ $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
 $pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
 $pageSize = isset($_GET['limit']) ? $_GET['limit'] : 5;
 $total_page = ceil($total_records / $pageSize);
-if ($pageIndex > $total_page) {
-    $pageIndex = $total_page;
-} else if ($pageIndex < 1) {
-    $pageIndex = 1;
-}
+
 $start = ($pageIndex - 1) * $pageSize;
 $search = '';
 if (isset($_GET['search']) && !empty($_GET['search'])) {
