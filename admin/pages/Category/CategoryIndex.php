@@ -79,10 +79,10 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 $displayOrder++;
             ?>
                 <tr>
-                     <td class="id">
+                    <td class="id">
                         <?php echo $row['id'] ?>
                     </td>
-                 
+
                     <td class="tendanhmuc">
                         <?php echo $row['name'] ?>
                     </td>

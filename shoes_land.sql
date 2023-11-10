@@ -15,7 +15,7 @@ CREATE TABLE `tbl_admin` (
 --
 -- Đang đổ dữ liệu cho bảng `tbl_admin`
 --
-====
+
 
 INSERT INTO `tbl_cart_old_detail` (`id_cart_detail`, `code_cart`, `id_sanpham`, `soluongmua`) VALUES
 (28, '4095', 8, 2),
