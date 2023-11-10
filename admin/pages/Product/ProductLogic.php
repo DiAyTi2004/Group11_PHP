@@ -54,15 +54,12 @@ if (isset($_POST['addProduct'])) {
             $sql_insert_product_size = "INSERT INTO tbl_product_size(product_id, size_id, quantity) 
                                        VALUES ('$productId', '$sizeId', '$quantity')";
             mysqli_query($connect, $sql_insert_product_size);
-
-            // Redirect after successful insertion
-            header('Location:../../AdminIndex.php?workingPage=product');
         } else {
-            // Handle case where file type is not supported
             $hinhanh = '';
-            header('Location:../../AdminIndex.php?workingPage=product');
         }
     }
+
+    header('Location:../../AdminIndex.php?workingPage=product');
 } else if (isset($_POST['editProduct'])) {
     $productId = $_GET['productId'];  // Assuming productId is passed through GET parameter
     $description_img = $_POST['des_img'];
@@ -92,8 +89,7 @@ if (isset($_POST['addProduct'])) {
     mysqli_query($connect, $sql_sua_size);
 
     header('Location: ../../AdminIndex.php?workingPage=product');
-}
- else if (isset($_POST['deleteProduct'])) {
+} else if (isset($_POST['deleteProduct'])) {
     $id = $_GET['productId'];
     $sql = "SELECT *FROM tbl_product WHERE id = '$productId'";
     $query = mysqli_query($connect, $sql);
