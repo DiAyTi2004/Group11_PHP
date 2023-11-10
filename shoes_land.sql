@@ -323,7 +323,8 @@ create table tbl_product (
   fake_price float ,
   category_id varchar(36) not null,
   event_id varchar(36) not null,
-  foreign key (event_id) references tbl_event(id)
+  foreign key (event_id) references tbl_event(id),
+  foreign key (category_id) references tbl_category(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_user (
