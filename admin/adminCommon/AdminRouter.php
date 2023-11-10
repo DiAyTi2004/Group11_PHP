@@ -15,7 +15,7 @@
         } else if ($workingPage == 'event') {
             include("./pages/Event/EventIndex.php");
             include("./pages/Event/AddEventPopup.php");
-            include("./pages/Event/EventConfirmDeletePopup.php");
+            include("./pages/Event/ConfirmDeleteEventPopup.php");
         } else if ($workingPage == 'user') {
             include("./pages/User/UserIndex.php");
             include("./pages/User/AddUserPopup.php");

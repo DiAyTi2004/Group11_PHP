@@ -1,50 +1,50 @@
-<!-- <?php
-        $sql_lietke_event = "SELECT * FROM tbl_event ORDER BY id DESC";
-        $result_lietke_event = mysqli_query($connect, $sql_lietke_event);
-        ?> -->
+<link rel="stylesheet" href="./styles/EventStyles.css">
 
-<!-- PHP logic paganition pages -->
 <?php
-// Tìm tổng số bản ghi
-$total_records = mysqli_num_rows($result_lietke_event);
-//Tìm limit và current_page
-$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-$limit = isset($_GET['limit']) ? $_GET['limit'] : 5;
-$i = 0;
-$stt = $i + ($current_page - 1) * $limit;
-//Tính toán total_page và start
-// tổng số trang
-$total_page = ceil($total_records / $limit);
+$countAllSql = "SELECT * FROM tbl_event;";
+$total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
 
-// Giới hạn current_page trong khoảng 1 đến total_page
-if ($current_page > $total_page) {
-    $current_page = $total_page;
-} else if ($current_page < 1) {
-    $current_page = 1;
+$pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
+$pageSize = isset($_GET['limit']) ? $_GET['limit'] : 5;
+
+$total_page = ceil($total_records / $pageSize);
+
+if ($pageIndex > $total_page) {
+    $pageIndex = $total_page;
+} else if ($pageIndex < 1) {
+    $pageIndex = 1;
 }
 
-// Tìm Start
-$start = ($current_page - 1) * $limit;
-if ($start < 0) {
-    $start = 0;
+$start = ($pageIndex - 1) * $pageSize;
+
+$search = '';
+
+if (isset($_GET['search']) && !empty($_GET['search'])) {
+    $search = $_GET['search'];
 }
 
-// BƯỚC 5: TRUY VẤN LẤY DANH SÁCH TIN TỨC
-// Có limit và start rồi thì truy vấn CSDL lấy danh sách tin tức
-$sql_lietke_event_2 = "SELECT * FROM tbl_event
-                    ORDER BY id 
-                    DESC 
-                    LIMIT $start, $limit";
-$result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
-//Hiển thị
+$getTableDataSql = "";
 
-// PHẦN HIỂN THỊ PHÂN TRANG
+if (isset($_GET['search'])) {
+    $getTableDataSql = "SELECT * FROM tbl_event
+    WHERE
+        tbl_event.name LIKE N'%" . $search . "%'
+        OR tbl_event.code LIKE N'%" . $search . "%'
+        OR tbl_event.start_date LIKE N'%" . $search . "%'
+        OR tbl_event.end_date LIKE N'%" . $search . "%'
+    ORDER BY tbl_event.end_date ASC
+    LIMIT $start, $pageSize";
+} else {
+    $getTableDataSql = "SELECT * FROM tbl_event
+    ORDER BY end_date ASC 
+    LIMIT $start, $pageSize";
+}
+
+$tableData = mysqli_query($connect, $getTableDataSql);
 ?>
 
-<link rel="stylesheet" href="./styles/EventStyles.css">
-<!-- Button trigger modal and search btn -->
 <div class="text-left flex justify-between">
-    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addEventModal">
         <i class="fa-solid fa-plus"></i>
         Thêm sự kiện
     </button>
@@ -57,51 +57,13 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
             Search
         </button>
     </div>
-    <?php
-    $search = ''; // Initialize the search variable
-
-    if (isset($_GET['search']) && !empty($_GET['search'])) {
-        $search = $_GET['search'];
-    }
-
-    ?>
-
-    <script>
-        function performSearch() {
-            var searchValue = document.getElementById('search-input').value;
-            var limit = <?php echo $limit; ?>;
-            var page = <?php echo $current_page; ?>;
-            var url = '?workingPage=event'; // Thay 'your_current_page.php' bằng tên trang hiện tại của bạn
-            // echo '<a href="?workingPage=event&limit='.($limit).'&page=' . ($current_page - 1) . '">
-            if (searchValue.trim() !== '') {
-                url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
-
-            } else {
-                url += '&limit=' + limit + '&page=' + page;
-
-            }
-            <?php
-            ?>
-            window.location.href = url;
-        }
-    </script>
-    <!-- Logic PHP search -->
-    <?php
-    // Câu truy vấn để tìm kiếm sự kiện
-    $query = "SELECT * FROM tbl_event
-        WHERE tbl_event.start_date LIKE N'%$search%'
-        ORDER BY tbl_event.end_date DESC
-        LIMIT $start, $limit";
-
-    // Thực thi câu truy vấn
-    $result_lietke_event_2 = isset($_GET['search']) ? mysqli_query($connect, $query) : mysqli_query($connect, $sql_lietke_event_2);
-    ?>
 
 </div>
 
 <div class="container p-0">
-    <table class="table-container">
+    <table>
         <legend class="text-center"><b>Quản lý sự kiện</b></legend>
+
         <thead class="table-head w-100">
             <tr class="table-heading">
                 <th class="noWrap">STT</th>
@@ -118,13 +80,13 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
 
         <tbody class="table-body">
             <?php
-            while ($row = mysqli_fetch_array($result_lietke_event_2)) {
-                $i++;
-                $stt++;
+            $displayOrder = 0;
+            while ($row = mysqli_fetch_array($tableData)) {
+                $displayOrder++;
             ?>
                 <tr>
                     <td>
-                        <?php echo  $stt ?>
+                        <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                     </td>
                     <td class="code">
                         <?php echo $row['code'] ?>
@@ -133,7 +95,7 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
                         <?php echo $row['name'] ?>
                     </td>
                     <td class="banner">
-                    <img src="pages/Event/EventImages/<?php echo $row['banner'] ?> " width="40%">
+                    <img  src="pages/Event/EventImages/<?php echo $row['banner'] ?> " width="40%">
                     </td>
                     <td class="discount">
                         <?php echo $row['discount'] ?>
@@ -148,11 +110,11 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
                         <?php echo $row['description'] ?>
                     </td>
                     <td>
-                        <div style="display: flex;">
-                            <button style="margin-right: 5px;" type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editEventPopup_<?php echo $row['id']; ?>">
+                        <div style="min-width: 150px;">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editEventPopup_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-pencil"></i>
                             </button>
-                            <button style="margin-left: 5px;" type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmEventPopup_<?php echo $row['id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteEventPopup_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-trash mr-1"></i>
                             </button>
                         </div>
@@ -165,7 +127,6 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
 
     </table>
 
-    <!-- Pagination table -->
     <form action="" method="GET">
         <nav class="row py-2" aria-label="Page navigation example">
 
@@ -173,9 +134,9 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
                 <form action="" method="GET">
                     <label for="limitSelect">Rows per page:</label>
                     <select name="limit" id="limitSelect" onchange="updatePageAndLimit()">
-                        <option value="5" <?php if ($limit == 5) echo 'selected'; ?>>5</option>
-                        <option value="10" <?php if ($limit == 10) echo 'selected'; ?>>10</option>
-                        <option value="15" <?php if ($limit == 15) echo 'selected'; ?>>15</option>
+                        <option value="5" <?php if ($pageSize == 5) echo 'selected'; ?>>5</option>
+                        <option value="10" <?php if ($pageSize == 10) echo 'selected'; ?>>10</option>
+                        <option value="15" <?php if ($pageSize == 15) echo 'selected'; ?>>15</option>
                     </select>
                 </form>
 
@@ -195,7 +156,7 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
 
                 <label class="mr-4">Showing
                     <?php
-                    echo $stt . " of " . $total_records . " results";
+                    echo $pageSize . " of " . $total_records . " results";
                     ?>
                 </label>
             </div>
@@ -203,8 +164,8 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
             <ul class="m-0 pagination justify-content-end py-2 col">
                 <li class="page-item">
                     <?php
-                    if ($current_page > 1 && $total_page > 1) {
-                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=event&limit=' . ($limit) . '&page=' . ($current_page - 1) . '">
+                    if ($pageIndex > 1 && $total_page > 1) {
+                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
                         Previous
                         </a>';
                     }
@@ -213,24 +174,22 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
 
                 <?php
                 for ($i = 1; $i <= $total_page; $i++) {
-                    // Nếu là trang hiện tại thì hiển thị thẻ span
-                    // ngược lại hiển thị thẻ a
-                    if ($i == $current_page) {
+                    if ($i == $pageIndex) {
                         echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=event&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                     } else {
                         echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?workingPage=event&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                        <a name="page" class="page-link text-reset text-black" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                         </li>';
                     }
                 }
                 ?>
 
                 <?php
-                if ($current_page < $total_page && $total_page > 1) {
+                if ($pageIndex < $total_page && $total_page > 1) {
                     echo '<li class="page-item light">
-                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=event&limit=' . ($limit) . '&page=' . ($current_page + 1) . '">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
                     Next
                     </a>
                     </li>';
@@ -240,3 +199,40 @@ $result_lietke_event_2 = mysqli_query($connect, $sql_lietke_event_2);
     </form>
     </nav>
 </div>
+
+<!-- pre display all edit popup -->
+<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
+
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/Event/EditEventPopup.php";
+}
+?>
+
+<!-- pre display all confirm delete popup -->
+<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
+
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/Event/ConfirmDeleteEventPopup.php";
+}
+?>
+
+<script>
+    function performSearch() {
+        var searchValue = document.getElementById('search-input').value;
+        var limit = <?php echo $pageSize; ?>;
+        var page = <?php echo $pageIndex; ?>;
+        var url = '?workingPage=event';
+        if (searchValue.trim() !== '') {
+            url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
+
+        } else {
+            url += '&limit=' + limit + '&page=' + page;
+
+        }
+        <?php
+        ?>
+        window.location.href = url;
+    }
+</script>

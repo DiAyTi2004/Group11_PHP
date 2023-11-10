@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-dark">
@@ -49,11 +49,11 @@
                             <td class="row">
                                 <div class="mb-2 col">
                                     <label for="date" class="form-label">Ngày bắt đầu</label>
-                                    <input name="start_date" type="date" class="form-control" id="datepicker">
+                                    <input name="start_date" type="datetime-local" class="form-control" id="datepicker_start">
                                 </div>
                                 <div class="mb-2 col">
                                     <label for="date" class="form-label">Ngày kết thúc</label>
-                                    <input name="end_date" type="date" class="form-control" id="datepicker">
+                                    <input name="end_date" type="datetime-local" class="form-control" id="datepicker_end">
                                 </div>
                             </td>
                         </tr>
