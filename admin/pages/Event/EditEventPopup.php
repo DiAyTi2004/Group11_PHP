@@ -72,7 +72,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary" name="editEvent">Sửa sản phẩm</button>
+                    <button type="submit" class="btn btn-primary" name="editEvent">Sửa sự kiện</button>
                 </div>
             </div>
         </form>
