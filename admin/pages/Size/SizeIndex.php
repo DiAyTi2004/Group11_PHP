@@ -101,7 +101,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             if($total_records == 0){
             ?>
                 <tr>
-                    <td class="text-left ">
+                    <td colspan="5">
                         <?php echo "Hiện không có kích cỡ nào!"?>
                     </td>
                 </tr>

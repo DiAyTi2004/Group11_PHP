@@ -119,7 +119,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             if($total_records == 0){
                 ?>
                     <tr>
-                        <td class="text-left ">
+                        <td colspan="9">
                             <?php echo "Hiện không có sự kiện nào!"?>
                         </td>
                     </tr>
