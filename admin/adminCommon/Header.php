@@ -57,7 +57,7 @@
                     </li>
                     <li class="flex-center">
                         <a href="AdminIndex.php?workingPage=event" class="nav-link <?php getHeaderTextColor('event'); ?> flex-column flex-center">
-                            <i class="fa-solid fa-sitemap text-white mb-2"></i>
+                        <i class="fa-solid fa-calendar-days text-white mb-2"></i>
                             Sự kiện
                         </a>
                     </li>
@@ -65,6 +65,24 @@
                         <a href="AdminIndex.php?workingPage=user" class="nav-link <?php getHeaderTextColor('user'); ?> flex-column flex-center">
                             <i class="fa-solid fa-users-gear text-white mb-2"></i>
                             Người dùng
+                        </a>
+                    </li>
+                    <li class="flex-center">
+                        <a href="AdminIndex.php?workingPage=status" class="nav-link <?php getHeaderTextColor('status'); ?> flex-column flex-center">
+                        <i class="fa-solid fa-toggle-off text-white mb-2"></i>
+                            Trạng thái
+                        </a>
+                    </li>
+                    <li class="flex-center">
+                        <a href="AdminIndex.php?workingPage=size" class="nav-link <?php getHeaderTextColor('size'); ?> flex-column flex-center">
+                        <i class="fa-solid fa-ruler-horizontal text-white mb-2"></i>
+                            kích cỡ
+                        </a>
+                    </li>
+                    <li class="flex-center">
+                        <a href="AdminIndex.php?workingPage=payment_type" class="nav-link <?php getHeaderTextColor('payment_type'); ?> flex-column flex-center">
+                        <i class="fa-solid fa-money-check-dollar text-white mb-2"></i>
+                            Thanh toán
                         </a>
                     </li>
                     <li class="flex-center">

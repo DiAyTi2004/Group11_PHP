@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="./styles/EventStyles.css">
+<link rel="stylesheet" href="./styles/SizeStyles.css">
 
 <?php
-$countAllSql = "SELECT * FROM tbl_event;";
+$countAllSql = "SELECT * FROM tbl_size;";
 $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
 
 $pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -20,17 +20,15 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
 $getTableDataSql = "";
 
 if (isset($_GET['search'])) {
-    $getTableDataSql = "SELECT * FROM tbl_event
+    $getTableDataSql = "SELECT * FROM tbl_size
     WHERE
-        tbl_event.name LIKE N'%" . $search . "%'
-        OR tbl_event.code LIKE N'%" . $search . "%'
-        OR tbl_event.start_date LIKE N'%" . $search . "%'
-        OR tbl_event.end_date LIKE N'%" . $search . "%'
-    ORDER BY tbl_event.end_date ASC
+        tbl_size.name LIKE N'%" . $search . "%'
+        OR tbl_size.code LIKE N'%" . $search . "%'
+    ORDER BY tbl_size.name ASC
     LIMIT $start, $pageSize";
 } else {
-    $getTableDataSql = "SELECT * FROM tbl_event
-    ORDER BY end_date ASC 
+    $getTableDataSql = "SELECT * FROM tbl_size
+    ORDER BY tbl_size.name ASC 
     LIMIT $start, $pageSize";
 }
 
@@ -38,9 +36,9 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 ?>
 
 <div class="text-left flex justify-between">
-    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addEventModal">
+    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addSizeModal">
         <i class="fa-solid fa-plus"></i>
-        Thêm sự kiện
+        Thêm kích cỡ
     </button>
 
 
@@ -56,17 +54,13 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
 <div class="container p-0">
     <table class="w-100">
-        <legend class="text-center"><b>Quản lý sự kiện</b></legend>
+        <legend class="text-center"><b>Quản lý kích cỡ</b></legend>
 
         <thead class="table-head w-100">
             <tr class="table-heading">
                 <th class="noWrap">STT</th>
-                <th class="noWrap">Mã sự kiện</th>
-                <th class="noWrap">Tên sự kiện</th>
-                <th class="noWrap">Banner</th>
-                <th class="noWrap">Giảm giá</th>
-                <th class="noWrap">Ngày bắt đầu</th>
-                <th class="noWrap">Ngày kết thúc</th>
+                <th class="noWrap">Mã kích cỡ</th>
+                <th class="noWrap">Tên kích cỡ</th>
                 <th class="noWrap">Mô tả</th>
                 <th class="noWrap">Quản lý</th>
             </tr>
@@ -88,27 +82,15 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     <td class="name">
                         <?php echo $row['name'] ?>
                     </td>
-                    <td class="banner">
-                        <img src="pages/Event/EventImages/<?php echo $row['banner'] ?> " width="40%">
-                    </td>
-                    <td class="discount">
-                        <?php echo $row['discount'] ?>
-                    </td>
-                    <td class="start_date">
-                        <?php echo $row['start_date'] ?>
-                    </td>
-                    <td class="end_date">
-                        <?php echo $row['end_date'] ?>
-                    </td>
                     <td class="description">
                         <?php echo $row['description'] ?>
                     </td>
                     <td>
                         <div style="min-width: 150px;">
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editEventPopup_<?php echo $row['id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editSizePopup_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteEventPopup_<?php echo $row['id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteSizePopup_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-trash mr-1"></i>
                             </button>
                         </div>
@@ -117,14 +99,14 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             <?php
             }
             if($total_records == 0){
-                ?>
-                    <tr>
-                        <td class="text-left ">
-                            <?php echo "Hiện không có sự kiện nào!"?>
-                        </td>
-                    </tr>
-                <?php
-                }
+            ?>
+                <tr>
+                    <td class="text-left ">
+                        <?php echo "Hiện không có kích cỡ nào!"?>
+                    </td>
+                </tr>
+            <?php
+            }
             ?>
         </tbody>
 
@@ -168,7 +150,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <li class="page-item">
                     <?php
                     if ($pageIndex > 1 && $total_page > 1) {
-                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
+                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=size&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
                         Previous
                         </a>';
                     }
@@ -179,11 +161,11 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 for ($i = 1; $i <= $total_page; $i++) {
                     if ($i == $pageIndex) {
                         echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=size&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                     } else {
                         echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                        <a name="page" class="page-link text-reset text-black" href="?workingPage=size&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                         </li>';
                     }
                 }
@@ -192,7 +174,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <?php
                 if ($pageIndex < $total_page && $total_page > 1) {
                     echo '<li class="page-item light">
-                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=size&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
                     Next
                     </a>
                     </li>';
@@ -208,7 +190,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
-    include "./pages/Event/EditEventPopup.php";
+    include "./pages/Size/EditSizePopup.php";
 }
 ?>
 
@@ -217,7 +199,7 @@ while ($row = mysqli_fetch_array($tableData)) {
 $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
-    include "./pages/Event/ConfirmDeleteEventPopup.php";
+    include "./pages/Size/ConfirmDeleteSizePopup.php";
 }
 ?>
 
@@ -226,7 +208,7 @@ while ($row = mysqli_fetch_array($tableData)) {
         var searchValue = document.getElementById('search-input').value;
         var limit = <?php echo $pageSize; ?>;
         var page = <?php echo $pageIndex; ?>;
-        var url = '?workingPage=event';
+        var url = '?workingPage=size';
         if (searchValue.trim() !== '') {
             url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
 

@@ -72,7 +72,6 @@ if (isset($_POST['addEvent'])) {
     header('Location:../../AdminIndex.php?workingPage=event');
 } else if (isset($_POST['deleteEvent'])) {
     $id = $_GET['id'];
-    echo $id;
     $sql = "SELECT *FROM tbl_event WHERE id = '$id'";
     $query = mysqli_query($connect, $sql);
     while ($row = mysqli_fetch_array($query)) {
