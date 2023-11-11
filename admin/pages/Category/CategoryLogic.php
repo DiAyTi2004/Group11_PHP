@@ -46,14 +46,14 @@ if (isset($_POST['themdanhmuc'])) {
 } else if (isset($_POST['suadanhmuc'])) {
     if ($hinhanh != '') {
         move_uploaded_file($hinhanh_tmp, 'CategoryImages/' . $hinhanh);
-        $sql_sua = "UPDATE tbl_category SET code='" .$code. "', name='" . $tendanhmuc . "',category_image='" . $hinhanh . "', description='".$description."' WHERE id='$_GET[categoryId]'";
+        $sql_sua = "UPDATE tbl_category SET code='". $code ."', name='" . $tendanhmuc . "',category_image='" . $hinhanh . "', description='".$description."' WHERE id='$_GET[categoryId]'";
         $sql = "SELECT*FROM tbl_category WHERE id='$_GET[id]' LIMIT 1";
         $query = mysqli_query($connect, $sql);
         while ($row = mysqli_fetch_array($query)) {
             unlink('CategoryImages/' . $row['hinhanh']);   
         }
     } else {
-        $sql_sua = "UPDATE tbl_category SET name ='" . $tendanhmuc . "' WHERE id='$_GET[categoryId]'";
+        $sql_sua = "UPDATE tbl_category SET code='". $code ."', name ='" . $tendanhmuc . "', description='".$description."' WHERE id='$_GET[categoryId]'";
     }
     mysqli_query($connect, $sql_sua);
     header('Location:../../AdminIndex.php?workingPage=category');
