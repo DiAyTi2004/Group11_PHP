@@ -9,7 +9,7 @@
                 </div>
                 <div class="modal-body">
                     <table border="1" width="100%" style="border-collapse: collapse;">
-
+                        
                         <tr>
                             <td class="row">
                                 <div class="mb-2 col">

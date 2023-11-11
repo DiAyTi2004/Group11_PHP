@@ -6,10 +6,10 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-0">
-                <form id="productForm" method="POST" action="pages/Order/OrderLogic.php?orderId=<?php echo $row['id']; ?>" enctype="multipart/form-data">
+                <form id="orderForm" method="POST" action="pages/Order/OrderLogic.php?orderId=<?php echo $row['id']; ?>" enctype="multipart/form-data">
                     <table border="1" width="100%" padding="10px" style="border-collapse: collapse;">
                         <p class="p-4 m-0">
-                            Bạn có chắc chắn muốn xóa đơn hàng này? <b><?php echo $row['fullname']; ?></b>
+                            Bạn có chắc chắn muốn xóa đơn hàng này? <b><?php echo $row['name']; ?></b>
                         </p>
                     </table>
 
