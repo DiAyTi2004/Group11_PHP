@@ -62,11 +62,9 @@ CREATE TABLE `tbl_dangky` (
   `diachi` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `chucvu` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Đang đổ dữ liệu cho bảng `tbl_dangky`
 --
-
 INSERT INTO `tbl_dangky` (`id_khachhang`, `hovaten`, `taikhoan`, `matkhau`, `sodienthoai`, `email`, `diachi`, `chucvu`) VALUES
 (1, 'Nguyễn Minh Tâm', 'maki', 'c4ca4238a0b923820dcc509a6f75849b', 569029353, 'mikuohandsome@gmail.com', '																																																																																																																																										13/C																																																																																																																			', 1),
 (9, 'Lê Văn Hùng', 'lehung', '202cb962ac59075b964b07152d234b70', 123456, 'lehung@gmail.com', 'Thanh Hóa', 0);
@@ -293,6 +291,10 @@ create table tbl_size (
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+insert into tbl_size values ('b5e8cf2d-8b4b-4ecf-a7c1-63e7a0e3d1a9', 'S40', 'Cỡ 40', 'Kích thước giày 40 thường được coi là phổ biến và phù hợp với nhiều người, nhưng sự thoải mái và vừa vặn có thể phụ thuộc vào kiểu giày cũng như cấu trúc chân của mỗi người.');
+insert into tbl_size values ('daa2e4bd-68cf-4a9e-bb69-89a7a6df7c12', 'S41', 'Cỡ 41', 'Size giày 41 (EU) thường là một lựa chọn phổ biến cho những người có chân lớn hơn, và nó cung cấp một số ưu điểm nhất định.');
+insert into tbl_size values ('fc7f0e9b-0c8d-46ab-b8d5-1e38c34c738d', 'S42', 'Cỡ 42', 'Size giày 42 (EU) là một lựa chọn lớn hơn và thường phù hợp với những người có chân to hoặc mong muốn sự thoải mái và không gian trong giày.');
+
 create table tbl_category (
   id varchar(36) primary key not null, 
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
@@ -300,8 +302,9 @@ create table tbl_category (
   category_image varchar(100),
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 INSERT INTO tbl_category (id, code, name, category_image , description) VALUES
-(100, 'abc', 'Dong ho thong ming','befit-b3-vang-1.jpg', 'test');
+('a4f18b20-7b62-4c88-8b03-3a9c1c2d5eab', 'NIKE', 'Nike','nikecategory.jpg', 'Nike là một trong những thương hiệu thể thao nổi tiếng toàn cầu, được biết đến với việc sản xuất và phân phối đa dạng sản phẩm thể thao và thời trang.');
 
 create table tbl_event (
   id varchar(36) primary key not null,
@@ -319,27 +322,28 @@ create table tbl_product (
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  quantity int,
   price float ,
   fake_price float ,
   category_id varchar(36) not null,
-  event_id varchar(36) not null,
-  foreign key (event_id) references tbl_event(id)
+  event_id varchar(36) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_user (
   id varchar(36) primary key not null,
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  user_image varchar(100),
   fullname varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   username varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   password varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  email varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  phonenumber int(11) NOT NULL,
+  chucvu int(11) NOT NULL,
   address LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_cart (
   id varchar(36) primary key not null,
-  user_id varchar(36) not null,
-  foreign key (user_id) references tbl_user(id)
+  user_id varchar(36) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_cart_detail (
@@ -347,9 +351,7 @@ create table tbl_cart_detail (
   product_id varchar(36) not null,
   quantity int,
   unit_price float ,
-  primary key (cart_id, product_id),
-  foreign key (cart_id) references tbl_cart(id),
-  foreign key (product_id) references tbl_product(id)
+  primary key (cart_id, product_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_status (
@@ -368,10 +370,7 @@ create table tbl_order (
   receive_phone varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   receive_address varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   delivery_cost float ,
-  description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  foreign key (user_id) references tbl_user(id),
-  foreign key (status_id) references tbl_status(id),
-  foreign key (payment_type_id) references tbl_payment_type(id)
+  description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_order_detail (
@@ -379,9 +378,7 @@ create table tbl_order_detail (
   product_id varchar(36) not null,
   quantity int,
   unit_price float ,
-  primary key (order_id, product_id),
-  foreign key (order_id) references tbl_order(id),
-  foreign key (product_id) references tbl_product(id)
+  primary key (order_id, product_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_product_image (
@@ -389,15 +386,12 @@ create table tbl_product_image (
   product_id varchar(36) not null,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   content varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  main_image bit ,
-  foreign key (product_id) references tbl_product(id)
+  main_image bit
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_product_size (
   product_id varchar(36) not null,
   size_id varchar(36) not null,
   quantity int,
-  primary key (product_id, size_id),
-  foreign key (product_id) references tbl_product(id),
-  foreign key (size_id) references tbl_size(id)
+  primary key (product_id, size_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+.hinhanh {
+  width: 150px;
+  height: 150px;
+}
+
 .clear {
   clear: both;
 }

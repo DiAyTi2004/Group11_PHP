@@ -14,15 +14,6 @@ table {
   border-radius: 10px;
 }
 
-/* #loading {
-  border: 3px solid white;
-  border-top-color: #000;
-  border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
-  animation: spin 1s linear infinite;
-  margin: 2rem auto 0 auto;
-} */
 
 @keyframes spin {
   to {
@@ -31,6 +22,10 @@ table {
 }
 
 .container {
+  width: 100%;
+}
+
+.table-container {
   width: 100%;
 }
 
@@ -61,7 +56,7 @@ table {
   text-align: center;
 }
 
-.table-head>th {
+.table-head > th {
   white-space: nowrap;
   padding: 12px;
   text-align: center;
@@ -164,16 +159,6 @@ th {
   color: white;
 }
 
-/* input[type="text"],
-input[type="number"],
-textarea {
-    width: 100%;
-    padding: 8px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-} */
-
 .form-check-label {
   display: block;
 }
@@ -197,31 +182,4 @@ option {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
-}
-
-.tensanpham {
-  width: 100px;
-  height: 150px;
-  text-align: center;
-}
-
-.hinhanh {
-  width: 150px;
-  height: 150px;
-}
-
-.giasanpham {
-  width: 150px;
-  text-align: center;
-}
-
-
-.imageInPopup {
-  width: 100%;
-  height: auto;
-}
-
-.productSizeButton{
-  color: white;
-  text-decoration: none;
 }

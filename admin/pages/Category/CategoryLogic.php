@@ -32,7 +32,6 @@ if (isset($_POST['themdanhmuc'])) {
     
     if (isset($_FILES['hinhanh'])) {
         if ($file['type'] == 'image/jpeg' || $file['type'] == 'imgae/jpg' || $file['type'] == 'image/png') {
-
             move_uploaded_file($hinhanh_tmp, 'CategoryImages/' . $hinhanh);
             $categoryId =  generateUuid();
             $sql_themdanhmuc = "INSERT INTO tbl_category(id,code,name,category_image,description) 

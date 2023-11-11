@@ -1,62 +1,71 @@
 <?php
 include "../../../common/config/Connect.php";
-$tensanpham = $_POST['tensanpham'];
-$masanpham = $_POST['masp'];
-$giasanpham = $_POST['giasp'];
-$soluong = $_POST['soluong'];
 //xử lý hình anh
-$file = $_FILES['hinhanh'];
-$hinhanh = $file['name'];
-$hinhanh_tmp = $_FILES['hinhanh']['tmp_name'];
-$hinhanhgio = time() . '_' . $hinhanh;
-$tomtat = $_POST['tomtat'];
-$noidung = $_POST['noidung'];
-$hienthi = $_POST['hienthi'];
-$danhmuc = $_POST['danhmuc'];
+// $file = $_FILES['hinhanh'];
+// $hinhanh = $file['name'];
+// $hinhanh_tmp = $_FILES['hinhanh']['tmp_name'];
+// $hinhanhgio = time() . '_' . $hinhanh;
+function generateUuid()
+{
+    $data = random_bytes(16);
+
+    // Set the version (4) and variant bits (2)
+    $data[6] = chr(ord($data[6]) & 0x0F | 0x40);
+    $data[8] = chr(ord($data[8]) & 0x3F | 0x80);
+
+    // Format the UUID string
+    $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+
+    return $uuid;
+}
 
 if (isset($_POST['addProduct'])) {
-    if (isset($_FILES['hinhanh'])) {
-        if ($file['type'] == 'image/jpeg' || $file['type'] == 'imgae/jpg' || $file['type'] == 'image/png') {
+    $name = $_POST['name'];
+    $code = $_POST['code'];
+    $price = $_POST['price'];
+    $description = $_POST['description'];
+    $categoryId = $_POST['categoryId'];
+    $eventId = $_POST['eventId'];
 
-            move_uploaded_file($hinhanh_tmp, 'ProductImages/' . $hinhanh);
+    $productId = generateUuid();
 
-            $sql_themsp = "INSERT INTO tbl_sanpham(tensanpham,masanpham,giasanpham,soluong,hinhanh,tomtat,noidung,trangthai,id_danhmuc) 
-                VALUE ('" . $tensanpham . "','" . $masanpham . "','" . $giasanpham . "','" . $soluong . "','" . $hinhanh . "','" . $tomtat . "','" . $noidung . "'," . $hienthi . ",'" . $danhmuc . "')";
-            mysqli_query($connect, $sql_themsp);
-            header('Location:../../AdminIndex.php?workingPage=product');
-        } else {
-            $hinhanh = '';
-            header('Location:../../AdminIndex.php?workingPage=product');
-        }
-    }
-} else if (isset($_POST['editProduct'])) {
-    if ($hinhanh != '') {
-        move_uploaded_file($hinhanh_tmp, 'ProductImages/' . $hinhanh);
-        $sql_sua = "UPDATE tbl_sanpham SET tensanpham='" . $tensanpham . "',masanpham='" . $masanpham . "',
-            giasanpham='" . $giasanpham . "',soluong='" . $soluong . "',hinhanh='" . $hinhanh . "',
-            tomtat='" . $tomtat . "',noidung='" . $noidung . "',trangthai='" . $hienthi . "',id_danhmuc='" . $danhmuc . "' WHERE id_sanpham='$_GET[productId]'";
+    $insertSql = "INSERT INTO tbl_product(id, code, name, description, price, category_id, event_id) 
+                        VALUES ('$productId', '$code', '$name', '$description', '$price', '$categoryId', '$eventId')";
+    mysqli_query($connect, $insertSql);
 
-        $sql = "SELECT*FROM tbl_sanpham WHERE id_sanpham='$_GET[productId]' LIMIT 1";
-        $query = mysqli_query($connect, $sql);
-        while ($row = mysqli_fetch_array($query)) {
-            unlink('ProductImages/' . $row['hinhanh']);
-        }
-    } else {
-        $sql_sua = "UPDATE tbl_sanpham SET tensanpham='" . $tensanpham . "',masanpham='" . $masanpham . "',
-            giasanpham='" . $giasanpham . "',soluong='" . $soluong . "',tomtat='" . $tomtat . "',
-            noidung='" . $noidung . "',trangthai='" . $hienthi . "',id_danhmuc='" . $danhmuc . "' WHERE id_sanpham='$_GET[productId]'";
-    }
-    mysqli_query($connect, $sql_sua);
     header('Location:../../AdminIndex.php?workingPage=product');
+} else if (isset($_POST['editProduct'])) {
+    $productId = $_GET['productId'];
+
+    $name = $_POST['name'];
+    $code = $_POST['code'];
+    $price = $_POST['price'];
+    $description = $_POST['description'];
+    $categoryId = $_POST['categoryId'];
+    $eventId = $_POST['eventId'];
+
+    $updateSql = "
+    UPDATE tbl_product 
+    SET 
+    code='$code', 
+    name='$name', 
+    description='$description', 
+    price='$price', 
+    category_id='$categoryId',
+    event_id='$eventId'
+    WHERE id='$productId';
+    ";
+
+    mysqli_query($connect, $updateSql);
+
+    header('Location:../../AdminIndex.php?workingPage=product');
+    var_dump($_POST);
+    echo "catched: " . $productId . ' ' . $name . ' ' . $code . ' ' . $price . ' ' . $description . ' ' . $categoryId . ' ' . $eventId . ' ' . $updateSql;
 } else if (isset($_POST['deleteProduct'])) {
-    $id = $_GET['productId'];
-    $sql = "SELECT *FROM tbl_sanpham WHERE id_sanpham = '$id'";
-    $query = mysqli_query($connect, $sql);
-    while ($row = mysqli_fetch_array($query)) {
-        unlink('ProductImages/' . $row['hinhanh']);
-    }
-    $sql_xoa = "DELETE FROM tbl_sanpham WHERE id_sanpham ='" . $id . "';";
-    mysqli_query($connect, $sql_xoa);
+    $productId = $_GET['productId'];
+
+    $deleteProductSql = "DELETE FROM tbl_product WHERE id ='" . $productId . "';";
+    mysqli_query($connect, $deleteProductSql);
 
     header('Location:../../AdminIndex.php?workingPage=product');
 }

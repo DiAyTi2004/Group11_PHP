@@ -1,17 +1,16 @@
 <link rel="stylesheet" href="./styles/ProductStyles.css">
 
 <?php
-$countAllSql = "SELECT * FROM tbl_giohang ,tbl_dangky  WHERE tbl_giohang.id_khachhang=tbl_dangky.id_khachhang ORDER BY id_cart DESC";
+$countAllSql = "SELECT * FROM tbl_order 
+inner join tbl_user on tbl_order.user_id  = tbl_user.id
+inner join tbl_status  on tbl_status.id = tbl_order.status_id
+inner join tbl_payment_type on tbl_order.payment_type_id =  tbl_payment_type.id ;";
 $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
+
 $pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
 $pageSize = isset($_GET['limit']) ? $_GET['limit'] : 5;
 
 $total_page = ceil($total_records / $pageSize);
-if ($pageIndex > $total_page) {
-    $pageIndex = $total_page;
-} else if ($pageIndex < 1) {
-    $pageIndex = 1;
-}
 
 $start = ($pageIndex - 1) * $pageSize;
 
@@ -24,16 +23,19 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
 $getTableDataSql = "";
 
 if (isset($_GET['search'])) {
-    $getTableDataSql = "SELECT * FROM tbl_giohang INNER JOIN tbl_dangky ON tbl_giohang.id_khachhang = tbl_dangky.id_khachhang 
+    $getTableDataSql = "SELECT * FROM tbl_order
+    inner join tbl_user on tbl_order.user_id  = tbl_user.id
     WHERE
-        tbl_dangky.hovaten LIKE N'%" . $search . "%'
-        OR tbl_giohang.code_cart LIKE N'%" . $search . "%'
-    ORDER BY tbl_giohang.id_cart DESC
+        tbl_order. LIKE N'%" . $search . "%'
+        OR tbl_payment_type.name  LIKE N'%" . $search . "%'
+    ORDER BY tbl_user.id DESC
     LIMIT $start, $pageSize";
 } else {
-    $getTableDataSql = "SELECT * FROM tbl_giohang ,tbl_dangky 
-    WHERE tbl_giohang.id_khachhang=tbl_dangky.id_khachhang 
-    ORDER BY id_cart    
+    $getTableDataSql = "SELECT * FROM tbl_order
+    inner join tbl_user on tbl_order.user_id  = tbl_user.id
+    inner join tbl_status  on tbl_status.id = tbl_order.status_id
+    inner join tbl_payment_type on tbl_order.payment_type_id =  tbl_payment_type.id 
+    ORDER BY tbl_order.id
     DESC 
     LIMIT $start, $pageSize";
 }
@@ -42,7 +44,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 ?>
 
 <div class="text-left flex justify-between">
-    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal_5">
+    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addOrder">
         <i class="fa-solid fa-plus"></i>
         Thêm đơn hàng
     </button>
@@ -60,19 +62,20 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
 <div class="container p-0">
     <table class="w-100">
-        <legend class="text-center"><b>Quản lý đơn hàng</b></legend>
+        <legend class="text-center"><b>Quản lý sản phẩm</b></legend>
 
         <thead class="table-head w-100">
             <tr class="table-heading">
-            <th class="noWrap">ID</th>
-            <th class="noWrap">Mã đơn hàng</th>
-            <th class="noWrap">Tên khách hàng</th>
-            <th class="noWrap">Địa chỉ</th>
-            <th class="noWrap">Tài khoản</th>
-            <th class="noWrap">Hình thức thanh toán</th>
-            <th class="noWrap">Điện thoại</th>
-            <th class="noWrap"> Tinh Trạng </th>
-            <th colspan="2">Quản lý </th>
+                <th class="noWrap">ID</th>
+                <th class="noWrap">Họ tên</th>
+                <th class="noWrap">Tài khoản</th>
+                <th class="noWrap">Hình thức thanh toán</th>
+                <th class="noWrap">Điện thoại nhận hàng</th>
+                <th class="noWrap">Địa chỉ nhận</th>
+                <th class="noWrap">Phí giao hàng</th>
+                <th class="noWrap">Tình trạng</th>
+                <th class="noWrap">Mô tả</th>
+                <th class="noWrap">Quản lý </th>
             </tr>
         </thead>
 
@@ -82,23 +85,39 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             while ($row = mysqli_fetch_array($tableData)) {
                 $displayOrder++;
             ?>
-                <td class="noWrap"><?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?></td>
-                <td class="noWrap"><?php echo $row['code_cart'] ?></td>
-                <td class="noWrap"><?php echo $row['hovaten'] ?></td>
-                <td class="noWrap"><?php echo $row['diachi'] ?></td>
-                <td class="noWrap"><?php echo $row['taikhoan'] ?></td>
-                <td class="noWrap"><?php echo $row['cart_payment'] ?></td>
-                <td class="noWrap"><?php echo $row['sodienthoai'] ?></td>
-                <td class="noWrap">
-                    <?php if ($row['cart_status'] == 1) {
-                        echo '<a href="modules/order/OrderLogic.php?code=' . $row['code_cart'] . '">Đơn hàng mới</a>';
-                    } else {
-                        echo 'Đã xem';
-                    }
-                    ?>
-                </td>
+                <tr>
                     <td>
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id_cart'];?>">
+                        <?php echo $displayOrder + ($pageIndex - 1) * $pageSize; ?>
+                    </td>
+                    <td class="tensanpham">
+                        <?php echo $row['fullname'] ?>
+                    </td>
+
+                    <td>
+                        <?php echo $row['username'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['name'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['username'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['receive_phone'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['receive_address'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['delivery_cost'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['description'] ?>
+                    </td>
+                    <td>
+
+
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-trash mr-1"></i>
                         </button>
                     </td>
@@ -117,9 +136,12 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <form action="" method="GET">
                     <label for="limitSelect">Rows per page:</label>
                     <select name="limit" id="limitSelect" onchange="updatePageAndLimit()">
-                        <option value="5" <?php if ($pageSize == 5) echo 'selected'; ?>>5</option>
-                        <option value="10" <?php if ($pageSize == 10) echo 'selected'; ?>>10</option>
-                        <option value="15" <?php if ($pageSize == 15) echo 'selected'; ?>>15</option>
+                        <option value="5" <?php if ($pageSize == 5)
+                                                echo 'selected'; ?>>5</option>
+                        <option value="10" <?php if ($pageSize == 10)
+                                                echo 'selected'; ?>>10</option>
+                        <option value="15" <?php if ($pageSize == 15)
+                                                echo 'selected'; ?>>15</option>
                     </select>
                 </form>
 
@@ -198,6 +220,11 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
     include "./pages/Order/OrderConfirmDelete.php";
+}
+?>
+<?php
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/Order/OrderLogic.php";
 }
 ?>
 

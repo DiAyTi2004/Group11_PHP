@@ -9,12 +9,6 @@ $pageSize = isset($_GET['limit']) ? $_GET['limit'] : 5;
 
 $total_page = ceil($total_records / $pageSize);
 
-if ($pageIndex > $total_page) {
-    $pageIndex = $total_page;
-} else if ($pageIndex < 1) {
-    $pageIndex = 1;
-}
-
 $start = ($pageIndex - 1) * $pageSize;
 
 $search = '';
@@ -61,7 +55,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 </div>
 
 <div class="container p-0">
-    <table>
+    <table class="w-100">
         <legend class="text-center"><b>Quản lý sự kiện</b></legend>
 
         <thead class="table-head w-100">
@@ -95,7 +89,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo $row['name'] ?>
                     </td>
                     <td class="banner">
-                    <img  src="pages/Event/EventImages/<?php echo $row['banner'] ?> " width="40%">
+                        <img src="pages/Event/EventImages/<?php echo $row['banner'] ?> " width="40%">
                     </td>
                     <td class="discount">
                         <?php echo $row['discount'] ?>
@@ -122,6 +116,15 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 </tr>
             <?php
             }
+            if($total_records == 0){
+                ?>
+                    <tr>
+                        <td colspan="9">
+                            <?php echo "Hiện không có sự kiện nào!"?>
+                        </td>
+                    </tr>
+                <?php
+                }
             ?>
         </tbody>
 
