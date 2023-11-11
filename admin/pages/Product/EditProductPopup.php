@@ -102,13 +102,13 @@
                         <tr>
                             <td class="row">
                                 <div class="col-6">
-                                    <p>Các kích cỡ của sản phẩm:</p>
+                                    <p><b>Các kích cỡ của sản phẩm:</b></p>
                                 </div>
                                 <div class="col-6">
                                     <button type="button" class="btn btn-primary h-100 w-100 flex-center">
                                         <i class="fa-solid fa-pen-to-square text-white mr-1"></i>
                                         <a class='text-white productSizeButton color-white display-block h-100 w-100' href="?workingPage=productSize&productId=<?php echo $row['id']; ?>">
-                                            Chỉnh sửa các cỡ của sản phẩm
+                                            Chỉnh sửa các kích cỡ mà sản phẩm có
                                         </a>
                                     </button>
                                 </div>

@@ -2,15 +2,22 @@
 
 <?php
 $productId = '';
+$productName = "";
+$productCode = "";
 
 if (isset($_GET['productId'])) {
     $productId = $_GET['productId'];
 }
 
-$currentProductSql =  "SELECT * FROM tbl_product WHERE id = $productId;";
+$getTableDataSql = "SELECT *FROM tbl_product WHERE id = '$productId'";
+$tableData = mysqli_query($connect, $getTableDataSql);
+while ($row = mysqli_fetch_array($tableData)) {
+    $productName = $row['name'];
+    $productCode = $row['code'];
+}
+?>
 
-$currentProduct = mysqli_query($connect, $currentProductSql);
-$currentProductData = mysqli_fetch_assoc($currentProduct);
+<?php
 
 $countAllSql = "SELECT * FROM tbl_product_size";
 $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
@@ -38,8 +45,8 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 </div>
 
 <div class="container p-0">
-    <table>
-        <legend class="text-center"><b>Quản lý kích cỡ của sản phẩm <?php echo $currentProductData['name']; ?></b></legend>
+    <table class="w-100">
+        <legend class="text-center"><b>Quản lý kích cỡ của sản phẩm <?php echo $productName; ?> <?php if (trim($productCode) != "") echo '(Mã SP: ' . trim($productCode) . ')'; ?> </b></legend>
 
         <thead class="table-head w-100">
             <tr class="table-heading">
@@ -54,8 +61,11 @@ $tableData = mysqli_query($connect, $getTableDataSql);
         <tbody class="table-body">
             <?php
             $displayOrder = 0;
+            $hasData = false;
+
             while ($row = mysqli_fetch_array($tableData)) {
                 $displayOrder++;
+                $hasData = true;
             ?>
                 <tr>
                     <td>
@@ -83,6 +93,15 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 </tr>
             <?php
             }
+            if (!$hasData) {
+            ?>
+                <tr>
+                    <td colspan="5">
+                        Chưa có dữ liệu
+                    </td>
+                </tr>
+            <?php
+            }
             ?>
         </tbody>
 
@@ -105,12 +124,10 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     function updatePageAndLimit() {
                         const selectedLimit = document.getElementById("limitSelect").value;
 
-                        // Tạo một URL mới với giá trị page và limit mới
                         const url = new URL(window.location.href);
                         url.searchParams.set("page", "1"); // Đặt page thành 1
                         url.searchParams.set("limit", selectedLimit);
 
-                        // Chuyển hướng đến URL mới
                         window.location.href = url.toString();
                     }
                 </script>
