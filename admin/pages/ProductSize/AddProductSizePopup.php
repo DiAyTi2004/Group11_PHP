@@ -26,16 +26,16 @@
                             <td class="row">
                                 <div class="mb-2 col">
                                     <label for="sizeId" class="form-label">Size</label>
-                                    <select name="sizeId" class="form-select" aria-label="Default select example">
+                                    <select name="sizeId" class="form-select" required>
                                         <option value="">Chưa chọn</option>
                                         <?php
                                         $getAllsizeSql = "SELECT * FROM tbl_size WHERE id NOT IN (SELECT size_id FROM tbl_product_size WHERE product_id = '$productId');";
                                         $sizeData = mysqli_query($connect, $getAllsizeSql);
 
-                                        while ($row_danhmuc = mysqli_fetch_array($sizeData)) {
+                                        while ($rowSize = mysqli_fetch_array($sizeData)) {
                                         ?>
-                                            <option value="<?php echo $row_danhmuc['id'] ?>">
-                                                <?php echo $row_danhmuc['name'] ?>
+                                            <option value="<?php echo $rowSize['id'] ?>">
+                                                <?php echo $rowSize['name'] ?>
                                             </option>
                                         <?php
                                         }

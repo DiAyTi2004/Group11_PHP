@@ -6,17 +6,17 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-0">
-                <form id="eventForm" method="POST" action="pages/Event/EventLogic.php?id=<?php echo $row['id']; ?>" enctype="multipart/form-data">
+                <form id="eventForm" method="POST" action="pages/ProductSize/ProductSizeLogic.php?productId=<?php echo $row['product_id']; ?>&sizeId=<?php echo $row['size_id']; ?>" enctype="multipart/form-data">
                     <table border="1" width="100%" padding="10px" style="border-collapse: collapse;">
                         <p class="p-4 m-0">
-                            Bạn có chắc chắn muốn kích thước này của sản phẩm? <b><?php echo $row['name']; ?></b>
+                            Bạn có chắc chắn muốn kích thước này của sản phẩm?
                         </p>
                     </table>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Hủy</button>
 
-                        <button type="submit" class="btn btn-primary" name="deleteEvent">Xác nhận</button>
+                        <button type="submit" class="btn btn-primary" name="deleteProductSize">Xác nhận</button>
                     </div>
                 </form>
             </div>

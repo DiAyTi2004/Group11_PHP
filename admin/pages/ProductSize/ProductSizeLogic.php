@@ -9,38 +9,26 @@ if (isset($_POST['addProductSize'])) {
     $addProductSizeSQL = "INSERT INTO tbl_product_size(product_id, size_id, quantity) 
                 VALUES ('" . $productId . "','" . $sizeId . "','" . $quantity . "')";
     mysqli_query($connect, $addProductSizeSQL);
-    echo "catched";
 }
 
 if (isset($_POST['editProductSize'])) {
-    if ($banner != '') {
-        $ProductSizeId = $_GET['id'];
-        $description_img = $_POST['des_img'];
-        if ($hinhanh != '') {
-            move_uploaded_file($hinhanh_tmp, 'ProductSizeImages/' . $hinhanh);
+    $quantity = $_POST['quantity'];
+    $productId = $_GET['productId'];
+    $newSizeId = $_POST['sizeId'];
+    $oldSizeId = $_GET['sizeId'];
 
-            $sql_update_image = "UPDATE tbl_product_image SET description='$description_img', content='$hinhanh' WHERE id='$ProductSizeId'";
-            mysqli_query($connect, $sql_update_image);
-        }
+    $updateProductSizeSQL = "UPDATE tbl_product_size SET quantity = '$quantity', size_id = '$newSizeId' WHERE product_id = '$productId' AND size_id = '$oldSizeId'";
 
-        $sql_editProductSize = "UPDATE tbl_ProductSize SET code='" . $code . "', name='" . $name . "', banner='" . $banner . "', discount='" . $discount . "', start_date='" . $start_date . "',end_date='" . $end_date . "',
-        description='" . $description . "' WHERE id='$_GET[id]'";
-        $sql = "SELECT*FROM tbl_ProductSize WHERE id='$_GET[id]'";
-        $query = mysqli_query($connect, $sql);
-        while ($row = mysqli_fetch_array($query)) {
-            unlink('ProductSizeImages/' . $row['banner']);
-        }
-    } else {
-        $sql_editProductSize = "UPDATE tbl_ProductSize SET code='" . $code . "', name='" . $name . "', banner='" . $banner . "', discount='" . $discount . "', start_date='" . $start_date . "',end_date='" . $end_date . "',
-        description='" . $description . "' WHERE id='$_GET[id]'";
-    }
-    mysqli_query($connect, $sql_editProductSize);
+    mysqli_query($connect, $updateProductSizeSQL);
 }
 
 if (isset($_POST['deleteProductSize'])) {
-    $id = $_GET['id'];
-    $sql_deleteProductSize = "DELETE FROM tbl_product_size WHERE id ='" . $id . "';";
-    mysqli_query($connect, $sql_deleteProductSize);
+    $productId = $_GET['productId'];
+    $sizeId = $_GET['sizeId'];
+
+    $deleteProductSizeSQL = "DELETE FROM tbl_product_size WHERE product_id ='" . $productId . "' AND size_id = '$sizeId';";
+
+    mysqli_query($connect, $deleteProductSizeSQL);
 }
 
-// header('Location:../../AdminIndex.php?workingPage=ProductSize');
+header('Location:../../AdminIndex.php?workingPage=productSize');

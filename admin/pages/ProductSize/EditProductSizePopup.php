@@ -26,17 +26,16 @@
                             <td class="row">
                                 <div class="mb-2 col">
                                     <label for="sizeId" class="form-label">Size</label>
-                                    <select name="sizeId" class="form-select" aria-label="Default select example">
-                                        <option value="">Chưa chọn</option>
+                                    <select name="sizeId" class="form-select" required>
                                         <?php
-                                        $getAllsizeSql = "SELECT * FROM tbl_size WHERE id NOT IN (SELECT size_id FROM tbl_product_size WHERE product_id = '$productId');";
+                                        $getAllsizeSql = "SELECT * FROM tbl_size WHERE id = '$row[size_id]' OR id NOT IN (SELECT size_id FROM tbl_product_size WHERE product_id = '$productId');";
                                         $sizeData = mysqli_query($connect, $getAllsizeSql);
 
-                                        while ($row_danhmuc = mysqli_fetch_array($sizeData)) {
-                                            $selected = ($row_danhmuc['id'] == $row['size_id']) ? 'selected' : '';
+                                        while ($rowSize = mysqli_fetch_array($sizeData)) {
+                                            $selected = ($rowSize['id'] == $row['size_id']) ? 'selected' : '';
                                         ?>
-                                            <option value="<?php echo $row_danhmuc['id'] ?>" <?php echo $selected; ?>>
-                                                <?php echo $row_danhmuc['name'] ?>
+                                            <option value="<?php echo $rowSize['id'] ?>" <?php echo $selected; ?>>
+                                                <?php echo $rowSize['name'] ?>
                                             </option>
                                         <?php
                                         }
@@ -46,7 +45,7 @@
 
                                 <div class="mb-2 col">
                                     <label for="quantity" class="form-label">Số lượng còn</label>
-                                    <input name="quantity" type="number" class="form-control" id="quantity" value="<?php $row['quantity'] ?>">
+                                    <input name="quantity" type="number" class="form-control" id="quantity" value="<?php echo $row['quantity'] ?>">
                                 </div>
                             </td>
                         </tr>
@@ -54,8 +53,8 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary" name="editProductSize">Sửa sản phẩm</button>
+                    <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary" name="editProductSize">Cập nhật</button>
                 </div>
             </div>
         </form>
