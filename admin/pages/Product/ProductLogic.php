@@ -23,81 +23,49 @@ if (isset($_POST['addProduct'])) {
     $name = $_POST['name'];
     $code = $_POST['code'];
     $price = $_POST['price'];
-    $quantity = $_POST['quantity'];
-    $description = $_POST['des'];
-    $categoryname = $_POST['categoryname'];
+    $description = $_POST['description'];
+    $categoryId = $_POST['categoryId'];
+    $eventId = $_POST['eventId'];
 
-    // Handle image upload
-    if (isset($_FILES['hinhanh'])) {
-        $file = $_FILES['hinhanh'];
-        if ($file['type'] == 'image/jpeg' || $file['type'] == 'image/jpg' || $file['type'] == 'image/png') {
-            $hinhanh_tmp = $file['tmp_name'];
-            $hinhanh = time() . '_' . $file['name'];
-            move_uploaded_file($hinhanh_tmp, 'ProductImages/' . $hinhanh);
+    $productId = generateUuid();
 
-            // Generate UUIDs for product and image
-            $productId = generateUuid();
-            $imageId = generateUuid();
-
-            // Insert data into tbl_product
-            $sql_insert_product = "INSERT INTO tbl_product(id, code, name, description, quantity, price, category_id, event_id) 
-                                   VALUES ('$productId', '$code', '$name', '$description', '$quantity', '$price', '$categoryId', '$eventId')";
-            mysqli_query($connect, $sql_insert_product);
-
-            // Insert data into tbl_product_image
-            $sql_insert_product_image = "INSERT INTO tbl_product_image(id, product_id, description, content, main_image) 
-                                        VALUES ('$imageId', '$productId', '$description', '$hinhanh', '1')";
-            mysqli_query($connect, $sql_insert_product_image);
-
-            // Insert data into tbl_product_size (adjust with actual size data)
-            $sizeId = generateUuid();
-            $sql_insert_product_size = "INSERT INTO tbl_product_size(product_id, size_id, quantity) 
-                                       VALUES ('$productId', '$sizeId', '$quantity')";
-            mysqli_query($connect, $sql_insert_product_size);
-        } else {
-            $hinhanh = '';
-        }
-    }
+    $insertSql = "INSERT INTO tbl_product(id, code, name, description, price, category_id, event_id) 
+                        VALUES ('$productId', '$code', '$name', '$description', '$price', '$categoryId', '$eventId')";
+    mysqli_query($connect, $insertSql);
 
     header('Location:../../AdminIndex.php?workingPage=product');
 } else if (isset($_POST['editProduct'])) {
-    $productId = $_GET['productId'];  // Assuming productId is passed through GET parameter
-    $description_img = $_POST['des_img'];
-    // Process image upload if a new image is provided
-    if ($hinhanh != '') {
-        move_uploaded_file($hinhanh_tmp, 'ProductImages/' . $hinhanh);
+    $productId = $_GET['productId'];
 
-        // Update tbl_product_image
-        $sql_update_image = "UPDATE tbl_product_image SET description='$description_img', content='$hinhanh' WHERE product_id='$productId'";
-        mysqli_query($connect, $sql_update_image);
-        header('Location: ../../AdminIndex.php?workingPage=product');
-    }
+    $name = $_POST['name'];
+    $code = $_POST['code'];
+    $price = $_POST['price'];
+    $description = $_POST['description'];
+    $categoryId = $_POST['categoryId'];
+    $eventId = $_POST['eventId'];
 
-    // Update tbl_product
-    $sql_sua_product = "UPDATE tbl_product SET 
-        code='$code', 
-        name='$name', 
-        description='$description', 
-        quantity='$quantity', 
-        price='$price', 
-        category_id='$categoryId'
-        WHERE id='$productId'";
-    mysqli_query($connect, $sql_sua_product);
+    $updateSql = "
+    UPDATE tbl_product 
+    SET 
+    code='$code', 
+    name='$name', 
+    description='$description', 
+    price='$price', 
+    category_id='$categoryId',
+    event_id='$eventId'
+    WHERE id='$productId';
+    ";
 
-    // Update tbl_product_size (adjust with actual size data)
-    $sql_sua_size = "UPDATE tbl_product_size SET quantity='$quantity' WHERE product_id='$productId'";
-    mysqli_query($connect, $sql_sua_size);
+    mysqli_query($connect, $updateSql);
 
-    header('Location: ../../AdminIndex.php?workingPage=product');
+    header('Location:../../AdminIndex.php?workingPage=product');
+    var_dump($_POST);
+    echo "catched: " . $productId . ' ' . $name . ' ' . $code . ' ' . $price . ' ' . $description . ' ' . $categoryId . ' ' . $eventId . ' ' . $updateSql;
 } else if (isset($_POST['deleteProduct'])) {
-    $id = $_GET['productId'];
-    $sql = "SELECT *FROM tbl_product WHERE id = '$productId'";
-    $query = mysqli_query($connect, $sql);
-    while ($row = mysqli_fetch_array($query)) {
-        unlink('ProductImages/' . $row['hinhanh']);
-    }
-    $sql_xoa = "DELETE FROM tbl_product WHERE id_sanpham ='" . $productId . "';";
-    mysqli_query($connect, $sql_xoa);
+    $productId = $_GET['productId'];
+
+    $deleteProductSql = "DELETE FROM tbl_product WHERE id ='" . $productId . "';";
+    mysqli_query($connect, $deleteProductSql);
 
     header('Location:../../AdminIndex.php?workingPage=product');
 }

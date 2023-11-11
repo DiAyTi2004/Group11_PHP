@@ -1,14 +1,15 @@
 <div class="flex-grow-1">
-    <div class="container my-4 appCard   <?php if (!isset($_GET['workingPage'])) echo "bg-transparent"; ?>">
+    <div class="container my-4 appCard <?php if (!isset($_GET['workingPage'])) echo "bg-transparent"; ?>">
         <?php
         if ($workingPage == 'category') {
             include("./pages/Category/CategoryIndex.php");
             include("./pages/Category/AddCategoryPopup.php");
+        } else if ($workingPage == 'productSize') {
+            include("./pages/ProductSize/ProductSizeIndex.php");
+            include("./pages/ProductSize/AddProductSizePopup.php");
         } else if ($workingPage == 'product') {
             include("./pages/Product/ProductIndex.php");
             include("./pages/Product/AddProductPopup.php");
-        } else if ($workingPage == 'event' && $query == 'edit') {
-            include("./pages/Event/EditEventPopup.php");
         } else if ($workingPage == 'event') {
             include("./pages/Event/EventIndex.php");
             include("./pages/Event/AddEventPopup.php");
