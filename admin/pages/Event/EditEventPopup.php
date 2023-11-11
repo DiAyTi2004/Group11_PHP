@@ -28,7 +28,7 @@
                                     <label for="exampleFormControlInput1" class="form-label">
                                         Banner
                                     </label>
-                                    <input type="file" name="banner" class="form-control" id="exampleFormControlInput1">
+                                    <input type="file" name="banner" class="form-control" id="exampleFormControlInput1" value="a">
                                 </div>
                                 <div class="col-6" >
                                     <img class="imageInPopup" style="max-width:100%" src="pages/Event/EventImages/<?php echo $row['banner'] ?>" alt="">
@@ -50,11 +50,11 @@
                             <td class="row">
                                 <div class="mb-2 col">
                                     <label for="date" class="form-label">Ngày bắt đầu</label>
-                                    <input name="start_date" type="date" value="<?php echo $row['start_date'] ?>" class="form-control" id="datepicker">
+                                    <input name="start_date" type="datetime-local" value="<?php echo $row['start_date'] ?>" class="form-control" id="datepicker_start">
                                 </div>
                                 <div class="mb-2 col">
                                     <label for="date" class="form-label">Ngày kết thúc</label>
-                                    <input name="end_date" type="date" value="<?php echo $row['end_date'] ?>" class="form-control" id="datepicker">
+                                    <input name="end_date" type="datetime-local" value="<?php echo $row['end_date'] ?>" class="form-control" id="datepicker_end">
                                 </div>
                             </td>
                         </tr>
