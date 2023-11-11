@@ -1,5 +1,6 @@
 <?php
 include "../../../common/config/Connect.php";
+$productId = "";
 
 if (isset($_POST['addProductSize'])) {
     $quantity = $_POST['quantity'];
@@ -31,4 +32,4 @@ if (isset($_POST['deleteProductSize'])) {
     mysqli_query($connect, $deleteProductSizeSQL);
 }
 
-header('Location:../../AdminIndex.php?workingPage=productSize');
+header("Location: ../../AdminIndex.php?workingPage=productSize?productId=" . $productId);
