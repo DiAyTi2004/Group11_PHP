@@ -76,7 +76,7 @@
                     <li class="flex-center">
                         <a href="AdminIndex.php?workingPage=size" class="nav-link <?php getHeaderTextColor('size'); ?> flex-column flex-center">
                         <i class="fa-solid fa-ruler-horizontal text-white mb-2"></i>
-                            kích cỡ
+                            Kích cỡ
                         </a>
                     </li>
                     <li class="flex-center">

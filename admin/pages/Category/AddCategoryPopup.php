@@ -12,6 +12,10 @@
                         <tr>
                             <td class="row">
                                 <div class="mb-2 col">
+                                    <label for="exampleFormControlInput1" class="form-label">Code</label>
+                                    <input name="code" type="text" class="form-control" id="exampleFormControlInput1">
+                                </div>
+                                <div class="mb-2 col">
                                     <label for="exampleFormControlInput1" class="form-label">Tên danh mục</label>
                                     <input name="tendanhmuc" type="text" class="form-control" id="exampleFormControlInput1">
                                 </div>
@@ -21,8 +25,8 @@
                                     <input name="hinhanh" type="file" class="form-control" id="inputGroupFile02">
                                 </div>
                                 <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">ID</label>
-                                    <input name="id" type="text" class="form-control" id="exampleFormControlInput1">
+                                    <label for="exampleFormControlInput1" class="form-label">Miêu tả</label>
+                                    <input name="description" type="text" class="form-control" id="exampleFormControlInput1">
                                 </div>
 
                             </td>
