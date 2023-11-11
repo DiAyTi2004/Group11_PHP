@@ -65,10 +65,14 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
         <thead class="table-head w-100">
             <tr class="table-heading">
+                <th class="noWrap">STT</th>
                 <th class="noWrap">ID</th>
+                <th class="noWrap">Code</th>
                 <th class="noWrap">Tên danh mục</th>
                 <th class="noWrap">Hình ảnh </th>
+                <th class="noWrap">Miêu tả</th>
                 <th class="noWrap">Quản lý</th>
+                
             </tr>
         </thead>
 
@@ -79,8 +83,15 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 $displayOrder++;
             ?>
                 <tr>
+                    <td >
+                    <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
+                    </td>
                     <td class="id">
                         <?php echo $row['id'] ?>
+                    </td>
+
+                    <td>
+                        <?php echo $row['code'] ?>
                     </td>
 
                     <td class="tendanhmuc">
@@ -89,6 +100,9 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
                     <td class="hinhanh">
                         <img src="pages/Category/CategoryImages/<?php echo $row['category_image'] ?> " width="100%">
+                    </td>
+                    <td>
+                        <?php echo $row['description'] ?>
                     </td>
                     <td>
                         <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editCategory<?php echo $row['id']; ?>">

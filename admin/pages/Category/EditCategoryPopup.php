@@ -21,6 +21,16 @@
                                 </div>
                                 
                             </td>
+                            <td class="row">
+                                <div class="mb-2 col">
+                                    <label for="exampleFormControlInput1" class="form-label">
+                                        Code
+                                    </label>
+                                    <input type="text" value="<?php echo $row['code'] ?>" name="code" class="form-control" id="exampleFormControlInput1">
+
+                                </div>
+                                
+                            </td>
                         </tr>
 
                         <tr>
@@ -36,6 +46,7 @@
                                     <input type="file" name="hinhanh" class="form-control" id="exampleFormControlInput1">
                                 </div>
                             </td>
+                            
                         </tr>
 
                         
@@ -47,6 +58,17 @@
                                         ID
                                     </label>
                                     <input type="text" name="id" value="<?php echo $row['id'] ?>" class="form-control" id="exampleFormControlInput1">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="row">
+                               
+                                <div class="mb-2 col">
+                                    <label for="exampleFormControlInput1" class="form-label">
+                                        Miêu tả
+                                    </label>
+                                    <input type="text" name="description" value="<?php echo $row['description'] ?>" class="form-control" id="exampleFormControlInput1">
                                 </div>
                             </td>
                         </tr>

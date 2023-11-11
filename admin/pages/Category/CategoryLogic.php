@@ -1,11 +1,14 @@
 <?php
 include "../../../common/config/Connect.php";
 $tendanhmuc = $_POST['tendanhmuc'];
+$code=$_POST['code'];
+$description=$_POST['description'];
 //xử lý hình anh
 $file = $_FILES['hinhanh'];
 $hinhanh = $file['name'];
 $hinhanh_tmp = $_FILES['hinhanh']['tmp_name'];
 $hinhanhgio = time() . '_' . $hinhanh;
+
 
 
 
@@ -26,15 +29,14 @@ function generateUuid()
 // Example usage
 
 if (isset($_POST['themdanhmuc'])) {
-    $id=$_POST['id'];
     
     if (isset($_FILES['hinhanh'])) {
         if ($file['type'] == 'image/jpeg' || $file['type'] == 'imgae/jpg' || $file['type'] == 'image/png') {
 
             move_uploaded_file($hinhanh_tmp, 'CategoryImages/' . $hinhanh);
             $categoryId =  generateUuid();
-            $sql_themdanhmuc = "INSERT INTO tbl_category(id,name,category_image) 
-                VALUE ('" . $categoryId . "' , '" . $tendanhmuc . "','" . $hinhanh . "' )";
+            $sql_themdanhmuc = "INSERT INTO tbl_category(id,code,name,category_image,description) 
+                VALUE ('" . $categoryId . "' ,'". $code ."' ,'" . $tendanhmuc . "','" . $hinhanh . "', '". $description. "' )";
             mysqli_query($connect, $sql_themdanhmuc);
             header('Location:../../AdminIndex.php?workingPage=category');
         } else {
@@ -45,7 +47,7 @@ if (isset($_POST['themdanhmuc'])) {
 } else if (isset($_POST['suadanhmuc'])) {
     if ($hinhanh != '') {
         move_uploaded_file($hinhanh_tmp, 'CategoryImages/' . $hinhanh);
-        $sql_sua = "UPDATE tbl_category SET name='" . $tendanhmuc . "',category_image='" . $hinhanh . "' WHERE id='$_GET[categoryId]'";
+        $sql_sua = "UPDATE tbl_category SET code='" .$code. "', name='" . $tendanhmuc . "',category_image='" . $hinhanh . "', description='".$description."' WHERE id='$_GET[categoryId]'";
         $sql = "SELECT*FROM tbl_category WHERE id='$_GET[id]' LIMIT 1";
         $query = mysqli_query($connect, $sql);
         while ($row = mysqli_fetch_array($query)) {
