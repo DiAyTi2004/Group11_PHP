@@ -23,7 +23,6 @@ if (isset($_POST['addProduct'])) {
     $name = $_POST['name'];
     $code = $_POST['code'];
     $price = $_POST['price'];
-    $fake_price = $_POST['fake_price'];
     $quantity = $_POST['quantity'];
     $description = $_POST['des'];
     $categoryname = $_POST['categoryname'];
@@ -41,8 +40,8 @@ if (isset($_POST['addProduct'])) {
             $imageId = generateUuid();
 
             // Insert data into tbl_product
-            $sql_insert_product = "INSERT INTO tbl_product(id, code, name, description, quantity, price, fake_price, category_id, event_id) 
-                                   VALUES ('$productId', '$code', '$name', '$description', '$quantity', '$price', '$fake_price', '$categoryId', '$eventId')";
+            $sql_insert_product = "INSERT INTO tbl_product(id, code, name, description, quantity, price, category_id, event_id) 
+                                   VALUES ('$productId', '$code', '$name', '$description', '$quantity', '$price', '$categoryId', '$eventId')";
             mysqli_query($connect, $sql_insert_product);
 
             // Insert data into tbl_product_image
@@ -55,15 +54,12 @@ if (isset($_POST['addProduct'])) {
             $sql_insert_product_size = "INSERT INTO tbl_product_size(product_id, size_id, quantity) 
                                        VALUES ('$productId', '$sizeId', '$quantity')";
             mysqli_query($connect, $sql_insert_product_size);
-
-            // Redirect after successful insertion
-            header('Location:../../AdminIndex.php?workingPage=product');
         } else {
-            // Handle case where file type is not supported
             $hinhanh = '';
-            header('Location:../../AdminIndex.php?workingPage=product');
         }
     }
+
+    header('Location:../../AdminIndex.php?workingPage=product');
 } else if (isset($_POST['editProduct'])) {
     $productId = $_GET['productId'];  // Assuming productId is passed through GET parameter
     $description_img = $_POST['des_img'];
@@ -84,7 +80,6 @@ if (isset($_POST['addProduct'])) {
         description='$description', 
         quantity='$quantity', 
         price='$price', 
-        fake_price = '$fake_price',
         category_id='$categoryId'
         WHERE id='$productId'";
     mysqli_query($connect, $sql_sua_product);
@@ -94,8 +89,7 @@ if (isset($_POST['addProduct'])) {
     mysqli_query($connect, $sql_sua_size);
 
     header('Location: ../../AdminIndex.php?workingPage=product');
-}
- else if (isset($_POST['deleteProduct'])) {
+} else if (isset($_POST['deleteProduct'])) {
     $id = $_GET['productId'];
     $sql = "SELECT *FROM tbl_product WHERE id = '$productId'";
     $query = mysqli_query($connect, $sql);
