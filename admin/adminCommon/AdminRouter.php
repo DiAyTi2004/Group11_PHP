@@ -28,6 +28,12 @@
             include("./pages/Status/AddStatusPopup.php");
             include("./pages/Status/EditStatusPopup.php");
             include("./pages/Status/ConfirmDeleteStatusPopup.php");
+        }
+        else if ($workingPage == 'size') {
+            include("./pages/Size/SizeIndex.php");
+            include("./pages/Size/AddSizePopup.php");
+            include("./pages/Size/EditSizePopup.php");
+            include("./pages/Size/ConfirmDeleteSizePopup.php");
         } else if ($workingPage == 'dangxuat') {
             include("Login.php");
         } else {
