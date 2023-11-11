@@ -80,7 +80,7 @@
                         </a>
                     </li>
                     <li class="flex-center">
-                        <a href="AdminIndex.php?workingPage=payment" class="nav-link <?php getHeaderTextColor('payment'); ?> flex-column flex-center">
+                        <a href="AdminIndex.php?workingPage=payment_type" class="nav-link <?php getHeaderTextColor('payment_type'); ?> flex-column flex-center">
                         <i class="fa-solid fa-money-check-dollar text-white mb-2"></i>
                             Thanh toán
                         </a>

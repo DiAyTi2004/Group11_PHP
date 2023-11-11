@@ -34,6 +34,12 @@
             include("./pages/Size/AddSizePopup.php");
             include("./pages/Size/EditSizePopup.php");
             include("./pages/Size/ConfirmDeleteSizePopup.php");
+        }
+        else if ($workingPage == 'payment_type') {
+            include("./pages/PaymentType/PaymentTypeIndex.php");
+            include("./pages/PaymentType/AddPaymentTypePopup.php");
+            include("./pages/PaymentType/EditPaymentTypePopup.php");
+            include("./pages/PaymentType/ConfirmDeletePaymentTypePopup.php");
         } else if ($workingPage == 'dangxuat') {
             include("Login.php");
         } else {
