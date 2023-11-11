@@ -19,7 +19,7 @@ while ($row = mysqli_fetch_array($tableData)) {
 
 <?php
 
-$countAllSql = "SELECT * FROM tbl_product_size";
+$countAllSql = "SELECT * FROM tbl_product_size WHERE product_id = '$productId'";
 $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
 
 $pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -31,14 +31,14 @@ $start = ($pageIndex - 1) * $pageSize;
 
 $getTableDataSql = "";
 
-$getTableDataSql = "SELECT * FROM tbl_product_size
+$getTableDataSql = "SELECT * FROM tbl_product_size WHERE product_id = '$productId'
     LIMIT $start, $pageSize";
 
 $tableData = mysqli_query($connect, $getTableDataSql);
 ?>
 
 <div class="text-left flex justify-between">
-    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addEventModal">
+    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addProductSizeModal">
         <i class="fa-solid fa-plus"></i>
         Thêm kích cỡ
     </button>
@@ -66,26 +66,36 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             while ($row = mysqli_fetch_array($tableData)) {
                 $displayOrder++;
                 $hasData = true;
+
+                $getSizeSQL = "SELECT * FROM tbl_size WHERE id = '$row[size_id]';";
+                $sizeData = mysqli_query($connect, $getSizeSQL);
+
+                $sizeCode = '';
+                $sizeName = '';
+                while ($sizeRow = mysqli_fetch_array($sizeData)) {
+                    $sizeCode = $sizeRow['code'];
+                    $sizeName = $sizeRow['name'];
+                }
             ?>
                 <tr>
                     <td>
                         <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                     </td>
-                    <td class="code">
-                        <?php echo $row['code'] ?>
+                    <td>
+                        <?php echo $sizeCode; ?>
                     </td>
-                    <td class="name">
-                        <?php echo $row['name'] ?>
+                    <td>
+                        <?php echo $sizeName; ?>
                     </td>
-                    <td class="description">
-                        <?php echo $row['description'] ?>
+                    <td>
+                        <?php echo $row['quantity']; ?>
                     </td>
                     <td>
                         <div style="min-width: 150px;">
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editEventPopup_<?php echo $row['id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['product_id']; ?>_<?php echo $row['size_id']; ?>">
                                 <i class="fa-solid fa-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteEventPopup_<?php echo $row['id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeletePopup_<?php echo $row['product_id']; ?>_<?php echo $row['size_id']; ?>">
                                 <i class="fa-solid fa-trash mr-1"></i>
                             </button>
                         </div>
@@ -183,7 +193,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
-    include "./pages/Event/EditEventPopup.php";
+    include "./pages/ProductSize/EditProductSizePopup.php";
 }
 ?>
 
@@ -192,7 +202,7 @@ while ($row = mysqli_fetch_array($tableData)) {
 $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
-    include "./pages/Event/ConfirmDeleteEventPopup.php";
+    include "./pages/ProductSize/ConfirmDeleteProductSizePopup.php";
 }
 ?>
 
@@ -201,7 +211,7 @@ while ($row = mysqli_fetch_array($tableData)) {
         var searchValue = document.getElementById('search-input').value;
         var limit = <?php echo $pageSize; ?>;
         var page = <?php echo $pageIndex; ?>;
-        var url = '?workingPage=event';
+        var url = '?workingPage=productSize';
         if (searchValue.trim() !== '') {
             url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
 

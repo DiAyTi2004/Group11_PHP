@@ -1,37 +1,23 @@
 <!-- Modal -->
-<div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addProductSizeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-dark">
-                <h5 class="text-center text-white">Thêm sự kiện</h5>
+                <h5 class="text-center text-white">Thêm kích thước cho sản phẩm <?php echo $productCode; ?></h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="eventForm" method="POST" action="pages/Event/EventLogic.php" enctype="multipart/form-data">
-                    <table border="1" width="100%" padding="10px" >
+                <form id="ProductSizeForm" method="POST" action="pages/ProductSize/ProductSizeLogic.php?productId=<?php echo $productId; ?>" enctype="multipart/form-data">
+                    <table border="1" width="100%" padding="10px">
                         <tr>
                             <td class="row">
                                 <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">Mã sự kiện</label>
-                                    <input name="code" type="text" class="form-control" id="exampleFormControlInput1">
+                                    <label for="code" class="form-label">Mã sản phẩm</label>
+                                    <input name="code" type="text" class="form-control" value="<?php echo $productCode; ?>" disabled id="code">
                                 </div>
                                 <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">Tên sự kiện</label>
-                                    <input name="name" type="text" class="form-control" id="exampleFormControlInput1">
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="row">
-                                <div class="col-6 flex-column">
-                                    <label for="exampleFormControlInput1" class="form-label">
-                                        Banner
-                                    </label>
-                                    <input type="file" name="banner" class="form-control" id="exampleFormControlInput1">
-                                </div>
-                                <div class="col-6">
-                                    <img class="imageInPopup" src="pages/Event/EventImages/<?php echo $row['banner'] ?>" alt="">
+                                    <label for="name" class="form-label">Tên sản phẩm</label>
+                                    <input name="name" type="text" class="form-control" value="<?php echo $productName; ?>" disabled id="name">
                                 </div>
                             </td>
                         </tr>
@@ -39,30 +25,27 @@
                         <tr>
                             <td class="row">
                                 <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">Giảm giá</label>
-                                    <input name="discount" type="text" class="form-control" id="exampleFormControlInput1">
-                                </div>
-                            </td>
-                        </tr>
+                                    <label for="sizeId" class="form-label">Size</label>
+                                    <select name="sizeId" class="form-select" aria-label="Default select example">
+                                        <option value="">Chưa chọn</option>
+                                        <?php
+                                        $getAllsizeSql = "SELECT * FROM tbl_size WHERE id NOT IN (SELECT size_id FROM tbl_product_size WHERE product_id = '$productId');";
+                                        $sizeData = mysqli_query($connect, $getAllsizeSql);
 
-                        <tr>
-                            <td class="row">
-                                <div class="mb-2 col">
-                                    <label for="date" class="form-label">Ngày bắt đầu</label>
-                                    <input name="start_date" type="datetime-local" class="form-control" id="datepicker_start">
+                                        while ($row_danhmuc = mysqli_fetch_array($sizeData)) {
+                                        ?>
+                                            <option value="<?php echo $row_danhmuc['id'] ?>">
+                                                <?php echo $row_danhmuc['name'] ?>
+                                            </option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
-                                <div class="mb-2 col">
-                                    <label for="date" class="form-label">Ngày kết thúc</label>
-                                    <input name="end_date" type="datetime-local" class="form-control" id="datepicker_end">
-                                </div>
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td class="row">
                                 <div class="mb-2 col">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Mô tả</label>
-                                    <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <label for="quantity" class="form-label">Số lượng còn</label>
+                                    <input name="quantity" type="number" class="form-control" id="quantity" value="0">
                                 </div>
                             </td>
                         </tr>
@@ -71,7 +54,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Đóng</button>
-                <button type="submit" class="btn btn-primary" name="addEvent">Thêm sự kiện</button>
+                <button type="submit" class="btn btn-primary" name="addProductSize">Thêm kích thước</button>
             </div>
             </form>
         </div>

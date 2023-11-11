@@ -42,7 +42,6 @@ $tableData = mysqli_query($connect, $getTableDataSql);
         Thêm danh mục
     </button>
 
-
     <div class="input-group mb-3 align-center mt-3 w-40">
         <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" name="search" id="search-input" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" id="search-button" onclick="performSearch()" name="ok">
@@ -60,13 +59,12 @@ $tableData = mysqli_query($connect, $getTableDataSql);
         <thead class="table-head w-100">
             <tr class="table-heading">
                 <th class="noWrap">STT</th>
-                <th class="noWrap">ID</th>
                 <th class="noWrap">Code</th>
                 <th class="noWrap">Tên danh mục</th>
                 <th class="noWrap">Hình ảnh </th>
                 <th class="noWrap">Miêu tả</th>
                 <th class="noWrap">Quản lý</th>
-                
+
             </tr>
         </thead>
 
@@ -77,11 +75,8 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 $displayOrder++;
             ?>
                 <tr>
-                    <td >
-                    <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
-                    </td>
-                    <td class="id">
-                        <?php echo $row['id'] ?>
+                    <td>
+                        <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                     </td>
 
                     <td>
