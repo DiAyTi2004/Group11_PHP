@@ -55,7 +55,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 </div>
 
 <div class="container p-0">
-    <table>
+    <table class="w-100">
         <legend class="text-center"><b>Quản lý sự kiện</b></legend>
 
         <thead class="table-head w-100">
