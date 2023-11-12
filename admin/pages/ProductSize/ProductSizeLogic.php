@@ -32,4 +32,4 @@ if (isset($_POST['deleteProductSize'])) {
     mysqli_query($connect, $deleteProductSizeSQL);
 }
 
-header("Location: ../../AdminIndex.php?workingPage=productSize?productId=" . $productId);
+header("Location: ../../AdminIndex.php?workingPage=productSize&productId=" . $productId);
