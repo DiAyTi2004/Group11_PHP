@@ -1,9 +1,9 @@
 <div class="modal fade" id="editPopup_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-lg">
         <form method="POST" action="pages/Product/ProductLogic.php?productId=<?php echo $row['id']; ?>" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
-                    <h5 class="text-center text-white">Sửa sản phẩm <?php echo $row['code']; ?></h5>
+                    <h5 class="text-center text-white">Sửa sản phẩm</h5>
 
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -11,15 +11,20 @@
                     <table border="1" width="100%" padding="10px" style="border-collapse: collapse;">
                         <tr>
                             <td class="row">
-                                <div class="mb-2 col col-12 col-md-4">
+                                <div class="mb-2 col">
                                     <label for="name" class="form-label">Tên sản phẩm</label>
                                     <input name="name" type="text" class="form-control" id="name" value="<?php echo $row['name'] ?>">
                                 </div>
-                                <div class="mb-2 col col-12 col-md-4">
+                                <div class="mb-2 col">
                                     <label for="code" class="form-label">Mã sản phẩm</label>
                                     <input name="code" type="text" class="form-control" id="code" value="<?php echo $row['code'] ?>">
                                 </div>
-                                <div class="mb-2 col col-12 col-md-4">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="row">
+                                <div class="mb-2 col">
                                     <label for="price" class="form-label">Giá</label>
                                     <input name="price" type="number" step="0.01" class="form-control" id="price" value="<?php echo $row['price'] ?>">
                                 </div>
@@ -79,22 +84,32 @@
                         </tr>
 
                         <tr>
-                            <td class="row">
-                                <div class="col-12 col-md-6">
-                                    <p><b>Các kích cỡ của sản phẩm:</b></p>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <a class='btn btn-primary text-white productSizeButton color-white display-block h-100 w-100' href="?workingPage=productSize&productId=<?php echo $row['id']; ?>">
-                                        <i class="fa-solid fa-pen-to-square text-white mr-1"></i>
-                                        Chỉnh sửa các kích cỡ mà sản phẩm có
-                                    </a>
+                            <td>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                        <label class="form-check-label" for="invalidCheck">
+                                            Bạn chắc chắn về thông tin sản phẩm?
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            You must agree before submitting.
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
 
                         <tr>
-                            <td colspan="2">
-                                <?php include "./pages/Product/OwningSizeTable.php"; ?>
+                            <td class="row">
+                                <div class="col-6">
+                                    <p><b>Các kích cỡ của sản phẩm:</b></p>
+                                </div>
+                                <div class="col-6">
+                                    <a class='btn btn-primary text-white productSizeButton color-white display-block h-100 w-100' href="?workingPage=productSize&productId=<?php echo $row['id']; ?>">
+                                        <i class="fa-solid fa-pen-to-square text-white mr-1"></i>
+                                        Chỉnh sửa các kích cỡ mà sản phẩm có
+                                    </a>
+                                </div>
                             </td>
                         </tr>
 
