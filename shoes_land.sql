@@ -325,9 +325,7 @@ create table tbl_product (
   price float ,
   fake_price float ,
   category_id varchar(36) not null,
-  event_id varchar(36) not null,
-  foreign key (event_id) references tbl_event(id),
-  foreign key (category_id) references tbl_category(id)
+  event_id varchar(36) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_user (
@@ -345,8 +343,7 @@ create table tbl_user (
 
 create table tbl_cart (
   id varchar(36) primary key not null,
-  user_id varchar(36) not null,
-  foreign key (user_id) references tbl_user(id)
+  user_id varchar(36) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_cart_detail (
@@ -354,9 +351,7 @@ create table tbl_cart_detail (
   product_id varchar(36) not null,
   quantity int,
   unit_price float ,
-  primary key (cart_id, product_id),
-  foreign key (cart_id) references tbl_cart(id),
-  foreign key (product_id) references tbl_product(id)
+  primary key (cart_id, product_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_status (
@@ -375,10 +370,7 @@ create table tbl_order (
   receive_phone varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   receive_address varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   delivery_cost float ,
-  description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  foreign key (user_id) references tbl_user(id),
-  foreign key (status_id) references tbl_status(id),
-  foreign key (payment_type_id) references tbl_payment_type(id)
+  description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_order_detail (
@@ -386,9 +378,7 @@ create table tbl_order_detail (
   product_id varchar(36) not null,
   quantity int,
   unit_price float ,
-  primary key (order_id, product_id),
-  foreign key (order_id) references tbl_order(id),
-  foreign key (product_id) references tbl_product(id)
+  primary key (order_id, product_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_product_image (
@@ -396,15 +386,12 @@ create table tbl_product_image (
   product_id varchar(36) not null,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   content varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  main_image bit,
-  foreign key (product_id) references tbl_product(id)
+  main_image bit
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_product_size (
   product_id varchar(36) not null,
   size_id varchar(36) not null,
   quantity int,
-  primary key (product_id, size_id),
-  foreign key (product_id) references tbl_product(id),
-  foreign key (size_id) references tbl_size(id)
+  primary key (product_id, size_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
