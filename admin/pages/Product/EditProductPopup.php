@@ -98,6 +98,26 @@
                             </td>
                         </tr>
 
+                        <tr>
+                            <td class="row">
+                                <div class="col-12 col-md-6">
+                                    <p><b>Các ảnh của sản phẩm:</b></p>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <a class='btn btn-primary text-white productSizeButton color-white display-block h-100 w-100' href="?workingPage=productImage&productId=<?php echo $row['id']; ?>">
+                                        <i class="fa-solid fa-pen-to-square text-white mr-1"></i>
+                                        Chỉnh sửa các ảnh mà sản phẩm có
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                <?php include "./pages/Product/OwningImageTable.php"; ?>
+                            </td>
+                        </tr>
+
                     </table>
                 </div>
                 <div class="modal-footer">

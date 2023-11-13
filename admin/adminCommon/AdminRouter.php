@@ -7,6 +7,9 @@
         } else if ($workingPage == 'productSize') {
             include("./pages/ProductSize/ProductSizeIndex.php");
             include("./pages/ProductSize/AddProductSizePopup.php");
+        } else if ($workingPage == 'productImage') {
+            include("./pages/ProductImage/ProductImageIndex.php");
+            include("./pages/ProductImage/AddProductImagePopup.php");
         } else if ($workingPage == 'product') {
             include("./pages/Product/ProductIndex.php");
             include("./pages/Product/AddProductPopup.php");

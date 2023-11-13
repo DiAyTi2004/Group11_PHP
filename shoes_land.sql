@@ -385,8 +385,8 @@ create table tbl_product_image (
   id varchar(36) primary key not null,
   product_id varchar(36) not null,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  content varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  main_image bit
+  content varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+   main_image TINYINT(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_product_size (
