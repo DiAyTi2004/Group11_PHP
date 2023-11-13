@@ -75,7 +75,8 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <th class="noWrap">Phí giao hàng</th>
                 <th class="noWrap">Tình trạng</th>
                 <th class="noWrap">Mô tả</th>
-                <th class="noWrap">Quản lý </th>
+                <th class="noWrap">Sửa </th>
+                <th class="noWrap">Xoá</th>
             </tr>
         </thead>
 
@@ -115,8 +116,12 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo $row['description'] ?>
                     </td>
                     <td>
-
-
+                    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal"
+                            data-bs-target="#editPopup_<?php echo $row['id']; ?>">
+                            <i class="fa-solid fa-pencil"></i>
+                        </button>
+                    </td>
+                    <td>
                         <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-trash mr-1"></i>
                         </button>
@@ -227,7 +232,11 @@ while ($row = mysqli_fetch_array($tableData)) {
     include "./pages/Order/OrderLogic.php";
 }
 ?>
-
+<?php
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/Order/EditOrderPopup.php";
+}
+?>
 
 <script>
     function performSearch() {
