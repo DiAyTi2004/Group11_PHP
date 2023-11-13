@@ -53,6 +53,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             <tr class="table-heading">
                 <th class="noWrap">STT</th>
                 <th class="noWrap">Các hình ảnh</th>
+                <th class="noWrap">Mô tả hình ảnh</th>
                 <th class="noWrap">Hình ảnh chính</th>
                 <th class="noWrap">Tác vụ</th>
             </tr>
@@ -75,14 +76,19 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <img style="width: 150px; height: 150px" src="pages/ProductImage/<?php echo $row['content']; ?>" alt="">
                     </td>
                     <td>
+                        <?php echo  $row['description']; ?>
+                    </td>
+                    <td>
                         <?php if ($row['main_image']) echo '<i class="fa-solid fa-check fa-lg"></i>';
                         else echo '<i class="fa-solid fa-xmark fa-lg"></i>'; ?>
                     </td>
                     <td>
                         <div style="min-width: 150px;">
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeletePopup_<?php echo $row['product_id']; ?>_<?php echo $row['id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
+                                <i class="fa-solid fa-pencil mr-1"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeletePopup_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-trash mr-1"></i>
-                                Xoá ảnh này
                             </button>
                         </div>
                     </td>
@@ -139,7 +145,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <li class="page-item">
                     <?php
                     if ($pageIndex > 1 && $total_page > 1) {
-                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=productImage&productId='.($productId).'&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
+                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=productImage&productId=' . ($productId) . '&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
                         Previous
                         </a>';
                     }
@@ -150,11 +156,11 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 for ($i = 1; $i <= $total_page; $i++) {
                     if ($i == $pageIndex) {
                         echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=productImage&productId='.($productId).'&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=productImage&productId=' . ($productId) . '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                     } else {
                         echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?workingPage=productImage&productId='.($productId).'&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                        <a name="page" class="page-link text-reset text-black" href="?workingPage=productImage&productId=' . ($productId) . '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                         </li>';
                     }
                 }
@@ -163,7 +169,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <?php
                 if ($pageIndex < $total_page && $total_page > 1) {
                     echo '<li class="page-item light">
-                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=productImage&productId='.($productId).'&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=productImage&productId=' . ($productId) . '&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
                     Next
                     </a>
                     </li>';
@@ -177,6 +183,9 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 <!-- pre display all edit popup -->
 <?php
 $tableData = mysqli_query($connect, $getTableDataSql);
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/ProductImage/EditProductImagePopup.php";
+}
 ?>
 
 <!-- pre display all confirm delete popup -->

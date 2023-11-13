@@ -2,16 +2,13 @@
 include "../../../common/config/Connect.php";
 $productId = "";
 $imageId = "";
-
 function generateUuid()
 {
     $data = random_bytes(16);
 
-    // Set the version (4) and variant bits (2)
     $data[6] = chr(ord($data[6]) & 0x0F | 0x40);
     $data[8] = chr(ord($data[8]) & 0x3F | 0x80);
 
-    // Format the UUID string
     $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 
     return $uuid;
@@ -26,50 +23,54 @@ if (isset($_POST['addProductImage'])) {
     if (isset($_FILES['images'])) {
         $file = $_FILES['images'];
         // Kiểm tra loại file
-        if ($file['type'][0] == 'image/jpeg' || $file['type'][0] == 'image/jpg' || $file['type'][0] == 'image/png') {
-            foreach ($file['name'] as $key => $fileName) {
-                $content = ""; // Khởi tạo biến content trước vòng lặp
-                $content = $uploads_dir . $fileName; // Lưu đường dẫn của ảnh vào content
-                $main_image = (isset($_POST['main_image']) && $_POST['main_image'] == $key) ? 1 : 0;
-                $imageId = generateUuid();
-                move_uploaded_file($file['tmp_name'][$key], $uploads_dir . $fileName); // Di chuyển ảnh đến thư mục lưu trữ
-                $addProductimageSQL = "INSERT INTO tbl_product_image(id, product_id, description, content, main_image) 
+        if ($file['type'] == 'image/jpeg' || $file['type'] == 'image/jpg' || $file['type'] == 'image/png') {
+            $content = "";
+            $imageId = generateUuid();
+            $content = $uploads_dir . $file['name']; // Lưu đường dẫn của ảnh vào content
+            $main_image = isset($_POST['main_image']) ? 1 : 0;
+            if ($main_image == 1) {
+                $updateMainImageSQL = "UPDATE tbl_product_image SET main_image = 0 WHERE product_id = '$productId'";
+                mysqli_query($connect, $updateMainImageSQL);
+            }
+            move_uploaded_file($file['tmp_name'], $uploads_dir . $file['name']); // Di chuyển ảnh đến thư mục lưu trữ
+            $addProductimageSQL = "INSERT INTO tbl_product_image(id, product_id, description, content, main_image) 
                         VALUES ('" . $imageId . "','" . $productId . "','" . $description . "','" . $content . "', '" . $main_image . "')";
-                mysqli_query($connect, $addProductimageSQL);
-            }
-        } else {
-            echo "Loại file không hợp lệ.";
+            mysqli_query($connect, $addProductimageSQL);
         }
+    } else {
+        echo "Loại file không hợp lệ.";
     }
-}
-
-
-if (isset($_POST['editProductImage'])) {
+} else if (isset($_POST['editProductImage'])) {
     $productId = $_GET['productId'];
-    $newimageId = $_POST['imageId'];
-    $oldimageId = $_GET['imageId'];
-    if (isset($_FILES['newimage'])) {
-        $newFile = $_FILES['newimage'];
+    $description = $_POST['description'];
+    if (isset($_FILES['images'])) {
+        $file = $_FILES['images'];
         // Kiểm tra loại file
-        if ($newFile['type'] == 'image/jpeg' || $newFile['type'] == 'image/jpg' || $newFile['type'] == 'image/png') {
-                $content = ""; // Khởi tạo biến content trước vòng lặp
-                $content = $uploads_dir . $newFileName; // Lưu đường dẫn của ảnh vào content
-                $newmain = (isset($_POST['newmain'])) ? 1 : 0;
-                $imageId = generateUuid();
-                move_uploaded_file($newFile['tmp_name'][$key], $uploads_dir . $newFileName); // Di chuyển ảnh đến thư mục lưu trữ
-                $updateProductImageSQL = "UPDATE tbl_product_image(id, product_id, description, content, main_image) 
-                        SET ('" . $newimageId . "','" . $productId . "','" . $description . "','" . $content . "', '" . $newmain . "')
-                        WHERE product_id = '$productId' AND id = '$oldimageId'
-                        ";
-                mysqli_query($connect, $updateProductImageSQL);
+        if ($file['type'] == 'image/jpeg' || $file['type'] == 'image/jpg' || $file['type'] == 'image/png') {
+            $content = "";
+            $content = $uploads_dir . $file['name']; // Lưu đường dẫn của ảnh vào content
+            $main_image = isset($_POST['main_image']) ? 1 : 0;
+            echo $main_image;
+            echo $content;
+            if ($main_image == 1) {
+                $updateMainImageSQL = "UPDATE tbl_product_image SET main_image = 0 WHERE product_id = '$productId'";
+                mysqli_query($connect, $updateMainImageSQL);
             }
-        } else {
-            echo "Loại file không hợp lệ.";
+            move_uploaded_file($file['tmp_name'], $uploads_dir . $file['name']);
+            $productId = $_GET['productId'];
+            $imageId = $_GET['imageId'];
+            echo $imageId;
+            $deleteProductImageSQL = "DELETE FROM tbl_product_image WHERE product_id ='$productId' AND id = '$imageId';";
+            $imageIdNew = generateUuid();
+            mysqli_query($connect, $deleteProductImageSQL);
+            $addProductimageSQL = "INSERT INTO tbl_product_image(id, product_id, description, content, main_image) 
+                        VALUES ('" . $imageIdNew . "','" . $productId . "','" . $description . "','" . $content . "', '" . $main_image . "')";
+            mysqli_query($connect, $addProductimageSQL);
         }
+    } else {
+        echo "Loại file không hợp lệ.";
     }
-
-
-if (isset($_POST['deleteProductImage'])) {
+} else if (isset($_POST['deleteProductImage'])) {
     $productId = $_GET['productId'];
     $imageId = $_GET['imageId'];
     $deleteProductImageSQL = "DELETE FROM tbl_product_image WHERE product_id ='$productId' AND id = '$imageId';";

@@ -35,7 +35,7 @@
                             <td class="row">
                                 <div class="col-md-6">
                                     <label for="images">Chọn Ảnh:</label>
-                                    <input type="file" name="images[]" id="imageInput" class="form-control" multiple accept="image/*" onchange="uploadImages()"><br>
+                                    <input type="file" name="images" id="imageInput" class="form-control" accept="image/*" onchange="uploadImages()"><br>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="images">Ảnh đã chọn:</label>
@@ -46,10 +46,8 @@
 
                         <tr>
                             <td>
-                                <label for="main_image">Chọn Ảnh Chính:</label>
-                                <select name="main_image" id="main_image" class="form-control" disabled>
-                                    <option value="" selected disabled>Chọn ảnh chính</option>
-                                </select>
+                                <label for="main_image">Chọn là Ảnh Chính:</label>
+                                <input type="checkbox" name="main_image" id="main_image_checkbox" value="1">
                             </td>
                         </tr>
 
@@ -65,68 +63,41 @@
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-            
+
             <script>
                 // Lấy thông tin từ form
                 var imageInput = document.getElementById('imageInput');
-                var mainImageSelect = document.getElementById('main_image');
+                var mainImageCheckbox = document.getElementById('main_image_checkbox');
                 var imageGallery = document.getElementById('imageGallery');
+
                 // Biến để kiểm tra xem đã chọn main_image chưa
                 var mainImageSelected = false;
+
                 function uploadImages() {
                     // Kiểm tra xem đã chọn ảnh chưa
                     if (imageInput.files.length === 0) {
                         alert("Vui lòng chọn ít nhất một ảnh.");
                         return;
                     }
-                    // Hiển thị ảnh trong select box để chọn làm ảnh chính
-                    mainImageSelect.innerHTML = "";
-                    for (var i = 0; i < imageInput.files.length; i++) {
-                        var option = document.createElement("option");
-                        option.value = i;
-                        option.text = "Ảnh " + (i + 1);
-                        mainImageSelect.appendChild(option);
-                    }
+
                     // Hiển thị danh sách ảnh
                     imageGallery.innerHTML = "";
-                    for (var i = 0; i < imageInput.files.length; i++) {
-                        var imgContainer = document.createElement("div");
-                        imgContainer.className = "mb-3";
-                        var img = document.createElement("img");
-                        img.src = URL.createObjectURL(imageInput.files[i]);
-                        img.width = 100; // Có thể thay đổi kích thước theo ý muốn
-                        img.height = 100;
-                        // Radio button để chọn ảnh chính
-                        var radioButton = document.createElement("input");
-                        radioButton.type = "radio";
-                        radioButton.name = "mainImageRadio";
-                        radioButton.value = i;
-                        // Thêm sự kiện click để chọn ảnh chính
-                        radioButton.addEventListener('click', function() {
-                            if (!mainImageSelected) {
-                                mainImageSelect.value = this.value;
-                                mainImageSelected = true;
-                            } else {
-                                // Nếu đã có ảnh được chọn, hủy chọn ảnh trước đó
-                                alert("Chỉ được chọn duy nhất một ảnh làm main_image.");
-                                this.checked = false;
-                            }
-                        });
-                        var divRadio = document.createElement("div");
-                        divRadio.className = "form-check";
-                        divRadio.appendChild(radioButton);
-                        // Thêm ảnh và radio button vào container
-                        imgContainer.appendChild(img);
-                        imgContainer.appendChild(divRadio);
-                        imageGallery.appendChild(imgContainer);
-                    }
-                    // Kích hoạt select box để cho phép chọn ảnh chính
-                    mainImageSelect.disabled = false;
+                    var imgContainer = document.createElement("div");
+                    imgContainer.className = "mb-3";
+                    var img = document.createElement("img");
+                    img.src = URL.createObjectURL(imageInput.files[0]);
+                    img.width = 100; // Có thể thay đổi kích thước theo ý muốn
+                    img.height = 100;
+
+                    // Thêm ảnh và checkbox vào container
+                    imgContainer.appendChild(img);
+                    imageGallery.appendChild(imgContainer);
                 }
-                // Thêm event listener cho sự kiện change của select box
-                mainImageSelect.addEventListener('change', function() {
-                    // Reset trạng thái đã chọn khi thay đổi select box
-                    mainImageSelected = false;
+
+                // Thêm event listener cho sự kiện change của checkbox
+                mainImageCheckbox.addEventListener('change', function() {
+                    // Reset trạng thái đã chọn khi thay đổi checkbox
+                    mainImageSelected = this.checked;
                 });
             </script>
         </div>
