@@ -28,7 +28,7 @@
                                     <label for="exampleFormControlInput1" class="form-label">
                                         Banner
                                     </label>
-                                    <input type="file" name="banner" class="form-control" id="exampleFormControlInput1" value="a">
+                                    <input type="file" name="banner" class="form-control" id="exampleFormControlInput1">
                                 </div>
                                 <div class="col-6" >
                                     <img class="imageInPopup" style="max-width:100%" src="pages/Event/EventImages/<?php echo $row['banner'] ?>" alt="">
