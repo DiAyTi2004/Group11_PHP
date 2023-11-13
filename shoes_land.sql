@@ -337,7 +337,6 @@ create table tbl_user (
   password varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   email varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   phonenumber int(11) NOT NULL,
-  chucvu int(11) NOT NULL,
   address LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

@@ -15,11 +15,6 @@
                                     <label for="exampleFormControlInput1" class="form-label">Họ tên</label>
                                     <input name="tennguoidung" type="text" class="form-control" id="exampleFormControlInput1">
                                 </div>
-
-                                <label for="exampleFormControlInput1" class="form-label">Hình ảnh</label>
-                                <div class="input-group mb-2">
-                                    <input name="hinhanh" type="file" class="form-control" id="inputGroupFile02">
-                                </div>
                                 <div class="mb-2 col">
                                     <label for="exampleFormControlInput1" class="form-label">Email</label>
                                     <input name="email" type="text" class="form-control" id="exampleFormControlInput1">
@@ -31,6 +26,20 @@
 
                             </td>
                         </tr>
+                        <tr>
+                        <td class="row">
+                                <div class="col-6">
+                                    <img class="w-100" src="pages/User/UserImages/<?php echo $row['user_image'] ?>">
+                                </div>
+                                <div class="col-6 flex-center flex-column">
+                                    <label for="exampleFormControlInput1" class="form-label">
+                                        Hình ảnh
+                                    </label>
+                                    <input type="file" name="hinhanh" class="form-control" id="exampleFormControlInput1">
+                                </div>
+                            </td>
+                        </tr>
+                        
                         <tr>
                             <td class="row">
                             <div class="mb-2 col">
@@ -45,29 +54,7 @@
                                     <label for="exampleFormControlInput1" class="form-label">Số điện thoại</label>
                                     <input name="phonenumber" type="text" class="form-control" id="exampleFormControlInput1">
                                 </div>
-                                <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">Chức vụ</label>
-                                    <p>
-                                        <select name="chucvu" style="width:120px">
-                                            <?php
-                                            if ($nguoidung['chucvu'] == 1) {
-                                            ?>
-                                                <option value="1" selected> Bán hàng</option>
-                                                <option value="0">Không</option>
-
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <option value="1"> Bán hàng</option>
-                                                <option value="0" selected>Không</option>
-                                            <?php
-
-                                            }
-
-                                            ?>
-                                        </select>
-                                    </p>
-                                </div>
+                                
                             </td>
                         </tr>
                         <tr>

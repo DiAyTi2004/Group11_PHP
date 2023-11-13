@@ -30,10 +30,10 @@ function generateUuid()
 if (isset($_POST['themnguoidung'])) {
     if (isset($_FILES['hinhanh'])) {
         if ($file['type'] == 'image/jpeg' || $file['type'] == 'imgae/jpg' || $file['type'] == 'image/png') {
-            move_uploaded_file($banner_tmp, 'UserImages/' . $banner);
+            move_uploaded_file($hinhanh_tmp, 'UserImages/' . $hinhanh);
             $userId =  generateUuid();
-            $sql_addUser = "INSERT INTO tbl_user(id, code, fullname,username, email, phonenumber,chucvu, address) 
-                 VALUE ('" . $userId . "','" . $code . "','" . $tennguoidung . "','" . $taikhoan . "','" . $email . "','" . $phonenumber . "','" . $chucvu . "','" . $address . "')";
+            $sql_addUser = "INSERT INTO tbl_user(id, code, fullname,username, email, phonenumber,address) 
+                 VALUES ('" . $userId . "','" . $code . "','" . $tennguoidung . "','" . $taikhoan . "','" . $email . "','" . $phonenumber . "','" . $diachi . "')";
             mysqli_query($connect, $sql_addUser);
             header('Location:../../AdminIndex.php?workingPage=user');
         }
