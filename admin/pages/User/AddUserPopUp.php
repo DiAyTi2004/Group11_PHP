@@ -59,13 +59,13 @@
                         </tr>
 
                     </table>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Đóng</button>
 
                 <button type="submit" class="btn btn-primary" name="addUser">Thêm danh mục</button>
             </div>
-            </form>
         </div>
     </div>
 </div>
