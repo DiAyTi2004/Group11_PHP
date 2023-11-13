@@ -35,7 +35,7 @@
                             <td class="row">
                                 <div class="col-md-6">
                                     <label for="images">Chọn Ảnh:</label>
-                                    <input type="file" name="images" id="imageInput" class="form-control" accept="image/*" onchange="uploadImages()"><br>
+                                    <input type="file" name="images" id="imageInput" class="form-control" accept="image/*" onchange="uploadImages()" ><br>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="images">Ảnh đã chọn:</label>
@@ -69,17 +69,7 @@
                 var imageInput = document.getElementById('imageInput');
                 var mainImageCheckbox = document.getElementById('main_image_checkbox');
                 var imageGallery = document.getElementById('imageGallery');
-
-                // Biến để kiểm tra xem đã chọn main_image chưa
-                var mainImageSelected = false;
-
                 function uploadImages() {
-                    // Kiểm tra xem đã chọn ảnh chưa
-                    if (imageInput.files.length === 0) {
-                        alert("Vui lòng chọn ít nhất một ảnh.");
-                        return;
-                    }
-
                     // Hiển thị danh sách ảnh
                     imageGallery.innerHTML = "";
                     var imgContainer = document.createElement("div");
@@ -89,16 +79,11 @@
                     img.width = 100; // Có thể thay đổi kích thước theo ý muốn
                     img.height = 100;
 
-                    // Thêm ảnh và checkbox vào container
+                    // Thêm ảnh vào container
                     imgContainer.appendChild(img);
                     imageGallery.appendChild(imgContainer);
                 }
 
-                // Thêm event listener cho sự kiện change của checkbox
-                mainImageCheckbox.addEventListener('change', function() {
-                    // Reset trạng thái đã chọn khi thay đổi checkbox
-                    mainImageSelected = this.checked;
-                });
             </script>
         </div>
     </div>
