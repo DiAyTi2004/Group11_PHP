@@ -39,8 +39,6 @@
             include("./pages/PaymentType/AddPaymentTypePopup.php");
             include("./pages/PaymentType/EditPaymentTypePopup.php");
             include("./pages/PaymentType/ConfirmDeletePaymentTypePopup.php");
-        } else if ($workingPage == 'dangxuat') {
-            include("Login.php");
         } else {
             include("./pages/Dashboard/DashboardIndex.php");
         }

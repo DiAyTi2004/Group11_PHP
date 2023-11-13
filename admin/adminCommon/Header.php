@@ -86,10 +86,10 @@
                         </a>
                     </li>
                     <li class="flex-center">
-                        <a href="AdminIndex.php?dangxuat=1" class="pr-0 nav-link text-white flex-column flex-center">
+                        <a href="adminCommon/Login.php" class="pr-0 nav-link text-white flex-column flex-center">
                             <div class="text-end">
                                 <?php
-                                if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == 1) {
+                                if (isset($_GET['logout']) && $_GET['logout'] == 1) {
                                     unset($_SESSION['login']);
                                     header('Location: ./adminCommon/Login.php');
                                 }
