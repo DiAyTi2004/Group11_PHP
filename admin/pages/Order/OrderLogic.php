@@ -29,6 +29,7 @@ if(isset($_POST['addOrder'])){
 }
 else if (isset($_POST['deleteOrder'])) {
     $id = $_GET['orderId'];
+    echo $id;
     $sql_xoa = "DELETE FROM tbl_order WHERE id ='".$id."'";
     mysqli_query($connect, $sql_xoa);
     header('Location:../../AdminIndex.php?workingPage=order');

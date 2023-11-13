@@ -337,7 +337,6 @@ create table tbl_user (
   password varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   email varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   phonenumber int(11) NOT NULL,
-  chucvu int(11) NOT NULL,
   address LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -363,6 +362,7 @@ create table tbl_status (
 
 create table tbl_order (
   id varchar(36) primary key not null,
+  code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   user_id varchar(36) not null,
   payment_type_id varchar(36) not null,
   status_id varchar(36) not null,

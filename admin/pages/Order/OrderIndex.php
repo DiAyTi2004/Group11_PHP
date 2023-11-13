@@ -3,8 +3,7 @@
 <?php
 $countAllSql = "SELECT * FROM tbl_order 
 inner join tbl_user on tbl_order.user_id  = tbl_user.id
-inner join tbl_status  on tbl_status.id = tbl_order.status_id
-inner join tbl_payment_type on tbl_order.payment_type_id =  tbl_payment_type.id ;";
+inner join tbl_status  on tbl_status.id = tbl_order.status_id;";
 $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
 
 $pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -34,7 +33,6 @@ if (isset($_GET['search'])) {
     $getTableDataSql = "SELECT * FROM tbl_order
     inner join tbl_user on tbl_order.user_id  = tbl_user.id
     inner join tbl_status  on tbl_status.id = tbl_order.status_id
-    inner join tbl_payment_type on tbl_order.payment_type_id =  tbl_payment_type.id 
     ORDER BY tbl_order.id
     DESC 
     LIMIT $start, $pageSize";
@@ -62,14 +60,12 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
 <div class="container p-0">
     <table class="w-100">
-        <legend class="text-center"><b>Quản lý sản phẩm</b></legend>
+        <legend class="text-center"><b>Quản lý đơn hàng</b></legend>
 
         <thead class="table-head w-100">
             <tr class="table-heading">
-                <th class="noWrap">ID</th>
-                <th class="noWrap">Họ tên</th>
-                <th class="noWrap">Tài khoản</th>
-                <th class="noWrap">Hình thức thanh toán</th>
+                <th class="noWrap">STT</th>
+                <th class="noWrap">Mã đơn hàng</th>
                 <th class="noWrap">Điện thoại nhận hàng</th>
                 <th class="noWrap">Địa chỉ nhận</th>
                 <th class="noWrap">Phí giao hàng</th>
@@ -82,25 +78,17 @@ $tableData = mysqli_query($connect, $getTableDataSql);
         <tbody class="table-body">
             <?php
             $displayOrder = 0;
+            $hasData = false;
             while ($row = mysqli_fetch_array($tableData)) {
                 $displayOrder++;
+                $hasData = true;
             ?>
                 <tr>
                     <td>
                         <?php echo $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                     </td>
                     <td class="tensanpham">
-                        <?php echo $row['fullname'] ?>
-                    </td>
-
-                    <td>
-                        <?php echo $row['username'] ?>
-                    </td>
-                    <td>
-                        <?php echo $row['name'] ?>
-                    </td>
-                    <td>
-                        <?php echo $row['username'] ?>
+                        <?php echo $row['code'] ?>
                     </td>
                     <td>
                         <?php echo $row['receive_phone'] ?>
@@ -112,14 +100,28 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo $row['delivery_cost'] ?>
                     </td>
                     <td>
+                        <?php echo $row['name'] ?>
+                    </td>
+                    <td>
                         <?php echo $row['description'] ?>
                     </td>
                     <td>
-
-
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addOrder">
+                            <i class="fa-solid fa-pencil"></i>
+                        </button>
                         <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-trash mr-1"></i>
                         </button>
+                    </td>
+                </tr>
+            <?php
+            }
+
+            if (!$hasData) {
+            ?>
+                <tr>
+                    <td colspan="8">
+                        Chưa có dữ liệu
                     </td>
                 </tr>
             <?php
@@ -227,7 +229,11 @@ while ($row = mysqli_fetch_array($tableData)) {
     include "./pages/Order/OrderLogic.php";
 }
 ?>
-
+<?php
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/Order/EditOrderPopup.php";
+}
+?>
 
 <script>
     function performSearch() {

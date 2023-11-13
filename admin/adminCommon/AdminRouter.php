@@ -27,6 +27,7 @@
             include("./pages/Order/OrderIndex.php");
             include("./pages/Order/AddOrderPopup.php");
             include("./pages/Order/OrderConfirmDelete.php");
+            include("pages/Order/EditOrderPopup.php");
         } else if ($workingPage == 'status') {
             include("./pages/Status/StatusIndex.php");
             include("./pages/Status/AddStatusPopup.php");
@@ -42,8 +43,6 @@
             include("./pages/PaymentType/AddPaymentTypePopup.php");
             include("./pages/PaymentType/EditPaymentTypePopup.php");
             include("./pages/PaymentType/ConfirmDeletePaymentTypePopup.php");
-        } else if ($workingPage == 'dangxuat') {
-            include("Login.php");
         } else {
             include("./pages/Dashboard/DashboardIndex.php");
         }
