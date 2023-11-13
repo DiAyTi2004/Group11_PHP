@@ -363,6 +363,7 @@ create table tbl_status (
 
 create table tbl_order (
   id varchar(36) primary key not null,
+  code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   user_id varchar(36) not null,
   payment_type_id varchar(36) not null,
   status_id varchar(36) not null,
