@@ -1,5 +1,15 @@
 <?php
-// include "../pages/Home/HomeBanner.php";
+$countAllEvent = "SELECT * FROM tbl_event;";
+$total_event = mysqli_num_rows(mysqli_query($connect, $countAllEvent));
+if ($total_event > 0) {
+?>
+    <div class="show_slide appCard p-0">
+        <?php
+        include("../pages/Home/HomeSlides.php");
+        ?>
+    </div>
+<?php
+}
 ?>
 
 <div class="show_new appCard">
