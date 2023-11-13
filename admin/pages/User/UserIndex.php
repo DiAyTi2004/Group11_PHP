@@ -55,7 +55,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
 <div class="container p-0">
     <table class="w-100">
-        <legend class="text-center"><b>Quản lý sản phẩm</b></legend>
+        <legend class="text-center"><b>Quản lý người dùng</b></legend>
 
         <thead class="table-head w-100">
             <tr class="table-heading">
@@ -66,9 +66,8 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <th class="noWrap">Số điện thoại</th>
                 <th class="noWrap">Tài khoản</th>
                 <th class="noWrap">Địa chỉ</th>
-                <th class="noWrap">Chức vụ</th>
-                <th class="noWrap">Sửa </th>
-                <th class="noWrap">Xoá</th>
+                <th class="noWrap">Quản lý </th>
+               
             </tr>
         </thead>
 
@@ -103,21 +102,11 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo $row['address'] ?>
                     </td>
                     <td>
-                    <?php if ($row['chucvu'] == 1) {
-                        echo "Bán hàng";
-                    } else {
-                        echo "Không";
-                    } ?>
-                    </td>
-                    <td>
                     <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal"
                             data-bs-target="#editPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-pencil"></i>
                         </button>
-                    </td>
-                    <td>
                         
-
                         <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal"
                             data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-trash mr-1"></i>

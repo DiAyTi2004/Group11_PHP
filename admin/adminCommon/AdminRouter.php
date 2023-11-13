@@ -24,6 +24,7 @@
             include("./pages/Order/OrderIndex.php");
             include("./pages/Order/AddOrderPopup.php");
             include("./pages/Order/OrderConfirmDelete.php");
+            include("pages/Order/EditOrderPopup.php");
         } else if ($workingPage == 'status') {
             include("./pages/Status/StatusIndex.php");
             include("./pages/Status/AddStatusPopup.php");
