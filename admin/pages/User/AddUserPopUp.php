@@ -27,7 +27,7 @@
                             </td>
                         </tr>
                         <tr>
-                        <td class="row">
+                            <td class="row">
                                 <div class="col-6">
                                     <img class="w-100" src="pages/User/UserImages/<?php echo $row['user_image'] ?>">
                                 </div>
@@ -39,10 +39,10 @@
                                 </div>
                             </td>
                         </tr>
-                        
+
                         <tr>
                             <td class="row">
-                            <div class="mb-2 col">
+                                <div class="mb-2 col">
                                     <label for="exampleFormControlInput1" class="form-label">Code</label>
                                     <input name="code" type="text" class="form-control" id="exampleFormControlInput1">
                                 </div>
@@ -54,30 +54,16 @@
                                     <label for="exampleFormControlInput1" class="form-label">Số điện thoại</label>
                                     <input name="phonenumber" type="text" class="form-control" id="exampleFormControlInput1">
                                 </div>
-                                
+
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="col-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                        <label class="form-check-label" for="invalidCheck">
-                                            Bạn chắc chắn về thông tin thêm người dùng?
-                                        </label>
-                                        <div class="invalid-feedback">
-                                            You must agree before submitting.
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+
                     </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Đóng</button>
 
-                <button type="submit" class="btn btn-primary" name="themnguoidung">Thêm danh mục</button>
+                <button type="submit" class="btn btn-primary" name="addUser">Thêm danh mục</button>
             </div>
             </form>
         </div>

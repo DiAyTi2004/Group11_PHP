@@ -64,8 +64,8 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
         <thead class="table-head w-100">
             <tr class="table-heading">
-                <th class="noWrap">ID</th>
-                <th class="noWrap">Code</th>
+                <th class="noWrap">STT</th>
+                <th class="noWrap">Mã đơn hàng</th>
                 <th class="noWrap">Điện thoại nhận hàng</th>
                 <th class="noWrap">Địa chỉ nhận</th>
                 <th class="noWrap">Phí giao hàng</th>
@@ -78,8 +78,10 @@ $tableData = mysqli_query($connect, $getTableDataSql);
         <tbody class="table-body">
             <?php
             $displayOrder = 0;
+            $hasData = false;
             while ($row = mysqli_fetch_array($tableData)) {
                 $displayOrder++;
+                $hasData = true;
             ?>
                 <tr>
                     <td>
@@ -104,12 +106,22 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo $row['description'] ?>
                     </td>
                     <td>
-                    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addOrder">
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addOrder">
                             <i class="fa-solid fa-pencil"></i>
                         </button>
                         <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-trash mr-1"></i>
                         </button>
+                    </td>
+                </tr>
+            <?php
+            }
+
+            if (!$hasData) {
+            ?>
+                <tr>
+                    <td colspan="8">
+                        Chưa có dữ liệu
                     </td>
                 </tr>
             <?php

@@ -23,12 +23,9 @@ if (isset($_GET['search'])) {
     $getTableDataSql = "SELECT * FROM tbl_user
     WHERE
         tbl_user.fullname LIKE N'%" . $search . "%'
-    ORDER BY tbl_user.id DESC
     LIMIT $start, $pageSize";
 } else {
     $getTableDataSql = "SELECT * FROM tbl_user
-    ORDER BY id
-    DESC 
     LIMIT $start, $pageSize";
 }
 
@@ -43,8 +40,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
 
     <div class="input-group mb-3 align-center mt-3 w-40">
-        <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" name="search"
-            id="search-input" aria-describedby="button-addon2">
+        <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" name="search" id="search-input" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" id="search-button" onclick="performSearch()" name="ok">
             <i class="fa-solid fa-magnifying-glass"></i>
             Search
@@ -59,36 +55,38 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
         <thead class="table-head w-100">
             <tr class="table-heading">
-                <th class="noWrap">ID</th>
+                <th class="noWrap">STT</th>
                 <th class="noWrap">Họ tên</th>
-                <th class="noWrap">Hình ảnh </th>
+                <th class="noWrap">Hình ảnh</th>
                 <th class="noWrap">Email</th>
                 <th class="noWrap">Số điện thoại</th>
                 <th class="noWrap">Tài khoản</th>
                 <th class="noWrap">Địa chỉ</th>
                 <th class="noWrap">Quản lý </th>
-               
+
             </tr>
         </thead>
 
         <tbody class="table-body">
             <?php
             $displayOrder = 0;
+            $hasData = false;
             while ($row = mysqli_fetch_array($tableData)) {
+                $hasData = true;
                 $displayOrder++;
-                ?>
+            ?>
                 <tr>
                     <td>
                         <?php echo $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                     </td>
-                    <td class="tensanpham">
+                    <td>
                         <?php echo $row['fullname'] ?>
                     </td>
 
-                    <td class="hinhanh">
-                        <img src="pages/User/UserImages/<?php echo $row['user_image']?>" width="100%">
+                    <td>
+                        <img src="pages/User/UserImages/<?php echo $row['user_image'] ?>" width="100%">
                     </td>
-                    
+
                     <td>
                         <?php echo $row['email'] ?>
                     </td>
@@ -102,18 +100,26 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo $row['address'] ?>
                     </td>
                     <td>
-                    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal"
-                            data-bs-target="#editPopup_<?php echo $row['id']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-pencil"></i>
                         </button>
-                        
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal"
-                            data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
+
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-trash mr-1"></i>
                         </button>
                     </td>
                 </tr>
-                <?php
+            <?php
+            }
+
+            if (!$hasData) {
+            ?>
+                <tr>
+                    <td colspan="8">
+                        Chưa có dữ liệu
+                    </td>
+                </tr>
+            <?php
             }
             ?>
         </tbody>
@@ -128,11 +134,11 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     <label for="limitSelect">Rows per page:</label>
                     <select name="limit" id="limitSelect" onchange="updatePageAndLimit()">
                         <option value="5" <?php if ($pageSize == 5)
-                            echo 'selected'; ?>>5</option>
+                                                echo 'selected'; ?>>5</option>
                         <option value="10" <?php if ($pageSize == 10)
-                            echo 'selected'; ?>>10</option>
+                                                echo 'selected'; ?>>10</option>
                         <option value="15" <?php if ($pageSize == 15)
-                            echo 'selected'; ?>>15</option>
+                                                echo 'selected'; ?>>15</option>
                     </select>
                 </form>
 
