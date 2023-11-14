@@ -100,6 +100,14 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-trash mr-1"></i>
                         </button>
+
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModalSize_<?php echo $row['id']; ?>">
+                            <i class="fa-solid fa-ruler"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModalImage_<?php echo $row['id']; ?>">
+                            <i class="fa-solid fa-image mr-1"></i>
+                        </button>
                     </td>
                 </tr>
             <?php
@@ -206,6 +214,24 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
     include "./pages/Product/ProductConfirmDeletePopup.php";
+}
+?>
+
+<!-- pre display all owning size table popup -->
+<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
+
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/Product/OwningSizeTable.php";
+}
+?>
+
+<!-- pre display all owning image popup -->
+<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
+
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/Product/OwningImageTable.php";
 }
 ?>
 

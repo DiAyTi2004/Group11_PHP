@@ -78,7 +78,7 @@
                             </td>
                         </tr>
 
-                        <tr>
+                        <!-- <tr>
                             <td class="row">
                                 <div class="col-12 col-md-6">
                                     <p><b>Các kích cỡ của sản phẩm:</b></p>
@@ -94,11 +94,11 @@
 
                         <tr>
                             <td colspan="2">
-                                <?php include "./pages/Product/OwningSizeTable.php"; ?>
+                                
                             </td>
-                        </tr>
+                        </tr> -->
 
-                        <tr>
+                        <!-- <tr>
                             <td class="row">
                                 <div class="col-12 col-md-6">
                                     <p><b>Các ảnh của sản phẩm:</b></p>
@@ -114,9 +114,8 @@
 
                         <tr>
                             <td colspan="2">
-                                <?php include "./pages/Product/OwningImageTable.php"; ?>
                             </td>
-                        </tr>
+                        </tr> -->
 
                     </table>
                 </div>
