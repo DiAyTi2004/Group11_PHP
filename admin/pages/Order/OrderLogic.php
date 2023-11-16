@@ -1,7 +1,5 @@
 <?php
 include "../../../common/config/Connect.php";
-$userId  = $_POST['userId'];
-$payment_type_id = $_POST['payment_type_id'];
 $status_id = $_POST['statusId'];
 $dienthoainhan = $_POST['dienthoainhan'];
 $diachinhan = $_POST['diachinhan'];
@@ -22,13 +20,13 @@ function generateUuid()
 }
 if(isset($_POST['addOrder'])){
     $Id =  generateUuid();
-    $add = "INSERT INTO tbl_order(id,user_id,payment_type_id,status_id,receive_phone,receive_address,delivery_cost,description) 
-    VALUES ('".$Id."','".$userId. "','".$payment_type_id. "','".$status_id. "','".$dienthoainhan."','".$diachinhan."','".$phigiaohang."','".$mota."')";  
+    $add = "INSERT INTO tbl_order(id,user_id,status_id,receive_phone,receive_address,delivery_cost,description) 
+    VALUES ('".$Id."','".$userId. "','".$status_id. "','".$dienthoainhan."','".$diachinhan."','".$phigiaohang."','".$mota."')";  
     mysqli_query($connect, $add);
     header('Location:../../AdminIndex.php?workingPage=order');
 }
 else if (isset($_POST['deleteOrder'])) {
-    $id = $_GET['orderId'];
+    $id = $_POST['orderId'];
     echo $id;
     $sql_xoa = "DELETE FROM tbl_order WHERE id ='".$id."'";
     mysqli_query($connect, $sql_xoa);

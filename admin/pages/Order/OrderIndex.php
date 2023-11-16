@@ -27,14 +27,11 @@ if (isset($_GET['search'])) {
     WHERE
         tbl_order. LIKE N'%" . $search . "%'
         OR tbl_payment_type.name  LIKE N'%" . $search . "%'
-    ORDER BY tbl_user.id DESC
     LIMIT $start, $pageSize";
 } else {
     $getTableDataSql = "SELECT * FROM tbl_order
     inner join tbl_user on tbl_order.user_id  = tbl_user.id
     inner join tbl_status  on tbl_status.id = tbl_order.status_id
-    ORDER BY tbl_order.id
-    DESC 
     LIMIT $start, $pageSize";
 }
 
@@ -106,7 +103,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo $row['description'] ?>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addOrder">
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-pencil"></i>
                         </button>
                         <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
@@ -225,11 +222,7 @@ while ($row = mysqli_fetch_array($tableData)) {
 }
 ?>
 <?php
-while ($row = mysqli_fetch_array($tableData)) {
-    include "./pages/Order/OrderLogic.php";
-}
-?>
-<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
 while ($row = mysqli_fetch_array($tableData)) {
     include "./pages/Order/EditOrderPopup.php";
 }
