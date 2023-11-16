@@ -86,7 +86,7 @@
                         <div style="clear: both;"> </div>
 
                         <?php
-                        if (isset($_SESSION['signup'])) {
+                        if (isset($_SESSION['userId'])) {
 
                         ?>
                             <p><a href="UserIndex.php?usingPage=thongtinthanhtoan" class="btn btn-success">Hình thức thanh toán</a></p>

@@ -12,9 +12,9 @@ if (isset($_POST['login'])) {
   if ($count > 0) {
     $row_data = mysqli_fetch_array($row);
 
-    $_SESSION['signup'] = $row_data['taikhoan'];
+    $_SESSION['userId'] = $row_data['id'];
     $_SESSION['email'] = $row_data['email'];
-    $_SESSION['id_khachhang'] = $row_data['id_khachhang'];
+    $_SESSION['username'] = $row_data['username'];
 
     header("Location: ./UserIndex.php");
   } elseif ($username == 'admin') {

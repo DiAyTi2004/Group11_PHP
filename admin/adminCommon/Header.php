@@ -90,17 +90,13 @@
                             <div class="text-end">
                                 <?php
                                 if (isset($_GET['logout']) && $_GET['logout'] == 1) {
-                                    unset($_SESSION['login']);
+                                    unset($_SESSION['userId']);
                                     header('Location: ./adminCommon/Login.php');
                                 }
                                 ?>
                                 <button type="button" class="btn btn-primary">
                                     <i class="fa-solid fa-right-from-bracket mr-1"></i>
                                     Đăng xuất
-                                    <?php if (isset($_SESSION['login'])) {
-                                        echo $_SESSION['login'];
-                                    }
-                                    ?>
                                 </button>
                             </div>
                         </a>

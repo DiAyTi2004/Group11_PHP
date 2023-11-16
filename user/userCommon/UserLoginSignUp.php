@@ -3,30 +3,77 @@ session_start();
 
 include('../../common/config/Connect.php');
 
-if (isset($_POST['login'])) {
+$username = '';
+$password  = '';
+
+if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['password'])) {
     $username = $_POST['username'];
 
-    if ($username == 'admin')
+    if ($username == 'admin') {
         header("Location: ../../admin/adminCommon/Login.php");
+    }
 
     $password = ($_POST['password']);
+    echo "catched 1";
 
-    $findLoginUserSQL = "SELECT * FROM tbl_user WHERE username = '$username' AND password = '$password'";
-    
-    $row = mysqli_query($connect, $findLoginUserSQL);
-    $count = mysqli_num_rows($row);
-    
-    if ($count > 0) {
-        $row_data = mysqli_fetch_array($row);
+    if ($username != '' && $password != '') {
+        $findLoginUserSQL = "SELECT * FROM tbl_user WHERE username = '$username' AND password = '$password'";
+        echo "catched 2";
 
-        $_SESSION['signup'] = $row_data['taikhoan'];
-        $_SESSION['email'] = $row_data['email'];
-        $_SESSION['id_khachhang'] = $row_data['id_khachhang'];
+        $row = mysqli_query($connect, $findLoginUserSQL);
+        $count = mysqli_num_rows($row);
 
-        header("Location: ./UserIndex.php");
+        if ($count > 0) {
+            echo "login success";
+            $row_data = mysqli_fetch_array($row);
+
+            $_SESSION['username'] = $row_data['username'];
+            $_SESSION['email'] = $row_data['email'];
+            $_SESSION['userId'] = $row_data['id'];
+            $_SESSION['userImage'] = $row_data['user_image'];
+
+            header("Location: ./UserIndex.php");
+        } else {
+            $message = "Tài khoản hoặc mật khẩu không đúng";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+        }
+    }
+} else if (isset($_POST['signUp'])) {
+    echo "catched in sign up";
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $passwordConfirmation = $_POST['passwordConfirmation'];
+
+    $findByUsernameSQL = "SELECT * FROM tbl_user WHERE username = '$username'";
+
+    $queryUser = mysqli_query($connect, $findByUsernameSQL);
+    $numsOfUser = mysqli_num_rows($queryUser);
+
+    if ($numsOfUser > 0 || $username == 'admin') {
+        echo '<script>alert("Tên tài khoản đã tồn tại, vui lòng chọn tên tài khoản khác")</script>';
+    } else if ($passwordConfirmation != $password) {
+        echo '<script>alert("Xác nhận mật khẩu không chính xác!")</script>';
     } else {
-        $message = "Tài khoản hoặc mật khẩu không đúng";
-        echo "<script type='text/javascript'>alert('$message');</script>";
+        function generateUuid()
+        {
+            $data = random_bytes(16);
+
+            $data[6] = chr(ord($data[6]) & 0x0F | 0x40);
+            $data[8] = chr(ord($data[8]) & 0x3F | 0x80);
+
+            $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+
+            return $uuid;
+        }
+
+        $userId =  generateUuid();
+        $createUser = "INSERT INTO tbl_user(id, username, password) 
+         VALUES ('" . $userId . "','" . $username . "','" . $password . "')";
+        $res = mysqli_query($connect, $createUser);
+
+        if ($res) {
+            echo '<script>alert("Đăng ký thành công, đăng nhập để bắt đầu trải nghiệm Shop nào!")</script>';
+        }
     }
 }
 
@@ -53,7 +100,7 @@ if (isset($_POST['login'])) {
     <section>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form action="#">
+                <form name="signUp" action="" method="POST">
                     <h1>Đăng ký</h1>
                     <div class="social-container">
                         <a href="https://Github.com/farazc60" target="_blank" class="social"><i class="fab fa-github"></i></a>
@@ -62,19 +109,19 @@ if (isset($_POST['login'])) {
                     </div>
                     <span>Tạo tài khoản mới</span>
                     <label>
-                        <input type="text" placeholder="Tên của bạn" />
+                        <input required name="username" type="text" placeholder="Tên tài khoản" />
                     </label>
                     <label>
-                        <input type="email" placeholder="Tên tài khoản" />
+                        <input required name="password" type="password" placeholder="Mật khẩu" />
                     </label>
                     <label>
-                        <input type="password" placeholder="Mật khẩu" />
+                        <input required name="passwordConfirmation" type="password" placeholder="Xác nhận mật khẩu" />
                     </label>
-                    <button style="margin-top: 9px">Đăng ký</button>
+                    <button style="margin-top: 9px" name="signUp">Đăng ký</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <form action="" method="POST">
+                <form name="login" action="" method="POST">
                     <h1>Đăng nhập</h1>
                     <div class="social-container">
                         <a href="https://Github.com/farazc60" target="_blank" class="social"><i class="fab fa-github"></i></a>
@@ -83,10 +130,10 @@ if (isset($_POST['login'])) {
                     </div>
                     <span> Hoặc đăng nhập bằng tài khoản sẵn có</span>
                     <label>
-                        <input type="username" placeholder="Tên tài khoản" />
+                        <input required name="username" type="text" placeholder="Tên tài khoản" />
                     </label>
                     <label>
-                        <input type="password" placeholder="Mật khẩu" />
+                        <input required name="password" type="password" placeholder="Mật khẩu" />
                     </label>
                     <a href="#">Quên mật khẩu?</a>
                     <button name="login">Đăng nhập</button>
@@ -109,7 +156,6 @@ if (isset($_POST['login'])) {
         </div>
     </section>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js'></script>
-    <script src="script.js"></script>
 </body>
 
 <script>
