@@ -8,7 +8,7 @@ if (isset($_POST['search'])) {
 }
 
 if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == "true") {
-    unset($_SESSION['signup']);
+    unset($_SESSION['userId']);
 }
 
 $usingPage = "";
@@ -71,7 +71,7 @@ if (isset($_GET['usingPage'])) {
                     </a>
                 </div>
                 <?php
-                if (isset($_SESSION['signup'])) {
+                if (isset($_SESSION['userId'])) {
                 ?>
                     <div class="user__section">
                         <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?usingPage=thongtin">
