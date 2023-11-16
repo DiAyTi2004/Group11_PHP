@@ -23,12 +23,15 @@ $getTableDataSql = "";
 
 if (isset($_GET['search'])) {
     $getTableDataSql = "SELECT * FROM tbl_order
-    inner join tbl_status  on tbl_status.id = tbl_order.status_id
+    inner join tbl_user on tbl_order.user_id  = tbl_user.id
     WHERE
         tbl_order. LIKE N'%" . $search . "%'
+        OR tbl_payment_type.name  LIKE N'%" . $search . "%'
     LIMIT $start, $pageSize";
 } else {
     $getTableDataSql = "SELECT * FROM tbl_order
+    inner join tbl_user on tbl_order.user_id  = tbl_user.id
+    inner join tbl_status  on tbl_status.id = tbl_order.status_id
     LIMIT $start, $pageSize";
 }
 
@@ -63,6 +66,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <th class="noWrap">Điện thoại nhận hàng</th>
                 <th class="noWrap">Địa chỉ nhận</th>
                 <th class="noWrap">Phí giao hàng</th>
+                <th class="noWrap">Tình trạng</th>
                 <th class="noWrap">Mô tả</th>
                 <th class="noWrap">Quản lý </th>
             </tr>
@@ -91,6 +95,9 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     </td>
                     <td>
                         <?php echo $row['delivery_cost'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['name'] ?>
                     </td>
                     <td>
                         <?php echo $row['description'] ?>
@@ -200,6 +207,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 <!-- pre display all edit popup -->
 <?php
 $tableData = mysqli_query($connect, $getTableDataSql);
+
 while ($row = mysqli_fetch_array($tableData)) {
     include "./pages/Order/AddOrderPopup.php";
 }
@@ -212,7 +220,6 @@ while ($row = mysqli_fetch_array($tableData)) {
     include "./pages/Order/OrderConfirmDelete.php";
 }
 ?>
-
 <?php
 $tableData = mysqli_query($connect, $getTableDataSql);
 while ($row = mysqli_fetch_array($tableData)) {

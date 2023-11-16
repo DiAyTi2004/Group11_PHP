@@ -15,7 +15,6 @@
                                     <label for="exampleFormControlInput1" class="form-label">Người đặt hàng</label>
                                     <select name="userId" class="form-select" aria-label="Default select example">
                                         <option value="">Chưa chọn</option>
-
                                         <?php
                                         $sql_user = "SELECT * FROM tbl_user";
                                         $query_user = mysqli_query($connect, $sql_user);
@@ -33,7 +32,6 @@
                                     <label for="exampleFormControlInput1" class="form-label">Trạng thái đơn hàng</label>
                                     <select name="statusId" class="form-select" aria-label="Default select example">
                                         <option value="">Chưa chọn</option>
-
                                         <?php
                                         $sql_status = "SELECT * FROM tbl_status";
                                         $query_status = mysqli_query($connect, $sql_status);
@@ -51,32 +49,20 @@
 
                             <td class="row">
                                 <div class="mb-2 col-6">
-                                    <label for="exampleFormControlInput1" class="form-label">Hình thức thanh toán</label>
-                                    <select name="payment_type_id" class="form-select" aria-label="Default select example">
-                                        <option value="">Chưa chọn</option>
-
-                                        <?php
-                                        $sql_payment = "SELECT * FROM tbl_payment_type";
-                                        $query_payment = mysqli_query($connect, $sql_payment);
-                                        while ($row_payment = mysqli_fetch_array($query_payment)) {
-                                        ?>
-                                            <option class="p-2" value="<?php echo $row_payment['id'] ?>">
-                                                <?php echo $row_payment['name'] ?>
-                                            </option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-
-                                <div class="mb-2 col-6">
-                                    <label for="exampleFormControlInput1" class="form-label">Điện thoại nhận hàng</label>
-                                    <input name="dienthoainhan" type="text" class="form-control" id="exampleFormControlInput1">
+                                    <label for="dienthoainhan" class="form-label">Điện thoại nhận hàng</label>
+                                    <input name="dienthoainhan" type="text" class="form-control" id="dienthoainhan">
                                 </div>
                             </td>
+                            <td class="row">
+                                <div class="mb-2 col">
+                                    <label for="code" class="form-label">Code</label>
+                                    <input name="code" type="text" class="form-control" id="code">
 
+                                </div>
+                            </td>
                         </tr>
                         <tr>
+
                             <td class="row">
                                 <div class="mb-2 col">
                                     <label for="diachinhan" class="form-label">Địa chỉ nhận</label>
@@ -88,8 +74,8 @@
                         <tr>
                             <td class="row">
                                 <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">Phí giao hàng</label>
-                                    <input name="phigiaohang" type="text" class="form-control" id="exampleFormControlInput1">
+                                    <label for="phigiaohang" class="form-label">Phí giao hàng</label>
+                                    <input name="phigiaohang" type="text" class="form-control" id="phigiaohang">
                                 </div>
                             </td>
                         </tr>
@@ -97,8 +83,8 @@
                         <tr>
                             <td class="row">
                                 <div class="mb-2 col">
-                                    <label for="diachinhan" class="form-label">Mô tả</label>
-                                    <textarea name="mota" class="form-control" id="diachinhan" rows="3"></textarea>
+                                    <label for="mota" class="form-label">Mô tả</label>
+                                    <textarea name="mota" class="form-control" id="mota" rows="3"></textarea>
                                 </div>
                             </td>
                         </tr>

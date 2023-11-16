@@ -43,7 +43,14 @@
             include("./pages/PaymentType/AddPaymentTypePopup.php");
             include("./pages/PaymentType/EditPaymentTypePopup.php");
             include("./pages/PaymentType/ConfirmDeletePaymentTypePopup.php");
-        } else {
+        }
+        else if($workingPage == 'order_detail'){
+            include("./pages/OrderDetail/OrderDetailIndex.php");
+            include("./pages/OrderDetail/AddOrderDetailPopup.php");
+            include("./pages/OrderDetail/EditOrderDetailPopup.php");
+            include("./pages/OrderDetail/OrderDetailConfirmDelete.php");
+        }
+         else {
             include("./pages/Dashboard/DashboardIndex.php");
         }
         ?>

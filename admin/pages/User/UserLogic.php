@@ -31,8 +31,6 @@ if (isset($_POST['addUser'])) {
     $sql_addUser = "INSERT INTO tbl_user(id, code, user_image, fullname, username, email, phonenumber,address) 
          VALUES ('" . $userId . "','" . $code . "','" . $hinhanh . "','" . $tennguoidung . "','" . $taikhoan . "','" . $email . "','" . $phonenumber . "','" . $diachi . "')";
     mysqli_query($connect, $sql_addUser);
-    
-header('Location:../../AdminIndex.php?workingPage=user');
 } else if (isset($_POST['editUser'])) {
     if ($file != '') {
         move_uploaded_file($hinhanh_tmp, 'UserImages/' . $hinhanh);

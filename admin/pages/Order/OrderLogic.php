@@ -1,10 +1,6 @@
 <?php
 include "../../../common/config/Connect.php";
-$status_id = $_POST['statusId'];
-$dienthoainhan = $_POST['dienthoainhan'];
-$diachinhan = $_POST['diachinhan'];
-$phigiaohang = $_POST['phigiaohang'];
-$mota = $_POST['mota'];
+
 
 
 function generateUuid()
@@ -18,17 +14,37 @@ function generateUuid()
     $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     return $uuid;
 }
-if(isset($_POST['addOrder'])){
+if (isset($_POST['addOrder'])) {
+    $code  = $_POST['code'];
+    $dienthoainhan = $_POST['dienthoainhan'];
+    $diachinhan = $_POST['diachinhan'];
+    $phigiaohang = $_POST['phigiaohang'];
+    $mota = $_POST['mota'];
+    $userId = $_POST['userId'];
+    $status_id = $_POST['statusId'];
     $Id =  generateUuid();
-    $add = "INSERT INTO tbl_order(id,user_id,status_id,receive_phone,receive_address,delivery_cost,description) 
-    VALUES ('".$Id."','".$userId. "','".$status_id. "','".$dienthoainhan."','".$diachinhan."','".$phigiaohang."','".$mota."')";  
+    $add = "INSERT INTO tbl_order(id,code,user_id,status_id,receive_phone,receive_address,delivery_cost,description) 
+    VALUES ('" . $Id . "','" . $code . "','" . $userId . "','" . $status_id . "','" . $dienthoainhan . "','" . $diachinhan . "','" . $phigiaohang . "','" . $mota . "')";
     mysqli_query($connect, $add);
     header('Location:../../AdminIndex.php?workingPage=order');
-}
-else if (isset($_POST['deleteOrder'])) {
-    $id = $_POST['orderId'];
-    echo $id;
-    $sql_xoa = "DELETE FROM tbl_order WHERE id ='".$id."'";
+} else if (isset($_POST['editOrder'])) {
+    $code  = $_POST['code'];
+    $dienthoainhan = $_POST['dienthoainhan'];
+    $diachinhan = $_POST['diachinhan'];
+    $phigiaohang = $_POST['phigiaohang'];
+    $mota = $_POST['mota'];
+    $sql_editOrder = "UPDATE tbl_order 
+    SET code='" . $code . "',
+    receive_phone='" . $dienthoainhan . "',
+    receive_address = '" . $diachinhan . "',
+    delivery_cost = '" . $phigiaohang . "' , 
+    description = '" . $mota . "'
+    WHERE id ='$_GET[orderId]' ";
+    $query = mysqli_query($connect, $sql_editOrder);
+    header('Location:../../AdminIndex.php?workingPage=order');
+} else if (isset($_POST['deleteOrder'])) {
+    $deleteOrder = $_GET['orderId'];
+    $sql_xoa = "DELETE FROM tbl_order WHERE id ='$_GET[orderId]';";
     mysqli_query($connect, $sql_xoa);
     header('Location:../../AdminIndex.php?workingPage=order');
 }
