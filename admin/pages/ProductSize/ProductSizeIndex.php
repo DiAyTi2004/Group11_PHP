@@ -153,7 +153,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <li class="page-item">
                     <?php
                     if ($pageIndex > 1 && $total_page > 1) {
-                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
+                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=productSize&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
                         Previous
                         </a>';
                     }
@@ -164,11 +164,11 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 for ($i = 1; $i <= $total_page; $i++) {
                     if ($i == $pageIndex) {
                         echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=productSize&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                     } else {
                         echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                        <a name="page" class="page-link text-reset text-black" href="?workingPage=productSize&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                         </li>';
                     }
                 }
@@ -177,7 +177,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <?php
                 if ($pageIndex < $total_page && $total_page > 1) {
                     echo '<li class="page-item light">
-                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=productSize&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
                     Next
                     </a>
                     </li>';

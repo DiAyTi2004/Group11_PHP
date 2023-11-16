@@ -1,13 +1,13 @@
 <!-- Modal -->
-<div class="modal fade" id="addProductSizeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addOrderDetailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-dark">
-                <h5 class="text-center text-white">Thêm chi tiết cho sản phẩm <?php echo $orderCode; ?></h5>
+                <h5 class="text-center text-white">Thêm sản phẩm cho đơn hàng <?php echo $orderCode; ?></h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="ProductSizeForm" method="POST" action="pages/OrderDetail/OrderDetailLogic.php?orderId=<?php echo $orderId; ?>" enctype="multipart/form-data">
+                <form id="OrderDetailForm" method="POST" action="pages/OrderDetail/OrderDetailLogic.php?orderId=<?php echo $orderId; ?>" enctype="multipart/form-data">
                     <table border="1" width="100%" padding="10px">
                         <tr>
                             <td class="row">
