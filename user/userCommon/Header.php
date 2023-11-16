@@ -101,6 +101,12 @@ if (isset($_GET['usingPage'])) {
                             <i class="fa-solid fa-user-plus"></i>
                         </a>
                     </div>
+
+                    <div class="user__section">
+                        <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserLoginSignUp.php">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                        </a>
+                    </div>
                 <?php
                 }
                 ?>
