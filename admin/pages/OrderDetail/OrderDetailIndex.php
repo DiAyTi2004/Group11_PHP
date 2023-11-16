@@ -9,6 +9,7 @@ if (isset($_GET['orderId'])) {
 }
 
 $getTableDataSql = "SELECT * FROM tbl_order WHERE id = '$orderId'";
+
 $tableData = mysqli_query($connect, $getTableDataSql);
 while ($row = mysqli_fetch_array($tableData)) {
     $orderCode = $row['code'];
@@ -38,20 +39,21 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 <div class="text-left flex justify-between">
     <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addProductSizeModal">
         <i class="fa-solid fa-plus"></i>
-        Thêm chi tiết đơn hàng
+        Thêm sản phẩm cho đơn hàng
     </button>
 </div>
 
 <div class="container p-0">
     <table class="w-100">
-        <legend class="text-center"><b>Chỉnh sửa chi tiết đơn hàng <?php echo $orderCode; ?> <?php if (trim($orderCode) != "") echo '(Mã SP: ' . trim($orderCode) . ')'; ?> </b></legend>
+        <legend class="text-center"><b>Cập nhật sản phẩm cho đơn hàng <?php if (trim($orderCode) != "") echo $orderCode; ?></b></legend>
 
         <thead class="table-head w-100">
             <tr class="table-heading">
                 <th class="noWrap">STT</th>
-                <th class="noWrap">Mã kích cỡ</th>
-                <th class="noWrap">Kích cỡ</th>
-                <th class="noWrap">Số lượng còn</th>
+                <th class="noWrap">Mã sản phẩm</th>
+                <th class="noWrap">Tên sản phẩm</th>
+                <th class="noWrap">Số lượng</th>
+                <th class="noWrap">Đơn giá</th>
                 <th class="noWrap">Quản lý</th>
             </tr>
         </thead>
@@ -79,20 +81,23 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                     </td>
                     <td>
-                        <?php echo $sizeCode; ?>
+                        <?php echo $rowOwningData['code'] ?>
                     </td>
                     <td>
-                        <?php echo $sizeName; ?>
+                        <?php echo $rowOwningData['name'] ?>
                     </td>
                     <td>
-                        <?php echo $row['quantity']; ?>
+                        <?php echo $rowOwningData['quantity'] ?>
+                    </td>
+                    <td>
+                        <?php echo $rowOwningData['unit_price'] ?>
                     </td>
                     <td>
                         <div style="min-width: 150px;">
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['product_id']; ?>_<?php echo $row['size_id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['order_id']; ?>_<?php echo $row['product_id']; ?>">
                                 <i class="fa-solid fa-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeletePopup_<?php echo $row['product_id']; ?>_<?php echo $row['size_id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeletePopup_<?php echo $row['order_id']; ?>_<?php echo $row['product_id']; ?>">
                                 <i class="fa-solid fa-trash mr-1"></i>
                             </button>
                         </div>
@@ -103,7 +108,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             if (!$hasData) {
             ?>
                 <tr>
-                    <td colspan="5">
+                    <td colspan="6">
                         Chưa có dữ liệu
                     </td>
                 </tr>
@@ -199,7 +204,7 @@ while ($row = mysqli_fetch_array($tableData)) {
 $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
-    include "./pages/ProductSize/ConfirmDeleteProductSizePopup.php";
+    include "./pages/ProductSize/ConfirmDeleteOrderDetailPopup.php";
 }
 ?>
 

@@ -1,9 +1,9 @@
-<div class="modal fade" id="editPopup_<?php echo $row['product_id']; ?>_<?php echo $row['size_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editPopup_<?php echo $row['order_id']; ?>_<?php echo $row['product_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <form method="POST" action="pages/ProductSize/ProductSizeLogic.php?productId=<?php echo $row['product_id']; ?>&sizeId=<?php echo $row['size_id']; ?>" enctype="multipart/form-data">
+        <form method="POST" action="pages/ProductSize/ProductSizeLogic.php?productId=<?php echo $row['order_id']; ?>&sizeId=<?php echo $row['product_id']; ?>" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
-                    <h5 class="text-center text-white">Cập nhật kích cỡ sản phẩm <?php echo $productCode; ?></h5>
+                    <h5 class="text-center text-white">Cập nhật sản phẩm trong đơn hàng<?php echo $productCode; ?></h5>
 
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

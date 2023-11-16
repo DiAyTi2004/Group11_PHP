@@ -1,4 +1,3 @@
-<!-- Modal -->
 <div class="modal fade" id="addOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -13,7 +12,7 @@
                             <td class="row">
                                 <div class="mb-2 col-6">
                                     <label for="exampleFormControlInput1" class="form-label">Người đặt hàng</label>
-                                    <select name="userId" class="form-select" aria-label="Default select example">
+                                    <select required name="userId" class="form-select" aria-label="Default select example">
                                         <option value="">Chưa chọn</option>
                                         <?php
                                         $sql_user = "SELECT * FROM tbl_user";
@@ -21,7 +20,13 @@
                                         while ($row_user = mysqli_fetch_array($query_user)) {
                                         ?>
                                             <option class="p-2" value="<?php echo $row_user['id'] ?>">
-                                                <?php echo $row_user['fullname'] ?>
+                                                <?php
+                                                if (trim($row_user['fullname']) == "") {
+                                                    echo $row_user['username'];
+                                                } else {
+                                                    echo $row_user['fullname'] . ' - ' . $row_user['username'];
+                                                }
+                                                ?>
                                             </option>
                                         <?php
                                         }
@@ -49,24 +54,21 @@
 
                             <td class="row">
                                 <div class="mb-2 col-6">
+                                    <label for="code" class="form-label">Mã đơn hàng</label>
+                                    <input required name="code" type="text" class="form-control" id="code" value="<?php
+                                                                                                                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                                                                                                                    $code = '';
+
+                                                                                                                    for ($i = 0; $i < 8; $i++) {
+                                                                                                                        $code .= $characters[rand(0, strlen($characters) - 1)];
+                                                                                                                    }
+
+                                                                                                                    echo $code;
+                                                                                                                    ?>">
+                                </div>
+                                <div class="mb-2 col-6">
                                     <label for="dienthoainhan" class="form-label">Điện thoại nhận hàng</label>
-                                    <input name="dienthoainhan" type="text" class="form-control" id="dienthoainhan">
-                                </div>
-                            </td>
-                            <td class="row">
-                                <div class="mb-2 col">
-                                    <label for="code" class="form-label">Code</label>
-                                    <input name="code" type="text" class="form-control" id="code">
-
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td class="row">
-                                <div class="mb-2 col">
-                                    <label for="diachinhan" class="form-label">Địa chỉ nhận</label>
-                                    <textarea name="diachinhan" class="form-control" id="diachinhan" rows="3"></textarea>
+                                    <input required name="dienthoainhan" type="text" class="form-control" id="dienthoainhan">
                                 </div>
                             </td>
                         </tr>
@@ -75,7 +77,16 @@
                             <td class="row">
                                 <div class="mb-2 col">
                                     <label for="phigiaohang" class="form-label">Phí giao hàng</label>
-                                    <input name="phigiaohang" type="text" class="form-control" id="phigiaohang">
+                                    <input required name="phigiaohang" type="number" step="0.01" class="form-control" id="phigiaohang">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="row">
+                                <div class="mb-2 col">
+                                    <label for="diachinhan" class="form-label">Địa chỉ nhận</label>
+                                    <textarea required name="diachinhan" class="form-control" id="diachinhan" rows="3"></textarea>
                                 </div>
                             </td>
                         </tr>

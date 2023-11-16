@@ -1,4 +1,4 @@
-<div class="modal fade" id="confirmDeletePopup_<?php echo $row['product_id']; ?>_<?php echo $row['size_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmDeletePopup_<?php echo $row['order_id']; ?>_<?php echo $row['product_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-dark">
@@ -9,7 +9,7 @@
                 <form id="eventForm" method="POST" action="pages/ProductSize/ProductSizeLogic.php?productId=<?php echo $row['product_id']; ?>&sizeId=<?php echo $row['size_id']; ?>" enctype="multipart/form-data">
                     <table border="1" width="100%" padding="10px" style="border-collapse: collapse;">
                         <p class="p-4 m-0">
-                            Bạn có chắc chắn muốn kích thước này của sản phẩm?
+                            Bạn có chắc chắn muốn xóa sản phẩm này khỏi đơn hàng?
                         </p>
                     </table>
 
