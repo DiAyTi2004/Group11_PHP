@@ -1,9 +1,13 @@
+<?php
+
+?>
+
 <div class="modal fade" id="editPopup_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <form method="POST" action="pages/User/UserLogic.php?userId=<?php echo $row['id']; ?>" enctype="multipart/form-data">
+        <form method="POST" action="pages/Order/OrderLogic.php?orderId=<?php echo $row['id'] ?>" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
-                    <h5 class="text-center text-white">Sửa người dùng</h5>
+                    <h5 class="text-center text-white">Sửa đơn hàng</h5>
 
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -14,7 +18,7 @@
                             <td class="row">
                                 <div class="mb-2 col">
                                     <label for="exampleFormControlInput1" class="form-label">
-                                        Tên người dùng
+                                        Mã đơn hàng
                                     </label>
                                     <input type="text" value="<?php echo $row['fullname'] ?>" name="tennguoidung" class="form-control" id="exampleFormControlInput1">
 
@@ -78,47 +82,11 @@
                             </td>
                         </tr>
 
-
-
-                        <tr>
-                            <td>Chức Vụ </td>
-                            <td>
-                                <select name="chucvu" style="width: 120px">
-                                    <?php
-                                    if ($nguoidung['chucvu'] == 1) {
-                                    ?>
-                                        <option value="1" selected> Bán hàng</option>
-                                        <option value="0">Không</option>
-
-                                    <?php
-                                    } else
-                                    ?>
-                                    <option value="1"> Bán hàng</option>
-                                    <option value="0" selected>Không</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                        <tr>
-                            <td>
-                                <div class="col-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                        <label class="form-check-label" for="invalidCheck">
-                                            Bạn chắc chắn về thông tin sửa người dùng?
-                                        </label>
-                                        <div class="invalid-feedback">
-                                            You must agree before submitting.
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary" name="editUser">Sửa</button>
+                    <button type="submit" class="btn btn-primary" name="editOrder">Sửa</button>
                 </div>
             </div>
         </form>
