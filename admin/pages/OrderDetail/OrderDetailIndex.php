@@ -1,9 +1,23 @@
-<link rel="stylesheet" href="./styles/ProductStyles.css">
+<link rel="stylesheet" href="./styles/EventStyles.css">
 
 <?php
-$countAllSql = "SELECT * FROM tbl_order 
-inner join tbl_user on tbl_order.user_id  = tbl_user.id
-inner join tbl_status  on tbl_status.id = tbl_order.status_id;";
+$orderId = '';
+$orderCode = "";
+
+if (isset($_GET['orderId'])) {
+    $orderId = $_GET['orderId'];
+}
+
+$getTableDataSql = "SELECT * FROM tbl_order WHERE id = '$orderId'";
+$tableData = mysqli_query($connect, $getTableDataSql);
+while ($row = mysqli_fetch_array($tableData)) {
+    $orderCode = $row['code'];
+}
+?>
+
+<?php
+
+$countAllSql = "SELECT * FROM tbl_order_detail WHERE order_id = '$orderId'";
 $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
 
 $pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -13,62 +27,32 @@ $total_page = ceil($total_records / $pageSize);
 
 $start = ($pageIndex - 1) * $pageSize;
 
-$search = '';
-
-if (isset($_GET['search']) && !empty($_GET['search'])) {
-    $search = $_GET['search'];
-}
-
 $getTableDataSql = "";
 
-if (isset($_GET['search'])) {
-    $getTableDataSql = "SELECT * FROM tbl_order
-    inner join tbl_user on tbl_order.user_id  = tbl_user.id
-    WHERE
-        tbl_order. LIKE N'%" . $search . "%'
-        OR tbl_payment_type.name  LIKE N'%" . $search . "%'
+$getTableDataSql = "SELECT * FROM tbl_order_detail WHERE order_id = '$orderId'
     LIMIT $start, $pageSize";
-} else {
-    $getTableDataSql = "SELECT * FROM tbl_order
-    inner join tbl_user on tbl_order.user_id  = tbl_user.id
-    inner join tbl_status  on tbl_status.id = tbl_order.status_id
-    LIMIT $start, $pageSize";
-}
 
 $tableData = mysqli_query($connect, $getTableDataSql);
 ?>
 
 <div class="text-left flex justify-between">
-    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addOrder">
+    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addProductSizeModal">
         <i class="fa-solid fa-plus"></i>
-        Thêm đơn hàng
+        Thêm chi tiết đơn hàng
     </button>
-
-
-    <div class="input-group mb-3 align-center mt-3 w-40">
-        <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" name="search" id="search-input" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" id="search-button" onclick="performSearch()" name="ok">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            Search
-        </button>
-    </div>
-
 </div>
 
 <div class="container p-0">
     <table class="w-100">
-        <legend class="text-center"><b>Quản lý đơn hàng</b></legend>
+        <legend class="text-center"><b>Chỉnh sửa chi tiết đơn hàng <?php echo $orderCode; ?> <?php if (trim($orderCode) != "") echo '(Mã SP: ' . trim($orderCode) . ')'; ?> </b></legend>
 
         <thead class="table-head w-100">
             <tr class="table-heading">
                 <th class="noWrap">STT</th>
-                <th class="noWrap">Mã đơn hàng</th>
-                <th class="noWrap">Điện thoại nhận hàng</th>
-                <th class="noWrap">Địa chỉ nhận</th>
-                <th class="noWrap">Phí giao hàng</th>
-                <th class="noWrap">Tình trạng</th>
-                <th class="noWrap">Mô tả</th>
-                <th class="noWrap">Quản lý </th>
+                <th class="noWrap">Mã kích cỡ</th>
+                <th class="noWrap">Kích cỡ</th>
+                <th class="noWrap">Số lượng còn</th>
+                <th class="noWrap">Quản lý</th>
             </tr>
         </thead>
 
@@ -76,48 +60,50 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             <?php
             $displayOrder = 0;
             $hasData = false;
+
             while ($row = mysqli_fetch_array($tableData)) {
                 $displayOrder++;
                 $hasData = true;
+
+                $getSizeSQL = "SELECT * FROM tbl_size WHERE id = '$row[size_id]';";
+                $sizeData = mysqli_query($connect, $getSizeSQL);
+                $sizeCode = '';
+                $sizeName = '';
+                while ($sizeRow = mysqli_fetch_array($sizeData)) {
+                    $sizeCode = $sizeRow['code'];
+                    $sizeName = $sizeRow['name'];
+                }
             ?>
                 <tr>
                     <td>
-                        <?php echo $displayOrder + ($pageIndex - 1) * $pageSize; ?>
-                    </td>
-                    <td class="tensanpham">
-                        <?php echo $row['code'] ?>
+                        <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                     </td>
                     <td>
-                        <?php echo $row['receive_phone'] ?>
+                        <?php echo $sizeCode; ?>
                     </td>
                     <td>
-                        <?php echo $row['receive_address'] ?>
+                        <?php echo $sizeName; ?>
                     </td>
                     <td>
-                        <?php echo $row['delivery_cost'] ?>
+                        <?php echo $row['quantity']; ?>
                     </td>
                     <td>
-                        <?php echo $row['name'] ?>
-                    </td>
-                    <td>
-                        <?php echo $row['description'] ?>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
-                            <i class="fa-solid fa-pencil"></i>
-                        </button>
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
-                            <i class="fa-solid fa-trash mr-1"></i>
-                        </button>
+                        <div style="min-width: 150px;">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['product_id']; ?>_<?php echo $row['size_id']; ?>">
+                                <i class="fa-solid fa-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeletePopup_<?php echo $row['product_id']; ?>_<?php echo $row['size_id']; ?>">
+                                <i class="fa-solid fa-trash mr-1"></i>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             <?php
             }
-
             if (!$hasData) {
             ?>
                 <tr>
-                    <td colspan="8">
+                    <td colspan="5">
                         Chưa có dữ liệu
                     </td>
                 </tr>
@@ -135,12 +121,9 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <form action="" method="GET">
                     <label for="limitSelect">Rows per page:</label>
                     <select name="limit" id="limitSelect" onchange="updatePageAndLimit()">
-                        <option value="5" <?php if ($pageSize == 5)
-                                                echo 'selected'; ?>>5</option>
-                        <option value="10" <?php if ($pageSize == 10)
-                                                echo 'selected'; ?>>10</option>
-                        <option value="15" <?php if ($pageSize == 15)
-                                                echo 'selected'; ?>>15</option>
+                        <option value="5" <?php if ($pageSize == 5) echo 'selected'; ?>>5</option>
+                        <option value="10" <?php if ($pageSize == 10) echo 'selected'; ?>>10</option>
+                        <option value="15" <?php if ($pageSize == 15) echo 'selected'; ?>>15</option>
                     </select>
                 </form>
 
@@ -148,12 +131,10 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     function updatePageAndLimit() {
                         const selectedLimit = document.getElementById("limitSelect").value;
 
-                        // Tạo một URL mới với giá trị page và limit mới
                         const url = new URL(window.location.href);
                         url.searchParams.set("page", "1"); // Đặt page thành 1
                         url.searchParams.set("limit", selectedLimit);
 
-                        // Chuyển hướng đến URL mới
                         window.location.href = url.toString();
                     }
                 </script>
@@ -169,7 +150,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <li class="page-item">
                     <?php
                     if ($pageIndex > 1 && $total_page > 1) {
-                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=order&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
+                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
                         Previous
                         </a>';
                     }
@@ -180,11 +161,11 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 for ($i = 1; $i <= $total_page; $i++) {
                     if ($i == $pageIndex) {
                         echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=order&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                     } else {
                         echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?workingPage=order&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                        <a name="page" class="page-link text-reset text-black" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                         </li>';
                     }
                 }
@@ -193,7 +174,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <?php
                 if ($pageIndex < $total_page && $total_page > 1) {
                     echo '<li class="page-item light">
-                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=order&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=event&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
                     Next
                     </a>
                     </li>';
@@ -209,21 +190,16 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
-    include "./pages/Order/AddOrderPopup.php";
+    include "./pages/OrderDetail/EditOrderDetailPopup.php";
 }
 ?>
 
 <!-- pre display all confirm delete popup -->
 <?php
 $tableData = mysqli_query($connect, $getTableDataSql);
+
 while ($row = mysqli_fetch_array($tableData)) {
-    include "./pages/Order/OrderConfirmDelete.php";
-}
-?>
-<?php
-$tableData = mysqli_query($connect, $getTableDataSql);
-while ($row = mysqli_fetch_array($tableData)) {
-    include "./pages/Order/EditOrderPopup.php";
+    include "./pages/ProductSize/ConfirmDeleteProductSizePopup.php";
 }
 ?>
 
@@ -232,7 +208,7 @@ while ($row = mysqli_fetch_array($tableData)) {
         var searchValue = document.getElementById('search-input').value;
         var limit = <?php echo $pageSize; ?>;
         var page = <?php echo $pageIndex; ?>;
-        var url = '?workingPage=order';
+        var url = '?workingPage=productSize';
         if (searchValue.trim() !== '') {
             url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
 

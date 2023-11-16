@@ -3,7 +3,7 @@
         <form method="POST" action="pages/Order/OrderLogic.php?orderId=<?php echo $row['id']; ?>" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
-                    <h5 class="text-center text-white">Sửa đơn hàng <?php echo $row['id']; ?></h5>
+                    <h5 class="text-center text-white">Sửa đơn hàng <?php echo $row['code']; ?></h5>
 
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -64,9 +64,9 @@
                                     <p><b>Các chi tiết của đơn hàng:</b></p>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <a class='btn btn-primary text-white productSizeButton color-white display-block h-100 w-100' href="?workingPage=productSize&productId=<?php echo $row['id']; ?>">
+                                    <a class='btn btn-primary text-white productSizeButton color-white display-block h-100 w-100' href="?workingPage=order_detail&orderId=<?php echo $row['id']; ?>">
                                         <i class="fa-solid fa-pen-to-square text-white mr-1"></i>
-                                        Chỉnh sửa chi tiết đơn hàng
+                                        Chỉnh sửa chi tiết đơn hàng 
                                     </a>
                                 </div>
                             </td>
