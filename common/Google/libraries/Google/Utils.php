@@ -25,9 +25,9 @@ class Google_Utils
   {
     $b64 = base64_encode($data);
     $b64 = str_replace(
-        array('+', '/', '\r', '\n', '='),
-        array('-', '_'),
-        $b64
+      array('+', '/', '\r', '\n', '='),
+      array('-', '_'),
+      $b64
     );
     return $b64;
   }
@@ -35,9 +35,9 @@ class Google_Utils
   public static function urlSafeB64Decode($b64)
   {
     $b64 = str_replace(
-        array('-', '_'),
-        array('+', '/'),
-        $b64
+      array('-', '_'),
+      array('+', '/'),
+      $b64
     );
     return base64_decode($b64);
   }
@@ -61,12 +61,12 @@ class Google_Utils
   {
     $strlenVar = strlen($str);
     $d = $ret = 0;
-    for ($count = 0; $count < $strlenVar; ++ $count) {
-      $ordinalValue = ord($str{$ret});
+    for ($count = 0; $count < $strlenVar; ++$count) {
+      $ordinalValue = ord($str[$ret]);
       switch (true) {
         case (($ordinalValue >= 0x20) && ($ordinalValue <= 0x7F)):
           // characters U-00000000 - U-0000007F (same as ASCII)
-          $ret ++;
+          $ret++;
           break;
         case (($ordinalValue & 0xE0) == 0xC0):
           // characters U-00000080 - U-000007FF, mask 110XXXXX
@@ -94,7 +94,7 @@ class Google_Utils
           $ret += 6;
           break;
         default:
-          $ret ++;
+          $ret++;
       }
     }
     return $ret;

@@ -1,10 +1,10 @@
 <?php
 session_start();
+include('../../common/config/Connect.php');
 
 //Handle login with google
 include('../../common/GoogleLogin.php');
 
-include('../../common/config/Connect.php');
 
 //Handle login with fb
 include('../../common/facebook_source.php');
@@ -22,17 +22,14 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
     }
 
     $password = ($_POST['password']);
-    echo "catched 1";
 
     if ($username != '' && $password != '') {
         $findLoginUserSQL = "SELECT * FROM tbl_user WHERE username = '$username' AND password = '$password'";
-        echo "catched 2";
 
         $row = mysqli_query($connect, $findLoginUserSQL);
         $count = mysqli_num_rows($row);
 
         if ($count > 0) {
-            echo "login success";
             $row_data = mysqli_fetch_array($row);
 
             $_SESSION['username'] = $row_data['username'];
@@ -47,7 +44,6 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
         }
     }
 } else if (isset($_POST['signUp'])) {
-    echo "catched in sign up";
     $username = $_POST['username'];
     $password = $_POST['password'];
     $passwordConfirmation = $_POST['passwordConfirmation'];
