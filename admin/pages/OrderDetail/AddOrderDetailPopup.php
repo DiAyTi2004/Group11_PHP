@@ -13,35 +13,33 @@
                             <td class="row">
                                 <div class="mb-2 col">
                                     <label for="code" class="form-label">Mã đơn hàng</label>
-                                    <input name="code" type="text" class="form-control" value="<?php echo $orderCode; ?>" disabled id="code">
+                                    <input name="orderCode" type="text" class="form-control" value="<?php echo $orderCode; ?>" disabled id="code">
                                 </div>
-                                <div class="mb-2 col">
-                                    <label for="name" class="form-label">Người đặt</label>
-                                    <input name="name" type="text" class="form-control" value="<?php echo $username; ?>" disabled id="name">
-                                </div>
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td class="row">
                                 <div class="mb-2 col">
-                                    <label for="sizeId" class="form-label">Size</label>
-                                    <select name="sizeId" class="form-select" required>
-                                        <option value="">Chưa chọn</option>
+                                    <label for="productId" class="form-label">Sản phẩm:</label>
+                                    <select name="productId" class="form-select" required>
+                                        <option class="p-2" value="">Chưa chọn</option>
                                         <?php
-                                        $getAllsizeSql = "SELECT * FROM tbl_size WHERE id NOT IN (SELECT size_id FROM tbl_product_size WHERE product_id = '$productId');";
-                                        $sizeData = mysqli_query($connect, $getAllsizeSql);
+                                        $getAllproductSql = "SELECT * FROM tbl_product WHERE id NOT IN (SELECT product_id FROM tbl_order_detail WHERE product_id = '$productId');";
+                                        $productData = mysqli_query($connect, $getAllproductSql);
 
-                                        while ($rowSize = mysqli_fetch_array($sizeData)) {
+                                        while ($rowproduct = mysqli_fetch_array($productData)) {
                                         ?>
-                                            <option value="<?php echo $rowSize['id'] ?>">
-                                                <?php echo $rowSize['name'] ?>
+                                            <option class="p-2" value="<?php echo $rowproduct['id'] ?>">
+                                                <?php echo $rowproduct['name'] . ' - ' . $rowproduct['code'] ?>
                                             </option>
                                         <?php
                                         }
                                         ?>
                                     </select>
                                 </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="row">
+
 
                                 <div class="mb-2 col">
                                     <label for="quantity" class="form-label">Số lượng còn</label>

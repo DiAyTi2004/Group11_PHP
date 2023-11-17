@@ -331,7 +331,7 @@ create table tbl_product (
 create table tbl_user (
   id varchar(36) primary key not null,
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  user_image varchar(100),
+  user_image LONGTEXT,
   fullname varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   username varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   password varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,

@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+//Handle login with google
+include('../../common/GoogleLogin.php');
+
 include('../../common/config/Connect.php');
 
 $username = '';
@@ -105,7 +108,12 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
                     <div class="social-container">
                         <a href="https://Github.com/farazc60" target="_blank" class="social"><i class="fab fa-github"></i></a>
                         <a href="https://Codepen.io/codewithfaraz" target="_blank" class="social"><i class="fab fa-codepen"></i></a>
-                        <a href="mailto:farazc60@gmail.com" target="_blank" class="social"><i class="fab fa-google"></i></a>
+
+                        <!-- login with google  -->
+                        <?php if (isset($authUrl)) { ?>
+                            <a href="<?php echo $authUrl; ?>" target="_blank" class="social"><i class="fab fa-google"></i></a>
+                        <?php } ?>
+
                     </div>
                     <span>Tạo tài khoản mới</span>
                     <label>
@@ -126,7 +134,12 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
                     <div class="social-container">
                         <a href="https://Github.com/farazc60" target="_blank" class="social"><i class="fab fa-github"></i></a>
                         <a href="https://Codepen.io/codewithfaraz" target="_blank" class="social"><i class="fab fa-codepen"></i></a>
-                        <a href="mailto:farazc60@gmail.com" target="_blank" class="social"><i class="fab fa-google"></i></a>
+
+                        <!-- login with google  -->
+                        <?php if (isset($authUrl)) { ?>
+                            <a href="<?php echo $authUrl; ?>" target="_blank" class="social"><i class="fab fa-google"></i></a>
+                        <?php } ?>
+
                     </div>
                     <span> Hoặc đăng nhập bằng tài khoản sẵn có</span>
                     <label>
