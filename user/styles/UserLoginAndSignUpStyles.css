@@ -14,12 +14,32 @@ body {
     overflow: hidden;
     /* background-image: url('../userCommon/images/logo.svg'); */
     background-image: url(https://static.vecteezy.com/system/resources/previews/010/617/206/original/landscape-cartoon-scene-with-green-trees-on-hills-and-white-fluffy-cloud-in-summer-blue-sky-background-vector.jpg);
-
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
 
+}
+.top_link {
+    position: absolute;
+    height: 30px;
+    width: 200px;
+    left: -32px;
+    /* text-align: left; */
+    top: 32px;
+}
+
+.top_link a {
+    text-decoration: none;
+    color: black;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 15px;
+    display: flex;
+    background-color: white;
+    font-weight: bold;
+    border-radius: 10px;
 }
 
 .ocean {
@@ -77,12 +97,13 @@ body {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    display: flex;
+     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: -20px 0 50px;
+    position: relative;
 }
 
 h1 {
@@ -102,12 +123,12 @@ span {
     font-size: 12px;
 }
 
-a {
+ a {
     color: #0e263d;
     font-size: 14px;
     text-decoration: none;
     margin: 15px 0;
-}
+} 
 
 .container {
     background: #fff;

@@ -93,14 +93,22 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'>
     <link rel="stylesheet" href="../styles/UserLoginAndSignUpStyles.css" />
+
+
 </head>
 
 <body>
+        <img src="./images/logo.svg" alt="" style="width: 120px;position: absolute; top: 0 ; right: 10px">
+        <a href="../../index.php" class="p-2 bg-white top_link" style="border-radius: 10px; position: absolute;top: 0;left:10px;font-weight: bold;">
+            <i class="fa-solid fa-circle-chevron-left"></i>
+            Về trang chủ
+        </a>
     <div class="ocean">
         <div class="wave"></div>
         <div class="wave"></div>
     </div>
     <!-- Log In Form Section -->
+
     <section>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
