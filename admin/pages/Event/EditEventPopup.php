@@ -1,4 +1,4 @@
-<div class="modal fade" id="editEventPopup_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editEventModal_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <form method="POST" action="pages/Event/EventLogic.php?id=<?php echo $row['id']; ?>" enctype="multipart/form-data">
             <div class="modal-content">
