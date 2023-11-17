@@ -105,26 +105,29 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     </td>
                     <td>
                         <div style="min-width: 150px;">
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editEventPopup_<?php echo $row['id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editEventModal_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteEventPopup_<?php echo $row['id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteEventModal_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-trash mr-1"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#EventProductsModal_<?php echo $row['id']; ?>">
+                                <i class="fa-solid fa-table text-white mb-2"></i>
                             </button>
                         </div>
                     </td>
                 </tr>
             <?php
             }
-            if($total_records == 0){
-                ?>
-                    <tr>
-                        <td colspan="9">
-                            <?php echo "Hiện không có sự kiện nào!"?>
-                        </td>
-                    </tr>
-                <?php
-                }
+            if ($total_records == 0) {
+            ?>
+                <tr>
+                    <td colspan="9">
+                        <?php echo "Hiện không có sự kiện nào!" ?>
+                    </td>
+                </tr>
+            <?php
+            }
             ?>
         </tbody>
 
