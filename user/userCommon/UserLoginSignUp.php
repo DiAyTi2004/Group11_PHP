@@ -6,6 +6,11 @@ include('../../common/GoogleLogin.php');
 
 include('../../common/config/Connect.php');
 
+//Handle login with fb
+include('../../common/facebook_source.php');
+
+include('../../common/config/Connect.php');
+
 $username = '';
 $password  = '';
 
@@ -106,12 +111,14 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
                 <form name="signUp" action="" method="POST">
                     <h1>Đăng ký</h1>
                     <div class="social-container">
-                        <a href="https://Github.com/farazc60" target="_blank" class="social"><i class="fab fa-github"></i></a>
-                        <a href="https://Codepen.io/codewithfaraz" target="_blank" class="social"><i class="fab fa-codepen"></i></a>
-
                         <!-- login with google  -->
                         <?php if (isset($authUrl)) { ?>
                             <a href="<?php echo $authUrl; ?>" target="_blank" class="social"><i class="fab fa-google"></i></a>
+                        <?php } ?>
+
+                        <!-- login with fb  -->
+                        <?php if (isset($authUrl)) { ?>
+                            <a href="<?php echo $authUrl; ?>" target="_blank" class="social"><i class="fab fa-facebook"></i></a>
                         <?php } ?>
 
                     </div>
@@ -132,8 +139,10 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
                 <form name="login" action="" method="POST">
                     <h1>Đăng nhập</h1>
                     <div class="social-container">
-                        <a href="https://Github.com/farazc60" target="_blank" class="social"><i class="fab fa-github"></i></a>
-                        <a href="https://Codepen.io/codewithfaraz" target="_blank" class="social"><i class="fab fa-codepen"></i></a>
+                        <!-- login with fb  -->
+                        <?php if (isset($authUrl)) { ?>
+                            <a href="<?php echo $authUrl; ?>" target="_blank" class="social"><i class="fab fa-facebook"></i></a>
+                        <?php } ?>
 
                         <!-- login with google  -->
                         <?php if (isset($authUrl)) { ?>
