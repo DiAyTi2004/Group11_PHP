@@ -323,7 +323,6 @@ create table tbl_product (
   name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   price float ,
-  fake_price float ,
   category_id varchar(36) not null,
   event_id varchar(36) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -374,6 +373,7 @@ create table tbl_order (
 create table tbl_order_detail (
   order_id varchar(36) not null,
   product_id varchar(36) not null,
+  size_id varchar(36) not null,
   quantity int,
   unit_price float ,
   primary key (order_id, product_id)
