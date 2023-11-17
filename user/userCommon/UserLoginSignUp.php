@@ -1,7 +1,15 @@
 <?php
 session_start();
-
 include('../../common/config/Connect.php');
+
+//Handle login with google
+include('../../common/GoogleLogin.php');
+
+
+//Handle login with fb
+// include('../../common/facebook_source.php');
+
+// include('../../common/config/Connect.php');
 
 $username = '';
 $password  = '';
@@ -14,17 +22,14 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
     }
 
     $password = ($_POST['password']);
-    echo "catched 1";
 
     if ($username != '' && $password != '') {
         $findLoginUserSQL = "SELECT * FROM tbl_user WHERE username = '$username' AND password = '$password'";
-        echo "catched 2";
 
         $row = mysqli_query($connect, $findLoginUserSQL);
         $count = mysqli_num_rows($row);
 
         if ($count > 0) {
-            echo "login success";
             $row_data = mysqli_fetch_array($row);
 
             $_SESSION['username'] = $row_data['username'];
@@ -39,7 +44,6 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
         }
     }
 } else if (isset($_POST['signUp'])) {
-    echo "catched in sign up";
     $username = $_POST['username'];
     $password = $_POST['password'];
     $passwordConfirmation = $_POST['passwordConfirmation'];
@@ -111,9 +115,16 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
                 <form name="signUp" action="" method="POST">
                     <h1>Đăng ký</h1>
                     <div class="social-container">
-                        <a href="https://Github.com/farazc60" target="_blank" class="social"><i class="fab fa-github"></i></a>
-                        <a href="https://Codepen.io/codewithfaraz" target="_blank" class="social"><i class="fab fa-codepen"></i></a>
-                        <a href="mailto:farazc60@gmail.com" target="_blank" class="social"><i class="fab fa-google"></i></a>
+                        <!-- login with google  -->
+                        <?php if (isset($authUrl)) { ?>
+                            <a href="<?php echo $authUrl; ?>" target="_blank" class="social"><i class="fab fa-google"></i></a>
+                        <?php } ?>
+
+                        <!-- login with fb  -->
+                        <!-- <?php if (isset($authUrl)) { ?>
+                            <a href="<?php echo $authUrl; ?>" target="_blank" class="social"><i class="fab fa-facebook"></i></a>
+                        <?php } ?> -->
+
                     </div>
                     <span>Tạo tài khoản mới</span>
                     <label>
@@ -132,9 +143,16 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
                 <form name="login" action="" method="POST">
                     <h1>Đăng nhập</h1>
                     <div class="social-container">
-                        <a href="https://Github.com/farazc60" target="_blank" class="social"><i class="fab fa-github"></i></a>
-                        <a href="https://Codepen.io/codewithfaraz" target="_blank" class="social"><i class="fab fa-codepen"></i></a>
-                        <a href="mailto:farazc60@gmail.com" target="_blank" class="social"><i class="fab fa-google"></i></a>
+                        <!-- login with fb  -->
+                        <!-- <?php if (isset($authUrl)) { ?>
+                            <a href="<?php echo $authUrl; ?>" target="_blank" class="social"><i class="fab fa-facebook"></i></a>
+                        <?php } ?> -->
+
+                        <!-- login with google  -->
+                        <?php if (isset($authUrl)) { ?>
+                            <a href="<?php echo $authUrl; ?>" target="_blank" class="social"><i class="fab fa-google"></i></a>
+                        <?php } ?>
+
                     </div>
                     <span> Hoặc đăng nhập bằng tài khoản sẵn có</span>
                     <label>
