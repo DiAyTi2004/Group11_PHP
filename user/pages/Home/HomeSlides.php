@@ -22,12 +22,8 @@ $query_show_slide = mysqli_query($connect, $sql_show_slide);
     while ($row = mysqli_fetch_array($query_show_slide)) {
     ?>
       <div class="carousel-item <?php echo $itemIndex == 0 ? 'active' : ''; ?>">
-        <img src="./../../admin/pages/Event/EventImages/<?php echo $row['banner']; ?>" class="d-block w-100" alt="slide_event" style="border-radius: 10px; height: 400px">
-        <div class="carousel-caption d-none d-md-block">
-          <h5><?php echo $row['name']; ?></h5>
-          <p><?php echo $row['start_date']; ?> __ <?php echo $row['end_date']; ?></p>
-          <p><?php echo $row['description']; ?></p>
-        </div>
+        <img src="./../../admin/pages/Event/EventImages/<?php echo $row['banner']; ?>" class="d-block w-100" alt="slide_event" style="border-radius: 10px; height: 624px">
+
       </div>
     <?php
       $itemIndex++;
