@@ -1,16 +1,23 @@
 <?php
-if (isset($_POST['search'])) {
-	$tukhoa = $_POST['tukhoa'];
+function insertPercentage($inputString)
+{
+	$characters = preg_split('//u', $inputString, -1, PREG_SPLIT_NO_EMPTY);
+	$resultString = implode('%', $characters);
+
+	return $resultString;
 }
-$sql_pro = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
-	AND tbl_sanpham.tensanpham LIKE '%" . $tukhoa . "%'";
-$query_pro = mysqli_query($connect, $sql_pro);
+
+$searchSql = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
+	AND tbl_sanpham.tensanpham LIKE '%" . insertPercentage($keyword) . "%'";
+
+$searchData = mysqli_query($connect, $searchSql);
 
 ?>
-<h3>Từ khoá tìm kiếm : <?php echo $_POST['tukhoa']; ?></h3>
+<h3>Từ khoá tìm kiếm : <?php echo $_POST['keyword']; ?></h3>
+
 <ul class="product_list">
 	<?php
-	while ($row = mysqli_fetch_array($query_pro)) {
+	while ($row = mysqli_fetch_array($searchData)) {
 	?>
 		<li>
 			<a href="UserIndex.php?usingPage=product&id=<?php echo $row['id_sanpham'] ?>">

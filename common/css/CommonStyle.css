@@ -1414,6 +1414,10 @@ body {
     align-items: center;
 }
 
+.flex-1 {
+    flex: 1;
+}
+
 .flex-grow-1 {
     flex-grow: 1;
 }
@@ -1493,7 +1497,11 @@ body {
     color: #000 !important;
 }
 
-
 .bg-transparent {
     background-color: transparent !important;
+    box-shadow: unset;
+}
+
+.over-hidden {
+    overflow: hidden;
 }
