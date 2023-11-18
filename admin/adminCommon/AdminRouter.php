@@ -1,33 +1,39 @@
 <div class="flex-grow-1">
-    <div class="container my-4 appCard   <?php if (!isset($_GET['workingPage'])) echo "bg-transparent"; ?>">
+    <div class="container my-4 appCard <?php if (!isset($_GET['workingPage'])) echo "bg-transparent"; ?>">
         <?php
-        if ($workingPage == 'category' && $query == 'edit') {
-            include("./pages/Category/EditCategoryPopup.php");
-        } else if ($workingPage == 'category') {
-            include("./pages/Category/AddCategoryPopup.php");
+        if ($workingPage == 'category') {
             include("./pages/Category/CategoryIndex.php");
-            include("./pages/Category/CategoryConfirmDeletePopup.php");
+            include("./pages/Category/AddCategoryPopup.php");
+        } else if ($workingPage == 'productSize') {
+            include("./pages/ProductSize/ProductSizeIndex.php");
+            include("./pages/ProductSize/AddProductSizePopup.php");
+        } else if ($workingPage == 'productImage') {
+            include("./pages/ProductImage/ProductImageIndex.php");
+            include("./pages/ProductImage/AddProductImagePopup.php");
         } else if ($workingPage == 'product') {
             include("./pages/Product/ProductIndex.php");
             include("./pages/Product/AddProductPopup.php");
-        } else if ($workingPage == 'event' && $query == 'edit') {
-            include("./pages/Event/EditEventPopup.php");
         } else if ($workingPage == 'event') {
             include("./pages/Event/EventIndex.php");
             include("./pages/Event/AddEventPopup.php");
-            include("./pages/Event/EventConfirmDeletePopup.php");
         } else if ($workingPage == 'user') {
             include("./pages/User/UserIndex.php");
             include("./pages/User/AddUserPopup.php");
-            include("./pages/User/EditUserPopup.php");
-            include("./pages/User/UserConfirmDeletePopup.php");
         } else if ($workingPage == 'order') {
-             include("./pages/Order/OrderIndex.php"); 
-             include("./pages/Order/AddOrderPopup.php");  
-             include("./pages/Order/OrderConfirmDelete.php");
-            }
-         else if ($workingPage == 'dangxuat') {
-            include("Login.php");
+            include("./pages/Order/OrderIndex.php");
+            include("./pages/Order/AddOrderPopup.php");
+        } else if ($workingPage == 'status') {
+            include("./pages/Status/StatusIndex.php");
+            include("./pages/Status/AddStatusPopup.php");
+        } else if ($workingPage == 'size') {
+            include("./pages/Size/SizeIndex.php");
+            include("./pages/Size/AddSizePopup.php");
+        } else if ($workingPage == 'payment_type') {
+            include("./pages/PaymentType/PaymentTypeIndex.php");
+            include("./pages/PaymentType/AddPaymentTypePopup.php");
+        } else if ($workingPage == 'orderDetail') {
+            include("./pages/OrderDetail/OrderDetailIndex.php");
+            include("./pages/OrderDetail/AddOrderDetailPopup.php");
         } else {
             include("./pages/Dashboard/DashboardIndex.php");
         }

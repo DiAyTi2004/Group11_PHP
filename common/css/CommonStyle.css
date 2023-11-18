@@ -1401,6 +1401,10 @@ body {
     display: none;
 }
 
+.display-block {
+    display: block;
+}
+
 .flex {
     display: flex;
 }
@@ -1505,3 +1509,5 @@ body {
 .over-hidden {
     overflow: hidden;
 }
+
+.hide-scroll-xƠ

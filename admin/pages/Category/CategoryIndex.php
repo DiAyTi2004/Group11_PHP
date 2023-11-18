@@ -1,54 +1,46 @@
-<!-- <?php
-        $sql_lietke_category = "SELECT * FROM tbl_category ORDER BY id DESC";
-        $result_lietke_category = mysqli_query($connect, $sql_lietke_category);
-        ?> -->
-
-<!-- PHP logic paganition pages -->
+<link rel="stylesheet" href="./styles/CategoryStyles.css">
 <?php
-// Tìm tổng số bản ghi
-$total_records = mysqli_num_rows($result_lietke_category);
-//Tìm limit và current_page
-$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-$limit = isset($_GET['limit']) ? $_GET['limit'] : 5;
-$i = 0;
-$stt = $i + ($current_page - 1) * $limit;
-//Tính toán total_page và start
-// tổng số trang
-$total_page = ceil($total_records / $limit);
+$countAllSql = "SELECT * FROM tbl_category;";
+$total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
 
-// Giới hạn current_page trong khoảng 1 đến total_page
-if ($current_page > $total_page) {
-    $current_page = $total_page;
-} else if ($current_page < 1) {
-    $current_page = 1;
+$pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
+$pageSize = isset($_GET['limit']) ? $_GET['limit'] : 5;
+
+$total_page = ceil($total_records / $pageSize);
+
+$start = ($pageIndex - 1) * $pageSize;
+
+$search = '';
+
+if (isset($_GET['search']) && !empty($_GET['search'])) {
+    $search = $_GET['search'];
 }
 
-// Tìm Start
-$start = ($current_page - 1) * $limit;
-if ($start < 0) {
-    $start = 0;
+$getTableDataSql = "";
+
+if (isset($_GET['search'])) {
+    $getTableDataSql = "SELECT * FROM tbl_category
+    WHERE
+        tbl_category.name LIKE N'%" . $search . "%'
+        OR tbl_category.id LIKE N'%" . $search . "%'
+        
+    ORDER BY tbl_category.id DESC
+    LIMIT $start, $pageSize";
+} else {
+    $getTableDataSql = "SELECT * FROM tbl_category
+    ORDER BY id
+    DESC 
+    LIMIT $start, $pageSize";
 }
 
-// BƯỚC 5: TRUY VẤN LẤY DANH SÁCH TIN TỨC
-// Có limit và start rồi thì truy vấn CSDL lấy danh sách tin tức
-$sql_lietke_category_2 = "SELECT * FROM tbl_category
-                    ORDER BY id 
-                    DESC 
-                    LIMIT $start, $limit";
-$result_lietke_category_2 = mysqli_query($connect, $sql_lietke_category_2);
-//Hiển thị
-
-// PHẦN HIỂN THỊ PHÂN TRANG
+$tableData = mysqli_query($connect, $getTableDataSql);
 ?>
 
-<link rel="stylesheet" href="./styles/CategoryStyles.css">
-<!-- Button trigger modal and search btn -->
 <div class="text-left flex justify-between">
-    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addCategory">
         <i class="fa-solid fa-plus"></i>
         Thêm danh mục
     </button>
-
 
     <div class="input-group mb-3 align-center mt-3 w-40">
         <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" name="search" id="search-input" aria-describedby="button-addon2">
@@ -57,79 +49,58 @@ $result_lietke_category_2 = mysqli_query($connect, $sql_lietke_category_2);
             Search
         </button>
     </div>
-    <?php
-    $search = ''; // Initialize the search variable
-
-    if (isset($_GET['search']) && !empty($_GET['search'])) {
-        $search = $_GET['search'];
-    }
-
-    ?>
-
-    <script>
-        function performSearch() {
-            var searchValue = document.getElementById('search-input').value;
-            var limit = <?php echo $limit; ?>;
-            var page = <?php echo $current_page; ?>;
-            var url = '?workingPage=category'; // Thay 'your_current_page.php' bằng tên trang hiện tại của bạn
-            // echo '<a href="?workingPage=category&limit='.($limit).'&page=' . ($current_page - 1) . '">
-            if (searchValue.trim() !== '') {
-                url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
-
-            } else {
-                url += '&limit=' + limit + '&page=' + page;
-
-            }
-            <?php
-            ?>
-            window.location.href = url;
-        }
-    </script>
-    <!-- Logic PHP search -->
-    <?php
-    // Câu truy vấn để tìm kiếm sự kiện
-    $query = "SELECT * FROM tbl_category
-        WHERE tbl_category.name LIKE N'%$search%'
-        ORDER BY tbl_category.id DESC
-        LIMIT $start, $limit";
-
-    // Thực thi câu truy vấn
-    $result_lietke_category_2 = isset($_GET['search']) ? mysqli_query($connect, $query) : mysqli_query($connect, $sql_lietke_category_2);
-    ?>
 
 </div>
 
 <div class="container p-0">
     <table class="w-100">
         <legend class="text-center"><b>Quản lý danh mục</b></legend>
+
         <thead class="table-head w-100">
             <tr class="table-heading">
-                <th class="id">ID</th>
+                <th class="noWrap">STT</th>
+                <th class="noWrap">Code</th>
                 <th class="noWrap">Tên danh mục</th>
                 <th class="noWrap">Hình ảnh </th>
+                <th class="noWrap">Miêu tả</th>
                 <th class="noWrap">Quản lý</th>
+
             </tr>
         </thead>
 
         <tbody class="table-body">
             <?php
-            while ($row = mysqli_fetch_array($result_lietke_category_2)) {
-                $i++;
-                $stt++;
+            $displayOrder = 0;
+            while ($row = mysqli_fetch_array($tableData)) {
+                $displayOrder++;
             ?>
                 <tr>
                     <td>
-                        <?php echo $row['id'] ?>
+                        <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                     </td>
+
+                    <td>
+                        <?php echo $row['code'] ?>
+                    </td>
+
                     <td class="tendanhmuc">
                         <?php echo $row['name'] ?>
                     </td>
+
                     <td class="hinhanh">
                         <img src="pages/Category/CategoryImages/<?php echo $row['category_image'] ?> " width="100%">
                     </td>
                     <td>
-                        <a href="?workingPage=category&query=edit&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-pencil"></i></a>
-                        <a href="?workingPage=category&query=delete&id=<?php echo $row['id'] ?>"><i class="fa-solid fa-trash mr-1"></i></a>
+                        <?php echo $row['description'] ?>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editCategory<?php echo $row['id']; ?>">
+                            <i class="fa-solid fa-pencil"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#deleteCategory<?php echo $row['id']; ?>">
+                            <i class="fa-solid fa-trash mr-1"></i>
+                        </button>
                     </td>
                 </tr>
             <?php
@@ -139,7 +110,6 @@ $result_lietke_category_2 = mysqli_query($connect, $sql_lietke_category_2);
 
     </table>
 
-    <!-- Pagination table -->
     <form action="" method="GET">
         <nav class="row py-2" aria-label="Page navigation example">
 
@@ -147,9 +117,9 @@ $result_lietke_category_2 = mysqli_query($connect, $sql_lietke_category_2);
                 <form action="" method="GET">
                     <label for="limitSelect">Rows per page:</label>
                     <select name="limit" id="limitSelect" onchange="updatePageAndLimit()">
-                        <option value="5" <?php if ($limit == 5) echo 'selected'; ?>>5</option>
-                        <option value="10" <?php if ($limit == 10) echo 'selected'; ?>>10</option>
-                        <option value="15" <?php if ($limit == 15) echo 'selected'; ?>>15</option>
+                        <option value="5" <?php if ($pageSize == 5) echo 'selected'; ?>>5</option>
+                        <option value="10" <?php if ($pageSize == 10) echo 'selected'; ?>>10</option>
+                        <option value="15" <?php if ($pageSize == 15) echo 'selected'; ?>>15</option>
                     </select>
                 </form>
 
@@ -169,7 +139,7 @@ $result_lietke_category_2 = mysqli_query($connect, $sql_lietke_category_2);
 
                 <label class="mr-4">Showing
                     <?php
-                    echo $stt . " of " . $total_records . " results";
+                    echo $pageSize . " of " . $total_records . " results";
                     ?>
                 </label>
             </div>
@@ -177,8 +147,8 @@ $result_lietke_category_2 = mysqli_query($connect, $sql_lietke_category_2);
             <ul class="m-0 pagination justify-content-end py-2 col">
                 <li class="page-item">
                     <?php
-                    if ($current_page > 1 && $total_page > 1) {
-                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=category&limit=' . ($limit) . '&page=' . ($current_page - 1) . '">
+                    if ($pageIndex > 1 && $total_page > 1) {
+                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=category&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
                         Previous
                         </a>';
                     }
@@ -187,24 +157,22 @@ $result_lietke_category_2 = mysqli_query($connect, $sql_lietke_category_2);
 
                 <?php
                 for ($i = 1; $i <= $total_page; $i++) {
-                    // Nếu là trang hiện tại thì hiển thị thẻ span
-                    // ngược lại hiển thị thẻ a
-                    if ($i == $current_page) {
+                    if ($i == $pageIndex) {
                         echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=category&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=category&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                     } else {
                         echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?workingPage=category&limit=' . ($limit) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                        <a name="page" class="page-link text-reset text-black" href="?workingPage=category&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                         </li>';
                     }
                 }
                 ?>
 
                 <?php
-                if ($current_page < $total_page && $total_page > 1) {
+                if ($pageIndex < $total_page && $total_page > 1) {
                     echo '<li class="page-item light">
-                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=category&limit=' . ($limit) . '&page=' . ($current_page + 1) . '">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=category&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
                     Next
                     </a>
                     </li>';
@@ -214,3 +182,40 @@ $result_lietke_category_2 = mysqli_query($connect, $sql_lietke_category_2);
     </form>
     </nav>
 </div>
+
+<!-- pre display all edit popup -->
+<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
+
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/Category/EditCategoryPopup.php";
+}
+?>
+
+<!-- pre display all confirm delete popup -->
+<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
+
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/Category/CategoryConfirmDeletePopup.php";
+}
+?>
+
+<script>
+    function performSearch() {
+        var searchValue = document.getElementById('search-input').value;
+        var limit = <?php echo $pageSize; ?>;
+        var page = <?php echo $pageIndex; ?>;
+        var url = '?workingPage=category';
+        if (searchValue.trim() !== '') {
+            url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
+
+        } else {
+            url += '&limit=' + limit + '&page=' + page;
+
+        }
+        <?php
+        ?>
+        window.location.href = url;
+    }
+</script>

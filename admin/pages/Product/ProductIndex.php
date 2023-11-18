@@ -1,19 +1,13 @@
 <link rel="stylesheet" href="./styles/ProductStyles.css">
 
 <?php
-$countAllSql = "SELECT * FROM tbl_sanpham;";
+$countAllSql = "SELECT *FROM tbl_product";
 $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
 
 $pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
 $pageSize = isset($_GET['limit']) ? $_GET['limit'] : 5;
 
 $total_page = ceil($total_records / $pageSize);
-
-if ($pageIndex > $total_page) {
-    $pageIndex = $total_page;
-} else if ($pageIndex < 1) {
-    $pageIndex = 1;
-}
 
 $start = ($pageIndex - 1) * $pageSize;
 
@@ -24,21 +18,15 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
 }
 
 $getTableDataSql = "";
-
 if (isset($_GET['search'])) {
-    $getTableDataSql = "SELECT * FROM tbl_sanpham INNER JOIN tbl_danhmuc ON tbl_sanpham.id_danhmuc = tbl_danhmuc.id_danhmuc 
+    $getTableDataSql = "SELECT *FROM tbl_product
     WHERE
-        tbl_sanpham.tensanpham LIKE N'%" . $search . "%'
-        OR tbl_sanpham.masanpham LIKE N'%" . $search . "%'
-        OR tbl_danhmuc.tendanhmuc LIKE N'%" . $search . "'
-    ORDER BY tbl_sanpham.id_sanpham DESC
-    LIMIT $start, $pageSize";
+        tbl_product.name LIKE N'%" . $search . "%'
+        OR tbl_product.code LIKE N'%" . $search . "%'
+    ";
 } else {
-    $getTableDataSql = "SELECT * FROM tbl_sanpham ,tbl_danhmuc 
-    WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
-    ORDER BY id_sanpham  
-    DESC 
-    LIMIT $start, $pageSize";
+    $getTableDataSql = "SELECT *FROM tbl_product
+    ";
 }
 
 $tableData = mysqli_query($connect, $getTableDataSql);
@@ -62,20 +50,16 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 </div>
 
 <div class="container p-0">
-    <table>
+    <table class="w-100">
         <legend class="text-center"><b>Quản lý sản phẩm</b></legend>
 
         <thead class="table-head w-100">
             <tr class="table-heading">
                 <th class="noWrap">STT</th>
-                <th class="noWrap">Tên sản phảm</th>
-                <th class="noWrap">Hình ảnh </th>
-                <th class="noWrap">Giá sản phẩm</th>
-                <th class="noWrap">Số lượng</th>
-                <th class="noWrap">Danh mục</th>
                 <th class="noWrap">Mã sản phẩm</th>
-                <th class="noWrap">Tóm tăt</th>
-                <th class="noWrap">Trạng thái</th>
+                <th class="noWrap">Tên sản phẩm</th>
+                <th class="noWrap">Mô tả</th>
+                <th class="noWrap">Giá gốc</th>
                 <th class="noWrap">Quản lý</th>
             </tr>
         </thead>
@@ -83,52 +67,57 @@ $tableData = mysqli_query($connect, $getTableDataSql);
         <tbody class="table-body">
             <?php
             $displayOrder = 0;
+            $hasData = false;
+
             while ($row = mysqli_fetch_array($tableData)) {
                 $displayOrder++;
+                $hasData = true;
             ?>
                 <tr>
                     <td>
                         <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                     </td>
+                    <td>
+                        <?php echo $row['code'] ?>
+                    </td>
                     <td class="tensanpham">
-                        <?php echo $row['tensanpham'] ?>
+                        <?php echo $row['name'] ?>
                     </td>
 
-                    <td class="hinhanh">
-                        <img src="pages/Product/ProductImages/<?php echo $row['hinhanh'] ?> " width="100%">
+                    <td>
+                        <?php echo $row['description'] ?>
                     </td>
 
                     <td class="giasanpham">
-                        <?php echo number_format($row['giasanpham'], 0, ',', '.') . 'VNĐ' ?>
+                        <?php echo number_format($row['price'], 0, ',', '.') . ' VNĐ' ?>
                     </td>
+
                     <td>
-                        <?php echo $row['soluong'] ?>
-                    </td>
-                    <td>
-                        <?php echo $row['tendanhmuc'] ?>
-                    </td>
-                    <td>
-                        <?php echo $row['masanpham'] ?>
-                    </td>
-                    <td>
-                        <?php echo $row['tomtat'] ?>
-                    </td>
-                    <td>
-                        <?php if ($row['trangthai'] == 1) {
-                            echo "Mới";
-                        } else {
-                            echo "Cũ";
-                        }
-                        ?>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id_sanpham']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-pencil"></i>
                         </button>
 
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id_sanpham']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-trash mr-1"></i>
                         </button>
+
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModalSize_<?php echo $row['id']; ?>">
+                            <i class="fa-solid fa-ruler"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModalImage_<?php echo $row['id']; ?>">
+                            <i class="fa-solid fa-image mr-1"></i>
+                        </button>
+                    </td>
+                </tr>
+            <?php
+            }
+
+            if (!$hasData) {
+            ?>
+                <tr>
+                    <td colspan="8">
+                        Chưa có dữ liệu
                     </td>
                 </tr>
             <?php
@@ -155,9 +144,8 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     function updatePageAndLimit() {
                         const selectedLimit = document.getElementById("limitSelect").value;
 
-                        // Tạo một URL mới với giá trị page và limit mới
                         const url = new URL(window.location.href);
-                        url.searchParams.set("page", "1"); // Đặt page thành 1
+                        url.searchParams.set("page", "1");
                         url.searchParams.set("limit", selectedLimit);
 
                         // Chuyển hướng đến URL mới
@@ -226,6 +214,24 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
     include "./pages/Product/ProductConfirmDeletePopup.php";
+}
+?>
+
+<!-- pre display all owning size table popup -->
+<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
+
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/Product/OwningSizeTable.php";
+}
+?>
+
+<!-- pre display all owning image popup -->
+<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
+
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/Product/OwningImageTable.php";
 }
 ?>
 

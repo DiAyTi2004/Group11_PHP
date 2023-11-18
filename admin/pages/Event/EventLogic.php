@@ -45,11 +45,21 @@ if (isset($_POST['addEvent'])) {
     }
 } else if (isset($_POST['editEvent'])) {
     if ($banner != '') {
-        move_uploaded_file($banner_tmp, 'EventImages/' . $banner);
+        $EventId = $_GET['id'];  // Assuming productId is passed through GET parameter
+        $description_img = $_POST['des_img'];
+        // Process image upload if a new image is provided
+        if ($hinhanh != '') {
+            move_uploaded_file($hinhanh_tmp, 'EventImages/' . $hinhanh);
+
+            // Update tbl_product_image
+            $sql_update_image = "UPDATE tbl_product_image SET description='$description_img', content='$hinhanh' WHERE id='$EventId'";
+            mysqli_query($connect, $sql_update_image);
+            header('Location: ../../AdminIndex.php?workingPage=event');
+        }
 
         $sql_editEvent = "UPDATE tbl_event SET code='" . $code . "', name='" . $name . "', banner='" . $banner . "', discount='" . $discount . "', start_date='" . $start_date . "',end_date='" . $end_date . "',
         description='" . $description . "' WHERE id='$_GET[id]'";
-        $sql = "SELECT*FROM tbl_event WHERE id='$_GET[Id]' LIMIT 1";
+        $sql = "SELECT*FROM tbl_event WHERE id='$_GET[id]'";
         $query = mysqli_query($connect, $sql);
         while ($row = mysqli_fetch_array($query)) {
             unlink('EventImages/' . $row['banner']);
@@ -62,7 +72,7 @@ if (isset($_POST['addEvent'])) {
     header('Location:../../AdminIndex.php?workingPage=event');
 } else if (isset($_POST['deleteEvent'])) {
     $id = $_GET['id'];
-    $sql = "SELECT *FROM tbl_event WHERE id = '$id' LIMIT 1";
+    $sql = "SELECT *FROM tbl_event WHERE id = '$id'";
     $query = mysqli_query($connect, $sql);
     while ($row = mysqli_fetch_array($query)) {
         unlink('EventtImages/' . $row['banner']);

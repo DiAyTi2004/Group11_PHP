@@ -1,6 +1,6 @@
        <p>
            <?php
-            if (isset($_SESSION['signup'])) {
+            if (isset($_SESSION['userId'])) {
             }
             ?>
        </p>
@@ -50,7 +50,7 @@
                        <p style="float: left; color: red;font-weight: bold;font-size: 16px;"> Tổng tiền : <?php echo number_format($tongtien, 0, ',', '.') . ' VNĐ'  ?></p>
                        <div style="clear:both;"> </div>
                        <?php
-                        if (isset($_SESSION['signup'])) {
+                        if (isset($_SESSION['userId'])) {
 
                         ?>
                            <p class="btn-dathang"><a class="btn-dathang-a" href="pages/main/thanhtoan/index.php?usingPage=vanchuyen">Đặt hàng</a></p>

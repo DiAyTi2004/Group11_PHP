@@ -1,4 +1,4 @@
-<div class="modal fade" id="confirmPopup_<?php echo $row['id_sanpham']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmPopup_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-dark">
@@ -6,10 +6,10 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-0">
-                <form id="productForm" method="POST" action="pages/Product/ProductLogic.php?productId=<?php echo $row['id_sanpham']; ?>" enctype="multipart/form-data">
+                <form id="productForm" method="POST" action="pages/Product/ProductLogic.php?productId=<?php echo $row['id']; ?>" enctype="multipart/form-data">
                     <table border="1" width="100%" padding="10px" style="border-collapse: collapse;">
                         <p class="p-4 m-0">
-                            Bạn có chắc chắn muốn xóa sản phẩm này? <b><?php echo $row['tensanpham']; ?></b>
+                            Bạn có chắc chắn muốn xóa sản phẩm này? <b><?php echo $row['name']; ?></b>
                         </p>
                     </table>
 

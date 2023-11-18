@@ -1,13 +1,16 @@
 <link rel="stylesheet" href="../styles/AccountStyles.css">
-<p><?php
-    if (isset($_SESSION['signup'])) {
-        // echo 'Xin chào: '.'<span style="color:red">'.$_SESSION['signup'].'</span>';
-        $id = $_SESSION['signup'];
+<p>
+    <?php
+    if (isset($_SESSION['userId'])) {
+        // echo 'Xin chào: '.'<span style="color:red">'.$_SESSION['userId'].'</span>';
+        $id = $_SESSION['userId'];
         $sql_thongtin = "SELECT * FROM tbl_dangky WHERE taikhoan='$id' LIMIT 1";
         $query_thongtin = mysqli_query($connect, $sql_thongtin);
 
         while ($row = mysqli_fetch_array($query_thongtin)) {
-    ?></p><br>
+    ?>
+</p>
+<br>
 <div class="container-info">
     <div class="container-info-left">
         <ul class="card-list">
