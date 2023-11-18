@@ -66,10 +66,9 @@ if (isset($_GET['code'])) {
      * CHECK EMAIL AND NAME IN DATABASE
      */
     $findLoginUserSQL = "SELECT * FROM tbl_user WHERE email = '$email' ";
-
     $row = mysqli_query($connect, $findLoginUserSQL);
     $count = mysqli_num_rows($row);
-
+    
     if ($count > 0) {
         //if user had been recorded in database, update info for user
         $userData = mysqli_fetch_array($row);
@@ -77,9 +76,9 @@ if (isset($_GET['code'])) {
 
         $updateInfoSQL = "UPDATE tbl_user 
         SET 
-        fullname='" . $fullName . "', 
+        fullname='" . $fullName . "',
         user_image='" . $userImage . "', 
-        username='" . $username . "', 
+        username='" . $username . "'
         WHERE email= '$email'";
         mysqli_query($connect, $updateInfoSQL);
     } else {
