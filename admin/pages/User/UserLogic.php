@@ -28,14 +28,13 @@ if (isset($_POST['addUser'])) {
         move_uploaded_file($hinhanh_tmp, 'UserImages/' . $hinhanh);
     }
     $userId =  generateUuid();
-    $sql_addUser = "INSERT INTO tbl_user(id, code, user_image, fullname, username, email, phonenumber,address) 
+    $addNewUser = "INSERT INTO tbl_user(id, code, user_image, fullname, username, email, phonenumber,address) 
          VALUES ('" . $userId . "','" . $code . "','" . $hinhanh . "','" . $tennguoidung . "','" . $taikhoan . "','" . $email . "','" . $phonenumber . "','" . $diachi . "')";
-    mysqli_query($connect, $sql_addUser);
+    mysqli_query($connect, $addNewUser);
 } else if (isset($_POST['editUser'])) {
     if ($file != '') {
         move_uploaded_file($hinhanh_tmp, 'UserImages/' . $hinhanh);
-        $sql_editUser = "UPDATE tbl_user SET code='" . $code . "', fullname='" . $tennguoidung . "', user_image='" . $hinhanh . "', username='" . $taikhoan . "', email='" . $email . "',phonenumber='" . $phonenumber . "',
-        chucvu='" . $chucvu . "',address = '" . $diachi . "' WHERE id='$_GET[userId]'";
+        $sql_editUser = "UPDATE tbl_user SET code='" . $code . "', fullname='" . $tennguoidung . "', user_image='" . $hinhanh . "', username='" . $taikhoan . "', email='" . $email . "',phonenumber='" . $phonenumber . "',address = '" . $diachi . "' WHERE id='$_GET[userId]'";
         $sql = "SELECT * FROM tbl_user WHERE id='$_GET[userId]'";
         $query = mysqli_query($connect, $sql);
         while ($row = mysqli_fetch_array($query)) {

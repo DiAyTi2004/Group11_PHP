@@ -1,116 +1,94 @@
 <div class="modal fade" id="editPopup_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <form method="POST" action="pages/User/UserLogic.php?userId=<?php echo $row['id']; ?>" enctype="multipart/form-data">
+        <form method="POST" action="pages/Order/OrderLogic.php?orderId=<?php echo $row['id']; ?>" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
-                    <h5 class="text-center text-white">Sửa người dùng</h5>
+                    <h5 class="text-center text-white">Sửa đơn hàng <?php echo $row['code']; ?></h5>
 
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <table border="1" width="100%" style="border-collapse: collapse;">
-
+                    <table border="1" width="100%" padding="10px" style="border-collapse: collapse;">
                         <tr>
                             <td class="row">
-                                <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">
-                                        Tên người dùng
-                                    </label>
-                                    <input type="text" value="<?php echo $row['fullname'] ?>" name="tennguoidung" class="form-control" id="exampleFormControlInput1">
+                                <div class="mb-2 col col-12 col-md-6">
+                                    <label class="form-label">Người đặt hàng</label>
+                                    <select required name="userId" class="form-select" aria-label="Default select example">
+                                        <?php
+                                        $sql_user = "SELECT * FROM tbl_user";
+                                        $query_user = mysqli_query($connect, $sql_user);
+                                        while ($row_user = mysqli_fetch_array($query_user)) {
+                                            $hadSet = false;
+                                            if ($row_user['user_id'] == $row['user_id']) $hadSet = true;
+                                        ?>
+                                            <option class="p-2" value="<?php echo $row_user['id'] ?>" <?php if ($hadSet) echo 'checked'; ?>>
+                                                <?php
+                                                if (trim($row_user['fullname']) == "") {
+                                                    echo $row_user['username'];
+                                                } else {
+                                                    echo $row_user['fullname'] . ' - ' . $row_user['username'];
+                                                }
+                                                ?>
+                                            </option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
 
+                                <div class="mb-2 col-6">
+                                    <label class="form-label">Trạng thái đơn hàng</label>
+                                    <select name="statusId" class="form-select" aria-label="Default select example">
+                                        <option value="">Chưa chọn</option>
+                                        <?php
+                                        $sql_status = "SELECT * FROM tbl_status";
+                                        $query_status = mysqli_query($connect, $sql_status);
+                                        while ($row_status = mysqli_fetch_array($query_status)) {
+                                        ?>
+                                            <option class="p-2" value="<?php echo $row_status['id'] ?>">
+                                                <?php echo $row_status['name'] ?>
+                                            </option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
-                            </td>
-                            <tr>
-                            <td class="row">
-                                <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">
-                                        Code
-                                    </label>
-                                    <input type="text" value="<?php echo $row['code'] ?>" name="code" class="form-control" id="exampleFormControlInput1">
 
-                                </div>
+
+
                             </td>
-                            <td class="row">
-                                <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">
-                                        Email
-                                    </label>
-                                    <input type="text" name="email" value="<?php echo $row['email'] ?>" class="form-control" id="exampleFormControlInput1">
-                                </div>
-                            </td>
-                            <td class="row">
-                                <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">
-                                        Tài khoản
-                                    </label>
-                                    <input type="text" name="taikhoan" value="<?php echo $row['username'] ?>" class="form-control" id="exampleFormControlInput1">
-                                </div>
-                            </td>
-                            <td class="row">
-                                <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">
-                                        Số điện thoại
-                                    </label>
-                                    <input type="text" name="phonenumber" value="<?php echo $row['phonenumber'] ?>" class="form-control" id="exampleFormControlInput1">
-                                </div>
-                            </td>
-                           
                         </tr>
                         <tr>
                             <td class="row">
-                                <div class="col-6">
-                                    <img class="w-100" src="pages/User/UserImages/<?php echo $row['user_image'] ?>">
+                                <div class="mb-2 col col-12 col-md-6">
+                                    <label for="code" class="form-label">Mã đơn hàng</label>
+                                    <input disabled name="code" type="text" class="form-control" id="code" value="<?php echo $row['code'] ?>">
                                 </div>
-                                <div class="col-6 flex-center flex-column">
-                                    <label for="exampleFormControlInput1" class="form-label">
-                                        Hình ảnh
-                                    </label>
-                                    <input type="file" name="hinhanh" class="form-control" id="exampleFormControlInput1">
+                                <div class="mb-2 col col-12 col-md-6">
+                                    <label for="dienthoainhan" class="form-label">Điện thoại nhận hàng</label>
+                                    <input name="dienthoainhan" type="text" class="form-control" id="name" value="<?php echo $row['receive_phone'] ?>">
                                 </div>
-                            </td>
-                            <td class="row">
-                                <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">
-                                        Địa chỉ
-                                    </label>
-                                    <input type="text" name="diachi" value="<?php echo $row['address'] ?>" class="form-control" id="exampleFormControlInput1">
+                                <div class="mb-2 col col-12">
+                                    <label for="phigiaohnang" class="form-label">Phí giao hàng</label>
+                                    <input name="phigiaohang" type="text" class="form-control" id="delivery_cost" value="<?php echo $row['delivery_cost'] ?>">
                                 </div>
                             </td>
                         </tr>
 
-
-
                         <tr>
-                            <td>Chức Vụ </td>
-                            <td>
-                                <select name="chucvu" style="width: 120px">
-                                    <?php
-                                    if ($nguoidung['chucvu'] == 1) {
-                                    ?>
-                                        <option value="1" selected> Bán hàng</option>
-                                        <option value="0">Không</option>
-
-                                    <?php
-                                    } else
-                                    ?>
-                                    <option value="1"> Bán hàng</option>
-                                    <option value="0" selected>Không</option>
-                                </select>
+                            <td class="row">
+                                <div class="mb-2 col">
+                                    <label for="diachinhan" class="form-label">Địa chỉ nhận</label>
+                                    <textarea required name="diachinhan" class="form-control" id="diachinhan" rows="3"><?php echo $row['receive_address'] ?></textarea>
+                                </div>
                             </td>
                         </tr>
+
                         <tr>
-                        <tr>
-                            <td>
-                                <div class="col-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                        <label class="form-check-label" for="invalidCheck">
-                                            Bạn chắc chắn về thông tin sửa người dùng?
-                                        </label>
-                                        <div class="invalid-feedback">
-                                            You must agree before submitting.
-                                        </div>
-                                    </div>
+                            <td class="row">
+                                <div class="mb-2 col">
+                                    <label for="mota" class="form-label">Mô tả</label>
+                                    <textarea name="mota" class="form-control" id="description" rows="3"><?php echo $row['description'] ?></textarea>
                                 </div>
                             </td>
                         </tr>
@@ -118,7 +96,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary" name="editUser">Sửa</button>
+                    <button type="submit" class="btn btn-primary" name="editOrder">Sửa</button>
                 </div>
             </div>
         </form>

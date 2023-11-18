@@ -7,7 +7,7 @@ $tableOwningData = mysqli_query($connect, $getAllOwningSQL);
 ?>
 <!-- Modal -->
 <div class="modal fade" id="exampleModalSize_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header bg-dark">
                 <h5 class="text-center text-white">Các size của sản phẩm (Mã SP: <?php echo $row['code'] ?>)</h5>

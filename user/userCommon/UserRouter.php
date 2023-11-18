@@ -1,5 +1,8 @@
 <div class="container flex-grow-1 py-5">
     <?php
+    // phpinfo();
+    // var_dump($_SESSION);
+
     if ($usingPage == 'category') {
         include("../pages/Category/CategoryIndex.php");
     } else if ($usingPage == 'cart') {
