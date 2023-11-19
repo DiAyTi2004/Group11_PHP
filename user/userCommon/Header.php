@@ -42,11 +42,12 @@ if (isset($_GET['usingPage'])) {
                                 <?php
                                 while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
                                 ?>
-                                    <li class="sub__category__item w-100">
-                                        <a href="UserIndex.php?usingPage=category&id=<?php echo $row_danhmuc['id_danhmuc'] ?>" class="w-100 p-2 py-3">
-                                            <?php echo $row_danhmuc['tendanhmuc'] ?>
-                                        </a>
-                                    </li>
+                                <li class="sub__category__item w-100">
+                                    <a href="UserIndex.php?usingPage=category&id=<?php echo $row_danhmuc['id_danhmuc'] ?>"
+                                        class="w-100 p-2 py-3">
+                                        <?php echo $row_danhmuc['tendanhmuc'] ?>
+                                    </a>
+                                </li>
                                 <?php
                                 }
                                 ?>
@@ -56,7 +57,8 @@ if (isset($_GET['usingPage'])) {
                 </div>
                 <div class="search__section bg-white br-10 over-hidden px-1 flex-center">
                     <form method="POST" action="UserIndex.php?usingPage=search">
-                        <input class="p-2" type="text" placeholder="Tìm kiếm nhanh sản phẩm...?" name="keyword" value="<?php echo $keyword; ?>" />
+                        <input class="p-2" type="text" placeholder="Tìm kiếm nhanh sản phẩm...?" name="keyword"
+                            value="<?php echo $keyword; ?>" />
                         <button type="submit" class="br-10 py-1 px-3 flex-grow-1" name="search" value="Tìm Kiếm">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -73,28 +75,44 @@ if (isset($_GET['usingPage'])) {
                 <?php
                 if (isset($_SESSION['userId'])) {
                 ?>
-                    <div class="user__section">
-                        <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?usingPage=thongtin">
-                            <i class="fa-solid fa-circle-user"></i>
-                        </a>
+                <div class="user__section">
+                    <?php
+                        echo '<img src="' . $_SESSION['userImage'] . '" alt="User Image">';                      
+                    ?>
+                    <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?usingPage=thongtin">
+                        <?php
+                                $webImage ="http";
+                                if(strpos($_SESSION['userImage'],$webImage)) {
+                                    echo '<img src="' . $_SESSION['userImage'] . '" alt="User Image">';
+                                } else {
+                                    echo '<img src="' . $_SESSION['userImage'] . '" alt="User Image">';
+                                }                 
+                            ?>
+                        <i class="fa-solid fa-circle-user"></i>
+                        <span>
+                            <?php echo $_SESSION['username']; ?>
+                        </span>
+                    </a>
 
-                    </div>
 
-                    <div class="user__section">
-                        <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?dangxuat=true">
-                            <i class="fa-solid fa-right-to-bracket">
 
-                            </i>
-                        </a>
-                    </div>
+                </div>
+
+                <div class="user__section">
+                    <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?dangxuat=true">
+                        <i class="fa-solid fa-right-to-bracket">
+
+                        </i>
+                    </a>
+                </div>
                 <?php
                 } else {
                 ?>
-                    <div class="user__section">
-                        <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserLoginSignUp.php">
-                            <i class="fa-solid fa-right-to-bracket"></i>
-                        </a>
-                    </div>
+                <div class="user__section">
+                    <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserLoginSignUp.php">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                    </a>
+                </div>
                 <?php
                 }
                 ?>
