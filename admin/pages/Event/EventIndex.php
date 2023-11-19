@@ -103,7 +103,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     <td class="description">
                         <?php echo $row['description'] ?>
                     </td>
-                    <td>
+                    <td class="col-2">
                         <div style="min-width: 150px;">
                             <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editEventModal_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-pencil"></i>
@@ -111,7 +111,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                             <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteEventModal_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-trash mr-1"></i>
                             </button>
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#EventProductsModal_<?php echo $row['id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#eventProductsModal_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-table text-white mb-2"></i>
                             </button>
                         </div>
@@ -221,6 +221,14 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
     include "./pages/Event/ConfirmDeleteEventPopup.php";
+}
+?>
+
+<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
+
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/Event/EventProductsPopup.php";
 }
 ?>
 

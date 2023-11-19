@@ -9,7 +9,7 @@
         include("../pages/Cart/CartIndex.php");
     } else if ($usingPage == 'product') {
         include("../pages/ProductDetail/ProductDetailIndex.php");
-    } else if ($usingPage == 'thongtin') {
+    } else if ($usingPage == 'account') {
         include("../pages/Account/AccountIndex.php");
     } else if ($usingPage == 'search') {
         include("../pages/Searching/SearchingIndex.php");
