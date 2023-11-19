@@ -376,17 +376,12 @@ create table tbl_user (
   address LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-create table tbl_cart (
-  id varchar(36) primary key not null,
-  user_id varchar(36) not null
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 create table tbl_cart_detail (
-  cart_id varchar(36) not null,
+  user_id varchar(36) not null,
   product_id varchar(36) not null,
   quantity int,
   unit_price float ,
-  primary key (cart_id, product_id)
+  primary key (user_id, product_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_status (
@@ -395,7 +390,7 @@ create table tbl_status (
   name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-insert into tbl_status (id, code, name, description) value 
+insert into tbl_status (id, code, name, description) values
 ('f1e30780-f494-477d-8fba-63d280843c91','S1','Chờ xác nhận','Trạng thái đầu tiên khi khách hàng đặt hàng thành công và hệ thống ghi nhận thông tin đơn hàng.'),
 ('94ea518b-b5cf-4ee3-8f8b-65a73c33a7e8','S2','Đã xác nhận','Khách hàng nhận được xác nhận đơn hàng qua email hoặc tin nhắn, xác nhận rằng đơn hàng của họ đã được nhận và đang được xử lý.'),
 ('1221802e-1ad2-4aba-91ae-69b86270ae32','S3','Đang đóng gói','Đơn hàng bắt đầu được xử lý và chuẩn bị để đóng gói.'),
@@ -407,6 +402,7 @@ insert into tbl_status (id, code, name, description) value
 ('00c64206-1c21-4fb8-b679-007de67d76c9','S9','Trả hàng','Đơn hàng đã được trả lại do lý do nào đó, và quá trình xử lý đơn hàng trả lại bắt đầu.'),
 ('6e4134f7-7ef4-4244-8a6e-4ae3ac5bbfa5','S10','Hoàn tiền','Khi đơn hàng được trả lại, quá trình hoàn tiền được thực hiện nếu có.'),
 ('b0b461c2-2309-4b2a-b186-f415368105e7','S11','Hoàn thành','Trạng thái cuối cùng của đơn hàng khi tất cả các quy trình liên quan đã được hoàn tất.');
+
 create table tbl_order (
   id varchar(36) primary key not null,
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,

@@ -72,7 +72,7 @@ $tableEventProductsData = mysqli_query($connect, $getAllEventProductsSQL);
                     </a>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>

@@ -6,7 +6,7 @@
 		<div class="arrow-steps clearfix">
 			<div class="step "> <span> <a href="../../../UserIndex.php?usingPage=giohang">Giỏ hàng</a></span> </div>
 			<div class="step"> <span><a href="UserIndex.php?usingPage=vanchuyen">Kiểm tra</a></span> </div>
-			<div class="step current"> <span><a href="UserIndex.php?usingPage=thongtinthanhtoan">Thanh toán</a><span> </div>
+			<div class="step current"> <span><a href="UserIndex.php?usingPage=payment">Thanh toán</a><span> </div>
 
 		</div>
 	<?php

@@ -10,8 +10,8 @@
 
         if ($usingPage == 'vanchuyen') {
             include("vanchuyen.php");
-        } elseif ($usingPage == 'thongtinthanhtoan') {
-            include("thongtinthanhtoan.php");
+        } elseif ($usingPage == 'payment') {
+            include("payment.php");
         } elseif ($usingPage == 'thanhtoan') {
             include("thanhtoan.php");
         } elseif ($usingPage == 'donhangdadat') {

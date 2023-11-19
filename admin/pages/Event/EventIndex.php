@@ -224,6 +224,14 @@ while ($row = mysqli_fetch_array($tableData)) {
 }
 ?>
 
+<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
+
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/Event/EventProductsPopup.php";
+}
+?>
+
 <script>
     function performSearch() {
         var searchValue = document.getElementById('search-input').value;

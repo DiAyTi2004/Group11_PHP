@@ -97,14 +97,14 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
 </head>
 
 <body>
-<a href="UserIndex.php">
-    <img src="./images/logo.svg" alt="" style="width: 120px;position: absolute; top: 20px ; right: 10px" >
-</a>
-        
-        <a href="UserIndex.php" class="p-2 bg-white" style="border-radius: 10px; position: absolute;top: 35px;left:10px;font-weight: bold;">
-            <i class="fa-solid fa-circle-chevron-left"></i>
-            Về trang chủ
-        </a>
+    <a href="UserIndex.php">
+        <img src="./images/logo.svg" alt="" style="width: 120px;position: absolute; top: 20px ; right: 10px">
+    </a>
+
+    <a href="UserIndex.php" class="p-2 bg-white" style="border-radius: 10px; position: absolute;top: 35px;left:10px;font-weight: bold;">
+        <i class="fa-solid fa-circle-chevron-left"></i>
+        Về trang chủ
+    </a>
     <div class="ocean">
         <div class="wave"></div>
         <div class="wave"></div>
@@ -146,7 +146,7 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
                     <h1>Đăng nhập</h1>
                     <div class="social-container">
                         <!-- login with fb  -->
-                         <?php if (isset($loginUrl)) { ?>
+                        <?php if (isset($loginUrl)) { ?>
                             <a href="<?php echo $loginUrl; ?>" target="_blank" class="social"><i class="fab fa-facebook"></i></a>
                         <?php } ?>
 

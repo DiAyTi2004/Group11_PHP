@@ -74,7 +74,7 @@ if (isset($_GET['usingPage'])) {
                 if (isset($_SESSION['userId'])) {
                 ?>
                     <div class="user__section">
-                        <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?usingPage=thongtin">
+                        <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?usingPage=account">
                             <i class="fa-solid fa-circle-user"></i>
                         </a>
 
