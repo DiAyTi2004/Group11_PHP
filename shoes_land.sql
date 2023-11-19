@@ -339,7 +339,7 @@ create table tbl_event (
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  banner varchar(100)
+  banner LONGTEXT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 insert into tbl_event values ('8d7a68e9-1783-4aff-8c71-1814bcdbda46','2023-10-01 08:00:00 SA','2023-10-30 22:00:00 CH','50%','#1','Ưu đãi tháng 10','Sự kiện giảm giá và khuyến mãi đặc biệt cho mùa đông đã tới.','even1.png');
 insert into tbl_event values ('c271c6ed-6926-4be9-afc6-b11b3e957ef3','2023-10-15 08:00:00 SA','2023-10-30 22:00 CH','70%','#2','Flash Sale','Sale giá sốc-giảm đến 70%, freeship từ 2 đôi.','even2.png');
