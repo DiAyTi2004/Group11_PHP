@@ -9,6 +9,7 @@ if (isset($_POST['search'])) {
 
 if (isset($_GET['dangxuat']) && $_GET['dangxuat'] == "true") {
     unset($_SESSION['userId']);
+    if (isset($_SESSION['userImage'])) unset($_SESSION['userId']);
 }
 
 $usingPage = "";
@@ -16,6 +17,14 @@ $usingPage = "";
 if (isset($_GET['usingPage'])) {
     $usingPage = $_GET['usingPage'];
 }
+
+$imageLink = "";
+if (str_contains($_SESSION['userImage'], "http")) {
+    $imageLink = $_SESSION['userImage'];
+} else {
+    $imageLink = "../../admin/pages/User/UserImage/" . $_SESSION['userImage'];
+}
+
 ?>
 
 <header class="header w-100">
@@ -65,28 +74,58 @@ if (isset($_GET['usingPage'])) {
             </div>
 
             <div class="cart__wrapper flex-center">
-                <div class="cart__section">
+                <!-- <div class="cart__section">
                     <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?usingPage=cart">
                         <i class="fa-solid fa-cart-shopping"></i>
                     </a>
-                </div>
+                </div> -->
+
                 <?php
                 if (isset($_SESSION['userId'])) {
                 ?>
                     <div class="user__section">
-                        <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?usingPage=account">
-                            <i class="fa-solid fa-circle-user"></i>
-                        </a>
+
+                        <div class="display-block header__btn br-10 p-2 py-1 flex align-center userAction">
+                            <?php
+                            if (trim($_SESSION['userImage']) == "") {
+                                echo '<i class="fa-solid fa-circle-user"></i>';
+                            } else {
+                                echo '<img class="userLogoImage mr-1" src=' . $imageLink . ' alt="UserImg">';
+                            }
+                            ?>
+                            <span>
+                                <?php echo $_SESSION['username']; ?>
+                            </span>
+
+                            <div class="subUserAction br-10 over-hidden">
+                                <ul class="m-0 p-0 w-100">
+                                    <li class="sub__category__item w-100">
+                                        <a href="UserIndex.php?usingPage=account" class="w-100 p-2 py-3">
+                                            Thông tin cá nhân
+                                        </a>
+                                    </li>
+                                    <li class="sub__category__item w-100">
+                                        <a href="UserIndex.php?usingPage=cart" class="w-100 p-2 py-3">
+                                            Giỏ hàng
+                                        </a>
+                                    </li>
+                                    <li class="sub__category__item w-100">
+                                        <a href="UserIndex.php?dangxuat=true" class="w-100 p-2 py-3">
+                                            Đăng xuất
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
                     </div>
 
-                    <div class="user__section">
+                    <!-- <div class="user__section">
                         <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?dangxuat=true">
                             <i class="fa-solid fa-right-to-bracket">
-
                             </i>
                         </a>
-                    </div>
+                    </div> -->
                 <?php
                 } else {
                 ?>
@@ -102,3 +141,11 @@ if (isset($_GET['usingPage'])) {
         </div>
     </div>
 </header>
+
+<script>
+    const userActionElement = document.querySelector('.userAction');
+    userActionElement.onclick = function() {
+        window.location.assign("UserIndex.php?usingPage=account");
+    }
+    // userActionElement.setAttribute('href', "UserIndex.php?usingPage=account");
+</script>
