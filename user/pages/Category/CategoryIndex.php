@@ -4,8 +4,8 @@ $categoryId = $_GET['categoryId'] || "";
 $findProductByCategoryIdSQL = "SELECT * FROM tbl_product WHERE tbl_product.category_id ='$categoryId'";
 $productData = mysqli_query($connect, $findProductByCategoryIdSQL);
 
-$sql_cate = "SELECT * FROM tbl_danhmuc WHERE id_danhmuc='$_GET[id]' LIMIT 1";
-$query_cate = mysqli_query($connect, $sql_cate);
+$categorySQL = "SELECT * FROM tbl_category WHERE id='$categoryId' LIMIT 1";
+$query_cate = mysqli_query($connect, $categorySQL);
 $row_title = mysqli_fetch_array($query_cate);
 ?>
 

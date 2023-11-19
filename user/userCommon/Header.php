@@ -19,10 +19,12 @@ if (isset($_GET['usingPage'])) {
 }
 
 $imageLink = "";
-if (str_contains($_SESSION['userImage'], "http")) {
-    $imageLink = $_SESSION['userImage'];
-} else {
-    $imageLink = "../../admin/pages/User/UserImage/" . $_SESSION['userImage'];
+if (isset($_SESSION['userImage'])) {
+    if (str_contains($_SESSION['userImage'], "http")) {
+        $imageLink = $_SESSION['userImage'];
+    } else {
+        $imageLink = "../../admin/pages/User/UserImage/" . $_SESSION['userImage'];
+    }
 }
 
 ?>
@@ -53,7 +55,7 @@ if (str_contains($_SESSION['userImage'], "http")) {
                                 ?>
                                     <li class="sub__category__item w-100">
                                         <a href="UserIndex.php?usingPage=category&categoryId=<?php echo $rowData['id'] ?>" class="w-100 p-2 py-3">
-                                            <?php echo $rowData['tendanhmuc'] ?>
+                                            <?php echo $rowData['name'] ?>
                                         </a>
                                     </li>
                                 <?php
