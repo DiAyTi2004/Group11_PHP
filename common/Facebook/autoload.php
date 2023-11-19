@@ -53,7 +53,7 @@ spl_autoload_register(function ($class) {
     // @todo v6: Remove support for 'FACEBOOK_SDK_V4_SRC_DIR'
     if (defined('FACEBOOK_SDK_V4_SRC_DIR')) {
         $customBaseDir = FACEBOOK_SDK_V4_SRC_DIR;
-    } elseif (defined('FACEBOOK_SDK_SRC_DIR')) {
+    } else if (defined('FACEBOOK_SDK_SRC_DIR')) {
         $customBaseDir = FACEBOOK_SDK_SRC_DIR;
     }
     // base directory for the namespace prefix

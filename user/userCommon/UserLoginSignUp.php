@@ -7,9 +7,8 @@ include('../../common/GoogleLogin.php');
 
 
 //Handle login with fb
-// include('../../common/facebook_source.php');
+include('../../common/facebook_source.php');
 
-// include('../../common/config/Connect.php');
 
 $username = '';
 $password  = '';
@@ -124,9 +123,9 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
                         <?php } ?>
 
                         <!-- login with fb  -->
-                        <!-- <?php if (isset($authUrl)) { ?>
-                            <a href="<?php echo $authUrl; ?>" target="_blank" class="social"><i class="fab fa-facebook"></i></a>
-                        <?php } ?> -->
+                        <?php if (isset($loginUrl)) { ?>
+                            <a href="<?php echo $loginUrl; ?>" target="_blank" class="social"><i class="fab fa-facebook"></i></a>
+                        <?php } ?>
 
                     </div>
                     <span>Tạo tài khoản mới</span>
@@ -147,9 +146,9 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
                     <h1>Đăng nhập</h1>
                     <div class="social-container">
                         <!-- login with fb  -->
-                        <!-- <?php if (isset($authUrl)) { ?>
-                            <a href="<?php echo $authUrl; ?>" target="_blank" class="social"><i class="fab fa-facebook"></i></a>
-                        <?php } ?> -->
+                         <?php if (isset($loginUrl)) { ?>
+                            <a href="<?php echo $loginUrl; ?>" target="_blank" class="social"><i class="fab fa-facebook"></i></a>
+                        <?php } ?>
 
                         <!-- login with google  -->
                         <?php if (isset($authUrl)) { ?>
