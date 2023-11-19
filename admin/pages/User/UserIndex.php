@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="./styles/ProductStyles.css">
 
 <?php
-$countAllSql = "SELECT * FROM tbl_user;";
+$countAllSql = "SELECT * FROM tbl_user";
 $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
 
 $pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -220,6 +220,12 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
     include "./pages/User/UserConfirmDeletePopup.php";
+}
+?>
+<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/User/UserOrderTable.php";
 }
 ?>
 

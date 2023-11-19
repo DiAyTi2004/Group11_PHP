@@ -1,24 +1,25 @@
 <link rel="stylesheet" href="./styles/EventStyles.css">
 
 <?php
-$orderId = '';
-$orderCode = "";
+$userId = '';
+$userName = "";
+$orderId = "";
 
-if (isset($_GET['orderId'])) {
-    $orderId = $_GET['orderId'];
+if (isset($_GET['userId'])) {
+    $userId = $_GET['userId'];
 }
 
-$getTableDataSql = "SELECT * FROM tbl_order WHERE id = '$orderId'";
+$getTableDataSql = "SELECT * FROM tbl_order inner join tbl_user on tbl_order.user_id  =  tbl_user.id WHERE user_id = '$userId'";
 
 $tableData = mysqli_query($connect, $getTableDataSql);
 while ($row = mysqli_fetch_array($tableData)) {
-    $orderCode = $row['code'];
+    $userName = $row['fullname'];
 }
 ?>
 
 <?php
 
-$countAllSql = "SELECT * FROM tbl_order_detail WHERE order_id = '$orderId'";
+$countAllSql = "SELECT * FROM tbl_order inner join tbl_user  on tbl_order.user_id  = tbl_user.id  WHERE user_id = '$userId'";
 $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
 
 $pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -30,30 +31,32 @@ $start = ($pageIndex - 1) * $pageSize;
 
 $getTableDataSql = "";
 
-$getTableDataSql = "SELECT * FROM tbl_order_detail WHERE order_id = '$orderId'
+$getTableDataSql = "SELECT * FROM tbl_order  WHERE user_id = '$userId'
     LIMIT $start, $pageSize";
-
 $tableData = mysqli_query($connect, $getTableDataSql);
 ?>
 
 <div class="text-left flex justify-between">
-    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addOrderDetailModal">
+    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addUserOrder">
         <i class="fa-solid fa-plus"></i>
-        Thêm sản phẩm cho đơn hàng
+        Thêm đơn hàng cho người dùng
     </button>
 </div>
 
 <div class="container p-0">
     <table class="w-100">
-        <legend class="text-center"><b>Cập nhật sản phẩm cho đơn hàng <?php if (trim($orderCode) != "") echo $orderCode; ?></b></legend>
+        <legend class="text-center"><b>Cập nhật đơn hàng cho người dùng
+                <?php if (trim($userName) != "")
+                    echo $userName; ?>
+            </b></legend>
 
         <thead class="table-head w-100">
             <tr class="table-heading">
                 <th class="noWrap">STT</th>
                 <th class="noWrap">Mã sản phẩm</th>
-                <th class="noWrap">Tên sản phẩm</th>
-                <th class="noWrap">Số lượng</th>
-                <th class="noWrap">Đơn giá</th>
+                <th class="noWrap">Điện thoại nhận</th>
+                <th class="noWrap">Địa chỉ nhận</th>
+                <th class="noWrap">Phí giao hàng</th>
                 <th class="noWrap">Quản lý</th>
             </tr>
         </thead>
@@ -66,38 +69,29 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             while ($row = mysqli_fetch_array($tableData)) {
                 $displayOrder++;
                 $hasData = true;
-
-                $getSizeSQL = "SELECT * FROM tbl_size WHERE id = '$row[size_id]';";
-                $sizeData = mysqli_query($connect, $getSizeSQL);
-                $sizeCode = '';
-                $sizeName = '';
-                while ($sizeRow = mysqli_fetch_array($sizeData)) {
-                    $sizeCode = $sizeRow['code'];
-                    $sizeName = $sizeRow['name'];
-                }
             ?>
                 <tr>
                     <td>
-                        <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
+                        <?php echo $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                     </td>
                     <td>
-                        <?php echo $rowOwningData['code'] ?>
+                        <?php echo $row['code'] ?>
                     </td>
                     <td>
-                        <?php echo $rowOwningData['name'] ?>
+                        <?php echo $row['receive_phone'] ?>
                     </td>
                     <td>
-                        <?php echo $rowOwningData['quantity'] ?>
+                        <?php echo $row['receive_address'] ?>
                     </td>
                     <td>
-                        <?php echo $rowOwningData['unit_price'] ?>
+                        <?php echo $row['delivery_cost'] ?>
                     </td>
                     <td>
                         <div style="min-width: 150px;">
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['order_id']; ?>_<?php echo $row['product_id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeletePopup_<?php echo $row['order_id']; ?>_<?php echo $row['product_id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-trash mr-1"></i>
                             </button>
                         </div>
@@ -126,9 +120,12 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <form action="" method="GET">
                     <label for="limitSelect">Rows per page:</label>
                     <select name="limit" id="limitSelect" onchange="updatePageAndLimit()">
-                        <option value="5" <?php if ($pageSize == 5) echo 'selected'; ?>>5</option>
-                        <option value="10" <?php if ($pageSize == 10) echo 'selected'; ?>>10</option>
-                        <option value="15" <?php if ($pageSize == 15) echo 'selected'; ?>>15</option>
+                        <option value="5" <?php if ($pageSize == 5)
+                                                echo 'selected'; ?>>5</option>
+                        <option value="10" <?php if ($pageSize == 10)
+                                                echo 'selected'; ?>>10</option>
+                        <option value="15" <?php if ($pageSize == 15)
+                                                echo 'selected'; ?>>15</option>
                     </select>
                 </form>
 
@@ -195,7 +192,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
-    include "./pages/OrderDetail/EditOrderDetailPopup.php";
+    include "./pages/UserOrderDetail/EditUserOrderPopup.php";
 }
 ?>
 
@@ -204,7 +201,7 @@ while ($row = mysqli_fetch_array($tableData)) {
 $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
-    include "./pages/ProductSize/ConfirmDeleteOrderDetailPopup.php";
+    include "./pages/UserOrderDetail/ConfirmDeleteUserOrderPopup.php";
 }
 ?>
 
@@ -213,7 +210,7 @@ while ($row = mysqli_fetch_array($tableData)) {
         var searchValue = document.getElementById('search-input').value;
         var limit = <?php echo $pageSize; ?>;
         var page = <?php echo $pageIndex; ?>;
-        var url = '?workingPage=productSize';
+        var url = '?workingPage=user_order';
         if (searchValue.trim() !== '') {
             url += '&search=' + encodeURIComponent(searchValue) + '&limit=' + limit + '&page=' + page;
 

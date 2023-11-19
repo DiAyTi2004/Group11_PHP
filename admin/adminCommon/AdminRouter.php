@@ -19,6 +19,7 @@
         } else if ($workingPage == 'user') {
             include("./pages/User/UserIndex.php");
             include("./pages/User/AddUserPopup.php");
+            include("./pages/User/UserOrderTable.php");
         } else if ($workingPage == 'order') {
             include("./pages/Order/OrderIndex.php");
             include("./pages/Order/AddOrderPopup.php");
@@ -34,7 +35,11 @@
         } else if ($workingPage == 'orderDetail') {
             include("./pages/OrderDetail/OrderDetailIndex.php");
             include("./pages/OrderDetail/AddOrderDetailPopup.php");
-        } else {
+        } else if($workingPage == "user_order") {
+            include("./pages/UserOrderDetail/UserOrderIndex.php");
+            include("./pages/UserOrderDetail/AddUserOrderPopup.php");
+        }
+        else {
             include("./pages/Dashboard/DashboardIndex.php");
         }
         ?>
