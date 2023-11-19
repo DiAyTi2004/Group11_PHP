@@ -1,6 +1,6 @@
 <div class="modal fade" id="editPopup_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <form method="POST" action="pages/Order/OrderLogic.php?orderId=<?php echo $row['id']; ?>" enctype="multipart/form-data">
+        <form method="POST" action="pages/UserOrderDetail/UserOrderLogic.php?orderId=<?php echo $row['id']; ?>" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="text-center text-white">Sửa đơn hàng <?php echo $row['code']; ?></h5>
@@ -15,7 +15,7 @@
                                     <label class="form-label">Người đặt hàng</label>
                                     <select required name="userId" class="form-select" aria-label="Default select example">
                                         <?php
-                                        $sql_user = "SELECT * FROM tbl_user";
+                                        $sql_user = "SELECT * FROM tbl_user where tbl_user.id =  '$userId'";
                                         $query_user = mysqli_query($connect, $sql_user);
                                         while ($row_user = mysqli_fetch_array($query_user)) {
                                             $hadSet = false;
@@ -61,8 +61,8 @@
                         <tr>
                             <td class="row">
                                 <div class="mb-2 col col-12 col-md-6">
-                                    <label for="code" class="form-label">Mã đơn hàng</label>
-                                    <input disabled name="code" type="text" class="form-control" id="code" value="<?php echo $row['code'] ?>">
+                                    <label for="code1" class="form-label">Mã đơn hàng</label>
+                                    <input disabled name="code1" type="text" class="form-control" id="code1" value="<?php echo $row['code'] ?>">
                                 </div>
                                 <div class="mb-2 col col-12 col-md-6">
                                     <label for="dienthoainhan" class="form-label">Điện thoại nhận hàng</label>

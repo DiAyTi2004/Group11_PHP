@@ -12,8 +12,8 @@ if (isset($_GET['userId'])) {
 $getTableDataSql = "SELECT * FROM tbl_order inner join tbl_user on tbl_order.user_id  =  tbl_user.id WHERE user_id = '$userId'";
 
 $tableData = mysqli_query($connect, $getTableDataSql);
-while ($row = mysqli_fetch_array($tableData)) {
-    $userName = $row['fullname'];
+while ($row2 = mysqli_fetch_array($tableData)) {
+    $userName = $row2['fullname'];
 }
 ?>
 
@@ -66,7 +66,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             $displayOrder = 0;
             $hasData = false;
 
-            while ($row = mysqli_fetch_array($tableData)) {
+            while ($row2 = mysqli_fetch_array($tableData)) {
                 $displayOrder++;
                 $hasData = true;
             ?>
@@ -75,23 +75,23 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                     </td>
                     <td>
-                        <?php echo $row['code'] ?>
+                        <?php echo $row2['code'] ?>
                     </td>
                     <td>
-                        <?php echo $row['receive_phone'] ?>
+                        <?php echo $row2['receive_phone'] ?>
                     </td>
                     <td>
-                        <?php echo $row['receive_address'] ?>
+                        <?php echo $row2['receive_address'] ?>
                     </td>
                     <td>
-                        <?php echo $row['delivery_cost'] ?>
+                        <?php echo $row2['delivery_cost'] ?>
                     </td>
                     <td>
                         <div style="min-width: 150px;">
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row2['id']; ?>">
                                 <i class="fa-solid fa-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row2['id']; ?>">
                                 <i class="fa-solid fa-trash mr-1"></i>
                             </button>
                         </div>
@@ -152,7 +152,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <li class="page-item">
                     <?php
                     if ($pageIndex > 1 && $total_page > 1) {
-                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=orderDetail&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
+                        echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?workingPage=user_order&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
                         Previous
                         </a>';
                     }
@@ -163,11 +163,11 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 for ($i = 1; $i <= $total_page; $i++) {
                     if ($i == $pageIndex) {
                         echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=orderDetail&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=user_order&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                     } else {
                         echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?workingPage=orderDetail&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                        <a name="page" class="page-link text-reset text-black" href="?workingPage=user_order&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                         </li>';
                     }
                 }
@@ -176,7 +176,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <?php
                 if ($pageIndex < $total_page && $total_page > 1) {
                     echo '<li class="page-item light">
-                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=orderDetail&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?workingPage=user_order&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
                     Next
                     </a>
                     </li>';

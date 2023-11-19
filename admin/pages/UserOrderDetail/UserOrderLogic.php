@@ -25,7 +25,7 @@ if (isset($_POST['addOrder'])) {
     VALUES ('" . $Id . "','" . $code . "','" . $userId . "','" . $status_id . "','" . $dienthoainhan . "','" . $diachinhan . "','" . $phigiaohang . "','" . $mota . "')";
     mysqli_query($connect, $add);
 } else if (isset($_POST['editOrder'])) {
-    $code  = $_POST['code'];
+    $code1  = $_POST['code1'];
     $dienthoainhan = $_POST['dienthoainhan'];
     $diachinhan = $_POST['diachinhan'];
     $phigiaohang = $_POST['phigiaohang'];
@@ -34,7 +34,7 @@ if (isset($_POST['addOrder'])) {
     $status_id = $_POST['statusId'];
 
     $sql_editOrder = "UPDATE tbl_order 
-    SET code='" . $code . "',
+    SET 
     receive_phone='" . $dienthoainhan . "',
     receive_address = '" . $diachinhan . "',
     delivery_cost = '" . $phigiaohang . "' , 
@@ -49,4 +49,4 @@ if (isset($_POST['addOrder'])) {
     mysqli_query($connect, $sql_xoa);
 }
 
-header('Location:../../AdminIndex.php?workingPage=user_order');
+header('Location:../../AdminIndex.php?workingPage=user_order&userId='.$userId);

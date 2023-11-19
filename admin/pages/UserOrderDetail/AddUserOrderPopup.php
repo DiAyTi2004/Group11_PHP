@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="categoryForm" method="POST" action="pages/Order/OrderLogic.php" enctype="multipart/form-data">
+                <form id="categoryForm" method="POST" action="pages/UserOrderDetail/UserOrderLogic.php" enctype="multipart/form-data">
                     <table border="1" width="100%" padding="10px" style="border-collapse: collapse;">
                         <tr>
                             <td class="row">
