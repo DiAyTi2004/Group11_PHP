@@ -1,13 +1,14 @@
 <?php
-
-include './Facebook/autoload.php';
-include('./fbconfig.php');
+include ('../../common/Facebook/autoload.php');
+include ('../../common/fbconfig.php');
 $helper = $fb->getRedirectLoginHelper();
 if (isset($_GET['state'])) {
     $helper->getPersistentDataHandler()->set('state', $_GET['state']);
 }
 try {
     $accessToken = $helper->getAccessToken();
+var_dump($accessToken);
+echo "<br>";
 } catch (Facebook\Exceptions\FacebookResponseException $e) {
     // When Graph returns an error
     echo 'Graph returned an error: ' . $e->getMessage();
@@ -17,7 +18,6 @@ try {
     echo 'Facebook SDK returned an error: ' . $e->getMessage();
     exit;
 }
-
 if (!isset($accessToken)) {
     if ($helper->getError()) {
         header('HTTP/1.0 401 Unauthorized');
@@ -45,7 +45,7 @@ try {
 }
 
 $fbUser = $response->getGraphUser();
-
+print_r($fbUser); exit;
 if (!empty($fbUser)) {
     include './function.php';
     loginFromSocialCallBack($fbUser);
