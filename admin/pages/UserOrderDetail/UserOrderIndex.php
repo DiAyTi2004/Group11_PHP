@@ -4,13 +4,11 @@
 $userId = '';
 $userName = "";
 $orderId = "";
-
+$getTableDataSql="";
 if (isset($_GET['userId'])) {
     $userId = $_GET['userId'];
 }
-
-$getTableDataSql = "SELECT * FROM tbl_order inner join tbl_user on tbl_order.user_id  =  tbl_user.id WHERE user_id = '$userId'";
-
+$getTableDataSql = "SELECT * FROM tbl_user WHERE id = '$userId'";
 $tableData = mysqli_query($connect, $getTableDataSql);
 while ($row2 = mysqli_fetch_array($tableData)) {
     $userName = $row2['fullname'];
@@ -199,7 +197,6 @@ while ($row = mysqli_fetch_array($tableData)) {
 <!-- pre display all confirm delete popup -->
 <?php
 $tableData = mysqli_query($connect, $getTableDataSql);
-
 while ($row = mysqli_fetch_array($tableData)) {
     include "./pages/UserOrderDetail/ConfirmDeleteUserOrderPopup.php";
 }
