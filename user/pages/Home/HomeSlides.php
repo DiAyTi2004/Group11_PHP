@@ -3,6 +3,8 @@ $sql_show_slide = "SELECT * FROM tbl_event";
 $query_show_slide = mysqli_query($connect, $sql_show_slide);
 ?>
 
+<input type="text" id="range_03" data-plugin="range-slider" data-type="double" data-grid="true" data-min="0" data-max="1000" data-from="200" data-to"800" data-prefix="$" />
+
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <?php

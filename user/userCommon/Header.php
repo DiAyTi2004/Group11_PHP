@@ -1,6 +1,6 @@
 <?php
-$sql_danhmuc = "SELECT * FROM tbl_danhmuc ORDER BY id_danhmuc DESC";
-$query_danhmuc = mysqli_query($connect, $sql_danhmuc);
+$queryCategorySQL = "SELECT * FROM tbl_category";
+$categoryData = mysqli_query($connect, $queryCategorySQL);
 
 $keyword = "";
 if (isset($_POST['search'])) {
@@ -40,11 +40,11 @@ if (isset($_GET['usingPage'])) {
                         <div class="sub__category br-10 over-hidden">
                             <ul class="m-0 p-0 w-100">
                                 <?php
-                                while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
+                                while ($rowData = mysqli_fetch_array($categoryData)) {
                                 ?>
                                     <li class="sub__category__item w-100">
-                                        <a href="UserIndex.php?usingPage=category&id=<?php echo $row_danhmuc['id_danhmuc'] ?>" class="w-100 p-2 py-3">
-                                            <?php echo $row_danhmuc['tendanhmuc'] ?>
+                                        <a href="UserIndex.php?usingPage=category&categoryId=<?php echo $rowData['id'] ?>" class="w-100 p-2 py-3">
+                                            <?php echo $rowData['tendanhmuc'] ?>
                                         </a>
                                     </li>
                                 <?php

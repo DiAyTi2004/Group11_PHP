@@ -1,27 +1,25 @@
 <?php
-// GET id là lấy id từ bên MENU.php 
-$sql_show = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_danhmuc='$_GET[id]' ORDER BY id_sanpham DESC";
-$query_show = mysqli_query($connect, $sql_show);
 
-//get ten danh muc
+$categoryId = $_GET['categoryId'] || "";
+$findProductByCategoryIdSQL = "SELECT * FROM tbl_product WHERE tbl_product.category_id ='$categoryId'";
+$productData = mysqli_query($connect, $findProductByCategoryIdSQL);
+
 $sql_cate = "SELECT * FROM tbl_danhmuc WHERE id_danhmuc='$_GET[id]' LIMIT 1";
 $query_cate = mysqli_query($connect, $sql_cate);
 $row_title = mysqli_fetch_array($query_cate);
 ?>
+
 <p></p>
 <h5> Danh mục |
     <?php
-    if (isset($row_title['tendanhmuc'])) {
-        echo $row_title['tendanhmuc'];
-    } else {
-        echo "lỗi không lấy được data";
+    if (isset($row_title['name'])) {
+        echo $row_title['name'];
     }
     ?>
-
 </h5>
 <ul class="product_list">
     <?php
-    while ($row_pro = mysqli_fetch_array($query_show)) {
+    while ($row_pro = mysqli_fetch_array($productData)) {
     ?>
         <li>
             <a href="UserIndex.php?usingPage=product&id=<?php echo $row_pro['id_sanpham'] ?>">
