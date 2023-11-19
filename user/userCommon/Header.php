@@ -48,7 +48,7 @@ if (isset($_SESSION['userImage'])) {
                         </p>
                         <i class="fa-solid fa-sort-down pb-1"></i>
 
-                        <div class="sub__category br-10 over-hidden">
+                        <div class="sub__category br-10">
                             <ul class="m-0 p-0 w-100">
                                 <?php
                                 while ($rowData = mysqli_fetch_array($categoryData)) {
@@ -131,6 +131,11 @@ if (isset($_SESSION['userImage'])) {
                 <?php
                 } else {
                 ?>
+                    <div class="user__section">
+                        <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?usingPage=cart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                    </div>
                     <div class="user__section">
                         <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserLoginSignUp.php">
                             <i class="fa-solid fa-right-to-bracket"></i>
