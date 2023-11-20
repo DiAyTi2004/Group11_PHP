@@ -44,8 +44,10 @@
                                         $sql_status = "SELECT * FROM tbl_status";
                                         $query_status = mysqli_query($connect, $sql_status);
                                         while ($row_status = mysqli_fetch_array($query_status)) {
+                                            $hasChosen = false;
+                                            if ($row_status['id'] == $row['status_id']) $hasChosen = true;
                                         ?>
-                                            <option class="p-2" value="<?php echo $row_status['id'] ?>">
+                                            <option class="p-2" value="<?php echo $row_status['id'] ?>" <?php if ($hasChosen) echo 'selected'; ?>>
                                                 <?php echo $row_status['name'] ?>
                                             </option>
                                         <?php
@@ -53,8 +55,6 @@
                                         ?>
                                     </select>
                                 </div>
-
-
 
                             </td>
                         </tr>
@@ -65,8 +65,8 @@
                                     <input disabled name="code" type="text" class="form-control" id="code" value="<?php echo $row['code'] ?>">
                                 </div>
                                 <div class="mb-2 col col-12 col-md-6">
-                                    <label for="dienthoainhan" class="form-label">Điện thoại nhận hàng</label>
-                                    <input name="dienthoainhan" type="text" class="form-control" id="name" value="<?php echo $row['receive_phone'] ?>">
+                                    <label for="receivePhone" class="form-label">Điện thoại nhận hàng</label>
+                                    <input name="receivePhone" type="text" class="form-control" id="receivePhone" value="<?php echo $row['receive_phone'] ?>">
                                 </div>
                                 <div class="mb-2 col col-12">
                                     <label for="phigiaohnang" class="form-label">Phí giao hàng</label>

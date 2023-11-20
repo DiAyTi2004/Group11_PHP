@@ -352,14 +352,13 @@ insert into tbl_event values ('2bc0c41b-0c08-43b7-8c45-d2f8c5c1566e','2023-12-23
 insert into tbl_event values ('d3950d8f-7e44-4786-8caf-f480f2b34540','2023-12-27 08:00:00 SA','2024-01-03 22:00 CH','50%','#9','Tết dương lịch','Giảm giá cực sốc khi khách hàng đến với shoesland vào dịp này.','even9.png');
 insert into tbl_event values ('11afef6c-bff6-432b-82eb-d44ba44743e2','2024-02-08 00:00:00 SA','2024-02-14 23:59 CH','50%','#10','Tết Nguyên Đán','Giảm giá cực sốc khi khách hàng đến với shoesland vào dịp này.','even10.png');
 
-
-
 create table tbl_product (
   id varchar(36) primary key not null,
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  price float ,
+  price float,
+  createDate datetime,
   category_id varchar(36) not null,
   event_id varchar(36) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -373,7 +372,10 @@ create table tbl_user (
   password varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   email varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   phonenumber int(11) NOT NULL,
-  address LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
+  address LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  createDate datetime,
+  birthDate datetime,
+  gender tinyint(1)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_cart_detail (
@@ -411,7 +413,8 @@ create table tbl_order (
   receive_phone varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   receive_address varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   delivery_cost float ,
-  description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
+  description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  createDate datetime
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_order_detail (

@@ -1,12 +1,12 @@
 <link rel="stylesheet" href="./styles/SizeStyles.css">
- <?php
- // Kiểm tra xem $row có tồn tại và không phải là null
+<?php
+// Kiểm tra xem $row có tồn tại và không phải là null
 if ($row && isset($row['id'])) {
     $getAllOwningSQL = "SELECT * FROM tbl_order WHERE tbl_order.user_id = '$row[id]';";
     // Tiếp tục xử lý
 } else {
     // Xử lý khi $row không tồn tại hoặc có giá trị null
-     $getAllOwningSQL = "SELECT * FROM tbl_order";
+    $getAllOwningSQL = "SELECT * FROM tbl_order";
 }
 
 $tableOwningData = mysqli_query($connect, $getAllOwningSQL);
@@ -43,7 +43,7 @@ $tableOwningData = mysqli_query($connect, $getAllOwningSQL);
                                 <td>
                                     <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                                 </td>
-                             
+
                                 <td>
                                     <?php echo $rowOwningData['code'] ?>
                                 </td>
@@ -54,7 +54,7 @@ $tableOwningData = mysqli_query($connect, $getAllOwningSQL);
                                     <?php echo $rowOwningData['receive_address'] ?>
                                 </td>
                                 <td>
-                                    <?php echo $rowOwningData['delivery_cost'] ?>
+                                    <?php echo formatVND(floatval($rowOwningData['delivery_cost'])) ?>
                                 </td>
                             </tr>
                         <?php
