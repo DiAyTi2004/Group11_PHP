@@ -103,16 +103,19 @@ if (isset($_SESSION['userImage'])) {
                                 <ul class="m-0 p-0 w-100">
                                     <li class="sub__category__item w-100">
                                         <a href="UserIndex.php?usingPage=account" class="w-100 p-2 py-3">
+                                        <i class="fa-solid fa-circle-user mr-2 ml-0"></i>
                                             Thông tin cá nhân
                                         </a>
                                     </li>
                                     <li class="sub__category__item w-100">
                                         <a href="UserIndex.php?usingPage=cart" class="w-100 p-2 py-3">
+                                        <i class="fa-solid fa-cart-shopping mr-2 ml-0"></i>
                                             Giỏ hàng
                                         </a>
                                     </li>
                                     <li class="sub__category__item w-100">
                                         <a href="UserIndex.php?dangxuat=true" class="w-100 p-2 py-3">
+                                        <i class="fa-solid fa-sign-out mr-2 ml-0"></i>
                                             Đăng xuất
                                         </a>
                                     </li>
