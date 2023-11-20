@@ -11,17 +11,21 @@
                     <table border="1" width="100%" padding="10px" style="border-collapse: collapse;">
                         <tr>
                             <td class="row">
-                                <div class="mb-2 col col-12 col-md-4">
+                                <div class="mb-2 col">
                                     <label for="name" class="form-label">Tên sản phẩm</label>
                                     <input name="name" type="text" class="form-control" id="name" value="<?php echo $row['name'] ?>">
                                 </div>
-                                <div class="mb-2 col col-12 col-md-4">
+                                <div class="mb-2 col">
                                     <label for="code" class="form-label">Mã sản phẩm</label>
                                     <input name="code" type="text" class="form-control" id="code" value="<?php echo $row['code'] ?>">
                                 </div>
-                                <div class="mb-2 col col-12 col-md-4">
+                                <div class="mb-2 col">
                                     <label for="price" class="form-label">Giá</label>
                                     <input name="price" type="number" step="0.01" class="form-control" id="price" value="<?php echo $row['price'] ?>">
+                                </div>
+                                <div class="mb-2 col">
+                                    <label for="date" class="form-label">Ngày tạo</label>
+                                    <input name="date" type="datetime-local" class="form-control" id="date" value="<?php echo $row['createDate'] ?>">
                                 </div>
                             </td>
                         </tr>
@@ -77,46 +81,6 @@
                                 </div>
                             </td>
                         </tr>
-
-                        <!-- <tr>
-                            <td class="row">
-                                <div class="col-12 col-md-6">
-                                    <p><b>Các kích cỡ của sản phẩm:</b></p>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <a class='btn btn-primary text-white productSizeButton color-white display-block h-100 w-100' href="?workingPage=productSize&productId=<?php echo $row['id']; ?>">
-                                        <i class="fa-solid fa-pen-to-square text-white mr-1"></i>
-                                        Chỉnh sửa các kích cỡ mà sản phẩm có
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td colspan="2">
-                                
-                            </td>
-                        </tr> -->
-
-                        <!-- <tr>
-                            <td class="row">
-                                <div class="col-12 col-md-6">
-                                    <p><b>Các ảnh của sản phẩm:</b></p>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <a class='btn btn-primary text-white productSizeButton color-white display-block h-100 w-100' href="?workingPage=productImage&productId=<?php echo $row['id']; ?>">
-                                        <i class="fa-solid fa-pen-to-square text-white mr-1"></i>
-                                        Chỉnh sửa các ảnh mà sản phẩm có
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td colspan="2">
-                            </td>
-                        </tr> -->
-
                     </table>
                 </div>
                 <div class="modal-footer">
@@ -124,6 +88,33 @@
                     <button type="submit" class="btn btn-primary" name="editProduct">Sửa sản phẩm</button>
                 </div>
             </div>
+            <script>
+                function formatDateTime() {
+                    var inputDate = document.getElementById('date').value;
+                    var formattedDateTime = '';
+
+                    // Check if a date is selected
+                    if (inputDate) {
+                        // Convert input date to a Date object
+                        var date = new Date(inputDate);
+
+                        // Format the date to dd/mm/yyyy
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1; // Month is zero-based
+                        var year = date.getFullYear();
+                        formattedDateTime += (day < 10 ? '0' : '') + day + '/' + (month < 10 ? '0' : '') + month + '/' + year + ' at ';
+
+                        // Format the time to hh:mm
+                        var hours = date.getHours();
+                        var minutes = date.getMinutes();
+                        formattedDateTime += (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
+                    }
+
+                    // Display the formatted date and time
+                    document.getElementById('formattedDateTime').innerText = formattedDateTime;
+                }
+            </script>
+
         </form>
     </div>
 </div>

@@ -16,14 +16,15 @@ if (isset($_POST['addProduct'])) {
     $name = $_POST['name'];
     $code = $_POST['code'];
     $price = $_POST['price'];
+    $date = $_POST['date'];
     $description = $_POST['description'];
     $categoryId = $_POST['categoryId'];
     $eventId = $_POST['eventId'];
 
     $productId = generateUuid();
 
-    $insertSql = "INSERT INTO tbl_product(id, code, name, description, price, category_id, event_id) 
-                        VALUES ('$productId', '$code', '$name', '$description', '$price', '$categoryId', '$eventId')";
+    $insertSql = "INSERT INTO tbl_product(id, code, name, description, price, createDate, category_id, event_id) 
+                        VALUES ('$productId', '$code', '$name', '$description', '$price', '$date', '$categoryId', '$eventId')";
     mysqli_query($connect, $insertSql);
 
     header('Location:../../AdminIndex.php?workingPage=product');
@@ -33,6 +34,7 @@ if (isset($_POST['addProduct'])) {
     $name = $_POST['name'];
     $code = $_POST['code'];
     $price = $_POST['price'];
+    $date = $_POST['date'];
     $description = $_POST['description'];
     $categoryId = $_POST['categoryId'];
     $eventId = $_POST['eventId'];
@@ -44,6 +46,7 @@ if (isset($_POST['addProduct'])) {
     name='$name', 
     description='$description', 
     price='$price', 
+    createDate = '$date',
     category_id='$categoryId',
     event_id='$eventId'
     WHERE id='$productId';

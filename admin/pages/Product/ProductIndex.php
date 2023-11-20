@@ -29,6 +29,15 @@ if (isset($_GET['search'])) {
     ";
 }
 
+function formatDateTime($dateTime)
+{
+    $formattedDate = date('d/m/Y', strtotime($dateTime)); // Định dạng lại ngày
+    $formattedTime = date('H:i', strtotime($dateTime)); // Định dạng lại thời gian
+
+    return $formattedDate . ' ' . $formattedTime;
+}
+
+
 $tableData = mysqli_query($connect, $getTableDataSql);
 ?>
 
@@ -58,6 +67,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <th class="noWrap">STT</th>
                 <th class="noWrap">Mã sản phẩm</th>
                 <th class="noWrap">Tên sản phẩm</th>
+                <th class="noWrap">Ngày tạo</th>
                 <th class="noWrap">Mô tả</th>
                 <th class="noWrap">Giá gốc</th>
                 <th class="noWrap">Quản lý</th>
@@ -82,6 +92,10 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     </td>
                     <td class="tensanpham">
                         <?php echo $row['name'] ?>
+                    </td>
+
+                    <td>
+                        <?php echo formatDateTime($row['createDate']); ?>
                     </td>
 
                     <td>
