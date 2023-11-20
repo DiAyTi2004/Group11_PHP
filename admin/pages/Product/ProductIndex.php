@@ -32,7 +32,7 @@ if (isset($_GET['search'])) {
 function formatDateTime($dateTime)
 {
     $formattedDate = date('d/m/Y', strtotime($dateTime)); // Định dạng lại ngày
-    $formattedTime = date('H:i', strtotime($dateTime)); // Định dạng lại thời gian
+    $formattedTime = date('H:i:s', strtotime($dateTime)); // Định dạng lại thời gian
 
     return $formattedDate . ' ' . $formattedTime;
 }
