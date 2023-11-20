@@ -76,12 +76,6 @@ if (isset($_SESSION['userImage'])) {
             </div>
 
             <div class="cart__wrapper flex-center">
-                <!-- <div class="cart__section">
-                    <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?usingPage=cart">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </a>
-                </div> -->
-
                 <?php
                 if (isset($_SESSION['userId'])) {
                 ?>
@@ -124,13 +118,6 @@ if (isset($_SESSION['userImage'])) {
                         </div>
 
                     </div>
-
-                    <!-- <div class="user__section">
-                        <a class="header__btn br-10 p-2 py-1 over-hidden" href="UserIndex.php?dangxuat=true">
-                            <i class="fa-solid fa-right-to-bracket">
-                            </i>
-                        </a>
-                    </div> -->
                 <?php
                 } else {
                 ?>
