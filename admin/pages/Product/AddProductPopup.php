@@ -24,14 +24,9 @@
 
                         <tr>
                             <td class="row">
-                                <div class="mb-2 col">
+                                <div class="mb-2">
                                     <label for="price" class="form-label">Giá</label>
                                     <input name="price" type="number" step="0.01" class="form-control" id="price">
-                                </div>
-
-                                <div class="mb-2 col">
-                                    <label for="date" class="form-label">Ngày tạo</label>
-                                    <input name="date" type="datetime-local" class="form-control" id="date">
                                 </div>
                             </td>
                         </tr>

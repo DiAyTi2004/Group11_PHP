@@ -23,10 +23,6 @@
                                     <label for="price" class="form-label">Giá</label>
                                     <input name="price" type="number" step="0.01" class="form-control" id="price" value="<?php echo $row['price'] ?>">
                                 </div>
-                                <div class="mb-2 col">
-                                    <label for="date" class="form-label">Ngày tạo</label>
-                                    <input name="date" type="datetime-local" class="form-control" id="date" value="<?php echo $row['createDate'] ?>">
-                                </div>
                             </td>
                         </tr>
 
@@ -88,33 +84,6 @@
                     <button type="submit" class="btn btn-primary" name="editProduct">Sửa sản phẩm</button>
                 </div>
             </div>
-            <script>
-                function formatDateTime() {
-                    var inputDate = document.getElementById('date').value;
-                    var formattedDateTime = '';
-
-                    // Check if a date is selected
-                    if (inputDate) {
-                        // Convert input date to a Date object
-                        var date = new Date(inputDate);
-
-                        // Format the date to dd/mm/yyyy
-                        var day = date.getDate();
-                        var month = date.getMonth() + 1; // Month is zero-based
-                        var year = date.getFullYear();
-                        formattedDateTime += (day < 10 ? '0' : '') + day + '/' + (month < 10 ? '0' : '') + month + '/' + year + ' at ';
-
-                        // Format the time to hh:mm
-                        var hours = date.getHours();
-                        var minutes = date.getMinutes();
-                        formattedDateTime += (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
-                    }
-
-                    // Display the formatted date and time
-                    document.getElementById('formattedDateTime').innerText = formattedDateTime;
-                }
-            </script>
-
         </form>
     </div>
 </div>

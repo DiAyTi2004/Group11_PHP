@@ -16,7 +16,8 @@ if (isset($_POST['addProduct'])) {
     $name = $_POST['name'];
     $code = $_POST['code'];
     $price = $_POST['price'];
-    $date = $_POST['date'];
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    $currentTime = date("Y-m-d H:i:s");
     $description = $_POST['description'];
     $categoryId = $_POST['categoryId'];
     $eventId = $_POST['eventId'];
@@ -24,17 +25,16 @@ if (isset($_POST['addProduct'])) {
     $productId = generateUuid();
 
     $insertSql = "INSERT INTO tbl_product(id, code, name, description, price, createDate, category_id, event_id) 
-                        VALUES ('$productId', '$code', '$name', '$description', '$price', '$date', '$categoryId', '$eventId')";
+                        VALUES ('$productId', '$code', '$name', '$description', '$price', '$currentTime', '$categoryId', '$eventId')";
     mysqli_query($connect, $insertSql);
 
-    header('Location:../../AdminIndex.php?workingPage=product');
+    // header('Location:../../AdminIndex.php?workingPage=product');
 } else if (isset($_POST['editProduct'])) {
     $productId = $_GET['productId'];
 
     $name = $_POST['name'];
     $code = $_POST['code'];
     $price = $_POST['price'];
-    $date = $_POST['date'];
     $description = $_POST['description'];
     $categoryId = $_POST['categoryId'];
     $eventId = $_POST['eventId'];
