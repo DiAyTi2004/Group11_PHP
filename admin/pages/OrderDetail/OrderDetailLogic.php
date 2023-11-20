@@ -9,7 +9,8 @@ if (isset($_POST['addOrderDetail'])) {
     $sizeId = $_POST['sizeId'];
     $productId = $_POST['productId'];
 
-    $getByProductIdAndSizeIdSQL = "SELECT * FROM tbl_product_size WHERE product_id = $productId AND size_id = $sizeId";
+    $getByProductIdAndSizeIdSQL = "SELECT * FROM tbl_product_size WHERE product_id = '" . $productId . "' AND size_id = '" . $sizeId . "'";
+    echo "sql: " . $getByProductIdAndSizeIdSQL;
     $productSizeRecords = mysqli_query($connect, $getByProductIdAndSizeIdSQL);
     $count = mysqli_num_rows($productSizeRecords);
 
@@ -22,7 +23,7 @@ if (isset($_POST['addOrderDetail'])) {
             echo "<script>alert('Số lượng hiện có không đủ, đang có sẵn: " . $available . "!')</script>";
         } else {
             //execute main logic
-            $getProductSQL = "SELECT * FROM tbl_product WHERE id = $productId";
+            $getProductSQL = "SELECT * FROM tbl_product WHERE id = '$productId'";
             $productData = mysqli_query($connect, $getProductSQL);
             $countProduct = mysqli_num_rows($productData);
 
@@ -35,7 +36,7 @@ if (isset($_POST['addOrderDetail'])) {
                 if (trim($eventId) == "") {
                     $unitPrice = $price;
                 } else {
-                    $getProductSQL = "SELECT * FROM tbl_event WHERE id = $eventId";
+                    $getProductSQL = "SELECT * FROM tbl_event WHERE id = '$eventId'";
                     $productData = mysqli_query($connect, $getProductSQL);
                     $countEvent = mysqli_num_rows($productData);
 
