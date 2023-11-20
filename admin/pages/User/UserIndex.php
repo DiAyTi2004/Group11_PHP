@@ -29,6 +29,11 @@ if (isset($_GET['search'])) {
     LIMIT $start, $pageSize";
 }
 
+function formatVND($amount)
+{
+    return number_format($amount, 0, ',', '.') . ' VND';
+}
+
 $tableData = mysqli_query($connect, $getTableDataSql);
 ?>
 
