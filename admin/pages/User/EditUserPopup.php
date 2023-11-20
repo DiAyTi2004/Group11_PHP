@@ -57,17 +57,20 @@
                            
                         </tr>
                         <tr>
+                        <tr>
                             <td class="row">
-                                <div class="col-6">
-                                    <img class="w-100" src="pages/User/UserImages/<?php echo $row['user_image'] ?>">
-                                </div>
-                                <div class="col-6 flex-center flex-column">
+                                <div class="col-6 flex-column">
                                     <label for="exampleFormControlInput1" class="form-label">
                                         Hình ảnh
                                     </label>
                                     <input type="file" name="hinhanh" class="form-control" id="exampleFormControlInput1">
                                 </div>
+                                <div class="col-6">
+                                    <img class="imageInPopup" src="pages/User/UserImages/<?php echo $row['user_image'] ?>" alt="">
+                                </div>
                             </td>
+                        </tr>
+                            
                             <td class="row">
                                 <div class="mb-2 col">
                                     <label for="exampleFormControlInput1" class="form-label">
@@ -75,27 +78,6 @@
                                     </label>
                                     <input type="text" name="diachi" value="<?php echo $row['address'] ?>" class="form-control" id="exampleFormControlInput1">
                                 </div>
-                            </td>
-                        </tr>
-
-
-
-                        <tr>
-                            <td>Chức Vụ </td>
-                            <td>
-                                <select name="chucvu" style="width: 120px">
-                                    <?php
-                                    if ($nguoidung['chucvu'] == 1) {
-                                    ?>
-                                        <option value="1" selected> Bán hàng</option>
-                                        <option value="0">Không</option>
-
-                                    <?php
-                                    } else
-                                    ?>
-                                    <option value="1"> Bán hàng</option>
-                                    <option value="0" selected>Không</option>
-                                </select>
                             </td>
                         </tr>
                     </table>
