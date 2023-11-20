@@ -1,6 +1,14 @@
 <link rel="stylesheet" href="./styles/SizeStyles.css">
  <?php
-$getAllOwningSQL = "SELECT * FROM tbl_user INNER JOIN tbl_order ON tbl_order.user_id = tbl_user.id WHERE tbl_user.id = '$row[id]';";
+ // Kiểm tra xem $row có tồn tại và không phải là null
+if ($row && isset($row['id'])) {
+    $getAllOwningSQL = "SELECT * FROM tbl_order WHERE tbl_order.user_id = '$row[id]';";
+    // Tiếp tục xử lý
+} else {
+    // Xử lý khi $row không tồn tại hoặc có giá trị null
+     $getAllOwningSQL = "SELECT * FROM tbl_order";
+}
+
 $tableOwningData = mysqli_query($connect, $getAllOwningSQL);
 ?>
 <!-- Modal -->
@@ -16,9 +24,7 @@ $tableOwningData = mysqli_query($connect, $getAllOwningSQL);
                     <thead class="table-head w-100">
                         <tr class="table-heading">
                             <th class="noWrap">STT</th>
-                            <th class="noWrap">Tên người dùng</th>
-                            <th class="noWrap">Tài khoản</th>
-                            <th class="noWrap">Mã sản phẩm</th>
+                            <th class="noWrap">Mã đơn hàng</th>
                             <th class="noWrap">Điện thoại nhận</th>
                             <th class="noWrap">Địa chỉ nhận</th>
                             <th class="noWrap">Phí giao hàng</th>
@@ -37,12 +43,7 @@ $tableOwningData = mysqli_query($connect, $getAllOwningSQL);
                                 <td>
                                     <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                                 </td>
-                                <td>
-                                    <?php echo $rowOwningData['fullname']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $rowOwningData['username'] ?>
-                                </td>
+                             
                                 <td>
                                     <?php echo $rowOwningData['code'] ?>
                                 </td>

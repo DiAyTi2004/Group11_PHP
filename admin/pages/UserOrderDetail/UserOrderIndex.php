@@ -51,7 +51,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
         <thead class="table-head w-100">
             <tr class="table-heading">
                 <th class="noWrap">STT</th>
-                <th class="noWrap">Mã sản phẩm</th>
+                <th class="noWrap">Mã đơn hàng</th>
                 <th class="noWrap">Điện thoại nhận</th>
                 <th class="noWrap">Địa chỉ nhận</th>
                 <th class="noWrap">Phí giao hàng</th>
@@ -64,7 +64,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             $displayOrder = 0;
             $hasData = false;
 
-            while ($row2 = mysqli_fetch_array($tableData)) {
+            while ($row = mysqli_fetch_array($tableData)) {
                 $displayOrder++;
                 $hasData = true;
             ?>
@@ -73,23 +73,23 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                     </td>
                     <td>
-                        <?php echo $row2['code'] ?>
+                        <?php echo $row['code'] ?>
                     </td>
                     <td>
-                        <?php echo $row2['receive_phone'] ?>
+                        <?php echo $row['receive_phone'] ?>
                     </td>
                     <td>
-                        <?php echo $row2['receive_address'] ?>
+                        <?php echo $row['receive_address'] ?>
                     </td>
                     <td>
-                        <?php echo $row2['delivery_cost'] ?>
+                        <?php echo $row['delivery_cost'] ?>
                     </td>
                     <td>
                         <div style="min-width: 150px;">
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row2['id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row2['id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-trash mr-1"></i>
                             </button>
                         </div>
