@@ -28,7 +28,7 @@ if (isset($_POST['addProduct'])) {
                         VALUES ('$productId', '$code', '$name', '$description', '$price', '$currentTime', '$categoryId', '$eventId')";
     mysqli_query($connect, $insertSql);
 
-    // header('Location:../../AdminIndex.php?workingPage=product');
+    header('Location:../../AdminIndex.php?workingPage=product');
 } else if (isset($_POST['editProduct'])) {
     $productId = $_GET['productId'];
 
