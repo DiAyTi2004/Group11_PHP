@@ -44,6 +44,7 @@ if (isset($_POST['addOrder'])) {
     WHERE id ='$_GET[orderId]' ";
     $query = mysqli_query($connect, $sql_editOrder);
 } else if (isset($_POST['deleteOrder'])) {
+    $userId = $_GET['userId'];
     $deleteOrder = $_GET['orderId'];
     $sql_xoa = "DELETE FROM tbl_order WHERE id ='$_GET[orderId]';";
     mysqli_query($connect, $sql_xoa);
