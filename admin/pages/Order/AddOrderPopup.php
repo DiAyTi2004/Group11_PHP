@@ -53,22 +53,25 @@
                             </td>
 
                             <td class="row">
+
                                 <div class="mb-2 col-6">
-                                    <label for="code" class="form-label">Mã đơn hàng</label>
-                                    <input required name="code" type="text" class="form-control" id="code" value="<?php
-                                                                                                                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                                                                                                                    $code = '';
-
-                                                                                                                    for ($i = 0; $i < 8; $i++) {
-                                                                                                                        $code .= $characters[rand(0, strlen($characters) - 1)];
-                                                                                                                    }
-
-                                                                                                                    echo $code;
-                                                                                                                    ?>">
+                                    <label for="receivePhone" class="form-label">Điện thoại nhận hàng</label>
+                                    <input required name="receivePhone" type="text" class="form-control" id="receivePhone">
                                 </div>
+
                                 <div class="mb-2 col-6">
-                                    <label for="dienthoainhan" class="form-label">Điện thoại nhận hàng</label>
-                                    <input required name="dienthoainhan" type="text" class="form-control" id="dienthoainhan">
+                                    <label for="transferFee" class="form-label">Phí giao hàng (VND)</label>
+                                    <input required name="transferFee" type="number" step="0.01" class="form-control" id="transferFee">
+                                </div>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="row">
+                                <div class="mb-2 col">
+                                    <label for="receiveAddress" class="form-label">Địa chỉ nhận</label>
+                                    <textarea required name="receiveAddress" class="form-control" id="receiveAddress" rows="3"></textarea>
                                 </div>
                             </td>
                         </tr>
@@ -76,26 +79,8 @@
                         <tr>
                             <td class="row">
                                 <div class="mb-2 col">
-                                    <label for="phigiaohang" class="form-label">Phí giao hàng</label>
-                                    <input required name="phigiaohang" type="number" step="0.01" class="form-control" id="phigiaohang">
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="row">
-                                <div class="mb-2 col">
-                                    <label for="diachinhan" class="form-label">Địa chỉ nhận</label>
-                                    <textarea required name="diachinhan" class="form-control" id="diachinhan" rows="3"></textarea>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="row">
-                                <div class="mb-2 col">
-                                    <label for="mota" class="form-label">Mô tả</label>
-                                    <textarea name="mota" class="form-control" id="mota" rows="3"></textarea>
+                                    <label for="description" class="form-label">Mô tả</label>
+                                    <textarea name="description" class="form-control" id="description" rows="3"></textarea>
                                 </div>
                             </td>
                         </tr>

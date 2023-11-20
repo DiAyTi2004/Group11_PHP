@@ -12,21 +12,29 @@ function generateUuid()
 }
 
 if (isset($_POST['addOrder'])) {
-    $code  = $_POST['code'];
-    $dienthoainhan = $_POST['dienthoainhan'];
-    $diachinhan = $_POST['diachinhan'];
-    $phigiaohang = $_POST['phigiaohang'];
-    $mota = $_POST['mota'];
     $userId = $_POST['userId'];
-    $status_id = $_POST['statusId'];
+    $statusId = $_POST['statusId'];
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-    $Id =  generateUuid();
-    $add = "INSERT INTO tbl_order(id,code,user_id,status_id,receive_phone,receive_address,delivery_cost,description) 
-    VALUES ('" . $Id . "','" . $code . "','" . $userId . "','" . $status_id . "','" . $dienthoainhan . "','" . $diachinhan . "','" . $phigiaohang . "','" . $mota . "')";
+    $orderCode = '';
+
+    for ($i = 0; $i < 8; $i++) {
+        $orderCode .= $characters[rand(0, strlen($characters) - 1)];
+    }
+
+    $receivePhone = $_POST['receivePhone'];
+    $transferFee = $_POST['transferFee'];
+    $receiveAddress = $_POST['receiveAddress'];
+    $description = $_POST['description'];
+    $createDate = date('Y-m-d H:i:s');
+
+    $orderId =  generateUuid();
+    $add = "INSERT INTO tbl_order(id,code,user_id,status_id,receive_phone,receive_address,delivery_cost,description, createDate) 
+    VALUES ('" . $orderId . "','" . $orderCode . "','" . $userId . "','" . $statusId . "','" . $receivePhone . "','" . $receiveAddress . "','" . $transferFee . "','" . $description . "','" . $createDate . "')";
+
     mysqli_query($connect, $add);
 } else if (isset($_POST['editOrder'])) {
-    $code  = $_POST['code'];
-    $dienthoainhan = $_POST['dienthoainhan'];
+    $receivePhone = $_POST['receivePhone'];
     $diachinhan = $_POST['diachinhan'];
     $phigiaohang = $_POST['phigiaohang'];
     $mota = $_POST['mota'];
@@ -34,14 +42,15 @@ if (isset($_POST['addOrder'])) {
     $status_id = $_POST['statusId'];
 
     $sql_editOrder = "UPDATE tbl_order 
-    SET code='" . $code . "',
-    receive_phone='" . $dienthoainhan . "',
+    SET 
+    receive_phone='" . $receivePhone . "',
     receive_address = '" . $diachinhan . "',
     delivery_cost = '" . $phigiaohang . "' , 
     user_id = '" . $userId . "' , 
     status_id = '" . $status_id . "' , 
     description = '" . $mota . "'
     WHERE id ='$_GET[orderId]' ";
+
     $query = mysqli_query($connect, $sql_editOrder);
 } else if (isset($_POST['deleteOrder'])) {
     $deleteOrder = $_GET['orderId'];

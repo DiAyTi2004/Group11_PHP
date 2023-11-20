@@ -5,6 +5,8 @@
 
     if ($usingPage == 'category') {
         include("../pages/Category/CategoryIndex.php");
+    } else if ($usingPage == 'event') {
+        include("../pages/Event/EventIndex.php");
     } else if ($usingPage == 'cart') {
         include("../pages/Cart/CartIndex.php");
     } else if ($usingPage == 'product') {

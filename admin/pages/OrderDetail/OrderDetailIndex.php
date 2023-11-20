@@ -30,7 +30,7 @@ $start = ($pageIndex - 1) * $pageSize;
 
 $getTableDataSql = "";
 
-$getTableDataSql = "SELECT * FROM tbl_order_detail WHERE order_id = '$orderId'
+$getTableDataSql = "SELECT * FROM tbl_order_detail INNER JOIN tbl_product ON tbl_product.id = tbl_order_detail.product_id WHERE order_id = '$orderId'
     LIMIT $start, $pageSize";
 
 $tableData = mysqli_query($connect, $getTableDataSql);
@@ -63,11 +63,11 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             $displayOrder = 0;
             $hasData = false;
 
-            while ($row = mysqli_fetch_array($tableData)) {
+            while ($rowOwningData = mysqli_fetch_array($tableData)) {
                 $displayOrder++;
                 $hasData = true;
 
-                $getSizeSQL = "SELECT * FROM tbl_size WHERE id = '$row[size_id]';";
+                $getSizeSQL = "SELECT * FROM tbl_size WHERE id = '$rowOwningData[size_id]';";
                 $sizeData = mysqli_query($connect, $getSizeSQL);
                 $sizeCode = '';
                 $sizeName = '';
@@ -94,10 +94,10 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     </td>
                     <td>
                         <div style="min-width: 150px;">
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['order_id']; ?>_<?php echo $row['product_id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $rowOwningData['order_id']; ?>_<?php echo $rowOwningData['product_id']; ?>">
                                 <i class="fa-solid fa-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeletePopup_<?php echo $row['order_id']; ?>_<?php echo $row['product_id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeletePopup_<?php echo $rowOwningData['order_id']; ?>_<?php echo $rowOwningData['product_id']; ?>">
                                 <i class="fa-solid fa-trash mr-1"></i>
                             </button>
                         </div>
