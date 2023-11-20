@@ -28,16 +28,17 @@
                         </tr>
                         <tr>
                             <td class="row">
-                                <div class="col-6">
-                                    <img class="w-100" src="pages/User/UserImages/<?php echo $row['user_image'] ?>">
-                                </div>
-                                <div class="col-6 flex-center flex-column">
+                                <div class="col-6 flex-column">
                                     <label for="exampleFormControlInput1" class="form-label">
                                         Hình ảnh
                                     </label>
                                     <input type="file" name="hinhanh" class="form-control" id="exampleFormControlInput1">
                                 </div>
+                                <div class="col-6">
+                                    <img class="imageInPopup" src="pages/User/UserImages/<?php echo $row['user_image'] ?>" alt="">
+                                </div>
                             </td>
+                        </tr>
                         </tr>
 
                         <tr>
