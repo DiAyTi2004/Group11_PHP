@@ -24,7 +24,7 @@ function generateUuid()
 }
 
 if (isset($_POST['addUser'])) {
-    if (isset($_FILES['hinhanh']) && ($file['type'] == 'image/jpeg' || $file['type'] == 'imgae/jpg' || $file['type'] == 'image/png')) {
+    if (isset($_FILES['hinhanh']) && ($file['type'] == 'image/jpeg' || $file['type'] == 'image/jpg' || $file['type'] == 'image/png')) {
         move_uploaded_file($hinhanh_tmp, 'UserImages/' . $hinhanh);
     }
     $userId =  generateUuid();
