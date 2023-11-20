@@ -37,6 +37,10 @@ function formatVND($amount)
 $tableData = mysqli_query($connect, $getTableDataSql);
 ?>
 
+<?php
+
+
+?>
 <div class="text-left flex justify-between">
     <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addUser">
         <i class="fa-solid fa-plus"></i>
@@ -79,6 +83,15 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             while ($row = mysqli_fetch_array($tableData)) {
                 $hasData = true;
                 $displayOrder++;
+                $_SESSION['userImage'] = $row['user_image'];
+                $imageLink = "";
+                if (isset($_SESSION['userImage'])) {
+                    if (str_contains($_SESSION['userImage'], "https") || str_contains($_SESSION['userImage'],"http")) {
+                        $imageLink = $_SESSION['userImage'];
+                    } else {
+                         $imageLink = "../../admin/pages/User/UserImages/" .$_SESSION['userImage'];
+                    }
+                }
             ?>
                 <tr>
                     <td>
@@ -89,7 +102,19 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     </td>
 
                     <td>
-                        <img src="pages/User/UserImages/<?php echo $row['user_image'] ?>" width="100%">
+                        <?php
+
+                        if (trim($_SESSION['userImage']) == "") {
+                            echo '<i class="fa-solid fa-circle-user"></i>';
+                        } else {
+                            if($_SESSION['userImage'] != 1) {
+                             echo '<img class="userLogoImage" src=' . $imageLink . ' alt="UserImg">';
+                            }
+                             else {
+                                echo $row['user_image'];
+                             }
+                        }
+                        ?>
                     </td>
 
                     <td>

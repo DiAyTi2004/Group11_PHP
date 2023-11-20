@@ -20,10 +20,10 @@ if (isset($_GET['usingPage'])) {
 
 $imageLink = "";
 if (isset($_SESSION['userImage'])) {
-    if (str_contains($_SESSION['userImage'], "http")) {
+    if (str_contains($_SESSION['userImage'], "https")) {
         $imageLink = $_SESSION['userImage'];
     } else {
-        $imageLink = "../../admin/pages/User/UserImage/" . $_SESSION['userImage'];
+        $imageLink = "../../admin/pages/User/UserImages/" . $_SESSION['userImage'];
     }
 }
 
