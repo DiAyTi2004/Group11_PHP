@@ -66,9 +66,19 @@ if (isset($_POST['addProductImage'])) {
             $addProductimageSQL = "INSERT INTO tbl_product_image(id, product_id, description, content, main_image) 
                         VALUES ('" . $imageIdNew . "','" . $productId . "','" . $description . "','" . $content . "', '" . $main_image . "')";
             mysqli_query($connect, $addProductimageSQL);
-        }
-    } else {
-        echo "Loại file không hợp lệ.";
+        } else if($file) {
+            $productId = $_GET['productId'];
+            $imageId = $_GET['imageId'];
+            $main_image = isset($_POST['main_image']) ? 1 : 0;
+            if ($main_image == 1) {
+                $updateMainImageSQL = "UPDATE tbl_product_image SET main_image = 0 WHERE product_id = '$productId'";
+                mysqli_query($connect, $updateMainImageSQL);
+            }
+            $updateNoImgSQL = "UPDATE tbl_product_image SET main_image = $main_image WHERE id = '$imageId'";
+            mysqli_query($connect, $updateNoImgSQL);
+        } else {
+            echo "Loại file không hợp lệ.";
+    } 
     }
 } else if (isset($_POST['deleteProductImage'])) {
     $productId = $_GET['productId'];
