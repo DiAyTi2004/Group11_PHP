@@ -10,8 +10,8 @@ if (isset($_GET['userId'])) {
 }
 $getTableDataSql = "SELECT * FROM tbl_user WHERE id = '$userId'";
 $tableData = mysqli_query($connect, $getTableDataSql);
-while ($row2 = mysqli_fetch_array($tableData)) {
-    $userName = $row2['fullname'];
+while ($row = mysqli_fetch_array($tableData)) {
+    $userName = $row['fullname'];
 }
 ?>
 
