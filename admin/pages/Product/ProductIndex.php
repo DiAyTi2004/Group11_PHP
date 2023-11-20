@@ -93,19 +93,19 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     </td>
 
                     <td>
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-placement="right" title="Chỉnh sửa sản phẩm" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-pencil"></i>
                         </button>
 
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-placement="left" title="Xoá sản phẩm" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-trash mr-1"></i>
                         </button>
 
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModalSize_<?php echo $row['id']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-placement="left" title="Chỉnh sửa kích thước" data-bs-target="#exampleModalSize_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-ruler"></i>
                         </button>
 
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModalImage_<?php echo $row['id']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-placement="left" title="Chỉnh sửa ảnh" data-bs-target="#exampleModalImage_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-image mr-1"></i>
                         </button>
                     </td>
