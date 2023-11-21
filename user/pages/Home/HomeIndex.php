@@ -5,7 +5,7 @@ if ($total_event > 0) {
 ?>
     <div class="show_slide appCard p-0">
         <?php
-        include("../pages/Home/HomeSlides.php");
+        include("../pages/Home/EventSlides.php");
         ?>
     </div>
 <?php
