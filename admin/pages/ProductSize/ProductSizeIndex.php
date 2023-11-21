@@ -92,11 +92,17 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     </td>
                     <td>
                         <div style="min-width: 150px;">
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['product_id']; ?>_<?php echo $row['size_id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip bottom" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['product_id']; ?>_<?php echo $row['size_id']; ?>">
                                 <i class="fa-solid fa-pencil"></i>
+                                <div class="tooltip ">
+                                <p>Chỉnh sửa size</p>
+                            </div>
                             </button>
-                            <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeletePopup_<?php echo $row['product_id']; ?>_<?php echo $row['size_id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip bottom" data-bs-toggle="modal" data-bs-target="#confirmDeletePopup_<?php echo $row['product_id']; ?>_<?php echo $row['size_id']; ?>">
                                 <i class="fa-solid fa-trash mr-1"></i>
+                                <div class="tooltip ">
+                                <p>Xoá size này</p>
+                            </div>
                             </button>
                         </div>
                     </td>
