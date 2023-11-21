@@ -12,7 +12,7 @@ $tableEventProductsData = mysqli_query($connect, $getAllEventProductsSQL);
                 <h5 class="text-center text-white">Các sản phẩm của sự kiện (Mã sự kiện: <?php echo $row['code'] ?>)</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="max-height: 600px; overflow: auto;">
+            <div class="modal-body">
                 <table class="w-100">
                     <thead class="table-head w-100">
                         <tr class="table-heading">
