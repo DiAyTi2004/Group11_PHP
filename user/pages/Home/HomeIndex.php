@@ -3,7 +3,7 @@ $countAllEvent = "SELECT * FROM tbl_event;";
 $total_event = mysqli_num_rows(mysqli_query($connect, $countAllEvent));
 if ($total_event > 0) {
 ?>
-    <div class="show_slide appCard p-0">
+    <div class="show_event_slide appCard p-0">
         <?php
         include("../pages/Home/EventSlides.php");
         ?>
@@ -11,6 +11,19 @@ if ($total_event > 0) {
 <?php
 }
 ?>
+
+<div class="show_category_slide appCard">
+    <?php
+    if (isset($_GET['usingPage'])) {
+        $usingPage = $_GET['usingPage'];
+    } else {
+        $usingPage = "";
+    }
+    if ($usingPage == "") {
+        include("../pages/Home/CategorySlide.php");
+    }
+    ?>
+</div>
 
 <div class="show_new appCard">
     <?php //lấy qiamly từ menu truyền vào bằng phuongư thức GET
