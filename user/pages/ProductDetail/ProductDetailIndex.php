@@ -1,61 +1,6 @@
 <link rel="stylesheet" href="../../user/styles/ProductDetailStyles.css">
 
 <?php
-$sql_chitiet = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc  AND tbl_sanpham.id_sanpham='$_GET[id]' LIMIT 1";
-$query_chitiet = mysqli_query($connect, $sql_chitiet);
-while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
-?>
-    <div class="warpper_deital">
-        <div class="hinhanh_sanpham">
-            <img src="../../admin/pages/Product/ProductImages/<?php echo $row_chitiet['hinhanh'] ?>">
-        </div>
-        <form class="form-sp" action="../pages/Cart/AddToCart.php?id=<?php echo $row_chitiet['id_sanpham'] ?>" method="POST">
-            <div class="chitiet_sanpham">
-                <h3 style="margin: 0;"><?php echo $row_chitiet['tensanpham'] ?></h3>
-                <div class="rating">
-                    <span class="review-no">4.8</span>
-                    <div class="stars">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                    </div>
-                </div>
-                <div class="price">
-                    <?php $salerandom = rand(10, 70) ?>
-                    <p class="gia-cu"><?php echo number_format($row_chitiet['giasanpham'] * ($salerandom / 100) + $row_chitiet['giasanpham'], 0, ',', '.') ?> VNĐ</p>
-                    <h5 class="gia-now"><?php echo number_format($row_chitiet['giasanpham'], 0, ',', '.') ?> VNĐ</h5>
-                    <span class="slae"><?php echo  $salerandom ?>% GIẢM</span>
-                </div>
-                <div class="soluong-sp">
-                    <p class="soluong-sp-p"><b>Số lượng:</b></p>
-                    <div class="soluong-sp-dem">
-                        <a class="soluong-sp-dem-icon" href="pages/main/giohang/suasoluong.php?cong=<?php echo $cart_item['id'] ?>"><i class="fa-solid fa-plus"></i></a>
-                        <input class="soluong-sp-input" type="text" name="soluong" value="1">
-                        <a class="soluong-sp-dem-icon" href="pages/main/giohang/suasoluong.php?tru=<?php echo $cart_item['id'] ?>"><i class="fa-solid fa-minus"></i></a>
-                    </div>
-                    <p class="soluong-sp-cosan"><?php echo $row_chitiet['soluong'] ?></p><span class="soluong-sp-cosan-text">sản phẩm còn sẵn</span>
-                </div>
-                <div class="mota">
-                    <p class="mota-text"><b>Danh mục:</b> <?php echo $row_chitiet['tendanhmuc'] ?> </p>
-                </div>
-
-                <div class="mota">
-                    <p class="mota-text"><b>Mô tả:</b> <?php echo $row_chitiet['tomta3'] ?> </p>
-                </div>
-                <div class="input-themcart">
-                    <i class="fa-solid fa-cart-plus"></i>
-                    <input class="themgiohang" type="submit" name="addToCart" value="Thêm Giỏ Hàng">
-                </div>
-            </div>
-        </form>
-    </div>
-<?php
-}
-?>
-
-<?php
 $sql_details = "SELECT * FROM tbl_product INNER JOIN tbl_product_image ON tbl_product.id = tbl_product_image.product_id
  WHERE tbl_product.id = '$_GET[id]'";
 $query_details = mysqli_query($connect, $sql_details);
