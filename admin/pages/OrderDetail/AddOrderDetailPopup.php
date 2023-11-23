@@ -2,12 +2,12 @@
 <div class="modal fade" id="addOrderDetailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-dark">
-                <h5 class="text-center text-white">Thêm sản phẩm cho đơn hàng <?php echo $orderCode; ?></h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="OrderDetailForm" method="POST" action="pages/OrderDetail/OrderDetailLogic.php?orderId=<?php echo $orderId; ?>" enctype="multipart/form-data">
+            <form id="OrderDetailForm" method="POST" action="pages/OrderDetail/OrderDetailLogic.php?orderId=<?php echo $orderId; ?>" enctype="multipart/form-data">
+                <div class="modal-header bg-dark">
+                    <h5 class="text-center text-white">Thêm sản phẩm cho đơn hàng <?php echo $orderCode; ?></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                     <table border="1" width="100%" padding="10px">
                         <tr>
                             <td class="row">
@@ -66,11 +66,11 @@
                         </tr>
 
                     </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Đóng</button>
-                <button type="submit" class="btn btn-primary" name="addOrderDetail">Thêm</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary" name="addOrderDetail">Thêm</button>
+                </div>
             </form>
         </div>
     </div>
