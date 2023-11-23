@@ -230,14 +230,14 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
                     <span>Shoes Land</span>
                     <div class="flex-center">
                         <span class="">
-                            <img height="18" width="74" alt="" class="" src="../../user/img/official.png" style="width: 74px; height: 18px;"><noscript><img height="18" width="74" alt="" class="WebpImg__StyledImg-sc-h3ozu8-0 fWjUGo badge-img" src="/wp-content/uploads/2022/06/offcial-i.png" style="width: 74px; height: 18px;" /></noscript>
+                            <img height="18" width="74" alt="" class="" src="./images/official.png" style="width: 74px; height: 18px;"><noscript><img height="18" width="74" alt="" class="WebpImg__StyledImg-sc-h3ozu8-0 fWjUGo badge-img" src="/wp-content/uploads/2022/06/offcial-i.png" style="width: 74px; height: 18px;" /></noscript>
                         </span>
                     </div>
                 </a>
             </div>
             <div class="row">
                 <div class="col benefit-item">
-                    <img alt="compensation-icon" src="../../user/img/security.png" height="32" width="32" data-lazy-src="/wp-content/uploads/2022/06/hoan-tien.png" data-ll-status="loaded" class="entered lazyloaded"><noscript><img alt="compensation-icon" src="/wp-content/uploads/2022/06/hoan-tien.png" height="32" width="32" /></noscript>
+                    <img alt="compensation-icon" src="./images/security.png" height="32" width="32" data-lazy-src="/wp-content/uploads/2022/06/hoan-tien.png" data-ll-status="loaded" class="entered lazyloaded"><noscript><img alt="compensation-icon" src="/wp-content/uploads/2022/06/hoan-tien.png" height="32" width="32" /></noscript>
                     <span>
                         Hoàn tiền<br>
                         <b>100%</b><br>
@@ -245,7 +245,7 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
                     </span>
                 </div>
                 <div class="col benefit-item">
-                    <img alt="compensation-icon" src="../../user/img/like.png" height="32" width="32" data-lazy-src="/wp-content/uploads/2022/06/unbox.png" data-ll-status="loaded" class="entered lazyloaded"><noscript><img alt="compensation-icon" src="/wp-content/uploads/2022/06/unbox.png" height="32" width="32" /></noscript>
+                    <img alt="compensation-icon" src="./images/like.png" height="32" width="32" data-lazy-src="/wp-content/uploads/2022/06/unbox.png" data-ll-status="loaded" class="entered lazyloaded"><noscript><img alt="compensation-icon" src="/wp-content/uploads/2022/06/unbox.png" height="32" width="32" /></noscript>
                     <span>
                         Nhận hàng<br>
                         Kiểm tra hàng<br>
@@ -253,7 +253,7 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
                     </span>
                 </div>
                 <div class="col benefit-item">
-                    <img alt="compensation-icon" src="../../user/img/refund.png" height="32" width="32" data-lazy-src="/wp-content/uploads/2022/06/doi-tra.png" data-ll-status="loaded" class="entered lazyloaded"><noscript><img alt="compensation-icon" src="/wp-content/uploads/2022/06/doi-tra.png" height="32" width="32" /></noscript>
+                    <img alt="compensation-icon" src="./images/refund.png" height="32" width="32" data-lazy-src="/wp-content/uploads/2022/06/doi-tra.png" data-ll-status="loaded" class="entered lazyloaded"><noscript><img alt="compensation-icon" src="/wp-content/uploads/2022/06/doi-tra.png" height="32" width="32" /></noscript>
                     <span>
                         Đổi trả trong<br>
                         <b>3 ngày</b><br>
