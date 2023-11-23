@@ -52,6 +52,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <th class="noWrap">STT</th>
                 <th class="noWrap">Mã sản phẩm</th>
                 <th class="noWrap">Tên sản phẩm</th>
+                <th class="noWrap">Kích cỡ</th>
                 <th class="noWrap">Số lượng</th>
                 <th class="noWrap">Đơn giá</th>
                 <th class="noWrap">Quản lý</th>
@@ -85,6 +86,9 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     </td>
                     <td>
                         <?php echo $rowOwningData['name'] ?>
+                    </td>
+                    <td>
+                        <?php echo $sizeName; ?>
                     </td>
                     <td>
                         <?php echo $rowOwningData['quantity'] ?>
@@ -195,6 +199,17 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
+    $getSizeSQL = "SELECT * FROM tbl_size WHERE id = '$row[size_id]';";
+    $sizeData = mysqli_query($connect, $getSizeSQL);
+    $sizeCode = '';
+    $sizeName = '';
+    $sizeId = '';
+    while ($sizeRow = mysqli_fetch_array($sizeData)) {
+        $sizeCode = $sizeRow['code'];
+        $sizeName = $sizeRow['name'];
+        $sizeId = $sizeRow['id'];
+    }
+
     include "./pages/OrderDetail/EditOrderDetailPopup.php";
 }
 ?>
@@ -204,7 +219,7 @@ while ($row = mysqli_fetch_array($tableData)) {
 $tableData = mysqli_query($connect, $getTableDataSql);
 
 while ($row = mysqli_fetch_array($tableData)) {
-    include "./pages/ProductSize/ConfirmDeleteOrderDetailPopup.php";
+    include "./pages/OrderDetail/ConfirmDeleteOrderDetailPopup.php";
 }
 ?>
 
