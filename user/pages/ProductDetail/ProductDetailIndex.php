@@ -162,7 +162,7 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
                 ?>
                     <div class="p-1">
                         <label class="btn btn-outline-success size-btn" data-size-id="<?php echo $id; ?>">
-                            <?php echo $size_name; ?>
+                            <?php echo preg_replace('/\D/', '', $size_name); ?>
                             <input type="hidden" name="selected_size" value="<?php echo $id; ?>">
                         </label>
                     </div>
@@ -224,7 +224,7 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
 
     <div class="col col-3 detail_contact">
         <div class="">
-            <div class="seller-info">
+            <div class="seller-info flex-center">
                 <a style="text-decoration: none;" href="#" class="">
                     <img height="44" width="4" alt="" class="" src="./images/logo.svg" style="width: 44px;"><noscript><img height="44" width="4" alt="" class="WebpImg__StyledImg-sc-h3ozu8-0 fWjUGo logo" src="/wp-content/uploads/2022/09/PNG-1.png" style="width: 44px;" /></noscript>
                     <span>Shoes Land</span>
@@ -235,7 +235,7 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
                     </div>
                 </a>
             </div>
-            <div class="row">
+            <div class="row mt-4">
                 <div class="col benefit-item">
                     <img alt="compensation-icon" src="./images/security.png" height="32" width="32" data-lazy-src="/wp-content/uploads/2022/06/hoan-tien.png" data-ll-status="loaded" class="entered lazyloaded"><noscript><img alt="compensation-icon" src="/wp-content/uploads/2022/06/hoan-tien.png" height="32" width="32" /></noscript>
                     <span>
