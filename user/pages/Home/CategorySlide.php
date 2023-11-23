@@ -39,7 +39,7 @@ $query_show_category = mysqli_query($connect, $sql_show_category);
             </div>
         </div>
     </div>
-
+</div>
     <script>
         const initSlider = () => {
             const imageList = document.querySelector(".slider-wrapper .image-list");
