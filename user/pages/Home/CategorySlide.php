@@ -7,7 +7,7 @@ $query_show_category = mysqli_query($connect, $sql_show_category);
 <link rel="stylesheet" href="./../styles/CategorySlideStyles.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
 
-<div class="container">
+<div class="containerCategorySlide">
     <div class="slider-wrapper">
         <button id="prev-slide" class="slide-button material-symbols-rounded">
             chevron_left
