@@ -86,10 +86,10 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 $_SESSION['userImage'] = $row['user_image'];
                 $imageLink = "";
                 if (isset($_SESSION['userImage'])) {
-                    if (str_contains($_SESSION['userImage'], "https") || str_contains($_SESSION['userImage'],"http")) {
+                    if (str_contains($_SESSION['userImage'], "https") || str_contains($_SESSION['userImage'], "http")) {
                         $imageLink = $_SESSION['userImage'];
                     } else {
-                         $imageLink = "../../admin/pages/User/UserImages/" .$_SESSION['userImage'];
+                        $imageLink = "./../admin/pages/User/UserImages/" . $_SESSION['userImage'];
                     }
                 }
             ?>
@@ -107,12 +107,13 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         if (trim($_SESSION['userImage']) == "") {
                             echo '<i class="fa-solid fa-circle-user"></i>';
                         } else {
-                            if($_SESSION['userImage'] != 1) {
-                             echo '<img class="userLogoImage" src=' . $imageLink . ' alt="UserImg">';
+                            if ($_SESSION['userImage'] != 1) {
+                                echo '<img class="userLogoImage" src=' . $imageLink . ' alt="UserImg">';
+                            } else {
+                        ?>
+                                <img style="width: 120px; height: 160px" class="userLogoImage"  src="pages/User/UserImages/<?php echo $row["user_image"] ?>" alt="">
+                        <?php
                             }
-                             else {
-                                echo $row['user_image'];
-                             }
                         }
                         ?>
                     </td>
