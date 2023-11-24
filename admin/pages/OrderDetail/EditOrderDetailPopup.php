@@ -1,6 +1,6 @@
-<div class="modal fade" id="editPopup_<?php echo $row['order_id']; ?>_<?php echo $row['product_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editPopup_<?php echo $row['order_id']; ?>_<?php echo $row['product_id']; ?>_<?php echo $row['size_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <form method="POST" action="pages/OrderDetail/OrderDetailLogic.php?orderId=<?php echo $row['order_id']; ?>&productId=<?php echo $row['product_id']; ?>" enctype="multipart/form-data">
+        <form method="POST" action="pages/OrderDetail/OrderDetailLogic.php?orderId=<?php echo $row['order_id']; ?>&productId=<?php echo $row['product_id']; ?>&sizeId=<?php echo $row['size_id']; ?>&quantity=<?php echo $row['quantity']; ?>" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="text-center text-white">Cập nhật sản phẩm trong đơn hàng: <?php echo $orderCode; ?></h5>
