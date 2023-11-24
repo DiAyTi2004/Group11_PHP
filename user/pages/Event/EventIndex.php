@@ -1,12 +1,16 @@
 <?php
 
-$categoryId = $_GET['categoryId'] || "";
-$findProductByCategoryIdSQL = "SELECT * FROM tbl_product WHERE tbl_product.category_id ='$categoryId'";
-$productData = mysqli_query($connect, $findProductByCategoryIdSQL);
+// $categoryId = $_GET['categoryId'] || "";
+// $findProductByCategoryIdSQL = "SELECT * FROM tbl_product WHERE tbl_product.category_id ='$categoryId'";
+// $productData = mysqli_query($connect, $findProductByCategoryIdSQL);
 
-$categorySQL = "SELECT * FROM tbl_category WHERE id='$categoryId' LIMIT 1";
-$query_cate = mysqli_query($connect, $categorySQL);
-$row_title = mysqli_fetch_array($query_cate);
+// $categorySQL = "SELECT * FROM tbl_category WHERE id='$categoryId' LIMIT 1";
+// $query_cate = mysqli_query($connect, $categorySQL);
+// $row_title = mysqli_fetch_array($query_cate);
+
+$eventId = isset($_GET['eventId']) ? $_GET['eventId'] : "";
+$findProductByCategoryIdSQL = "SELECT * FROM tbl_product WHERE tbl_product.event_id ='$eventId'";
+$productData = mysqli_query($connect, $findProductByCategoryIdSQL);
 ?>
 
 <p></p>
@@ -22,7 +26,7 @@ $row_title = mysqli_fetch_array($query_cate);
     while ($row_pro = mysqli_fetch_array($productData)) {
     ?>
         <li>
-            <a href="UserIndex.php?usingPage=product&id=<?php echo $row_pro['id_sanpham'] ?>">
+            <a href="UserIndex.php?usingPage=product&id=<?php echo $row_pro['id'] ?>">
                 <img src="../../admin/pages/Product/ProductImages/<?php echo $row_pro['hinhanh'] ?>">
                 <p></p>
                 <h5 class="title_product"> <?php echo $row_pro['tensanpham'] ?></h5>
