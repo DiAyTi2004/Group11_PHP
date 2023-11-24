@@ -35,7 +35,7 @@
                                     <input type="file" name="hinhanh" class="form-control" id="exampleFormControlInput1">
                                 </div>
                                 <div class="col-6">
-                                    <img class="imageInPopup" src="pages/User/UserImages/<?php echo $row['user_image'] ?>" alt="">
+                                    <img class="imageInPopup" src="./../pages/User/UserImages/<?php echo $row['user_image'] ?>" alt="">
                                 </div>
                             </td>
                         </tr>
