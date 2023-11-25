@@ -2,16 +2,15 @@
 // GET id là lấy id từ bên MENU.php 
 
 $sql_show_test = "SELECT * FROM tbl_product INNER JOIN tbl_product_image ON tbl_product.id = tbl_product_image.product_id
-WHERE tbl_product_image.main_image = 1";
+WHERE tbl_product_image.main_image = 1 LIMIT 5";
 $query_show_test = mysqli_query($connect, $sql_show_test);
-
-$sql_show_event = "SELECT * FROM tbl_product INNER JOIN tbl_event ON tbl_product.event_id = tbl_event.id";
-$query_show_event = mysqli_query($connect, $sql_show_event);
 ?>
 
 <ul class="product_list">
     <?php
     while ($row_test = mysqli_fetch_array($query_show_test)) {
+        $sql_show_event = "SELECT * FROM tbl_product INNER JOIN tbl_event ON tbl_product.event_id = tbl_event.id WHERE tbl_product.id = '$row_test[product_id]'";
+        $query_show_event = mysqli_query($connect, $sql_show_event);
         $row_event = mysqli_fetch_array($query_show_event);
     ?>
         <li>
