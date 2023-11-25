@@ -90,7 +90,7 @@ ul.product_list li {
     margin: 5px;
     float: left;
     border-radius: 5px;
-    height: 380px;
+    height: auto;
     margin-bottom: 50px;
     background: rgb(239, 239, 239);
 }

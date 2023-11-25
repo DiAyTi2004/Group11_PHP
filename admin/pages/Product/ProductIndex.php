@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="./styles/ProductStyles.css">
 
 <?php
-$countAllSql = "SELECT *FROM tbl_product";
+$countAllSql = "SELECT * FROM tbl_product";
 $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
 
 $pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -25,7 +25,7 @@ if (isset($_GET['search'])) {
         OR tbl_product.code LIKE N'%" . $search . "%'
     ";
 } else {
-    $getTableDataSql = "SELECT *FROM tbl_product
+    $getTableDataSql = "SELECT *FROM tbl_product LIMIT $start, $pageSize
     ";
 }
 
@@ -198,15 +198,39 @@ $tableData = mysqli_query($connect, $getTableDataSql);
             </li>
 
             <?php
+            $range = 3;
             for ($i = 1; $i <= $total_page; $i++) {
                 if ($i == $pageIndex) {
                     echo '<li class="page-item light">
                         <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=product&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                 } else {
-                    echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?workingPage=product&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
-                        </li>';
+                    // Hiển thị trang đầu tiên
+                    if ($i == 1) {
+                        echo '<li class="page-item light">
+                            <a name="page" class="page-link text-reset text-black" href="?workingPage=product&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                            </li>';
+                    }            
+                    // Hiển thị các trang ở giữa
+                    else if ($i > $pageIndex - $range && $i < $pageIndex + $range) {
+                        echo '<li class="page-item light">
+                            <a name="page" class="page-link text-reset text-black" href="?workingPage=product&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                            </li>';
+                    }
+            
+                    // Hiển thị trang cuối cùng
+                    else if ($i == $total_page) {
+                        echo '<li class="page-item light">
+                            <a name="page" class="page-link text-reset text-black" href="?workingPage=product&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                            </li>';
+                    }
+            
+                    // Thêm dấu "..." nếu cần thiết
+                    if (($i == $pageIndex - $range - 1 && $pageIndex - $range > 2) || ($i == $pageIndex + $range + 1 && $pageIndex + $range < $total_page - 1)) {
+                        echo '<li class="page-item light">
+                            <span class="page-link text-reset text-black"> ... </span>
+                            </li>';
+                    }
                 }
             }
             ?>
