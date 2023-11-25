@@ -39,12 +39,14 @@ $row_title = mysqli_fetch_array($query_cate);
         }
 
         .img1 {
-            display: block;
-            margin: 0 auto;
-            width: 80%;
+            width: 100%;
             height: 100%;
-            object-fit: cover;
-            border-radius: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10%;
+            /* border: 1px solid #0be04f; */
+            box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
         }
 
         .title {

@@ -38,13 +38,15 @@ $eventDetail =  mysqli_fetch_array($productData);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin: 10px 0;
         }
+
         .img1 {
-            display: block;
-            margin: 0 auto;
             width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 5px;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10%;Ư
+            box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
         }
 
         .title {
@@ -81,6 +83,7 @@ $eventDetail =  mysqli_fetch_array($productData);
             font-weight: bold;
             /* Làm đậm cho mục đầu tiên */
         }
+
         .head-title {
             margin-bottom: 10px;
             font-size: 18px;
