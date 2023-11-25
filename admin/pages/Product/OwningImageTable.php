@@ -37,7 +37,21 @@ $tableOwningData = mysqli_query($connect, $getAllOwningSQL);
                                     <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                                 </td>
                                 <td>
-                                    <img style="width: 150px; height: 150px" src="pages/ProductImage/<?php echo $rowOwningData['content'] ?>" alt="">
+                                        <?php
+                                            $link_anh=$rowOwningData['content'];
+                                            $check="https";
+                                            if (strpos($link_anh, $check) !== false)
+                                            {
+                                                $link="";
+                                                
+                                            }
+                                            else
+                                            {
+                                                $link="pages/ProductImage/";
+                                            }
+                                        ?>
+                                        <img style="width: 150px; height: 150px" src="<?php echo $link.$rowOwningData['content'] ?>" alt="">;
+                                        
                                 </td>
                                 <td>
                                     <?php echo $rowOwningData['description'] ?>
