@@ -80,7 +80,7 @@ ul.product_list {
 }
 
 ul.product_list li img {
-    height: 300px;
+    height: 200px;
 }
 
 ul.product_list li {
@@ -90,10 +90,28 @@ ul.product_list li {
     margin: 5px;
     float: left;
     border-radius: 5px;
-    height: 420px;
+    height: 350px;
     margin-bottom: 50px;
     background: rgb(239, 239, 239);
 }
+
+.product-container {
+    position: relative;
+    display: inline-block;
+}
+
+.discount-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #ff0000; /* Màu nền của overlay */
+    color: #ffffff; /* Màu chữ trên overlay */
+    padding: 5px; /* Khoảng cách padding của overlay */
+    font-size: 14px; /* Kích thước chữ của overlay */
+    border-radius: 5px; /* Bo tròn góc của overlay */
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 90%, 0% 100%);
+}
+
 
 ul.product_list li a {
     text-decoration: none;
@@ -101,6 +119,15 @@ ul.product_list li a {
 
 ul.product_list li img {
     width: 100%;
+}
+
+.cdt-product-param {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 6px;
+    position: relative;
+    color: #000;
+    opacity: 0.7;
 }
 
 h5.price_product {
@@ -113,9 +140,28 @@ h5.price_product {
 h5.title_product {
     text-align: center;
     color: #000;
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 14px;
 }
+
+.price_fake, .price_real {
+    text-align: center;
+}
+
+.price_fake, .sold {
+    color: #000;
+    font-size: 15px;
+    opacity: 0.7;
+}
+
+.price_real {
+    font-size: 14px;
+    color: red;
+}
+
+span i.fa-star {
+    color: #fe9727;;
+}
+
 
 .footer {
     background: linear-gradient(3500deg, #0be04f, #007306) no-repeat 0 0 / cover;
