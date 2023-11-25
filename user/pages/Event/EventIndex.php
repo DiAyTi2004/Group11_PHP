@@ -36,9 +36,8 @@ $eventDetail =  mysqli_fetch_array($productData);
             border-radius: 15px;
             display: flex;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 40px 0;
+            margin: 10px 0;
         }
-
         .img1 {
             display: block;
             margin: 0 auto;
@@ -166,10 +165,10 @@ $eventDetail =  mysqli_fetch_array($productData);
                 $startFormatted = formatEventDate($eventDetail['start_date']);
                 $endFormatted = formatEventDate($eventDetail['end_date']);
                 ?>
-                <li>
+                <li style="color: green; /* tên màu */color: rgb(0, 0, 255); color: #0000FF;">
                     Bắt đầu từ: <?php echo $startFormatted; ?>
                 </li>
-                <li>
+                <li style="color: blue; color: rgb(0, 0, 255); color: #0000FF; ">
                     Kết thúc lúc: <?php echo $endFormatted; ?>
                 </li>
 

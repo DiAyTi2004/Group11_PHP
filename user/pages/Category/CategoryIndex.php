@@ -70,7 +70,7 @@ $row_title = mysqli_fetch_array($query_cate);
     </h5>
     <div class="row appCart1">
         <div class="photo col-4">
-            <img class ="img1"src="./../../admin/pages/Category/CategoryImages/<?php echo $row_title['category_image'] ?>" alt="">
+            <img class="img1" src="./../../admin/pages/Category/CategoryImages/<?php echo $row_title['category_image'] ?>" alt="">
         </div>
         <div class="title col-8">
             <p><?php echo $row_title['description'] ?></p>
