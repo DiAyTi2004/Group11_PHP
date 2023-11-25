@@ -17,7 +17,7 @@ $query_show_category = mysqli_query($connect, $sql_show_category);
             while ($row = mysqli_fetch_array($query_show_category)) {
             ?>
                 <div class="item">
-                    <a href="UserIndex.php?usingPage=category&id=<?php echo $row['id'] ?>">
+                    <a href="UserIndex.php?usingPage=category&categoryId=<?php echo $row['id'] ?>">
                         <div class="card-image">
                             <img class="image-item" src="./../../admin/pages/Category/CategoryImages/<?php echo $row['category_image'] ?>" alt="img-1" />
                         </div>

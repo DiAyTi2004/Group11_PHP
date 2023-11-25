@@ -22,7 +22,7 @@ $query_show_slide = mysqli_query($connect, $sql_show_slide);
     while ($row = mysqli_fetch_array($query_show_slide)) {
     ?>
       <div class="carousel-item <?php echo $itemIndex == 0 ? 'active' : ''; ?>">
-      <a href="UserIndex.php?usingPage=event&id=<?php echo $row_pro['id'] ?>">
+      <a href="UserIndex.php?usingPage=event&eventId=<?php echo $row['id'] ?>">
         <img src="./../../admin/pages/Event/EventImages/<?php echo $row['banner']; ?>" class="d-block w-100" alt="slide_event" style="border-radius: 10px; height: 624px">
       </a>
       </div>

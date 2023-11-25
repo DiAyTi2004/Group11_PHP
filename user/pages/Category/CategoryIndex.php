@@ -28,7 +28,7 @@ $row_title = mysqli_fetch_array($query_cate);
             text-transform: uppercase;
         }
 
-        .appCart {
+        .appCart1 {
             width: 100%;
             background-color: #fff;
             padding: 25px;
@@ -38,13 +38,15 @@ $row_title = mysqli_fetch_array($query_cate);
             margin: 20px 0;
         }
 
-        img {
-            display: block;
-            margin: 0 auto;
-            width: 80%;
+        .img1 {
+            width: 100%;
             height: 100%;
-            object-fit: cover;
-            border-radius: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10%;
+            /* border: 1px solid #0be04f; */
+            box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
         }
 
         .title {
@@ -68,9 +70,9 @@ $row_title = mysqli_fetch_array($query_cate);
         }
         ?>
     </h5>
-    <div class="row appCart">
+    <div class="row appCart1">
         <div class="photo col-4">
-            <img src="./../../admin/pages/Category/CategoryImages/<?php echo $row_title['category_image'] ?>" alt="">
+            <img class="img1" src="./../../admin/pages/Category/CategoryImages/<?php echo $row_title['category_image'] ?>" alt="">
         </div>
         <div class="title col-8">
             <p><?php echo $row_title['description'] ?></p>

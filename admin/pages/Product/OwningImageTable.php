@@ -50,7 +50,7 @@ $tableOwningData = mysqli_query($connect, $getAllOwningSQL);
                                                 $link="pages/ProductImage/";
                                             }
                                         ?>
-                                        <img style="width: 150px; height: 150px" src="<?php echo $link.$rowOwningData['content'] ?>" alt="">;
+                                        <img style="width: 150px; height: 150px" src="<?php echo $link.$rowOwningData['content'] ?>" alt="">
                                         
                                 </td>
                                 <td>
