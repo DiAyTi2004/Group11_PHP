@@ -7,7 +7,7 @@ $query_show_category = mysqli_query($connect, $sql_show_category);
 <link rel="stylesheet" href="./../styles/CategorySlideStyles.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
 
-<div class="container">
+<div class="containerCategorySlide">
     <div class="slider-wrapper">
         <button id="prev-slide" class="slide-button material-symbols-rounded">
             chevron_left
@@ -33,84 +33,87 @@ $query_show_category = mysqli_query($connect, $sql_show_category);
                 chevron_right
             </button>
         </div>
-        <div class="slider-scrollbar">
-            <div class="scrollbar-track">
-                <div class="scrollbar-thumb"></div>
-            </div>
-        </div>
     </div>
 </div>
-    <script>
-        const initSlider = () => {
-            const imageList = document.querySelector(".slider-wrapper .image-list");
-            const slideButtons = document.querySelectorAll(".slider-wrapper .slide-button");
-            const sliderScrollbar = document.querySelector(".container .slider-scrollbar");
-            const scrollbarThumb = sliderScrollbar.querySelector(".scrollbar-thumb");
-            const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
 
-            // Handle scrollbar thumb drag
-            scrollbarThumb.addEventListener("mousedown", (e) => {
-                const startX = e.clientX;
-                const thumbPosition = scrollbarThumb.offsetLeft;
-                const maxThumbPosition = sliderScrollbar.getBoundingClientRect().width - scrollbarThumb.offsetWidth;
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-                // Update thumb position on mouse move
-                const handleMouseMove = (e) => {
-                    const deltaX = e.clientX - startX;
-                    const newThumbPosition = thumbPosition + deltaX;
+<script>
+    $(document).ready(function() {
+        // Kích thước của mỗi item và khoảng cách giữa chúng
+        var itemWidth = $(".item").outerWidth(true);
+        var itemMargin = parseInt($(".item").css("margin-right"));
 
-                    // Ensure the scrollbar thumb stays within bounds
-                    const boundedPosition = Math.max(0, Math.min(maxThumbPosition, newThumbPosition));
-                    const scrollPosition = (boundedPosition / maxThumbPosition) * maxScrollLeft;
+        // Số lượng item trên mỗi lần trượt
+        var itemsPerSlide = 1;
 
-                    scrollbarThumb.style.left = `${boundedPosition}px`;
-                    imageList.scrollLeft = scrollPosition;
-                }
+        // Tính toán khoảng cách di chuyển
+        var distanceToMove = (itemWidth + itemMargin) * itemsPerSlide;
 
-                // Remove event listeners on mouse up
-                const handleMouseUp = () => {
-                    document.removeEventListener("mousemove", handleMouseMove);
-                    document.removeEventListener("mouseup", handleMouseUp);
-                }
-
-                // Add event listeners for drag interaction
-                document.addEventListener("mousemove", handleMouseMove);
-                document.addEventListener("mouseup", handleMouseUp);
+        // Sự kiện khi nhấn nút "next"
+        $("#next-slide").on("click", function() {
+            // Di chuyển các item sang trái
+            $(".image-list").animate({
+                left: "-=" + distanceToMove
+            }, 100, function() {
+                // Đưa item đầu tiên về cuối nếu cần
+                $(".item:lt(" + itemsPerSlide + ")").appendTo(".image-list");
+                // Đặt lại vị trí left
+                $(".image-list").css("left", "0");
             });
+        });
 
-            // Slide images according to the slide button clicks
-            slideButtons.forEach(button => {
-                button.addEventListener("click", () => {
-                    const direction = button.id === "prev-slide" ? -1 : 1;
-                    const scrollFraction = 0.18;
-                    const scrollAmount = imageList.clientWidth * direction * scrollFraction;
-                    imageList.scrollBy({
-                        left: scrollAmount,
-                        behavior: "smooth"
-                    });
-                });
-            });
-
-            // Show or hide slide buttons based on scroll position
-            const handleSlideButtons = () => {
-                slideButtons[0].style.display = imageList.scrollLeft <= 0 ? "none" : "flex";
-                slideButtons[1].style.display = imageList.scrollLeft >= maxScrollLeft ? "none" : "flex";
-            }
-
-            // Update scrollbar thumb position based on image scroll
-            const updateScrollThumbPosition = () => {
-                const scrollPosition = imageList.scrollLeft;
-                const thumbPosition = (scrollPosition / maxScrollLeft) * (sliderScrollbar.clientWidth - scrollbarThumb.offsetWidth);
-                scrollbarThumb.style.left = `${thumbPosition}px`;
-            }
-
-            // Call these two functions when image list scrolls
-            imageList.addEventListener("scroll", () => {
-                updateScrollThumbPosition();
-                handleSlideButtons();
+        // Hàm tự động trượt
+        function autoSlide() {
+            // Di chuyển các item sang trái
+            $(".image-list").animate({
+                left: "-=" + distanceToMove
+            }, 100, function() {
+                // Đưa item đầu tiên về cuối nếu cần
+                $(".item:lt(" + itemsPerSlide + ")").appendTo(".image-list");
+                // Đặt lại vị trí left
+                $(".image-list").css("left", "0");
             });
         }
 
-        window.addEventListener("resize", initSlider);
-        window.addEventListener("load", initSlider);
-    </script>
+        // Thiết lập tự động trượt sau 3 giây
+        setTimeout(autoSlide, 3000);
+
+        // Sự kiện khi nhấn nút "prev"
+        // Số lượng item trong slider
+        var totalItems = $(".item").length;
+
+        // Sự kiện khi nhấn nút "prev"
+        $("#prev-slide").on("click", function() {
+            // Đưa item cuối cùng về đầu nếu cần
+            $(".item:gt(" + (totalItems - itemsPerSlide - 1) + ")").prependTo(".image-list");
+            // Đặt lại vị trí left để chuẩn bị di chuyển
+            $(".image-list").css("left", "-" + distanceToMove + "px");
+            // Di chuyển các item sang phải
+            $(".image-list").animate({
+                left: "+=" + distanceToMove
+            }, 100);
+        });
+
+        // Dừng tự động trượt khi hover chuột vào slider
+        var isHovered = false;
+        var autoSlideInterval;
+
+        $(".slider-wrapper").hover(
+            function() {
+                // Dừng auto-slide khi chuột hover vào slider
+                isHovered = true;
+                clearInterval(autoSlideInterval);
+            },
+            function() {
+                // Khởi động lại auto-slide khi chuột rời khỏi slider
+                isHovered = false;
+                autoSlideInterval = setInterval(function() {
+                    if (!isHovered) {
+                        autoSlide();
+                    }
+                }, 3000);
+            }
+        );
+    });
+</script>

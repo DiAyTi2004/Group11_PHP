@@ -11,6 +11,20 @@ function generateUuid()
     return $uuid;
 }
 
+function handleDeleteOrderDetail($orderId, $productId, $sizeId, $quantity)
+{
+    // var_dump($GLOBALS['connect']);
+
+    //delete from tbl_order_detail
+    $sqlStatement = "DELETE FROM tbl_order_detail WHERE order_id = '" . $orderId . "' AND size_id = '" . $sizeId . "' AND product_id = '" . $productId . "' AND quantity = '" . $quantity . "'";
+    mysqli_query($GLOBALS['connect'], $sqlStatement);
+
+    //retake to tbl_product_size with specific quantity
+    $updateQuantity = "UPDATE tbl_product_size SET quantity = quantity + " . $quantity . " WHERE product_id = '$productId' AND size_id = '$sizeId' ";
+    echo "checking update sql: " . $updateQuantity;
+    mysqli_query($GLOBALS['connect'], $updateQuantity);
+}
+
 if (isset($_POST['addOrder'])) {
     $userId = $_POST['userId'];
     $statusId = $_POST['statusId'];
@@ -53,9 +67,20 @@ if (isset($_POST['addOrder'])) {
 
     $query = mysqli_query($connect, $sql_editOrder);
 } else if (isset($_POST['deleteOrder'])) {
-    $deleteOrder = $_GET['orderId'];
-    $sql_xoa = "DELETE FROM tbl_order WHERE id ='$_GET[orderId]';";
-    mysqli_query($connect, $sql_xoa);
+    $orderId = $_GET['orderId'];
+
+    $getOrderDetailInOrderSQL = "SELECT * FROM tbl_order_detail WHERE order_id = '" . $orderId . "'";
+    $orderDetailData = mysqli_query($connect, $getOrderDetailInOrderSQL);
+
+    while ($orderDetail = mysqli_fetch_array($orderDetailData)) {
+        $productId = $orderDetail['product_id'];
+        $sizeId = $orderDetail['size_id'];
+        $quantity = $orderDetail['quantity'];
+        handleDeleteOrderDetail($orderId, $productId, $sizeId, $quantity);
+    }
+
+    $deleteOrderSQL = "DELETE FROM tbl_order WHERE id ='" . $orderId . "';";
+    mysqli_query($connect, $deleteOrderSQL);
 }
 
 header('Location:../../AdminIndex.php?workingPage=order');
