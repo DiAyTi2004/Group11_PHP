@@ -16,11 +16,17 @@ $query_show_test = mysqli_query($connect, $sql_show_test);
         <li>
             <a href="UserIndex.php?usingPage=product&id=<?php echo $row_test['product_id'] ?>">
                 <div class="product-container">
-                    <img src="../../admin/pages/ProductImage/<?php echo $row_test['content'] ?>" alt="<?php echo $row_test['name'] ?>">
-                    <?php if ($row_event['discount'] > 0) : ?>
+                    <?php
+                    $imageSource = str_starts_with($row_test['content'], 'http') ? $row_test['content'] : "../../admin/pages/ProductImage/{$row_test['content']}";
+
+                    echo "<img src=\"{$imageSource}\" alt=\"{$row_test['name']}\">";
+
+                    if ($row_event['discount'] > 0) :
+                    ?>
                         <div class="discount-overlay"><?php echo "-" . $row_event['discount'] . '%'; ?></div>
                     <?php endif; ?>
                 </div>
+
                 <h5 class="title_product mt-2"> <?php echo $row_test['name'] ?></h5>
                 <div class="cdt-product-param"><span data-title="Loại Hàng"><i class="fa-solid fa-cart-arrow-down"></i> Like auth</span></div>
                 <span style="text-decoration: line-through;" class="price_fake ml-3">

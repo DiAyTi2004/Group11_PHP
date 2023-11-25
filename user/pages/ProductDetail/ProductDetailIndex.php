@@ -45,26 +45,35 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
 
 ?>
 <div class="appCard row">
-    <div class="col col-4 detail_images">
-        <div class="ecommerce-gallery" data-mdb-zoom-effect="true" data-mdb-auto-height="true">
-            <div class="row py-3 shadow-5">
-                <div class="col-12 mb-1">
-                    <div class="lightbox">
-                        <img style="max-width: 100%; max-height: 500px;" src="../../admin/pages/ProductImage/<?php if ($row_details['main_image']) echo $row_details['content'] ?>" alt="Gallery image 1" class="ecommerce-gallery-main-img active w-100" />
-                    </div>
+<div class="col col-4 detail_images">
+    <div class="ecommerce-gallery" data-mdb-zoom-effect="true" data-mdb-auto-height="true">
+        <div class="row py-3 shadow-5">
+            <div class="col-12 mb-1">
+                <div class="lightbox">
+                    <?php
+                    $mainImageSource = str_starts_with($row_details['content'], 'http') ? $row_details['content'] : "../../admin/pages/ProductImage/{$row_details['content']}";
+
+                    echo "<img style=\"max-width: 100%; max-height: 500px;\" src=\"{$mainImageSource}\" alt=\"Gallery image 1\" class=\"ecommerce-gallery-main-img active w-100\" />";
+                    ?>
                 </div>
-                <?php
-                while ($row_details = mysqli_fetch_array($query_details)) {
-                ?>
-                    <div class="col-4 mt-3">
-                        <img style="max-width: 100%; max-height: 100px;" src="../../admin/pages/ProductImage/<?php if (!$row_details['main_image']) echo $row_details['content'] ?>" data-mdb-img="" alt="Gallery image 1" class="active w-100" />
-                    </div>
-                <?php
-                }
-                ?>
             </div>
+            <?php
+            while ($row_details = mysqli_fetch_array($query_details)) {
+            ?>
+                <div class="col-4 mt-3">
+                    <?php
+                    $imageSource = str_starts_with($row_details['content'], 'http') ? $row_details['content'] : "../../admin/pages/ProductImage/{$row_details['content']}";
+
+                    echo "<img style=\"max-width: 100%; max-height: 100px;\" src=\"{$imageSource}\" data-mdb-img=\"\" alt=\"Gallery image 1\" class=\"active w-100\" />";
+                    ?>
+                </div>
+            <?php
+            }
+            ?>
         </div>
     </div>
+</div>
+
 
     <div class="col col-5 detail_product">
         <div class="product_name">
