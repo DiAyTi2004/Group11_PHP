@@ -86,7 +86,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 $_SESSION['userImage'] = $row['user_image'];
                 $imageLink = "";
                 if (isset($_SESSION['userImage'])) {
-                    if (str_contains($_SESSION['userImage'], "https") || str_contains($_SESSION['userImage'], "http")) {
+                    if (str_contains($_SESSION['userImage'], "http")) {
                         $imageLink = $_SESSION['userImage'];
                     } else {
                         $imageLink = "./../admin/pages/User/UserImages/" . $_SESSION['userImage'];
