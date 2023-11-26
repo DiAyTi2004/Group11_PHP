@@ -20,7 +20,7 @@ if (isset($_GET['usingPage'])) {
 
 $imageLink = "";
 if (isset($_SESSION['userImage'])) {
-    if (str_contains($_SESSION['userImage'], "https")) {
+    if (str_contains($_SESSION['userImage'], "http")) {
         $imageLink = $_SESSION['userImage'];
     } else {
         $imageLink = "../../admin/pages/User/UserImages/" . $_SESSION['userImage'];
@@ -54,8 +54,12 @@ if (isset($_SESSION['userImage'])) {
                                 ?>
                                     <li class="sub__category__item w-100">
                                         <a href="UserIndex.php?usingPage=category&categoryId=<?php echo $rowData['id'] ?>" class="w-100 p-2 py-3">
-                                            <img class="mr-8" src="./../../admin/pages/Category/CategoryImages/<?php echo $rowData['category_image'] ?>" alt="" style="width: 35px; height: 35px;">
-                                            <?php echo $rowData['name'] ?>
+                                            <div class="sub__category__image">
+                                                <img class="" src="./../../admin/pages/Category/CategoryImages/<?php echo $rowData['category_image'] ?>" alt="" style="width: 35px; height: 35px;">
+                                            </div>
+                                            <div class="sub__category__name">
+                                                <?php echo $rowData['name'] ?>
+                                            </div>
                                         </a>
                                     </li>
                                 <?php
