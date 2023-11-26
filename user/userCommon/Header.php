@@ -55,7 +55,7 @@ if (isset($_SESSION['userImage'])) {
                                     <li class="sub__category__item w-100">
                                         <a href="UserIndex.php?usingPage=category&categoryId=<?php echo $rowData['id'] ?>" class="w-100 p-2 py-3">
                                             <div class="sub__category__image">
-                                                <img class="" src="./../../admin/pages/Category/CategoryImages/<?php echo $rowData['category_image'] ?>" alt="" style="width: 35px; height: 35px;">
+                                                <img class="" src="./../../admin/pages/Category/CategoryImages/<?php echo $rowData['category_image'] ?>" alt="">
                                             </div>
                                             <div class="sub__category__name">
                                                 <?php echo $rowData['name'] ?>
