@@ -74,6 +74,7 @@ ul.product_list {
     padding: 0;
     margin: 0;
     list-style: none;
+    margin-bottom: 50px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -81,23 +82,21 @@ ul.product_list {
 
 ul.product_list li img {
     height: auto;
+    width: 100%;
 }
 
 ul.product_list li {
     background-color: #ffffff;
-    width: 25%;
     border: 1px solid rgb(193, 193, 193);
-    margin: 5px;
-    float: left;
     border-radius: 5px;
     height: auto;
-    margin-bottom: 50px;
     background: rgb(239, 239, 239);
 }
 
 .product-container {
     position: relative;
     display: inline-block;
+    width: 100%;
 }
 
 .discount-overlay {
@@ -115,10 +114,6 @@ ul.product_list li {
 
 ul.product_list li a {
     text-decoration: none;
-}
-
-ul.product_list li img {
-    width: 100%;
 }
 
 .cdt-product-param {
