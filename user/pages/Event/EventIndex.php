@@ -11,6 +11,9 @@ $eventId = isset($_GET['eventId']) ? $_GET['eventId'] : "";
 $findProductByCategoryIdSQL = "SELECT * FROM tbl_event WHERE tbl_event.id ='$eventId'";
 $productData = mysqli_query($connect, $findProductByCategoryIdSQL);
 $eventDetail =  mysqli_fetch_array($productData);
+
+$findProductByEventIdSQL = "SELECT * FROM tbl_product WHERE tbl_product.event_id = '$eventId'";
+$productByEvent = mysqli_query($connect, $findProductByEventIdSQL)
 ?>
 
 <p></p>
@@ -45,7 +48,7 @@ $eventDetail =  mysqli_fetch_array($productData);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 10%;Ư
+            border-radius: 10px;
             box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
         }
 
@@ -177,27 +180,56 @@ $eventDetail =  mysqli_fetch_array($productData);
 
         </div>
     </div>
+
+    <div class="appCard container">
+    <ul class="product_list row row-cols-1 row-cols-sm-3 row-cols-md-4">
+        <?php
+        while ($row_pro = mysqli_fetch_array($productByEvent)) {
+            $sql_show_image = "SELECT * FROM tbl_product_image WHERE tbl_product_image.product_id = '$row_pro[id]'";
+            $query_show_image = mysqli_query($connect, $sql_show_image);
+            $row_image = mysqli_fetch_array($query_show_image);
+        ?>
+
+            <li class="col">
+                <a href="UserIndex.php?usingPage=product&id=<?php echo $row_pro['id'] ?>">
+                    <div class="product-container">
+                        <?php
+                        $imageSource = str_starts_with($row_image['content'], 'http') ? $row_image['content'] : "../../admin/pages/ProductImage/{$row_image['content']}";
+
+                        echo "<img src=\"{$imageSource}\" alt=\"{$row_pro['name']}\">";
+
+                        if ($eventDetail['discount'] > 0) :
+                        ?>
+                            <div class="discount-overlay"><?php echo "-" . $eventDetail['discount'] . '%'; ?></div>
+                        <?php endif; ?>
+                    </div>
+
+                    <h5 class="title_product mt-2"> <?php echo $row_pro['name'] ?></h5>
+                    <div class="cdt-product-param"><span data-title="Loại Hàng"><i class="fa-solid fa-cart-arrow-down"></i> Like auth</span></div>
+                    <span style="text-decoration: line-through;" class="price_fake ml-3">
+                        <?php echo number_format($row_pro['price'] * ($eventDetail['discount'] / 100) + $row_pro['price'], 0, ',', '.') ?> đ
+                    </span>
+                    <b class="price_real ml-3">
+                        <?php echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
+                    </b>
+                    <div class="sold flex justify-between mt-4">
+                        <span class="ml-3">
+                            Đã bán: <?php echo random_int(5, 100) ?>
+                        </span>
+                        <span class="mr-3">
+                            5 <i class="fa fa-star checked"></i>
+                        </span>
+                    </div>
+                </a>
+            </li>
+        <?php
+        }
+        ?>
+
+    </ul>
+</div>
+
 </body>
 
+
 </html>
-
-
-
-<!-- <ul class="product_list">
-    <?php
-    while ($row_pro = mysqli_fetch_array($productData)) {
-    ?>
-        <li>
-            <a href="UserIndex.php?usingPage=product&id=<?php echo $row_pro['id'] ?>">
-                <img src="../../admin/pages/Product/ProductImages/<?php echo $row_pro['hinhanh'] ?>">
-                <p></p>
-                <h5 class="title_product"> <?php echo $row_pro['tensanpham'] ?></h5>
-                <h5 class="price_product">Giá: <?php echo number_format($row_pro['giasanpham'], 0, ',', '.') . ' VNĐ' ?></h5>
-                <p style="text-align: center;"><?php echo "Xem chi tiết" ?></p>
-            </a>
-        </li>
-    <?php
-    }
-    ?>
-
-</ul> -->
