@@ -80,7 +80,7 @@ ul.product_list {
 }
 
 ul.product_list li img {
-    height: 200px;
+    height: auto;
 }
 
 ul.product_list li {
