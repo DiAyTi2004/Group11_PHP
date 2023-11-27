@@ -15,28 +15,28 @@ $query_show_test = mysqli_query($connect, $sql_show_test);
             $row_event = mysqli_fetch_array($query_show_event);
         ?>
             <li class="col-xs-12 col-sm-4 col-md-3 pb-4">
-                <div class="productClass br-10 over-hidden">
-                    <div class="product-container">
-                        <?php
-                        $imageSource = str_starts_with($row_test['content'], 'http') ? $row_test['content'] : "../../admin/pages/ProductImage/{$row_test['content']}";
-
-                        echo "<img src=\"{$imageSource}\" alt=\"{$row_test['name']}\">";
-
-                        if ($row_event['discount'] > 0) :
-                        ?>
-                            <div class="discount-overlay"><?php echo "-" . $row_event['discount'] . '%'; ?></div>
-                        <?php endif; ?>
-                    </div>
+                <div class="productClass br-10">
                     <a href="UserIndex.php?usingPage=product&id=<?php echo $row_test['product_id'] ?>">
+                        <div class="product-container">
+                            <?php
+                            $imageSource = str_starts_with($row_test['content'], 'http') ? $row_test['content'] : "../../admin/pages/ProductImage/{$row_test['content']}";
+    
+                            echo "<img src=\"{$imageSource}\" alt=\"{$row_test['name']}\">";
+    
+                            if ($row_event['discount'] > 0) :
+                            ?>
+                                <div class="discount-overlay"><?php echo "-" . $row_event['discount'] . '%'; ?></div>
+                            <?php endif; ?>
+                        </div>
 
                         <h5 class="title_product mt-2"> <?php echo $row_test['name'] ?></h5>
                         <div class="cdt-product-param"><span data-title="Loại Hàng"><i class="fa-solid fa-cart-arrow-down"></i> Like auth</span></div>
                         <span style="text-decoration: line-through;" class="price_fake ml-3">
                             <?php echo number_format($row_test['price'] * ($row_event['discount'] / 100) + $row_test['price'], 0, ',', '.') ?> đ
                         </span>
-                        <b class="price_real ml-3">
+                        <span class="price_real ml-3">
                             <?php echo number_format($row_test['price'], 0, ',', '.') . ' đ' ?>
-                        </b>
+                        </span>
                         <div class="sold flex justify-between mt-4 mb-2">
                             <span class="ml-3">
                                 Đã bán: <?php echo random_int(5, 100) ?>
