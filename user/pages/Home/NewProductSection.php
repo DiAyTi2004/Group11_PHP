@@ -20,9 +20,9 @@ $query_show_test = mysqli_query($connect, $sql_show_test);
                         <div class="product-container over-hidden">
                             <?php
                             $imageSource = str_starts_with($row_test['content'], 'http') ? $row_test['content'] : "../../admin/pages/ProductImage/{$row_test['content']}";
-    
+
                             echo "<img src=\"{$imageSource}\" alt=\"{$row_test['name']}\">";
-    
+
                             if ($row_event['discount'] > 0) :
                             ?>
                                 <div class="discount-overlay"><?php echo "-" . $row_event['discount'] . '%'; ?></div>
@@ -30,6 +30,11 @@ $query_show_test = mysqli_query($connect, $sql_show_test);
                         </div>
 
                         <h5 class="title_product mt-2"> <?php echo $row_test['name'] ?></h5>
+                        <div class="sold flex justify-between mt-2">
+                            <span style="font-size: 15px;" class="ml-3">
+                                Mã sản phẩm: <?php echo $row_test['code'] ?>
+                            </span>
+                        </div>
                         <div class="cdt-product-param"><span data-title="Loại Hàng"><i class="fa-solid fa-cart-arrow-down"></i> Like auth</span></div>
                         <span style="text-decoration: line-through;" class="price_fake ml-3">
                             <?php echo number_format($row_test['price'] * ($row_event['discount'] / 100) + $row_test['price'], 0, ',', '.') ?> đ
@@ -37,14 +42,6 @@ $query_show_test = mysqli_query($connect, $sql_show_test);
                         <span class="price_real ml-3">
                             <?php echo number_format($row_test['price'], 0, ',', '.') . ' đ' ?>
                         </span>
-                        <div class="sold flex justify-between mt-4 mb-2">
-                            <span class="ml-3">
-                                Đã bán: <?php echo random_int(5, 100) ?>
-                            </span>
-                            <span class="mr-3">
-                                5 <i class="fa fa-star checked"></i>
-                            </span>
-                        </div>
                     </a>
                 </div>
 
