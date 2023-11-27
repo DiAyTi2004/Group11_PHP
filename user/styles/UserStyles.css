@@ -81,42 +81,42 @@ ul.product_list {
 ul.product_list li img {
     height: auto;
     width: 100%;
-    transition: transform 0.5s ease; /* Thêm hiệu ứng chuyển động */
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    transition: transform 0.5s ease; 
 }
 
 
 ul.product_list li:hover img {
-    transform: scale(1.08); /* Phóng to ảnh khi hover */
+    transform: scale(1.1); 
 }
 
 ul.product_list li {
-    /* border-radius: 5px; */
     height: auto;
 }
 
 .productClass{
+    position: relative;
     background-color: #ffffff;
     box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
     background: rgb(239, 239, 239);
-
 }
 
 .product-container {
-    position: relative;
     display: inline-block;
     width: 100%;
 }
 
 .discount-overlay {
     position: absolute;
-    width: 60px;
+    width: 40px;
     text-align: center;
-    top: 0;
+    top: 8px;
     left: -4px;
     background-color: #ff0000; /* Màu nền của overlay */
     color: #ffffff; /* Màu chữ trên overlay */
-    padding: 5px; /* Khoảng cách padding của overlay */
-    font-size: 14px; /* Kích thước chữ của overlay */
+    padding: 3px; /* Khoảng cách padding của overlay */
+    font-size: 12px; /* Kích thước chữ của overlay */
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }

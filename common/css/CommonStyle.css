@@ -1398,7 +1398,7 @@ body {
 }
 
 .display-none {
-    display: none;
+    display: none !important;
 }
 
 .display-block {
@@ -1622,11 +1622,12 @@ body {
   
   /*right*/
   
-  .right .tooltip { top:-20%; left:115%; }
+  .right .tooltip { top:-5%; left:-339%; }
   
   .right .tooltip::after{
     top:40%;
     left:-12%;
     transform: rotate(90deg);
   }
+
   

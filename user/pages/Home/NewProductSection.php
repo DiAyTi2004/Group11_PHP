@@ -17,7 +17,7 @@ $query_show_test = mysqli_query($connect, $sql_show_test);
             <li class="col-xs-12 col-sm-4 col-md-3 pb-4">
                 <div class="productClass br-10">
                     <a href="UserIndex.php?usingPage=product&id=<?php echo $row_test['product_id'] ?>">
-                        <div class="product-container">
+                        <div class="product-container over-hidden">
                             <?php
                             $imageSource = str_starts_with($row_test['content'], 'http') ? $row_test['content'] : "../../admin/pages/ProductImage/{$row_test['content']}";
     

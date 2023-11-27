@@ -1,22 +1,24 @@
 <?php
-
-// $categoryId = $_GET['categoryId'] || "";
-// $findProductByCategoryIdSQL = "SELECT * FROM tbl_product WHERE tbl_product.category_id ='$categoryId'";
-// $productData = mysqli_query($connect, $findProductByCategoryIdSQL);
-
-// $categorySQL = "SELECT * FROM tbl_category WHERE id='$categoryId' LIMIT 1";
-// $query_cate = mysqli_query($connect, $categorySQL);
-// $row_title = mysqli_fetch_array($query_cate);
 $eventId = isset($_GET['eventId']) ? $_GET['eventId'] : "";
-$findProductByCategoryIdSQL = "SELECT * FROM tbl_event WHERE tbl_event.id ='$eventId'";
-$productData = mysqli_query($connect, $findProductByCategoryIdSQL);
+
+//Phân trang
+$countAllSql = "SELECT * FROM tbl_product WHERE tbl_product.event_id = '$eventId'";
+$total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
+
+$pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
+$pageSize = 8;
+
+$total_page = ceil($total_records / $pageSize);
+
+$start = ($pageIndex - 1) * $pageSize;
+
+$findProductByEventIdSQL = "SELECT * FROM tbl_event WHERE tbl_event.id ='$eventId'";
+$productData = mysqli_query($connect, $findProductByEventIdSQL);
 $eventDetail =  mysqli_fetch_array($productData);
 
-$findProductByEventIdSQL = "SELECT * FROM tbl_product WHERE tbl_product.event_id = '$eventId'";
-$productByEvent = mysqli_query($connect, $findProductByEventIdSQL)
+$findProductByEventIdSQL = "SELECT * FROM tbl_product WHERE tbl_product.event_id = '$eventId'  LIMIT $start, $pageSize";
+$productByEvent = mysqli_query($connect, $findProductByEventIdSQL);
 ?>
-
-<p></p>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,15 +29,15 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL)
     <style>
         h5 {
             font-family: 'Montserrat', sans-serif;
-            font-weight: bold;
             color: #333;
+            font-weight: 500;
             text-transform: uppercase;
         }
 
         .appCart1 {
             width: 100%;
             background-color: #fff;
-            padding: 25px;
+            padding: 5px;
             border-radius: 15px;
             display: flex;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -68,53 +70,59 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL)
 
         .title.col-4 ul {
             list-style: none;
-            /* Loại bỏ dấu đầu dòng của danh sách */
             padding: 0;
-            /* Loại bỏ lề trong danh sách */
         }
 
         .title.col-4 li {
             margin-bottom: 10px;
-            /* Khoảng cách giữa các mục danh sách */
             font-size: 16px;
-            /* Kích thước chữ */
             color: #333;
-            /* Màu chữ */
         }
 
         .title.col-4 li:first-child {
             font-weight: bold;
-            /* Làm đậm cho mục đầu tiên */
         }
 
         .head-title {
             margin-bottom: 10px;
             font-size: 18px;
-            /* Kích thước chữ lớn hơn */
-            color: #3498db;
-            /* Màu chữ xanh dương */
-            font-weight: bold;
-            /* Chữ đậm */
-            text-transform: uppercase;
-            /* Chuyển đổi chữ thành chữ in hoa */
-            letter-spacing: 1px;
-            /* Khoảng cách giữa các ký tự */
             transition: transform 0.3s ease;
-            /* Hiệu ứng transform */
         }
     </style>
+    <!-- Hidden appCard1 when move to next page -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lấy thông tin về trang hiện tại từ URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentPage = parseInt(urlParams.get('page')) || 1;
+
+            // Lấy phần tử cần ẩn/hiện
+            const appCard1 = document.querySelector('.row.appCart1');
+            const h5Element = document.querySelector('h5.enable-none');
+
+            // Kiểm tra nếu trang hiện tại không phải là trang đầu tiên, thì ẩn appCard1 và h5
+            if (currentPage > 1) {
+                appCard1.classList.add('display-none');
+                if (h5Element) {
+                    h5Element.classList.add('display-none');
+                }
+            }
+        });
+    </script>
+    </script>
+
 </head>
 
 <body>
-    <h5> Sự kiện |
-        <?php
-        if (isset($eventDetail['name'])) {
-            echo $eventDetail['name'];
-        }
-        ?>
-    </h5>
-    <div class="row appCart1">
-        <div class="col-8">
+    <div class="row appCart1 mb-10">
+        <h5 class="enable_none mt-3"> Sự kiện <i class="fa-solid fa-chevron-right fa-2xs"></i>
+            <?php
+            if (isset($eventDetail['name'])) {
+                echo $eventDetail['name'];
+            }
+            ?>
+        </h5>
+        <div class="col-8 mt-2 mb-3">
             <img class="img1" src="./../../admin/pages/Event/EventImages/<?php echo $eventDetail['banner'] ?>" alt="">
         </div>
         <div class="title col-4 ">
@@ -123,7 +131,8 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL)
                     <?php echo $eventDetail['code'] . " " . $eventDetail['name'] ?>
                 </li>
                 <li>
-                    <p style="font-weight: bold;  color: #ff5733;  font-style: italic;"><?php echo $eventDetail['description'] ?></p>
+                    <p style="font-weight: bold;  color: #ff5733;  font-style: italic;">
+                        <?php echo $eventDetail['description'] ?></p>
                 </li>
                 <li>
                     <p>Giảm giá toàn bộ sản phẩm lên đến: <?php echo $eventDetail['discount'] ?>% </p>
@@ -180,56 +189,140 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL)
 
         </div>
     </div>
-
     <div class="appCard container">
-    <ul class="product_list row row-cols-1 row-cols-sm-3 row-cols-md-4">
-        <?php
-        while ($row_pro = mysqli_fetch_array($productByEvent)) {
-            $sql_show_image = "SELECT * FROM tbl_product_image WHERE tbl_product_image.product_id = '$row_pro[id]'";
-            $query_show_image = mysqli_query($connect, $sql_show_image);
-            $row_image = mysqli_fetch_array($query_show_image);
-        ?>
+        <h5 class="mt-3 ml-2 mb-3"> Các sản phẩm trong chương trình sự kiện:
+            <span style="color: red;">
+                <?php
+                if (isset($eventDetail['name'])) {
+                    echo $eventDetail['name'];
+                }
+                ?>
+            </span>
+        </h5>
+        <ul class="product_list row">
+            <?php
+            while ($row_pro = mysqli_fetch_array($productByEvent)) {
+                $sql_show_image = "SELECT * FROM tbl_product_image WHERE tbl_product_image.product_id = '$row_pro[id]'";
+                $query_show_image = mysqli_query($connect, $sql_show_image);
+                $row_image = mysqli_fetch_array($query_show_image);
+            ?>
 
-            <li class="col">
-                <a href="UserIndex.php?usingPage=product&id=<?php echo $row_pro['id'] ?>">
-                    <div class="product-container">
+                <li class="product_item col-xs-12 col-sm-4 col-md-3 pb-4">
+                    <div class="productClass br-10">
+                        <a href="UserIndex.php?usingPage=product&id=<?php echo $row_pro['id'] ?>">
+                            <div class="product-container over-hidden">
+                                <?php
+                                $imageSource = str_starts_with($row_image['content'], 'http') ? $row_image['content'] : "../../admin/pages/ProductImage/{$row_image['content']}";
+
+                                echo "<img src=\"{$imageSource}\" alt=\"{$row_pro['name']}\">";
+
+                                if ($eventDetail['discount'] > 0) :
+                                ?>
+                                    <div class="discount-overlay"><?php echo "-" . $eventDetail['discount'] . '%'; ?></div>
+                                <?php endif; ?>
+                            </div>
+
+                            <h5 class="title_product mt-3"> <?php echo $row_pro['name'] ?></h5>
+                            <div class="sold flex justify-between mt-2">
+                                <span style="font-size: 15px;" class="ml-3">
+                                    Mã sản phẩm: <?php echo $row_pro['code'] ?>
+                                </span>
+                            </div>
+                            <div class="cdt-product-param"><span data-title="Loại Hàng"><i class="fa-solid fa-cart-arrow-down"></i> Like auth</span></div>
+                            <div class="price mb-3">
+                                <span style="text-decoration: line-through;" class="price_fake ml-3">
+                                    <?php echo number_format($row_pro['price'] * ($eventDetail['discount'] / 100) + $row_pro['price'], 0, ',', '.') ?>
+                                    đ
+                                </span>
+                                <span class="price_real ml-3">
+                                    <?php echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+            <?php
+            }
+            ?>
+
+        </ul>
+        <form action="" method="GET">
+            <nav class="row py-2" aria-label="Page navigation example">
+
+                <div class="paganation-infor col py-2 ml-3">
+                    <label class="mr-4">Showing
                         <?php
-                        $imageSource = str_starts_with($row_image['content'], 'http') ? $row_image['content'] : "../../admin/pages/ProductImage/{$row_image['content']}";
+                        $startItem = ($pageIndex - 1) * $pageSize + 1;
+                        $endItem = min($pageIndex * $pageSize, $total_records);
 
-                        echo "<img src=\"{$imageSource}\" alt=\"{$row_pro['name']}\">";
-
-                        if ($eventDetail['discount'] > 0) :
+                        echo "{$startItem} - {$endItem} of {$total_records} results";
                         ?>
-                            <div class="discount-overlay"><?php echo "-" . $eventDetail['discount'] . '%'; ?></div>
-                        <?php endif; ?>
-                    </div>
+                    </label>
+                </div>
 
-                    <h5 class="title_product mt-2"> <?php echo $row_pro['name'] ?></h5>
-                    <div class="cdt-product-param"><span data-title="Loại Hàng"><i class="fa-solid fa-cart-arrow-down"></i> Like auth</span></div>
-                    <span style="text-decoration: line-through;" class="price_fake ml-3">
-                        <?php echo number_format($row_pro['price'] * ($eventDetail['discount'] / 100) + $row_pro['price'], 0, ',', '.') ?> đ
-                    </span>
-                    <b class="price_real ml-3">
-                        <?php echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
-                    </b>
-                    <div class="sold flex justify-between mt-4">
-                        <span class="ml-3">
-                            Đã bán: <?php echo random_int(5, 100) ?>
-                        </span>
-                        <span class="mr-3">
-                            5 <i class="fa fa-star checked"></i>
-                        </span>
-                    </div>
-                </a>
-            </li>
-        <?php
-        }
-        ?>
+                <ul class="m-0 pagination justify-content-end py-2 col">
+                    <li class="page-item">
+                        <?php
+                        if ($pageIndex > 1 && $total_page > 1) {
+                            echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?usingPage=event&eventId=' . ($eventId) . '&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
+                        Previous
+                        </a>';
+                        }
+                        ?>
+                    </li>
 
-    </ul>
-</div>
+                    <?php
+                    $range = 3;
+                    for ($i = 1; $i <= $total_page; $i++) {
+                        if ($i == $pageIndex) {
+                            echo '<li class="page-item light">
+                        <span name="page" class="page-link text-reset text-white bg-dark" href="?usingPage=event&eventId=' . ($eventId) . '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        </li>';
+                        } else {
+                            // Hiển thị trang đầu tiên
+                            if ($i == 1) {
+                                echo '<li class="page-item light">
+                            <a name="page" class="page-link text-reset text-black" href="?usingPage=event&eventId=' . ($eventId) . '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                            </li>';
+                            }
+                            // Hiển thị các trang ở giữa
+                            else if ($i > $pageIndex - $range && $i < $pageIndex + $range) {
+                                echo '<li class="page-item light">
+                            <a name="page" class="page-link text-reset text-black" href="?usingPage=event&eventId=' . ($eventId) . '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                            </li>';
+                            }
 
+                            // Hiển thị trang cuối cùng
+                            else if ($i == $total_page) {
+                                echo '<li class="page-item light">
+                            <a name="page" class="page-link text-reset text-black" href="?usingPage=event&eventId=' . ($eventId) . '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                            </li>';
+                            }
+
+                            // Thêm dấu "..." nếu cần thiết
+                            if (($i == $pageIndex - $range - 1 && $pageIndex - $range > 2) || ($i == $pageIndex + $range + 1 && $pageIndex + $range < $total_page - 1)) {
+                                echo '<li class="page-item light">
+                            <span class="page-link text-reset text-black"> ... </span>
+                            </li>';
+                            }
+                        }
+                    }
+                    ?>
+
+                    <?php
+                    if ($pageIndex < $total_page && $total_page > 1) {
+                        echo '<li class="page-item light">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?usingPage=event&eventId=' . ($eventId) . '&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
+                    Next
+                    </a>
+                    </li>';
+                    }
+                    ?>
+                </ul>
+    </div>
+    </nav>
+    </form>
+    </div>
 </body>
-
 
 </html>
