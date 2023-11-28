@@ -632,8 +632,13 @@ create table tbl_user (
   gender tinyint(1)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-create table tbl_cart_detail (
+create table tbl_cart{
   user_id varchar(36) not null,
+  cart_id varchar(36) not null
+}
+
+create table tbl_cart_detail (
+  cart_id varchar(36) not null,
   product_id varchar(36) not null,
   quantity int,
   unit_price float ,
