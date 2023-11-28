@@ -6,7 +6,7 @@ $countAllSql = "SELECT * FROM tbl_product WHERE tbl_product.event_id = '$eventId
 $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
 
 $pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
-$pageSize = 8;
+$pageSize = 16;
 
 $total_page = ceil($total_records / $pageSize);
 
@@ -41,15 +41,12 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL);
             border-radius: 15px;
             display: flex;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 10px 0;
         }
 
         .img1 {
-            width: 100%;
-            height: 450px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            max-width: 100%;
+            height: auto;
+            margin-left: -7px;
             border-radius: 10px;
             box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
         }
@@ -97,7 +94,7 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL);
             const currentPage = parseInt(urlParams.get('page')) || 1;
 
             // Lấy phần tử cần ẩn/hiện
-            const appCard1 = document.querySelector('.row.appCart1');
+            const appCard1 = document.querySelector('.appCard');
             const h5Element = document.querySelector('h5.enable-none');
 
             // Kiểm tra nếu trang hiện tại không phải là trang đầu tiên, thì ẩn appCard1 và h5
@@ -114,83 +111,87 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL);
 </head>
 
 <body>
-    <div class="row appCart1 mb-10">
-        <h5 class="enable_none mt-3"> Sự kiện <i class="fa-solid fa-chevron-right fa-2xs"></i>
+    <div class="appCard">
+        <h5 class="enable_none mt-2 ml-2 mb-2"> Sự kiện <i class="fa-solid fa-chevron-right fa-2xs"></i>
             <?php
             if (isset($eventDetail['name'])) {
                 echo $eventDetail['name'];
             }
             ?>
         </h5>
-        <div class="col-8 mt-2 mb-3">
-            <img class="img1" src="./../../admin/pages/Event/EventImages/<?php echo $eventDetail['banner'] ?>" alt="">
-        </div>
-        <div class="title col-4 ">
-            <ul>
-                <li class="head-title">
-                    <?php echo $eventDetail['code'] . " " . $eventDetail['name'] ?>
-                </li>
-                <li>
-                    <p style="font-weight: bold;  color: #ff5733;  font-style: italic;">
-                        <?php echo $eventDetail['description'] ?></p>
-                </li>
-                <li>
-                    <p>Giảm giá toàn bộ sản phẩm lên đến: <?php echo $eventDetail['discount'] ?>% </p>
-                </li>
-                <?php
-                function formatEventDate($dateString)
-                {
-                    // Tạo đối tượng DateTime từ chuỗi ngày tháng
-                    $dateTime = new DateTime($dateString);
+        <div class="row m-0 ml-1">
+            <div class="col-8 mb-3">
+                <div class="image_event">
+                <img class="img1" src="./../../admin/pages/Event/EventImages/<?php echo $eventDetail['banner'] ?>" alt="">
+                </div>
+            </div>
+            <div class="title col-4 ">
+                <ul>
+                    <li class="head-title">
+                        <?php echo $eventDetail['code'] . " " . $eventDetail['name'] ?>
+                    </li>
+                    <li>
+                        <p style="font-weight: bold;  color: #ff5733;  font-style: italic;">
+                            <?php echo $eventDetail['description'] ?></p>
+                    </li>
+                    <li>
+                        <p>Giảm giá toàn bộ sản phẩm lên đến: <?php echo $eventDetail['discount'] ?>% </p>
+                    </li>
+                    <?php
+                    function formatEventDate($dateString)
+                    {
+                        // Tạo đối tượng DateTime từ chuỗi ngày tháng
+                        $dateTime = new DateTime($dateString);
 
-                    // Thiết lập ngôn ngữ và khu vực cho tiếng Việt
-                    setlocale(LC_TIME, 'vi_VN');
+                        // Thiết lập ngôn ngữ và khu vực cho tiếng Việt
+                        setlocale(LC_TIME, 'vi_VN');
 
-                    // Mảng dịch tiếng Việt cho ngày
-                    $days = [
-                        'Sunday'    => 'Chủ Nhật',
-                        'Monday'    => 'Thứ Hai',
-                        'Tuesday'   => 'Thứ Ba',
-                        'Wednesday' => 'Thứ Tư',
-                        'Thursday'  => 'Thứ Năm',
-                        'Friday'    => 'Thứ Sáu',
-                        'Saturday'  => 'Thứ Bảy',
-                    ];
+                        // Mảng dịch tiếng Việt cho ngày
+                        $days = [
+                            'Sunday'    => 'Chủ Nhật',
+                            'Monday'    => 'Thứ Hai',
+                            'Tuesday'   => 'Thứ Ba',
+                            'Wednesday' => 'Thứ Tư',
+                            'Thursday'  => 'Thứ Năm',
+                            'Friday'    => 'Thứ Sáu',
+                            'Saturday'  => 'Thứ Bảy',
+                        ];
 
-                    // Mảng dịch tiếng Việt cho tháng
-                    $months = [
-                        'January'   => 'Tháng Một',
-                        'February'  => 'Tháng Hai',
-                        'March'     => 'Tháng Ba',
-                        'April'     => 'Tháng Tư',
-                        'May'       => 'Tháng Năm',
-                        'June'      => 'Tháng Sáu',
-                        'July'      => 'Tháng Bảy',
-                        'August'    => 'Tháng Tám',
-                        'September' => 'Tháng Chín',
-                        'October'   => 'Tháng Mười',
-                        'November'  => 'Tháng Mười Một',
-                        'December'  => 'Tháng Mười Hai',
-                    ];
+                        // Mảng dịch tiếng Việt cho tháng
+                        $months = [
+                            'January'   => 'Tháng Một',
+                            'February'  => 'Tháng Hai',
+                            'March'     => 'Tháng Ba',
+                            'April'     => 'Tháng Tư',
+                            'May'       => 'Tháng Năm',
+                            'June'      => 'Tháng Sáu',
+                            'July'      => 'Tháng Bảy',
+                            'August'    => 'Tháng Tám',
+                            'September' => 'Tháng Chín',
+                            'October'   => 'Tháng Mười',
+                            'November'  => 'Tháng Mười Một',
+                            'December'  => 'Tháng Mười Hai',
+                        ];
 
-                    $formattedDate = $days[$dateTime->format('l')] . ', ' . $dateTime->format('d') . ' ' . $months[$dateTime->format('F')] . ' ' . $dateTime->format('Y H:i:s');
+                        $formattedDate = $days[$dateTime->format('l')] . ', ' . $dateTime->format('d') . ' ' . $months[$dateTime->format('F')] . ' ' . $dateTime->format('Y H:i:s');
 
-                    return $formattedDate;
-                }
-                $startFormatted = formatEventDate($eventDetail['start_date']);
-                $endFormatted = formatEventDate($eventDetail['end_date']);
-                ?>
-                <li style="color: green; /* tên màu */color: rgb(0, 0, 255); color: #0000FF;">
-                    Bắt đầu từ: <?php echo $startFormatted; ?>
-                </li>
-                <li style="color: blue; color: rgb(0, 0, 255); color: #0000FF; ">
-                    Kết thúc lúc: <?php echo $endFormatted; ?>
-                </li>
-
+                        return $formattedDate;
+                    }
+                    $startFormatted = formatEventDate($eventDetail['start_date']);
+                    $endFormatted = formatEventDate($eventDetail['end_date']);
+                    ?>
+                    <li style="color: green; /* tên màu */color: rgb(0, 0, 255); color: #0000FF;">
+                        Bắt đầu từ: <?php echo $startFormatted; ?>
+                    </li>
+                    <li style="color: blue; color: rgb(0, 0, 255); color: #0000FF; ">
+                        Kết thúc lúc: <?php echo $endFormatted; ?>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="appCard container">
-        <h5 class="mt-3 ml-2 mb-3"> Các sản phẩm trong chương trình sự kiện:
+        <h5 class="mt-2 ml-2 mb-2"> Các sản phẩm trong chương trình sự kiện:
             <span style="color: red;">
                 <?php
                 if (isset($eventDetail['name'])) {
@@ -212,9 +213,18 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL);
                         <a href="UserIndex.php?usingPage=product&id=<?php echo $row_pro['id'] ?>">
                             <div class="product-container over-hidden">
                                 <?php
-                                $imageSource = str_starts_with($row_image['content'], 'http') ? $row_image['content'] : "../../admin/pages/ProductImage/{$row_image['content']}";
+                                $imageSource = null;
 
+                                if ($row_image !== null) {
+                                    $imageSource = str_starts_with($row_image['content'], 'http') ? $row_image['content'] : "../../admin/pages/ProductImage/{$row_image['content']}";
+                                }
+                                
+                                if ($imageSource === null) {
+                                    $imageSource = 'https://cdn-icons-png.flaticon.com/512/4601/4601560.png';
+                                }
+                                
                                 echo "<img src=\"{$imageSource}\" alt=\"{$row_pro['name']}\">";
+                                
 
                                 if ($eventDetail['discount'] > 0) :
                                 ?>
@@ -229,7 +239,7 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL);
                                 </span>
                             </div>
                             <div class="cdt-product-param"><span data-title="Loại Hàng"><i class="fa-solid fa-cart-arrow-down"></i> Like auth</span></div>
-                            <div class="price mb-3">
+                            <div class="price pb-3">
                                 <span style="text-decoration: line-through;" class="price_fake ml-3">
                                     <?php echo number_format($row_pro['price'] * ($eventDetail['discount'] / 100) + $row_pro['price'], 0, ',', '.') ?>
                                     đ
@@ -250,12 +260,12 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL);
             <nav class="row py-2" aria-label="Page navigation example">
 
                 <div class="paganation-infor col py-2 ml-3">
-                    <label class="mr-4">Showing
+                    <label class="mr-4">Hiển thị
                         <?php
                         $startItem = ($pageIndex - 1) * $pageSize + 1;
                         $endItem = min($pageIndex * $pageSize, $total_records);
 
-                        echo "{$startItem} - {$endItem} of {$total_records} results";
+                        echo "{$startItem} - {$endItem} trên {$total_records} kết quả";
                         ?>
                     </label>
                 </div>
@@ -276,7 +286,7 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL);
                     for ($i = 1; $i <= $total_page; $i++) {
                         if ($i == $pageIndex) {
                             echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-dark" href="?usingPage=event&eventId=' . ($eventId) . '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-success" href="?usingPage=event&eventId=' . ($eventId) . '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                         } else {
                             // Hiển thị trang đầu tiên
