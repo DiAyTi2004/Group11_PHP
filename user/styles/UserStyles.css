@@ -96,15 +96,21 @@ ul.product_list li {
 }
 
 .productClass{
+    display: flex;
     position: relative;
+    width: 100%;
     background-color: #ffffff;
     box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
     background: rgb(239, 239, 239);
 }
 
 .product-container {
-    display: inline-block;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+    min-height: 300px;
 }
 
 .discount-overlay {
@@ -146,9 +152,17 @@ ul.product_list li a {
 }
 
 h5.title_product {
+    text-transform: uppercase;
     text-align: center;
     color: #000;
     font-size: 14px;
+    height: 42px;
+    padding: 0 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Số dòng tối đa */
+    -webkit-box-orient: vertical;
 }
 
 .price_fake, .price_real {
