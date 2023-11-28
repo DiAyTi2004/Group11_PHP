@@ -27,13 +27,6 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        h5 {
-            font-family: 'Montserrat', sans-serif;
-            color: #333;
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-
         .appCart1 {
             width: 100%;
             background-color: #fff;
@@ -112,7 +105,7 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL);
 
 <body>
     <div class="appCard">
-        <h5 class="enable_none mt-2 ml-2 mb-2"> Sự kiện <i class="fa-solid fa-chevron-right fa-2xs"></i>
+        <h5 style="text-transform: uppercase; font-family: Arial, Helvetica, sans-serif;" class="enable_none mt-2 ml-2 mb-2"> Sự kiện <i class="fa-solid fa-chevron-right fa-2xs"></i>
             <?php
             if (isset($eventDetail['name'])) {
                 echo $eventDetail['name'];
@@ -191,7 +184,7 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL);
         </div>
     </div>
     <div class="appCard container">
-        <h5 class="mt-2 ml-2 mb-2"> Các sản phẩm trong chương trình sự kiện:
+        <h5 style="text-transform: uppercase; font-family: Arial, Helvetica, sans-serif;"  class="mt-2 ml-2 mb-2"> Các sản phẩm trong chương trình sự kiện:
             <span style="color: red;">
                 <?php
                 if (isset($eventDetail['name'])) {
@@ -208,7 +201,7 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL);
                 $row_image = mysqli_fetch_array($query_show_image);
             ?>
 
-                <li class="product_item col-xs-12 col-sm-4 col-md-3 pb-4">
+                <li class="product_item col-xs-12 col-sm-4 col-md-3 pb-6">
                     <div class="productClass br-10">
                         <a href="UserIndex.php?usingPage=product&id=<?php echo $row_pro['id'] ?>">
                             <div class="product-container over-hidden">
@@ -232,7 +225,7 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL);
                                 <?php endif; ?>
                             </div>
 
-                            <h5 class="title_product mt-3"> <?php echo $row_pro['name'] ?></h5>
+                            <h5 class="title_product pt-3"> <?php echo $row_pro['name'] ?></h5>
                             <div class="sold flex justify-between mt-2">
                                 <span style="font-size: 15px;" class="ml-3">
                                     Mã sản phẩm: <?php echo $row_pro['code'] ?>
