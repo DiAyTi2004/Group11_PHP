@@ -358,17 +358,17 @@ create table tbl_user (
   gender tinyint(1)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-create table tbl_cart{
+create table tbl_cart(
   user_id varchar(36) not null,
   cart_id varchar(36) not null
-}
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_cart_detail (
   cart_id varchar(36) not null,
   product_id varchar(36) not null,
   quantity int,
   unit_price float ,
-  primary key (user_id, product_id)
+  primary key (cart_id, product_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_status (
