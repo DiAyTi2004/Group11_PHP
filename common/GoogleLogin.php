@@ -106,16 +106,16 @@ if (isset($_GET['code'])) {
         if (isset($_COOKIE['cartId'])) {
             // Cookie exists
             $userCartId = $_COOKIE['cartId'];
+
+            setcookie('cartId', $userCartId, time() + (365 * 24 * 60 * 60), '/');
+
+            $createCartSQL = "INSERT INTO tbl_cart(user_id, cart_id) 
+                    VALUES ('" . $_SESSION['userId'] . "','" . $userCartId . "')";
+            mysqli_query($connect, $createCartSQL);
         } else {
             // Cookie does not exist
             $userCartId = generateUuid();
         }
-
-        setcookie('cartId', $userCartId, time() + (365 * 24 * 60 * 60), '/');
-
-        $createCartSQL = "INSERT INTO tbl_cart(user_id, cart_id) 
-                VALUES ('" . $_SESSION['userId'] . "','" . $userCartId . "')";
-        mysqli_query($connect, $createCartSQL);
     }
 
     // header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));

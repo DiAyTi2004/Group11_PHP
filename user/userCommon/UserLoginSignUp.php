@@ -73,28 +73,16 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
                 if (isset($_COOKIE['cartId'])) {
                     // Cookie exists
                     $userCartId = $_COOKIE['cartId'];
+
+                    setcookie('cartId', $userCartId, time() + (365 * 24 * 60 * 60), '/');
+
+                    $createCartSQL = "INSERT INTO tbl_cart(user_id, cart_id) 
+                    VALUES ('" . $_SESSION['userId'] . "','" . $userCartId . "')";
+                    mysqli_query($connect, $createCartSQL);
                 } else {
                     // Cookie does not exist
-                    function generateUuid()
-                    {
-                        $data = random_bytes(16);
-
-                        $data[6] = chr(ord($data[6]) & 0x0F | 0x40);
-                        $data[8] = chr(ord($data[8]) & 0x3F | 0x80);
-
-                        $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
-
-                        return $uuid;
-                    }
-
                     $userCartId = generateUuid();
                 }
-
-                setcookie('cartId', $userCartId, time() + (365 * 24 * 60 * 60), '/');
-
-                $createCartSQL = "INSERT INTO tbl_cart(user_id, cart_id) 
-                VALUES ('" . $_SESSION['userId'] . "','" . $userCartId . "')";
-                mysqli_query($connect, $createCartSQL);
             }
 
             header("Location: ./UserIndex.php");
