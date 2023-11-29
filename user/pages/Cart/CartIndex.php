@@ -1,20 +1,3 @@
-<?php
-include('../../common/config/Connect.php');
-
-$cartId = '';
-
-if (isset($_COOKIE['cartId'])) {
-    // Cookie exists
-    $cartId = $_COOKIE['cartId'];
-} else {
-    // Cookie does not exist
-    $cartId = generateUuid();
-}
-setcookie('cartId', $cartId, time() + (365 * 24 * 60 * 60), '/');
-
-?>
-
-
 <hr />
 <table border="0" style="width:95%; padding: 0; margin: 0 auto">
     <tr>
