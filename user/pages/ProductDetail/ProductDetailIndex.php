@@ -44,40 +44,40 @@ $seconds = $time_left % 60;
 $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $hours, $minutes, $seconds);
 
 ?>
-<div class="appCard row">
-<div class="col col-4 detail_images">
-    <div class="ecommerce-gallery" data-mdb-zoom-effect="true" data-mdb-auto-height="true">
-        <div class="row py-3 shadow-5">
-            <div class="col-12 mb-1">
-                <div class="lightbox">
-                    <?php
-                    $mainImageSource = str_starts_with($row_details['content'], 'http') ? $row_details['content'] : "../../admin/pages/ProductImage/{$row_details['content']}";
+<div class="appCard row pb-3">
+    <div class="col col-4 detail_images">
+        <div class="ecommerce-gallery" data-mdb-zoom-effect="true" data-mdb-auto-height="true">
+            <div class="row py-3 shadow-5">
+                <div class="col-12 mb-1">
+                    <div class="lightbox">
+                        <?php
+                        $mainImageSource = str_starts_with($row_details['content'], 'http') ? $row_details['content'] : "../../admin/pages/ProductImage/{$row_details['content']}";
 
-                    echo "<img style=\"max-width: 100%; max-height: 500px;\" src=\"{$mainImageSource}\" alt=\"Gallery image 1\" class=\"ecommerce-gallery-main-img active w-100\" />";
-                    ?>
+                        echo "<img style=\"max-width: 100%; max-height: 500px;\" src=\"{$mainImageSource}\" alt=\"Gallery image 1\" class=\"ecommerce-gallery-main-img active w-100\" />";
+                        ?>
+                    </div>
                 </div>
+                <?php
+                while ($row_details = mysqli_fetch_array($query_details)) {
+                ?>
+                    <div class="col-4 mt-3">
+                        <?php
+                        $imageSource = str_starts_with($row_details['content'], 'http') ? $row_details['content'] : "../../admin/pages/ProductImage/{$row_details['content']}";
+
+                        echo "<img style=\"max-width: 100%; max-height: 100px;\" src=\"{$imageSource}\" data-mdb-img=\"\" alt=\"Gallery image 1\" class=\"active w-100\" />";
+                        ?>
+                    </div>
+                <?php
+                }
+                ?>
             </div>
-            <?php
-            while ($row_details = mysqli_fetch_array($query_details)) {
-            ?>
-                <div class="col-4 mt-3">
-                    <?php
-                    $imageSource = str_starts_with($row_details['content'], 'http') ? $row_details['content'] : "../../admin/pages/ProductImage/{$row_details['content']}";
-
-                    echo "<img style=\"max-width: 100%; max-height: 100px;\" src=\"{$imageSource}\" data-mdb-img=\"\" alt=\"Gallery image 1\" class=\"active w-100\" />";
-                    ?>
-                </div>
-            <?php
-            }
-            ?>
         </div>
     </div>
-</div>
 
 
     <div class="col col-5 detail_product">
         <div class="product_name">
-            <p>
+            <p class="product_code">
                 <?php echo $get_Name ?>
             </p>
         </div>
@@ -93,7 +93,10 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
             </span>
             <div class="status fs-14 mt-3">
                 <span class="product_code">
-                    Mã sản phẩm: <?php echo $get_Code; ?>
+                    Mã sản phẩm:
+                    <span class="text-green">
+                        <?php echo $get_Code; ?>
+                    </span>
                 </span>
                 <div>Tình trạng:
                     <a style="color: green;">Còn hàng</a>
@@ -154,62 +157,67 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
             </div>
         </div>
 
-        <div class="prodcut_size mt-3">
-            <div class="d-flex flex-wrap">
-                <span class="flex-center mr-3">
-                    Size
-                </span>
-                <?php
-                $sql_details_size = "SELECT * FROM tbl_product_size INNER JOIN tbl_size
+        <form method="post" action="../pages/ProductDetail/AddProductToCart.php?productId=<?php echo $_GET['id']; ?>">
+            <div class="prodcut_size mt-3">
+                <div class="d-flex flex-wrap">
+                    <span class="flex-center mr-3">
+                        Size
+                    </span>
+                    <?php
+                    $sql_details_size = "SELECT * FROM tbl_product_size INNER JOIN tbl_size
             ON tbl_size.id = tbl_product_size.size_id
             WHERE product_id = '$_GET[id]'";
-                $query_details_size = mysqli_query($connect, $sql_details_size);
+                    $query_details_size = mysqli_query($connect, $sql_details_size);
 
-                while ($row_details_size = mysqli_fetch_array($query_details_size)) {
-                    $id = $row_details_size['id'];
-                    $size_name = $row_details_size['name'];
-                ?>
-                    <div class="p-1">
-                        <label class="btn btn-outline-success size-btn" data-size-id="<?php echo $id; ?>">
-                            <?php echo preg_replace('/\D/', '', $size_name); ?>
-                            <input type="hidden" name="selected_size" value="<?php echo $id; ?>">
-                        </label>
-                    </div>
-                <?php
-                }
-                ?>
-            </div>
+                    while ($row_details_size = mysqli_fetch_array($query_details_size)) {
+                        $id = $row_details_size['id'];
+                        $size_name = $row_details_size['name'];
+                    ?>
+                        <div class="p-1">
+                            <label class="btn btn-outline-success size-btn" data-size-id="<?php echo $id; ?>">
+                                <?php echo preg_replace('/\D/', '', $size_name); ?>
+                                <input type="hidden" name="selectedSize" value="<?php echo $id; ?>">
+                            </label>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
 
-            <script>
-                $(document).ready(function() {
-                    $(".size-btn").click(function() {
-                        // Xóa lớp active từ tất cả các nút
-                        $(".size-btn").removeClass("active");
+                <script>
+                    $(document).ready(function() {
+                        $(".size-btn").click(function() {
+                            // Xóa lớp active từ tất cả các nút
+                            $(".size-btn").removeClass("active");
 
-                        // Thêm lớp active cho nút được chọn
-                        $(this).addClass("active");
+                            // Thêm lớp active cho nút được chọn
+                            $(this).addClass("active");
+                        });
                     });
-                });
-            </script>
+                </script>
 
-        </div>
+            </div>
 
-        <div class="size_quantity mt-3">
-            <div class="input-group input-group-sm">
-                <span class="flex-center mr-10" for="quantity">Số lượng:</span>
-                <div class="input-group-prepend">
-                    <button class="btn btn-light" type="button" id="minusBtn">-</button>
-                </div>
-                <input class="btn btn-light" id="quantity" name="quantity" size="1" min="1" value="1">
-                <div class="input-group-append">
-                    <button class="btn btn-light" type="button" id="plusBtn">+</button>
+            <div class="size_quantity mt-3">
+                <div class="input-group input-group-sm">
+                    <span class="flex-center mr-10" for="quantity">Số lượng:</span>
+                    <div class="input-group-prepend">
+                        <button class="btn btn-light" type="button" id="minusBtn">-</button>
+                    </div>
+                    <input class="btn btn-light" id="quantity" name="quantity" size="1" min="1" value="1">
+                    <div class="input-group-append">
+                        <button class="btn btn-light" type="button" id="plusBtn">+</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="addCart d-grid gap-2 mt-3">
-            <button type="submit" class="btn btn-success btn-lg">Đặt mua ngay</button>
-        </div>
+            <div class="addCart d-grid gap-2 mt-4">
+                <button type="submit" class="btn btn-success btn-lg" name="addToCart">
+                    <i class="fa-solid fa-cart-shopping mr-2 ml-0"></i>
+                    Đặt mua ngay
+                </button>
+            </div>
+        </form>
 
         <script>
             $(document).ready(function() {
@@ -235,7 +243,7 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
         <div class="">
             <div class="seller-info flex-center">
                 <a style="text-decoration: none;" href="#" class="">
-                    <img height="44" width="4" alt="" class="" src="./images/logo.svg" style="width: 44px;"><noscript><img height="44" width="4" alt="" class="WebpImg__StyledImg-sc-h3ozu8-0 fWjUGo logo" src="/wp-content/uploads/2022/09/PNG-1.png" style="width: 44px;" /></noscript>
+                    <img height="44" width="44" alt="" class="" src="./images/logo.svg" style="width: 44px;"><noscript><img height="44" width="4" alt="" class="WebpImg__StyledImg-sc-h3ozu8-0 fWjUGo logo" src="/wp-content/uploads/2022/09/PNG-1.png" style="width: 44px;" /></noscript>
                     <span>Shoes Land</span>
                     <div class="flex-center">
                         <span class="">

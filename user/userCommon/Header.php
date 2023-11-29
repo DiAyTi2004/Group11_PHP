@@ -88,7 +88,7 @@ if (isset($_SESSION['userImage'])) {
                         <div class="display-block header__btn br-10 p-2 py-1 flex align-center userAction">
                             <?php
                             if (trim($_SESSION['userImage']) == "") {
-                                echo '<i class="fa-solid fa-circle-user"></i>';
+                                echo '<i class="fa-solid fa-circle-user mr-1"></i>';
                             } else {
                                 echo '<img class="userLogoImage mr-1" src=' . $imageLink . ' alt="UserImg">';
                             }

@@ -1,5 +1,30 @@
 <?php
 session_start();
+
+function generateUuid()
+{
+    $data = random_bytes(16);
+
+    $data[6] = chr(ord($data[6]) & 0x0F | 0x40);
+    $data[8] = chr(ord($data[8]) & 0x3F | 0x80);
+
+    $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+
+    return $uuid;
+}
+
+function generateCode()
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $code = '';
+
+    for ($i = 0; $i < 8; $i++) {
+        $code .= $characters[rand(0, strlen($characters) - 1)];
+    }
+
+    return $code;
+}
+
 include('../../common/config/Connect.php');
 
 //Handle login with google
@@ -8,7 +33,6 @@ include('../../common/GoogleLogin.php');
 
 //Handle login with fb
 include('../../common/facebook_source.php');
-
 
 $username = '';
 $password  = '';
@@ -36,6 +60,43 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
             $_SESSION['userId'] = $row_data['id'];
             $_SESSION['userImage'] = $row_data['user_image'];
 
+            $getUserCartSQL = "SELECT * FROM tbl_cart WHERE user_id = '$_SESSION[userId]'";
+
+            $queryCart = mysqli_query($connect, $getUserCartSQL);
+            $numsOfCart = mysqli_num_rows($queryCart);
+            if ($numsOfCart > 0) {
+                $numsOfCart = mysqli_fetch_array($queryCart);
+                setcookie('cartId', $numsOfCart['cart_id'], time() + (365 * 24 * 60 * 60), '/');
+            } else {
+                $userCartId = '';
+
+                if (isset($_COOKIE['cartId'])) {
+                    // Cookie exists
+                    $userCartId = $_COOKIE['cartId'];
+                } else {
+                    // Cookie does not exist
+                    function generateUuid()
+                    {
+                        $data = random_bytes(16);
+
+                        $data[6] = chr(ord($data[6]) & 0x0F | 0x40);
+                        $data[8] = chr(ord($data[8]) & 0x3F | 0x80);
+
+                        $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+
+                        return $uuid;
+                    }
+
+                    $userCartId = generateUuid();
+                }
+
+                setcookie('cartId', $userCartId, time() + (365 * 24 * 60 * 60), '/');
+
+                $createCartSQL = "INSERT INTO tbl_cart(user_id, cart_id) 
+                VALUES ('" . $_SESSION['userId'] . "','" . $userCartId . "')";
+                mysqli_query($connect, $createCartSQL);
+            }
+
             header("Location: ./UserIndex.php");
         } else {
             $message = "Tài khoản hoặc mật khẩu không đúng";
@@ -57,21 +118,10 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
     } else if ($passwordConfirmation != $password) {
         echo '<script>alert("Xác nhận mật khẩu không chính xác!")</script>';
     } else {
-        function generateUuid()
-        {
-            $data = random_bytes(16);
-
-            $data[6] = chr(ord($data[6]) & 0x0F | 0x40);
-            $data[8] = chr(ord($data[8]) & 0x3F | 0x80);
-
-            $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
-
-            return $uuid;
-        }
-
         $userId =  generateUuid();
-        $createUser = "INSERT INTO tbl_user(id, username, password) 
-         VALUES ('" . $userId . "','" . $username . "','" . $password . "')";
+        $userCode =  generateCode();
+        $createUser = "INSERT INTO tbl_user(id, code, username, password) 
+         VALUES ('" . $userId . "','" . $userCode . "','" . $username . "','" . $password . "')";
         $res = mysqli_query($connect, $createUser);
 
         if ($res) {
