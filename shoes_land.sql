@@ -86,7 +86,7 @@ create table tbl_product (
   price float,
   createDate datetime,
   category_id varchar(36) not null,
-  event_id varchar(36) not null
+  event_id varchar(36)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 INSERT INTO `tbl_product` (`id`, `code`, `name`, `description`, `price`, `createDate`, `category_id`, `event_id`) VALUES
 ('7f0f5819-7962-401c-b98f-5d7bfd92a001','SP1','Giày Nike Dunk Low Michigan State DD1391-101 Cao Cấp','Giày Nike Dunk Low Michigan State DD1391-101 với thiết kế đẹp, tinh tế & màu sắc vô cùng dễ phối đồ. Vậy nên đôi giày này trở nên phổ biến, mang tính biểu tượng và được rất nhiều giới trẻ yêu thích.',1500000,'2023-10-01 00:00:00','a4f18b20-7b62-4c88-8b03-3a9c1c2d5eab','8d7a68e9-1783-4aff-8c71-1814bcdbda46'),
