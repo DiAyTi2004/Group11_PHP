@@ -1,83 +1,172 @@
 <?php
-function insertPercentage($inputString)
-{
-	$characters = preg_split('//u', $inputString, -1, PREG_SPLIT_NO_EMPTY);
-	$resultString = implode('%', $characters);
+$keywordNew = isset($_GET['keyword']) ? $_GET['keyword'] : $_POST['keyword'];
+//Phân trang
+$countAllSql = "SELECT * FROM tbl_product WHERE tbl_product.name LIKE '%" . $keywordNew . "%'";
 
-	return $resultString;
-}
+$total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
 
-$searchSql = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc 
-	AND tbl_sanpham.tensanpham LIKE '%" . insertPercentage($keyword) . "%'";
+$pageIndex = isset($_GET['page']) ? $_GET['page'] : 1;
+$pageSize = 16;
+
+$total_page = ceil($total_records / $pageSize);
+
+$start = ($pageIndex - 1) * $pageSize;
+$searchSql = "SELECT * FROM tbl_product WHERE tbl_product.name LIKE '%" . $keywordNew . "%' LIMIT $start, $pageSize ";
 
 $searchData = mysqli_query($connect, $searchSql);
 
-$productImageSQL = "SELECT * FROM tbl_product INNER JOIN tbl_product_image ON tbl_product.id = tbl_product_image.product_id
-WHERE tbl_product_image.main_image = 1 LIMIT 4";
-$productImageData = mysqli_query($connect, $productImageSQL);
-
 ?>
 
-<h3>Từ khoá tìm kiếm : <?php echo $_POST['keyword']; ?></h3>
+<h3>Từ khoá tìm kiếm : <?php echo $keywordNew; ?></h3>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="appCard container">
+        <ul class="product_list mt-3 row">
+            <?php
+            while ($row_pro = mysqli_fetch_array($searchData)) {
+                $sql_show_image = "SELECT * FROM tbl_product_image WHERE tbl_product_image.product_id = '$row_pro[id]'";
+                $query_show_image = mysqli_query($connect, $sql_show_image);
+                $row_image = mysqli_fetch_array($query_show_image);
+
+				$sql_show_event = "SELECT * FROM tbl_event WHERE tbl_event.id = '$row_pro[event_id]'";
+                $query_show_event = mysqli_query($connect, $sql_show_event);
+                $row_event = mysqli_fetch_array($query_show_event);
+            ?>
+
+                <li class="product_item col-xs-12 col-sm-4 col-md-3 pb-6">
+                    <div class="productClass br-10">
+                        <a href="UserIndex.php?usingPage=product&id=<?php echo $row_pro['id'] ?>">
+                            <div class="product-container over-hidden">
+                                <?php
+                                $imageSource = null;
+
+                                if ($row_image !== null) {
+                                    $imageSource = str_starts_with($row_image['content'], 'http') ? $row_image['content'] : "../../admin/pages/ProductImage/{$row_image['content']}";
+                                }
+
+                                if ($imageSource === null) {
+                                    $imageSource = 'https://cdn-icons-png.flaticon.com/512/4601/4601560.png';
+                                }
+
+                                echo "<img src=\"{$imageSource}\" alt=\"{$row_pro['name']}\">";
 
 
-<div class="container p-0">
-	<div class="row">
-		<div class="col-sm-12 col-md-2">
-			<div class="appCard">
-				1 of 2
-			</div>
-		</div>
+                                if ($row_event['discount'] > 0) :
+                                ?>
+                                    <div class="discount-overlay"><?php echo "-" . $row_event['discount'] . '%'; ?></div>
+                                <?php endif; ?>
+                            </div>
 
-		<div class="col-sm-12 col-md-10">
-			<div class="appCard">
-				<div class="container p-0">
-					<div class="row">
-						<?php
-						while ($row_test = mysqli_fetch_array($productImageData)) {
-							$productEventSQL = "SELECT * FROM tbl_product INNER JOIN tbl_event ON tbl_product.event_id = tbl_event.id WHERE tbl_product.id = '$row_test[product_id]'";
-							$productEventData = mysqli_query($connect, $productEventSQL);
-							$row_event = mysqli_fetch_array($productEventData);
-						?>
-							<div class="col-lg-3 col-md-4">
-								<a href="UserIndex.php?usingPage=product&id=<?php echo $row_test['product_id'] ?>" class="w-100 display-block">
-									<div class="product-container">
-										<?php
-										$imageSource = str_starts_with($row_test['content'], 'http') ? $row_test['content'] : "../../admin/pages/ProductImage/{$row_test['content']}";
+                            <h5 class="title_product pt-3"> <?php echo $row_pro['name'] ?></h5>
+                            <div class="sold flex justify-between mt-2">
+                                <span style="font-size: 15px;" class="ml-3">
+                                    Mã sản phẩm: <?php echo $row_pro['code'] ?>
+                                </span>
+                            </div>
+                            <div class="cdt-product-param"><span data-title="Loại Hàng"><i class="fa-solid fa-cart-arrow-down"></i> Like auth</span></div>
+                            <div class="price pb-3">
+                                <span style="text-decoration: line-through;" class="price_fake ml-3">
+                                    <?php echo number_format($row_pro['price'] * ($row_event['discount'] / 100) + $row_pro['price'], 0, ',', '.') ?>
+                                    đ
+                                </span>
+                                <span class="price_real ml-3">
+                                    <?php echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+            <?php
+            }
+            ?>
 
-										echo "<img src=\"{$imageSource}\" alt=\"{$row_test['name']}\">";
+        </ul>
+        <form action="" method="GET">
+            <nav class="row py-2" aria-label="Page navigation example">
 
-										if ($row_event['discount'] > 0) :
-										?>
-											<div class="discount-overlay"><?php echo "-" . $row_event['discount'] . '%'; ?></div>
-										<?php endif; ?>
-									</div>
+                <div class="paganation-infor col py-2 ml-3">
+                    <label class="mr-4">Hiển thị
+                        <?php
+                        $startItem = ($pageIndex - 1) * $pageSize + 1;
+                        $endItem = min($pageIndex * $pageSize, $total_records);
 
-									<h5 class="title_product mt-2"> <?php echo $row_test['name'] ?></h5>
-									<div class="cdt-product-param"><span data-title="Loại Hàng"><i class="fa-solid fa-cart-arrow-down"></i> Like auth</span></div>
-									<span style="text-decoration: line-through;" class="price_fake ml-3">
-										<?php echo number_format($row_test['price'] * ($row_event['discount'] / 100) + $row_test['price'], 0, ',', '.') ?> đ
-									</span>
-									<b class="price_real ml-3">
-										<?php echo number_format($row_test['price'], 0, ',', '.') . ' đ' ?>
-									</b>
-									<div class="sold flex justify-between mt-4">
-										<span class="ml-3">
-											Đã bán: <?php echo random_int(5, 100) ?>
-										</span>
-										<span class="mr-3">
-											5 <i class="fa fa-star checked"></i>
-										</span>
-									</div>
-								</a>
-							</div>
+                        echo "{$startItem} - {$endItem} trên {$total_records} kết quả";
+                        ?>
+                    </label>
+                </div>
 
-						<?php
-						}
-						?>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+                <ul class="m-0 pagination justify-content-end py-2 col">
+                    <li class="page-item">
+                        <?php
+                        if ($pageIndex > 1 && $total_page > 1) {
+                            echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?usingPage=search&keyword=' .($keyword). '&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
+                        Previous
+                        </a>';
+                        }
+                        ?>
+                    </li>
+
+                    <?php
+                    $range = 3;
+                    for ($i = 1; $i <= $total_page; $i++) {
+                        if ($i == $pageIndex) {
+                            echo '<li class="page-item light">
+                        <span name="page" class="page-link text-reset text-white bg-success" href="?usingPage=search&keyword=' .($keywordNew). '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        </li>';
+                        } else {
+                            // Hiển thị trang đầu tiên
+                            if ($i == 1) {
+                                echo '<li class="page-item light">
+                            <a name="page" class="page-link text-reset text-black" href="?usingPage=search&keyword=' .($keywordNew). '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                            </li>';
+                            }
+                            // Hiển thị các trang ở giữa
+                            else if ($i > $pageIndex - $range && $i < $pageIndex + $range) {
+                                echo '<li class="page-item light">
+                            <a name="page" class="page-link text-reset text-black" href="?usingPage=search&keyword=' .($keywordNew). '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                            </li>';
+                            }
+
+                            // Hiển thị trang cuối cùng
+                            else if ($i == $total_page) {
+                                echo '<li class="page-item light">
+                            <a name="page" class="page-link text-reset text-black" href="?usingPage=search&keyword=' .($keywordNew). '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                            </li>';
+                            }
+
+                            // Thêm dấu "..." nếu cần thiết
+                            if (($i == $pageIndex - $range - 1 && $pageIndex - $range > 2) || ($i == $pageIndex + $range + 1 && $pageIndex + $range < $total_page - 1)) {
+                                echo '<li class="page-item light">
+                            <span class="page-link text-reset text-black"> ... </span>
+                            </li>';
+                            }
+                        }
+                    }
+                    ?>
+
+                    <?php
+                    if ($pageIndex < $total_page && $total_page > 1) {
+                        echo '<li class="page-item light">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?usingPage=search&keyword=' .($keywordNew). '&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
+                    Next
+                    </a>
+                    </li>';
+                    }
+                    ?>
+                </ul>
+
+            </nav>
+        </form>
+    </div>
+</body>
+
+</html>

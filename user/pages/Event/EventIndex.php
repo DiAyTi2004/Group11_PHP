@@ -322,7 +322,6 @@ $productByEvent = mysqli_query($connect, $findProductByEventIdSQL);
                     }
                     ?>
                 </ul>
-    </div>
     </nav>
     </form>
     </div>

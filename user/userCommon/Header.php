@@ -72,7 +72,7 @@ if (isset($_SESSION['userImage'])) {
                 <div class="search__section bg-white br-10 over-hidden px-1 flex-center">
                     <form method="POST" action="UserIndex.php?usingPage=search">
                         <input class="p-2" type="text" placeholder="Tìm kiếm nhanh sản phẩm...?" name="keyword" value="<?php echo $keyword; ?>" />
-                        <button type="submit" class="br-10 py-1 px-3 flex-grow-1" name="search" value="Tìm Kiếm">
+                        <button type="submit" class="br-10 py-1 px-3 flex-grow-1" name="search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </form>

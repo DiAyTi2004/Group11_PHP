@@ -295,9 +295,8 @@ $productByCategory = mysqli_query($connect, $findProductByCategoryIdSQL);
                     }
                     ?>
                 </ul>
-    </div>
-    </nav>
-    </form>
+            </nav>
+        </form>
     </div>
 </body>
 
