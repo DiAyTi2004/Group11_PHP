@@ -28,20 +28,17 @@ function generateUuid()
 
 if (isset($_POST['addToCart'])) {
     $productId = $_GET['productId'];
-
-
     $quantity = $_POST['quantity'];
     $selectedSize = $_POST['selectedSize'];
-
+    $price = $_POST['price'];
     echo "\n cart id: " . $cartId;
     echo "\n product id: " . $productId;
     echo "\n size id: " . $selectedSize;
     echo "\n quantity: " . $quantity;
-
-    $addProductToCart = "INSERT INTO tbl_cart_detail() 
-         VALUES ()";
+    echo "\n price: " . $price;
+    $addProductToCart = "INSERT INTO tbl_cart_detail(cart_id, product_id, quantity, unit_price) VALUES ('$cartId','$productId',$quantity,$price)";
          
     mysqli_query($connect, $addProductToCart);
 }
 
-// header('Location:../../AdminIndex.php?workingPage=cart');
+header('Location:../../userCommon/UserIndex.php?usingPage=cart');

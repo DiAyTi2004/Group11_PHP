@@ -73,7 +73,11 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo  $displayOrder + ($pageIndex - 1) * $pageSize; ?>
                     </td>
                     <td>
-                        <img style="width: 150px; height: 150px" src="pages/ProductImage/<?php echo $row['content']; ?>" alt="">
+                        <?php
+                        $imageSource = str_starts_with($row['content'], 'http') ? $row['content'] : "../../admin/pages/ProductImage/{$row['content']}";
+
+                        echo "<img style=\"width: 150px; height: 150px\" src=\"{$imageSource}\">";
+                        ?>
                     </td>
                     <td>
                         <?php echo  $row['description']; ?>

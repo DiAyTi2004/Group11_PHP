@@ -165,37 +165,24 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
                     </span>
                     <?php
                     $sql_details_size = "SELECT * FROM tbl_product_size INNER JOIN tbl_size
-            ON tbl_size.id = tbl_product_size.size_id
-            WHERE product_id = '$_GET[id]'";
+                        ON tbl_size.id = tbl_product_size.size_id
+                        WHERE product_id = '$_GET[id]'";
                     $query_details_size = mysqli_query($connect, $sql_details_size);
 
                     while ($row_details_size = mysqli_fetch_array($query_details_size)) {
-                        $id = $row_details_size['id'];
+                        $size_id = $row_details_size['id'];
                         $size_name = $row_details_size['name'];
                     ?>
                         <div class="p-1">
-                            <label class="btn btn-outline-success size-btn" data-size-id="<?php echo $id; ?>">
+                            <label class="btn btn-outline-success size-btn">
                                 <?php echo preg_replace('/\D/', '', $size_name); ?>
-                                <input type="hidden" name="selectedSize" value="<?php echo $id; ?>">
+                                <input type="hidden" name="selectedSize" value="<?php echo $size_id; ?>">
                             </label>
                         </div>
                     <?php
                     }
                     ?>
                 </div>
-
-                <script>
-                    $(document).ready(function() {
-                        $(".size-btn").click(function() {
-                            // Xóa lớp active từ tất cả các nút
-                            $(".size-btn").removeClass("active");
-
-                            // Thêm lớp active cho nút được chọn
-                            $(this).addClass("active");
-                        });
-                    });
-                </script>
-
             </div>
 
             <div class="size_quantity mt-3">
@@ -217,7 +204,44 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
                     Đặt mua ngay
                 </button>
             </div>
+
+            <!-- Get price -->
+            <input type="hidden" name="price" value="<?php echo $get_Price; ?>">
         </form>
+
+        <script>
+            $(document).ready(function() {
+                // Khi người dùng submit form
+                $("form").submit(function(event) {
+                    // Lấy giá trị size_id từ trường input ẩn
+                    var selectedSizeId = $("input[name='selectedSize']").val();
+
+                    // Kiểm tra nếu size chưa được chọn
+                    if (!selectedSizeId) {
+                        // Hiển thị thông báo cảnh báo
+                        alert("Vui lòng chọn một size trước khi đặt hàng.");
+                        // Ngăn chặn sự kiện submit nếu size chưa được chọn
+                        event.preventDefault();
+                    }
+                });
+
+                // Xử lý sự kiện khi người dùng chọn size
+                $(".size-btn").click(function() {
+                    // Xóa lớp active từ tất cả các nút
+                    $(".size-btn").removeClass("active");
+
+                    // Thêm lớp active cho nút được chọn
+                    $(this).addClass("active");
+
+                    // Lấy giá trị size_id từ trường input ẩn của nút được chọn
+                    var selectedSizeId = $(this).find("input[name='selectedSize']").val();
+
+                    // Cập nhật giá trị của trường input ẩn
+                    $("input[name='selectedSize']").val(selectedSizeId);
+                });
+            });
+        </script>
+
 
         <script>
             $(document).ready(function() {
