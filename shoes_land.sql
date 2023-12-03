@@ -366,6 +366,7 @@ create table tbl_cart(
 create table tbl_cart_detail (
   cart_id varchar(36) not null,
   product_id varchar(36) not null,
+  size_id varchar(36) not null,
   quantity int,
   unit_price float ,
   primary key (cart_id, product_id)

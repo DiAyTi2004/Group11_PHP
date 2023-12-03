@@ -36,9 +36,9 @@ if (isset($_POST['addToCart'])) {
     echo "\n size id: " . $selectedSize;
     echo "\n quantity: " . $quantity;
     echo "\n price: " . $price;
-    $addProductToCart = "INSERT INTO tbl_cart_detail(cart_id, product_id, quantity, unit_price) VALUES ('$cartId','$productId',$quantity,$price)";
+    $addProductToCart = "INSERT INTO tbl_cart_detail(cart_id, product_id, size_id, quantity, unit_price) VALUES ('$cartId','$productId','$selectedSize',$quantity,$price)";
          
     mysqli_query($connect, $addProductToCart);
 }
 
-header('Location:../../userCommon/UserIndex.php?usingPage=cart');
+// header('Location:../../userCommon/UserIndex.php?usingPage=cart');

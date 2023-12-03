@@ -1,69 +1,87 @@
-<hr />
-<table border="0" style="width:95%; padding: 0; margin: 0 auto">
-    <tr>
-        <th>Sản phẩm đã thêm</th>
-    </tr>
-</table>
-<table border="0" style="width:95%; padding: 0; margin: 0 auto">
-    <?php
-    if (isset($_SESSION['cart'])) {
-        $i = 0;
-        $tongtien = 0;
-        foreach ($_SESSION['cart'] as $cart_item) {
-            $thanhtien = $cart_item['soluong'] * $cart_item['giasanpham'];
-            $tongtien += $thanhtien;
-            $i++;
-    ?>
-            <tr>
-                <td><b><?php echo $cart_item['tensanpham'] ?></b></td>
-                <td><img class="img-cart" src="../../admin/pages/Product/ProductImages/<?php echo $cart_item['hinhanh'] ?>"></td>
-                <td>
-                    <div class="soluong-sp-dem">
-                        <a class="soluong-sp-dem-icon" href="../pages/Cart/EditQuantity.php?minus=<?php echo $cart_item['id'] ?>"><i class="fa-solid fa-minus"></i></a>
-                        <input class="soluong-sp-input" type="text" name="soluong" value="<?php echo $cart_item['soluong'] ?>">
-                        <a class="soluong-sp-dem-icon" href="../pages/Cart/EditQuantity.php?plus=<?php echo $cart_item['id'] ?>"><i class="fa-solid fa-plus"></i></a>
-                    </div>
-                </td>
-                <td><?php echo number_format($cart_item['giasanpham'], 0, ',', '.') . ' VNĐ' ?></td>
-                <td class="giasp-cart"><?php echo number_format($thanhtien, 0, ',', '.') . ' VNĐ' ?></td>
-                <td style="text-align: center"><a href="../pages/Cart/DeleteFromCart.php?id=<?php echo $cart_item['id'] ?>">Xóa sản phẩm</a></td>
-            </tr>
-        <?php
-        }
-        echo "<hr/>";
-        ?>
-        <tr>
-            <td colspan="5">
-                <p style="float: left; color: red;font-weight: bold;font-size: 16px;"> Tổng tiền : <?php echo number_format($tongtien, 0, ',', '.') . ' VNĐ'  ?></p>
-                <div style="clear:both;"> </div>
-                <?php
-                if (isset($_SESSION['userId'])) {
+<?php
+$show_cart_sql = "SELECT * FROM tbl_cart_detail WHERE tbl_cart_detail.cart_id = '$_COOKIE[cartId]'";
+$show_cart_query = mysqli_query($connect, $show_cart_sql);
+$totalAmount = 0; // Initialize total amount
+?>
+<!DOCTYPE html>
+<html lang="en">
 
-                ?>
-                    <p class="btn-dathang"><a class="btn-dathang-a" href="pages/main/thanhtoan/index.php?usingPage=vanchuyen">Đặt hàng</a></p>
-                <?php
-                } else {
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
 
-                ?>
-                    <p><a href="UserIndex.php?usingPage=login">Đăng nhập đặt hàng</a></p>
-                <?php
-                }
+<body>
+    <div class="appCard">
+        <table class="table">
+            <legend class="text-center fw-bold">Quản lý giỏ hàng</legend>
+            <thead>
+                <tr>
+                    <th scope="col">Sản phẩm</th>
+                    <th class="text-center align-middle" scope="col">Size</th>
+                    <th class="text-center align-middle" scope="col">Đơn giá</th>
+                    <th class="text-center align-middle" scope="col">Số lượng</th>
+                    <th class="text-center align-middle" scope="col">Số tiền</th>
+                    <th class="text-center align-middle" scope="col">Thao tác</th>
+                </tr>
+            </thead>
+            <?php
+            while ($row_cart = mysqli_fetch_array($show_cart_query)) {
+                $show_size_sql = "SELECT * FROM tbl_size
+                WHERE tbl_size.id = '$row_cart[size_id]'";
+                $show_size_query = mysqli_query($connect, $show_size_sql);
+                $row_size = mysqli_fetch_array($show_size_query);
 
-                ?>
-            </td>
-            <td>
-                <p style="text-align: center"><a href="../pages/Cart/DeleteAllFromCart.php?deleteAll=true">Xóa hết</a></p>
-            </td>
-        </tr>
-    <?php
-    } else {
-    ?>
-        <hr>
-        <tr>
-            <td colspan="6">Hiện tại giỏ hàng trống</td>
-        </tr>
-    <?php
-    }
-    ?>
-</table>
-<p></p>
+                $show_image_sql = "SELECT * FROM tbl_product_image WHERE product_id = '$row_cart[product_id]' AND main_image = 1;";
+                $show_image_query = mysqli_query($connect, $show_image_sql);
+                $row_image = mysqli_fetch_array($show_image_query);
+            ?>
+                <tr>
+                    <td class="text-center align-middle">
+                        <a style="text-decoration: none;" href="UserIndex.php?usingPage=product&id=<?php echo $row_cart['product_id'] ?>">
+                            <div class="product_container flex">
+                                <?php
+                                $imageSource = str_starts_with($row_image['content'], 'http') ? $row_image['content'] : "../../admin/pages/ProductImage/{$row_image['content']}";
+
+                                echo "<img style=\"width: 150px; height: 150px\" src=\"{$imageSource}\">";
+                                ?>
+                            </div>
+                        </a>
+                    </td>
+                    <td class="text-center align-middle">
+                        <?php echo preg_replace('/\D/', '', $row_size['name']); ?>
+                    </td>
+                    <td class="text-center align-middle">
+                        <span class="price_real">
+                            <?php echo number_format($row_cart['unit_price'], 0, ',', '.') . ' đ' ?>
+
+                        </span>
+                    </td>
+                    <td class="text-center align-middle">
+                        <?php echo $row_cart['quantity'] ?>
+                    </td>
+                    <td class="text-center align-middle">
+                        <span class="price_real">
+                            <?php echo number_format($row_cart['quantity'] * $row_cart['unit_price'], 0, ',', '.') . ' đ' ?>
+                        </span>
+                    </td>
+                    <td class="text-center align-middle">
+                        <!-- Buttons to increase and decrease quantity -->
+                        <button type="button" class="btn btn-primary" data-product-id="<?php echo $row_cart['product_id']; ?>">Chỉnh sửa</button>
+                        <button type="button" class="btn btn-danger remove-btn" data-product-id="<?php echo $row_cart['product_id']; ?>">Xoá</button>
+                    </td>
+                </tr>
+            <?php
+            }
+            ?>
+        </table>
+    </div>
+
+    <button type="button" class="btn btn-success float-end mt-3 p-3">
+    <i class="fa-solid fa-cart-shopping mr-2 ml-0"></i>
+    Mua hàng</button>
+</body>
+
+</html>
