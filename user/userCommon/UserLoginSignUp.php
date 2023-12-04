@@ -127,6 +127,8 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
     <title>SHOESLAND</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="./images/logo.svg">
+
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'>
     <link rel="stylesheet" href="../styles/UserLoginAndSignUpStyles.css" />
@@ -142,7 +144,7 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
     <a href="UserIndex.php" class="p-2 bg-white" style="border-radius: 10px; position: absolute;top: 35px;left:10px;font-weight: bold;">
         <i class="fa-solid fa-circle-chevron-left"></i>
         Về trang chủ
-    </a>
+    </a> 
     <div class="ocean">
         <div class="wave"></div>
         <div class="wave"></div>
