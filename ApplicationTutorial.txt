@@ -1,9 +1,0 @@
-Cài đặt MySQL
-Chạy nhập file shoes_land.sql
-
-_ Để vào giao diện admin:
-+ Ấn đăng nhập ở header giao diện user
-+ Nhập tên tài khoản là admin, ấn nút Đăng nhập => Hiện ra giao diện đăng nhập cho admin
-+ Đăng nhập với quyền quản trị bằng tài khoản
-	Tài khoản: admin
-	Mật khẩu: 1

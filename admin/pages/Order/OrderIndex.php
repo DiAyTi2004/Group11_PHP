@@ -105,6 +105,9 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#orderDetail_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-circle-info"></i>
                         </button>
+                        <button type="button" class="btn btn-primary mb-2 mt-3" onclick="printElement('printOrder_<?php echo $row['id']; ?>')">
+                            <i class="fa-solid fa-print"></i>
+                        </button>
                     </td>
                 </tr>
             <?php
@@ -220,6 +223,13 @@ while ($row = mysqli_fetch_array($tableData)) {
 $tableData = mysqli_query($connect, $getTableDataSql);
 while ($row = mysqli_fetch_array($tableData)) {
     include "./pages/Order/EditOrderPopup.php";
+}
+?>
+
+<?php
+$tableData = mysqli_query($connect, $getTableDataSql);
+while ($row = mysqli_fetch_array($tableData)) {
+    include "./pages/Order/PrintOrderPage.php";
 }
 ?>
 
