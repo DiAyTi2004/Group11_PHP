@@ -7,5 +7,7 @@ if (isset($_POST['deleteProduct'])) {
     mysqli_query($connect, $deleteProductSql);
 
     header('Location:../../userCommon/UserIndex.php?usingPage=cart');
+} else if(isset($_POST['confirmBuy'])) {
+    
 }
 ?>

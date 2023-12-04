@@ -104,7 +104,7 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
 
             <div class="text-end mt-3">
                 Tổng số tiền: <span id="totalAmountDisplay" class="price_real"> <?php echo number_format($totalAmount, 0, ',', '.') . ' đ'; ?></span>
-                <button type="submit" class="btn btn-success p-3" id="buyButton">
+                <button name="confirmBuy" type="submit" class="btn btn-success p-3" id="buyButton">
                     <i class="fa-solid fa-cart-shopping mr-2 ml-0"></i>
                     Mua hàng
                 </button>
