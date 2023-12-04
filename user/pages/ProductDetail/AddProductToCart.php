@@ -41,4 +41,4 @@ if (isset($_POST['addToCart'])) {
     mysqli_query($connect, $addProductToCart);
 }
 
-// header('Location:../../userCommon/UserIndex.php?usingPage=cart');
+header('Location:../../userCommon/UserIndex.php?usingPage=cart');
