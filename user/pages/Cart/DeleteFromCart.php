@@ -11,6 +11,6 @@ if (isset($_SESSION['cart']) && isset($_GET['id'])) {
             $product[] = array('tensanpham' => $cart_item['tensanpham'], 'id' => $cart_item['id'], 'soluong' => $cart_item['soluong'], 'giasanpham' => $cart_item['giasanpham'], 'hinhanh' => $cart_item['hinhanh'], 'masp' => $cart_item['masp']);
         }
         $_SESSION['cart'] = $product;
-        header('Location:../../../UserIndex.php?usingPage=giohang');
+        header('Location:../../../UserIndex.php?usingPage=cart');
     }
 }
