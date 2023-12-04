@@ -14,7 +14,7 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
 </head>
 
 <body>
-<?php if ($cart_empty) : ?>
+    <?php if ($cart_empty) : ?>
         <div class="appCard text-center">
             <h1>
                 <legend class="text-center fw-bold">Quản lý giỏ hàng</legend>
@@ -39,6 +39,7 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                         </tr>
                     </thead>
                     <?php
+
                     while ($row_cart = mysqli_fetch_array($show_cart_query)) {
                         $show_size_sql = "SELECT * FROM tbl_size
                     WHERE tbl_size.id = '$row_cart[size_id]'";
@@ -48,10 +49,16 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                         $show_image_sql = "SELECT * FROM tbl_product_image WHERE product_id = '$row_cart[product_id]' AND main_image = 1;";
                         $show_image_query = mysqli_query($connect, $show_image_sql);
                         $row_image = mysqli_fetch_array($show_image_query);
+
+                        $rowCartId = $_COOKIE['cartId'];
+                        $rowProductId = $row_cart['product_id'];
+                        $rowSizeId = $row_cart['size_id'];
+
+                        $compositeKey = $rowCartId . "diayti" . $rowProductId . "diayti" . $rowSizeId;
                     ?>
                         <tr>
                             <td class="text-center align-middle">
-                                <input class="form-check-input float-start" type="checkbox" name="selectedPro[]" id="">
+                                <input class="form-check-input float-start" type="checkbox" name="selectedPro[]" value="<?php echo $compositeKey; ?>">
                             </td>
                             <td class="text-center align-middle">
                                 <a style="text-decoration: none;" href="UserIndex.php?usingPage=product&id=<?php echo $row_cart['product_id'] ?>">
@@ -74,9 +81,9 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                             </td>
                             <td class="text-center align-middle">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-primary btn-increase">+</button>
-                                    <input class="btn btn-outline-primary" id="quantity" name="quantity[]" size="1" min="1" value="<?php echo $row_cart['quantity'] ?>">
                                     <button type="button" class="btn btn-primary btn-decrease">-</button>
+                                    <input class="btn btn-outline-primary" id="quantity" name="quantity[]" size="1" min="1" max="5" value="<?php echo $row_cart['quantity'] ?>">
+                                    <button type="button" class="btn btn-primary btn-increase">+</button>
                                 </div>
                             </td>
 
@@ -94,10 +101,10 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                     }
                     ?>
                 </table>
-                <div class="ml-2 mb-3 form-check">
+                <!-- <div class="ml-2 mb-3 form-check">
                     <input name="submit" type="checkbox" class="form-check-input" id="exampleCheck1" required>
                     <label class="form-check-label" for="exampleCheck1">Bạn có muốn xác nhận đơn hàng này?</label>
-                </div>
+                </div> -->
             </div>
 
             <input type="hidden" name="totalAmount">
@@ -107,6 +114,11 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                 <button name="confirmBuy" type="submit" class="btn btn-success p-3" id="buyButton">
                     <i class="fa-solid fa-cart-shopping mr-2 ml-0"></i>
                     Mua hàng
+
+                    <?php
+                    if (isset($_SESSION['userId'])) echo "Đã đăng nhập";
+                    else echo "Chưa đăng nhập";
+                    ?>
                 </button>
             </div>
         </form>

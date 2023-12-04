@@ -144,7 +144,7 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
     <a href="UserIndex.php" class="p-2 bg-white" style="border-radius: 10px; position: absolute;top: 35px;left:10px;font-weight: bold;">
         <i class="fa-solid fa-circle-chevron-left"></i>
         Về trang chủ
-    </a> 
+    </a>
     <div class="ocean">
         <div class="wave"></div>
         <div class="wave"></div>
@@ -157,16 +157,15 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
                 <form name="signUp" action="" method="POST">
                     <h1>Đăng ký</h1>
                     <div class="social-container">
-                        <!-- login with google  -->
-                        <?php if (isset($authUrl)) { ?>
-                            <a href="<?php echo $authUrl; ?>" target="_blank" class="social"><i class="fab fa-google"></i></a>
-                        <?php } ?>
-
                         <!-- login with fb  -->
                         <?php if (isset($loginUrl)) { ?>
                             <a href="<?php echo $loginUrl; ?>" target="_blank" class="social"><i class="fab fa-facebook"></i></a>
                         <?php } ?>
 
+                        <!-- login with google  -->
+                        <?php if (isset($authUrl)) { ?>
+                            <a href="<?php echo $authUrl; ?>" target="_blank" class="social"><i class="fab fa-google"></i></a>
+                        <?php } ?>
                     </div>
                     <span>Tạo tài khoản mới</span>
                     <label>
