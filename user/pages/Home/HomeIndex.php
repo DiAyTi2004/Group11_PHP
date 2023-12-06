@@ -44,7 +44,7 @@ if ($total_event > 0) {
 
 </div>
 
-<div class="show appCard">
+<!-- <div class="show appCard">
     <?php //lấy qiamly từ menu truyền vào bằng phuong thức GET
     if (isset($_GET['usingPage'])) {
         $usingPage = $_GET['usingPage'];
@@ -129,4 +129,4 @@ if ($total_event > 0) {
 
     </ul>
 
-</div>
+</div> -->
