@@ -176,7 +176,7 @@ $productByCategory = mysqli_query($connect, $findProductByCategoryIdSQL);
 
                 <li class="product_item col-xs-12 col-sm-4 col-md-3 pb-6">
                     <div class="productClass br-10">
-                        <a href="UserIndex.php?usingPage=product&id=<?php echo $row_pro['id'] ?>">
+                        <a class="w-100" href="UserIndex.php?usingPage=product&id=<?php echo $row_pro['id'] ?>">
                             <div class="product-container over-hidden">
                                 <?php
                                 $imageSource = null;

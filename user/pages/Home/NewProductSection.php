@@ -15,7 +15,7 @@ $query_show_test = mysqli_query($connect, $sql_show_test);
             $row_event = mysqli_fetch_array($query_show_event);
         ?>
             <li class="col-xs-12 col-sm-4 col-md-3 pb-4">
-                <div class="productClass br-10">
+                <div class="w-100" class="productClass br-10">
                     <a href="UserIndex.php?usingPage=product&id=<?php echo $row_test['product_id'] ?>">
                         <div class="product-container over-hidden">
                             <?php
