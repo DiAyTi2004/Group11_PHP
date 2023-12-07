@@ -120,12 +120,7 @@ if (isset($_SESSION['userImage'])) {
                                         Đăng xuất
                                     </li>
 
-                                    <!-- <li class="sub__category__item w-100">
-                                         <a href="UserIndex.php?dangxuat=true" class="w-100 p-2 py-3" >
-                                                <i class="fa-solid fa-sign-out mr-2 ml-0"></i>
-                                                Đăng xuất
-                                            </a>  
-                                    </li> -->
+            
 
                                 </ul>
                             </div>
@@ -156,7 +151,7 @@ if (isset($_SESSION['userImage'])) {
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Đăng xuất</h4>
+                <h4 class="modal-title"> <i class="fa-solid fa-sign-out mr-2 ml-0"></i>Đăng xuất</h4>
                 <button type="button"  style="border: none; background: #28A745"class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
               
             </div>
@@ -164,10 +159,10 @@ if (isset($_SESSION['userImage'])) {
                 <p>Bạn có muốn đăng xuất không? </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" style="background-color: lightgray;" data-dismiss="modal">Không</button>
+            <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Đóng</button>
                 <button type="button" class="btn btn-primary">
-                    <a href="UserIndex.php?dangxuat=true" class="w-100 p-2 py-3" style="color: white; text-decoration: none ">
-                        Đăng xuất
+                    <a href="UserIndex.php?dangxuat=true" style="color: white; text-decoration: none ">
+                    <i class="fa-solid fa-sign-out mr-2 ml-0"></i>Đăng xuất
                     </a>
                 </button>
 
