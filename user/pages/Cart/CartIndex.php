@@ -156,6 +156,23 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                 }
             });
         </script>
+        <!-- Thêm đoạn mã JavaScript này sau thẻ </script> trong đoạn mã bạn đã có -->
+        <script>
+            $(document).ready(function() {
+                // Intercept the form submission
+                $('form').submit(function(e) {
+                    // Check if at least one checkbox is checked
+                    if ($('input[name="selectedPro[]"]:checked').length === 0) {
+                        // Display an alert or a custom message
+                        alert("Vui lòng chọn ít nhất một sản phẩm trước khi mua hàng.");
+
+                        // Prevent the form submission
+                        e.preventDefault();
+                    }
+                });
+            });
+        </script>
+
         <!-- pre delete -->
         <?php
         $show_cart_query = mysqli_query($connect, $show_cart_sql);
