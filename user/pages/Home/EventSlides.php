@@ -1,5 +1,5 @@
 <?php
-$sql_show_slide = "SELECT * FROM tbl_event";
+$sql_show_slide = "SELECT * FROM tbl_event WHERE end_date  >= CURDATE() ";
 $query_show_slide = mysqli_query($connect, $sql_show_slide);
 ?>
 
@@ -19,11 +19,11 @@ $query_show_slide = mysqli_query($connect, $sql_show_slide);
     <?php
     $itemIndex = 0;
     mysqli_data_seek($query_show_slide, 0);
-    while ($row = mysqli_fetch_array($query_show_slide)) {
+    while ($row = mysqli_fetch_array($query_show_slide) ) {
     ?>
       <div class="carousel-item <?php echo $itemIndex == 0 ? 'active' : ''; ?>">
       <a href="UserIndex.php?usingPage=event&eventId=<?php echo $row['id'] ?>">
-        <img src="./../../admin/pages/Event/EventImages/<?php echo $row['banner']; ?>" class="d-block w-100" alt="slide_event" style="border-radius: 10px; height: 624px">
+        <img src="./../../admin/pages/Event/EventImages/<?php  echo $row['banner']; ?>" class="d-block w-100" alt="slide_event" style="border-radius: 10px; height: 624px">
       </a>
       </div>
     <?php
