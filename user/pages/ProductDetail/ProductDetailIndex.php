@@ -103,39 +103,62 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
                 </div>
             </div>
         </div>
-
+        <?php 
+        $check_end_date ;
+                 if($row_event['end_date'] >= date("Y-m-d"))
+                 {
+                    $check_end_date = 1;
+                   
+                 }
+                 else $check_end_date = 0;
+                
+                ?>
         <div class="product_price flex justify-between mt-3">
             <div class="price mr-12">
-                <div class="current_price">
+               
+                <div class="current_price" >
                     <span class="price">
-                        Giá sale:
-                        <i class="sale"><?php echo number_format($get_Price, 0, ',', '.') ?> VNĐ</i>
+                        <?php if($check_end_date == 1) echo ' Giá sale: '; ?>
+                        <i class="sale"><?php if($check_end_date == 1) echo number_format($get_Price, 0, ',', '.') ?></i>
+                        <?php if($check_end_date == 1) echo ' VNĐ '; ?>
                     </span>
                 </div>
                 <div class="fake_price">
                     <span class="price">
-                        Giá gốc:
-                        <i class="fake"><?php echo number_format($get_Price * ($get_Discount / 100) + $get_Price, 0, ',', '.') ?> VNĐ</i>
+                    <?php if($check_end_date == 1) echo ' Giá gốc: '; ?>
+                        
+                        <i class="fake"><?php if($check_end_date == 1) echo number_format($get_Price * ($get_Discount / 100) + $get_Price, 0, ',', '.') ?></i>
+                        <?php if($check_end_date == 1) echo ' VNĐ '; ?>
                     </span>
                 </div>
                 <div class="save">
                     <span class="price">
-                        Tiết kiệm:
-                        <i class="sale"><?php echo number_format(($get_Price * ($get_Discount / 100) + $get_Price - $get_Price), 0, ',', '.') ?> VNĐ</i>
+                    <?php if($check_end_date == 1) echo ' Tiết kiệm: '; ?>
+                        
+                        <i class="sale"><?php if($check_end_date == 1) echo number_format(($get_Price * ($get_Discount / 100) + $get_Price - $get_Price), 0, ',', '.') ?></i>
+                        <?php if($check_end_date == 1) echo ' VNĐ '; ?>
+                    </span>
+                </div>
+                <div class="current_price" >
+                    <span class="price">
+                    <?php if($check_end_date == 0) echo ' Giá: '; ?>
+                        
+                        <i ><?php if($check_end_date == 0) echo number_format($get_Price * ($get_Discount / 100) + $get_Price, 0, ',', '.') ?></i>
+                        <?php if($check_end_date == 0) echo ' VNĐ '; ?>
                     </span>
                 </div>
             </div>
             <div class="event">
                 <div class="event_name">
                     <span class="sale">
-                        <i class="fa-regular fa-clock"></i>
-                        <?php echo $get_EventName ?>
+                        <i <?php if($check_end_date == 1) echo 'class="fa-regular fa-clock"'?> ></i>
+                        <?php if($check_end_date == 1) echo $get_EventName ?>
                     </span>
                 </div>
 
                 <div class="event_time">
                     <span>
-                        <?php echo $time_left_formatted; ?>
+                        <?php if($check_end_date == 1) echo $time_left_formatted; ?>
                     </span>
                 </div>
             </div>

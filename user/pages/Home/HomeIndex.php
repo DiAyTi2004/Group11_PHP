@@ -1,5 +1,5 @@
 <?php
-$countAllEvent = "SELECT * FROM tbl_event;";
+$countAllEvent = "SELECT * FROM tbl_event WHERE end_date  >= CURDATE();";
 $total_event = mysqli_num_rows(mysqli_query($connect, $countAllEvent));
 if ($total_event > 0) {
 ?>
@@ -76,7 +76,7 @@ if ($total_event > 0) {
         $begin = ($page * 10) - 10;
     }
     // GET id là lấy id từ bên MENU.php 
-    $sql_show = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc ORDER BY tbl_sanpham.id_sanpham DESC LIMIT $begin,10";
+    $sql_show = "SELECT * FROM tbl_sanpham,tbl_danhmuc,tbl_event WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc and tbl_sanpham.id_event=tbl_event.id_event and end_date  >= CURDATE() ORDER BY tbl_sanpham.id_sanpham DESC LIMIT $begin,10";
     $query_show = mysqli_query($connect, $sql_show);
 
     ?>

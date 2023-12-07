@@ -192,7 +192,7 @@ $productByCategory = mysqli_query($connect, $findProductByCategoryIdSQL);
                                 echo "<img src=\"{$imageSource}\" alt=\"{$row_pro['name']}\">";
 
 
-                                if ($row_event['discount'] > 0) :
+                                if ($row_event['discount'] > 0 ) :
                                 ?>
                                     <div class="discount-overlay"><?php echo "-" . $row_event['discount'] . '%'; ?></div>
                                 <?php endif; ?>
@@ -206,12 +206,17 @@ $productByCategory = mysqli_query($connect, $findProductByCategoryIdSQL);
                             </div>
                             <div class="cdt-product-param"><span data-title="Loại Hàng"><i class="fa-solid fa-cart-arrow-down"></i> Like auth</span></div>
                             <div class="price pb-3">
+                               
                                 <span style="text-decoration: line-through;" class="price_fake ml-3">
-                                    <?php echo number_format($row_pro['price'] * ($row_event['discount'] / 100) + $row_pro['price'], 0, ',', '.') ?>
-                                    đ
+                                    <?php if($row_event['end_date'] >= date("Y-m-d")) echo number_format($row_pro['price'] * ($row_event['discount'] / 100) + $row_pro['price'], 0, ',', '.') ?>    
+                                    <?php if($row_event['end_date'] >= date("Y-m-d")) echo 'đ'?>    
                                 </span>
                                 <span class="price_real ml-3">
-                                    <?php echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
+                                    <?php if($row_event['end_date'] >= date("Y-m-d")) echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
+                                </span>
+                                
+                                <span>
+                                    <?php if($row_event['end_date'] <= date("Y-m-d")) echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
                                 </span>
                             </div>
                         </a>
@@ -220,6 +225,8 @@ $productByCategory = mysqli_query($connect, $findProductByCategoryIdSQL);
             <?php
             }
             ?>
+ 
+
 
         </ul>
         <form action="" method="GET">
