@@ -25,8 +25,8 @@ if (isset($_POST['deleteProduct'])) {
 
         return $uuid;
     }
+    $order_id = generateUuid();
     foreach ($selectedPro as $item) {
-        $order_id = generateUuid();
         echo "các dòng được chọn: \n";
         $tachChuoi = explode("diayti", $item);
 
@@ -48,10 +48,10 @@ if (isset($_POST['deleteProduct'])) {
                         VALUES ('$order_id', '$productId', '$sizeId', $row_cart[quantity], $row_cart[unit_price])";
         mysqli_query($connect, $insertSql);
 
-        $delSql = "DELETE FROM tbl_cart_detail WHERE product_id = '$productId'";
-        mysqli_query($connect, $delSql);
-        header('Location:../../userCommon/UserIndex.php?usingPage=payment');
+        // $delSql = "DELETE FROM tbl_cart_detail WHERE product_id = '$productId'";
+        // mysqli_query($connect, $delSql);
     }
+    header('Location:../../userCommon/UserIndex.php?usingPage=payment&orderId=' . $order_id);
 } else if (isset($_POST['editCart'])) {
     $productId = $_GET['productId'];
     $newQuantity = $_POST['quantity'];

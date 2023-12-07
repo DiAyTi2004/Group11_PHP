@@ -31,6 +31,8 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                         <tr>
                             <th scope="col"></th>
                             <th scope="col">Sản phẩm</th>
+                            <th class="text-center align-middle" scope="col">Tên sản phẩm</th>
+                            <th class="text-center align-middle" scope="col">Mã</th>
                             <th class="text-center align-middle" scope="col">Size</th>
                             <th class="text-center align-middle" scope="col">Đơn giá</th>
                             <th class="text-center align-middle" scope="col">Số lượng</th>
@@ -56,6 +58,9 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                         $rowProductId = $row_cart['product_id'];
                         $rowSizeId = $row_cart['size_id'];
 
+                        $show_product_query = mysqli_query($connect, "SELECT * FROM tbl_product WHERE id = '$row_cart[product_id]'");
+                        $row_product = mysqli_fetch_array($show_product_query);
+
                         $compositeKey = $rowCartId . "diayti" . $rowProductId . "diayti" . $rowSizeId;
                     ?>
                         <tr>
@@ -72,6 +77,12 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                                         ?>
                                     </div>
                                 </a>
+                            </td>
+                            <td style="max-width: 150px;" class="text-center align-middle">
+                                <?php echo $row_product['name']; ?>
+                            </td>
+                            <td class="text-center align-middle">
+                                <?php echo $row_product['code']; ?>
                             </td>
                             <td class="text-center align-middle">
                                 <?php echo preg_replace('/\D/', '', $row_size['name']); ?>
@@ -110,15 +121,20 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
 
             <div class="text-end mt-3">
                 Tổng số tiền: <span id="totalAmountDisplay" class="price_real"></span>
-                <button name="confirmBuy" type="submit" class="btn btn-success p-3" id="buyButton">
-                    <i class="fa-solid fa-cart-shopping mr-2 ml-0"></i>
-                    Mua hàng
-
-                    <?php
-                    if (isset($_SESSION['userId'])) echo "Đã đăng nhập";
-                    else echo "Chưa đăng nhập";
-                    ?>
-                </button>
+                <?php
+                if (isset($_SESSION['userId'])) {
+                ?>
+                    <button name="confirmBuy" type="submit" class="btn btn-success p-3" id="buyButton">
+                        <i class="fa-solid fa-cart-shopping mr-2 ml-0"></i>
+                        Mua hàng
+                    </button>
+                <?php } else {
+                ?>
+                    <button disabled name="confirmBuy" type="submit" class="btn btn-success p-3" id="buyButton">
+                        <i class="fa-solid fa-cart-shopping mr-2 ml-0"></i>
+                        Vui lòng đăng nhập để mua hàng
+                    </button>
+                <?php } ?>
             </div>
         </form>
 
@@ -137,8 +153,8 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
 
                     $('input[name="selectedPro[]"]:checked').each(function() {
                         // Update the indices used to access quantity and unit price
-                        var quantity = parseInt($(this).closest('tr').find('.text-center.align-middle:eq(4)').text());
-                        var unitPriceText = $(this).closest('tr').find('.text-center.align-middle:eq(3) .price_real').text();
+                        var quantity = parseInt($(this).closest('tr').find('.text-center.align-middle:eq(6)').text()); // Updated index
+                        var unitPriceText = $(this).closest('tr').find('.text-center.align-middle:eq(5) .price_real').text(); // Updated index
 
                         // Remove non-numeric characters except for the dot
                         var unitPrice = parseInt(unitPriceText.replace(/[^\d]/g, ''));
@@ -147,15 +163,17 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                     });
 
                     // Update the display
-                    $('#totalAmountDisplay').text(formatCurrency(totalAmount) + ' đ');
+                    $('#totalAmountDisplay').text(formatCurrency(totalAmount));
                 }
 
                 // Function to format currency with commas
                 function formatCurrency(amount) {
-                    return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' đ';
                 }
             });
         </script>
+
+
         <!-- Thêm đoạn mã JavaScript này sau thẻ </script> trong đoạn mã bạn đã có -->
         <script>
             $(document).ready(function() {
