@@ -20,7 +20,6 @@ $query_show_test = mysqli_query($connect, $sql_show_test);
                         <div class="product-container over-hidden">
                             <?php
                             $imageSource = str_starts_with($row_test['content'], 'http') ? $row_test['content'] : "../../admin/pages/ProductImage/{$row_test['content']}";
-
                             echo "<img src=\"{$imageSource}\" alt=\"{$row_test['name']}\">";
 
                             if ($row_event['discount'] > 0) :

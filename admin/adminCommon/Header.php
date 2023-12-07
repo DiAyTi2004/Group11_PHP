@@ -105,7 +105,7 @@
             <div class="modal-header">
                 <h4 class="modal-title">
                 <i class="fa-solid fa-right-from-bracket mr-1"></i>Đăng xuất</h4>
-                <button type="button"  style="border: none; background: #28A745"class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
               
             </div>
             <div class="modal-body">
