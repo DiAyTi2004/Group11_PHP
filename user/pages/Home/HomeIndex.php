@@ -43,6 +43,30 @@ if ($total_event > 0) {
     ?>
 
 </div>
+<div class="show_new appCard">
+    <?php //lấy qiamly từ menu truyền vào bằng phuongư thức GET
+    if (isset($_GET['usingPage'])) {
+        $usingPage = $_GET['usingPage'];
+    } else {
+        $usingPage = "";
+    }
+    if ($usingPage == "") { ?>
+
+        <div class="new_product" style="display: flex">
+            <h3 style="width: 90%">Giá sốc hôm nay</h3>
+            <button style="margin-right: 10px ;width: 10%;">
+                <a href="../pages/AllProduct/AllProduct.php" style="text-decoration: none">
+                    Xem tất cả
+                </a>
+
+            </button>
+        </div>
+    <?php
+        include("../pages/Home/AllProductSection.php");
+    }
+    ?>
+
+</div>
 
 <!-- <div class="show appCard">
     <?php //lấy qiamly từ menu truyền vào bằng phuong thức GET

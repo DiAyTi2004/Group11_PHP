@@ -103,21 +103,31 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Đăng xuất</h4>
-                <button type="button"  style="border: none; background: #28A745"class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">
+                <i class="fa-solid fa-right-from-bracket mr-1"></i>Đăng xuất</h4>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
               
             </div>
             <div class="modal-body">
                 <p>Bạn có muốn đăng xuất không? </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" style="background-color: lightgray;" data-dismiss="modal">Không</button>
-                <button type="button" class="btn btn-primary">
-                    <a href="UserIndex.php?dangxuat=true" class="w-100 p-2 py-3" style="color: white; text-decoration: none ">
-                        Đăng xuất
-                    </a>
-                </button>
-
+            <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Đóng</button>
+                <a href="adminCommon/Login.php" class="pr-0 nav-link text-white flex-column flex-center">
+                            <div class="text-end">
+                                <?php
+                                if (isset($_GET['logout']) && $_GET['logout'] == 1) {
+                                    unset($_SESSION['userId']);
+                                    header('Location: ./adminCommon/Login.php');
+                                }
+                                ?>
+                                <button type="button" class="btn btn-primary">
+                                    <i class="fa-solid fa-right-from-bracket mr-1"></i>
+                                    Đăng xuất
+                                </button>
+                            </div>
+                        </a>
+                
             </div>
         </div>
     </div>
