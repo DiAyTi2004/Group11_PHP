@@ -104,44 +104,35 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Đăng xuất</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-
+                <button type="button"  style="border: none; background: #28A745"class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              
             </div>
             <div class="modal-body">
                 <p>Bạn có muốn đăng xuất không? </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
-                <a href="adminCommon/Login.php" class="pr-0 nav-link text-white flex-column flex-center">
-                            <div class="text-end">
-                                <?php
-                                if (isset($_GET['logout']) && $_GET['logout'] == 1) {
-                                    unset($_SESSION['userId']);
-                                    header('Location: ./adminCommon/Login.php');
-                                }
-                                ?>
-                                <button type="button" class="btn btn-primary">
-                                    <i class="fa-solid fa-right-from-bracket mr-1"></i>
-                                    Đăng xuất
-                                </button>
-                            </div>
-                        </a>
-
+                <button type="button" class="btn btn-default" style="background-color: lightgray;" data-dismiss="modal">Không</button>
+                <button type="button" class="btn btn-primary">
+                    <a href="UserIndex.php?dangxuat=true" class="w-100 p-2 py-3" style="color: white; text-decoration: none ">
+                        Đăng xuất
+                    </a>
                 </button>
+
             </div>
         </div>
     </div>
 </div>
+
 <style>
     #myModal .modal-header {
-        background-color: #28a745;
+        background-color: #28A745;
         /* Green background color */
         color: #fff;
         /* White text color */
     }
 
     #myModal .btn-primary {
-        background-color: green;
+        background-color: #28A745;
         /* Red background color */
         color: #fff;
         /* White text color */
