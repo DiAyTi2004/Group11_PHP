@@ -4,7 +4,7 @@
     if (isset($_SESSION['userId'])) {
         // echo 'Xin chào: '.'<span style="color:red">'.$_SESSION['userId'].'</span>';
         $id = $_SESSION['userId'];
-        $sql_thongtin = "SELECT * FROM tbl_dangky WHERE taikhoan='$id' LIMIT 1";
+        $sql_thongtin = "SELECT * FROM tbl_user WHERE id='$id' LIMIT 1";
         $query_thongtin = mysqli_query($connect, $sql_thongtin);
 
         while ($row = mysqli_fetch_array($query_thongtin)) {
@@ -20,10 +20,10 @@
                 </div>
                 <p class="card-item-name">
                     <?php
-                    echo '' . '<span style="color:#fff">' . $row['taikhoan'] . '</span>';
+                    echo '' . '<span style="color:#fff">' . $row['name'] . '</span>';
                     ?></p>
                 <p class="card-item-duty"><?php
-                                            echo '' . '<span >' . $row['hovaten'] . '</span>';
+                                            echo '' . '<span >' . $row['name'] . '</span>';
                                             ?></p>
                 <div class="social-media-list">
                     <a href="https://www.facebook.com/hoandz93/" class="social-media-item"><i class="fab fa-facebook facebook-icon"></i></a>
@@ -42,7 +42,7 @@
         <div class="infor-main">
             <div class="infor-main-text">
                 <label for="">Tên Đăng Nhập: </label>
-                <span class="infor-text-sql"><?php echo $row['hovaten']  ?></span>
+                <span class="infor-text-sql"><?php echo $row['name']  ?></span>
             </div>
             <div class="infor-main-text">
                 <label for="">Email: </label>
