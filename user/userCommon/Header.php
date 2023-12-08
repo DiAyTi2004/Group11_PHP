@@ -1,5 +1,11 @@
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Include Bootstrap CSS and JS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- Your Modal HTML -->
+
 <?php
 $queryCategorySQL = "SELECT * FROM tbl_category";
 $categoryData = mysqli_query($connect, $queryCategorySQL);
@@ -103,13 +109,13 @@ if (isset($_SESSION['userImage'])) {
                             <div class="subUserAction br-10 over-hidden">
                                 <ul class="m-0 p-0 w-100">
                                     <li class="sub__category__item w-100">
-                                        <a href="UserIndex.php?usingPage=account" class="w-100 p-2 py-3">
+                                        <a href="UserIndex.php?usingPage=account" class="w-100 p-2 py-3" style="text-decoration: none">
                                             <i class="fa-solid fa-circle-user mr-2 ml-0"></i>
                                             Thông tin cá nhân
                                         </a>
                                     </li>
                                     <li class="sub__category__item w-100">
-                                        <a href="UserIndex.php?usingPage=cart" class="w-100 p-2 py-3">
+                                        <a href="UserIndex.php?usingPage=cart" class="w-100 p-2 py-3" style="text-decoration: none">
                                             <i class="fa-solid fa-cart-shopping mr-2 ml-0"></i>
                                             Giỏ hàng
                                         </a>
@@ -152,26 +158,25 @@ if (isset($_SESSION['userImage'])) {
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"> <i class="fa-solid fa-sign-out mr-2 ml-0"></i>Đăng xuất</h4>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-              
+                <button type="button" class="btn-close btn-close-white"  data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p>Bạn có muốn đăng xuất không? </p>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-bs-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary">
-                    <a href="UserIndex.php?dangxuat=true" style="color: white; text-decoration: none ">
+                <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-dismiss="modal">Đóng</button>
+                <a href="UserIndex.php?dangxuat=true" class="btn btn-primary">
                     <i class="fa-solid fa-sign-out mr-2 ml-0"></i>Đăng xuất
-                    </a>
-                </button>
-
+                </a>
             </div>
         </div>
     </div>
 </div>
 
 <style>
+    #myModol {
+        padding:  0;
+    }
     #myModal .modal-header {
         background-color: #28A745;
         /* Green background color */
@@ -180,9 +185,15 @@ if (isset($_SESSION['userImage'])) {
     }
 
     #myModal .btn-primary {
-        background-color: #28A745;
+        background-color: red;
         /* Red background color */
         color: #fff;
+        font-weight: bold;
+        border: 0;
         /* White text color */
+    }
+    #myModal .btn-primary:hover{
+        background-color: coral;
+        
     }
 </style>
