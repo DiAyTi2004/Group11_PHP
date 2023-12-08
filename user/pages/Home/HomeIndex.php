@@ -52,14 +52,8 @@ if ($total_event > 0) {
     }
     if ($usingPage == "") { ?>
 
-        <div class="new_product" style="display: flex">
-            <h3 style="width: 90%">Giá sốc hôm nay</h3>
-            <button style="margin-right: 10px ;width: 10%;">
-                <a href="../pages/AllProduct/AllProduct.php" style="text-decoration: none">
-                    Xem tất cả
-                </a>
-
-            </button>
+        <div class="new_product">
+            <h3>GIÁ SỐC HÔM NAY</h3>
         </div>
     <?php
         include("../pages/Home/AllProductSection.php");
