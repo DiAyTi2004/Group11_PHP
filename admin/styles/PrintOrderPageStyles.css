@@ -1,0 +1,38 @@
+.orderContainer {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    /* border: 1px solid red; */
+}
+
+.orderInfo,
+.product-table {
+    margin-bottom: 20px;
+}
+
+h2{
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: red;
+}
+
+.product-table > th,
+.product-table > td {
+    border: 1px solid red;
+    padding: 8px;
+    text-align: left;
+    background-color: red;
+}
+
+/* th {
+    background-color: red;
+} */
+
+.total {
+    float: right;
+}
