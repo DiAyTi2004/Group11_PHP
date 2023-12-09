@@ -38,7 +38,7 @@ $searchData = mysqli_query($connect, $searchSql);
                 $query_show_image = mysqli_query($connect, $sql_show_image);
                 $row_image = mysqli_fetch_array($query_show_image);
 
-				$sql_show_event = "SELECT * FROM tbl_event WHERE tbl_event.id = '$row_pro[event_id]'";
+                $sql_show_event = "SELECT * FROM tbl_event WHERE tbl_event.id = '$row_pro[event_id]'";
                 $query_show_event = mysqli_query($connect, $sql_show_event);
                 $row_event = mysqli_fetch_array($query_show_event);
             ?>
@@ -59,9 +59,10 @@ $searchData = mysqli_query($connect, $searchSql);
                                 }
 
                                 echo "<img src=\"{$imageSource}\" alt=\"{$row_pro['name']}\">";
+                                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                                $currentTime = date("Y-m-d H:i:s");
 
-
-                                if ($row_event['discount'] > 0) :
+                                if ($row_event['discount'] > 0 && $row_event['end_date'] > $currentTime) :
                                 ?>
                                     <div class="discount-overlay"><?php echo "-" . $row_event['discount'] . '%'; ?></div>
                                 <?php endif; ?>
@@ -75,13 +76,20 @@ $searchData = mysqli_query($connect, $searchSql);
                             </div>
                             <div class="cdt-product-param"><span data-title="Loại Hàng"><i class="fa-solid fa-cart-arrow-down"></i> Like auth</span></div>
                             <div class="price pb-3">
-                                <span style="text-decoration: line-through;" class="price_fake ml-3">
-                                    <?php echo number_format($row_pro['price'] * ($row_event['discount'] / 100) + $row_pro['price'], 0, ',', '.') ?>
-                                    đ
-                                </span>
-                                <span class="price_real ml-3">
-                                    <?php echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
-                                </span>
+                                <?php
+                                if ($row_event['end_date'] > $currentTime) {
+                                ?>
+                                    <span style="text-decoration: line-through;" class="price_fake ml-3">
+                                        <?php echo number_format($row_pro['price'] * ($row_event['discount'] / 100) + $row_pro['price'], 0, ',', '.') ?> đ
+                                    </span>
+                                    <span class="price_real ml-3">
+                                        <?php echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
+                                    </span>
+                                <?php } else { ?>
+                                    <span style="font-size: 16px; color: #000; opacity: 0.7;" class="ml-3">
+                                        <?php echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
+                                    </span>
+                                <?php } ?>
                             </div>
                         </a>
                     </div>
@@ -109,7 +117,7 @@ $searchData = mysqli_query($connect, $searchSql);
                     <li class="page-item">
                         <?php
                         if ($pageIndex > 1 && $total_page > 1) {
-                            echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?usingPage=search&keyword=' .($keyword). '&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
+                            echo '<a class="page-link text-reset text-black" aria-label="Previous" href="?usingPage=search&keyword=' . ($keyword) . '&limit=' . ($pageSize) . '&page=' . ($pageIndex - 1) . '">
                         Previous
                         </a>';
                         }
@@ -121,26 +129,26 @@ $searchData = mysqli_query($connect, $searchSql);
                     for ($i = 1; $i <= $total_page; $i++) {
                         if ($i == $pageIndex) {
                             echo '<li class="page-item light">
-                        <span name="page" class="page-link text-reset text-white bg-success" href="?usingPage=search&keyword=' .($keywordNew). '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
+                        <span name="page" class="page-link text-reset text-white bg-success" href="?usingPage=search&keyword=' . ($keywordNew) . '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                         } else {
                             // Hiển thị trang đầu tiên
                             if ($i == 1) {
                                 echo '<li class="page-item light">
-                            <a name="page" class="page-link text-reset text-black" href="?usingPage=search&keyword=' .($keywordNew). '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                            <a name="page" class="page-link text-reset text-black" href="?usingPage=search&keyword=' . ($keywordNew) . '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                             </li>';
                             }
                             // Hiển thị các trang ở giữa
                             else if ($i > $pageIndex - $range && $i < $pageIndex + $range) {
                                 echo '<li class="page-item light">
-                            <a name="page" class="page-link text-reset text-black" href="?usingPage=search&keyword=' .($keywordNew). '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                            <a name="page" class="page-link text-reset text-black" href="?usingPage=search&keyword=' . ($keywordNew) . '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                             </li>';
                             }
 
                             // Hiển thị trang cuối cùng
                             else if ($i == $total_page) {
                                 echo '<li class="page-item light">
-                            <a name="page" class="page-link text-reset text-black" href="?usingPage=search&keyword=' .($keywordNew). '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                            <a name="page" class="page-link text-reset text-black" href="?usingPage=search&keyword=' . ($keywordNew) . '&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
                             </li>';
                             }
 
@@ -157,7 +165,7 @@ $searchData = mysqli_query($connect, $searchSql);
                     <?php
                     if ($pageIndex < $total_page && $total_page > 1) {
                         echo '<li class="page-item light">
-                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?usingPage=search&keyword=' .($keywordNew). '&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
+                    <a name="page" class="page-link text-reset text-black" aria-label="Next" href="?usingPage=search&keyword=' . ($keywordNew) . '&limit=' . ($pageSize) . '&page=' . ($pageIndex + 1) . '">
                     Next
                     </a>
                     </li>';

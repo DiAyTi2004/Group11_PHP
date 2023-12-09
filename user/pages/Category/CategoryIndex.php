@@ -173,18 +173,6 @@ $productByCategory = mysqli_query($connect, $findProductByCategoryIdSQL);
                 $query_show_event = mysqli_query($connect, $sql_show_event);
                 $row_event = mysqli_fetch_array($query_show_event);
             ?>
-            <?php
-             $check_end_date ;
-                 if($row_event['end_date'] >= date("Y-m-d"))
-                 {
-                    $check_end_date = 1;
-                   
-                 }
-                 else $check_end_date = 0;
-                     $class=''; 
-        if($check_end_date == 1)
-        $class='discount-overlay';
-        ?>
 
 
                 <li class="product_item col-xs-12 col-sm-4 col-md-3 pb-6">
@@ -203,12 +191,12 @@ $productByCategory = mysqli_query($connect, $findProductByCategoryIdSQL);
                                 }
 
                                 echo "<img src=\"{$imageSource}\" alt=\"{$row_pro['name']}\">";
-
-
-                                if ($row_event['discount'] > 0 ) :
-                                ?>
-                                    <div class="<?php echo $class?>"><?php if($check_end_date == 1) echo "-" . $row_event['discount'] . '%'; ?></div>
-                                <?php endif; ?>
+                                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                                $currentTime = date("Y-m-d H:i:s");
+                                if ($row_event['discount'] > 0 && $row_event['end_date'] > $currentTime) :
+                                    ?>
+                                        <div class="discount-overlay"><?php echo "-" . $row_event['discount'] . '%'; ?></div>
+                                    <?php endif; ?>
                             </div>
 
                             <h5 class="title_product pt-3"> <?php echo $row_pro['name'] ?></h5>
@@ -219,18 +207,20 @@ $productByCategory = mysqli_query($connect, $findProductByCategoryIdSQL);
                             </div>
                             <div class="cdt-product-param"><span data-title="Loại Hàng"><i class="fa-solid fa-cart-arrow-down"></i> Like auth</span></div>
                             <div class="price pb-3">
-                               
-                                <span style="text-decoration: line-through;" class="price_fake ml-3">
-                                    <?php if($row_event['end_date'] >= date("Y-m-d")) echo number_format($row_pro['price'] * ($row_event['discount'] / 100) + $row_pro['price'], 0, ',', '.') ?>    
-                                    <?php if($row_event['end_date'] >= date("Y-m-d")) echo 'đ'?>    
-                                </span>
-                                <span class="price_real ml-3">
-                                    <?php if($row_event['end_date'] >= date("Y-m-d")) echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
-                                </span>
-                                
-                                <span style="color: black">
-                                <?php if($row_event['end_date'] <= date("Y-m-d")) echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
-                                </span>
+                                <?php
+                                if ($row_event['end_date'] > $currentTime) {
+                                ?>
+                                    <span style="text-decoration: line-through;" class="price_fake ml-3">
+                                        <?php echo number_format($row_pro['price'] * ($row_event['discount'] / 100) + $row_pro['price'], 0, ',', '.') ?> đ
+                                    </span>
+                                    <span class="price_real ml-3">
+                                        <?php echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
+                                    </span>
+                                <?php } else { ?>
+                                    <span style="font-size: 16px; color: #000; opacity: 0.7;" class="ml-3">
+                                        <?php echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
+                                    </span>
+                                <?php } ?>
                             </div>
                         </a>
                     </div>

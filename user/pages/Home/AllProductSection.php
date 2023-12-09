@@ -29,8 +29,9 @@ $query_show_test = mysqli_query($connect, $sql_show_test);
                                     <?php
                                     $imageSource = str_starts_with($row_test['content'], 'http') ? $row_test['content'] : "../../admin/pages/ProductImage/{$row_test['content']}";
                                     echo "<img src=\"{$imageSource}\" alt=\"{$row_test['name']}\">";
-
-                                    if ($row_event['discount'] > 0) :
+                                    date_default_timezone_set('Asia/Ho_Chi_Minh');
+                                    $currentTime = date("Y-m-d H:i:s");
+                                    if ($row_event['discount'] > 0 && $row_event['end_date'] > $currentTime) :
                                     ?>
                                         <div class="discount-overlay"><?php echo "-" . $row_event['discount'] . '%'; ?></div>
                                     <?php endif; ?>
@@ -43,12 +44,20 @@ $query_show_test = mysqli_query($connect, $sql_show_test);
                                     </span>
                                 </div>
                                 <div class="cdt-product-param"><span data-title="Loại Hàng"><i class="fa-solid fa-cart-arrow-down"></i> Like auth</span></div>
-                                <span style="text-decoration: line-through;" class="price_fake ml-3">
-                                    <?php echo number_format($row_test['price'] * ($row_event['discount'] / 100) + $row_test['price'], 0, ',', '.') ?> đ
-                                </span>
-                                <span class="price_real ml-3">
-                                    <?php echo number_format($row_test['price'], 0, ',', '.') . ' đ' ?>
-                                </span>
+                                <?php
+                                if ($row_event['end_date'] > $currentTime) {
+                                ?>
+                                    <span style="text-decoration: line-through;" class="price_fake ml-3">
+                                        <?php echo number_format($row_test['price'] * ($row_event['discount'] / 100) + $row_test['price'], 0, ',', '.') ?> đ
+                                    </span>
+                                    <span class="price_real ml-3">
+                                        <?php echo number_format($row_test['price'], 0, ',', '.') . ' đ' ?>
+                                    </span>
+                                <?php } else { ?>
+                                    <span style="font-size: 16px; color: #000; opacity: 0.7;" class="ml-3">
+                                        <?php echo number_format($row_test['price'], 0, ',', '.') . ' đ' ?>
+                                    </span>
+                                <?php } ?>
                             </a>
                         </div>
                     </li>
@@ -83,7 +92,7 @@ $query_show_test = mysqli_query($connect, $sql_show_test);
 </div>
 <div class="search__section bg-white br-10 over-hidden px-1 flex-center">
     <form method="POST" action="UserIndex.php?usingPage=search">
-        <button type="submit" class="br-10 py-1 px-3 flex-grow-1" name="search" >
+        <button type="submit" class="br-10 py-1 px-3 flex-grow-1" name="search">
             Xem tất cả
         </button>
     </form>
