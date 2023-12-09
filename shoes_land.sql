@@ -394,7 +394,7 @@ create table tbl_order (
   user_id varchar(36) not null,
   status_id varchar(36) not null,
   receive_phone varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  receive_address varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  receive_address varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   delivery_cost float ,
   payment_id varchar(36) not null,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,

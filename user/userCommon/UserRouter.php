@@ -17,6 +17,8 @@
         include("../pages/Searching/SearchingIndex.php");
     } else if ($usingPage == 'payment') {
         include("../pages/Payment/PaymentIndex.php");
+    } else if ($usingPage == 'done') {
+        include("../pages/Payment/PaymentDone.php");
     }
     else {
         include("../pages/Home/HomeIndex.php");

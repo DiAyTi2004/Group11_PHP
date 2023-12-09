@@ -2,66 +2,55 @@
 $order_id = $_GET['orderId'];
 $show_order_detail = "SELECT * FROM tbl_order_detail WHERE order_id = '$order_id'";
 $show_order_detail_query = mysqli_query($connect, $show_order_detail);
+
+$product_ids = array();
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<style>
-    .price_real, .span {
-        font-size: 15px;
-    }
-</style>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông Tin Thanh Toán</title>
-    <!-- Sử dụng thư viện Bootstrap -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 
-<body>
-    <form action="../../user/pages/Payment/PaymentLogic.php" method="POST">
-        <div class="appCard">
-            <h4 class="text-center mb-4">Thông Tin Người Nhận</h4>
-            <!-- Tên -->
-            <div class="row">
-                <div class="mb-3 col">
-                    <label for="name" class="form-label">Họ và Tên</label>
-                    <input disabled type="text" value="<?php echo $_SESSION['username']; ?>" class="form-control" id="name" name="name" required>
-                </div>
 
-                <!-- Số Điện Thoại -->
-                <div class="mb-3 col">
-                    <label for="phone" class="form-label">Số Điện Thoại</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" required>
-                </div>
+<form action="../../user/pages/Payment/PaymentLogic.php?userId=<?php echo $_SESSION['userId'] ?>" method="POST">
+    <div class="appCard">
+        <h4 class="text-center mb-4">Thông Tin Người Nhận</h4>
+        <!-- Tên -->
+        <div class="row">
+            <div class="mb-3 col">
+                <label for="name" class="form-label">Họ và Tên</label>
+                <input disabled type="text" value="<?php echo $_SESSION['username']; ?>" class="form-control" id="name" name="name" required>
             </div>
 
-            <!-- Địa Chỉ -->
-            <div class="mb-3">
-                <div class="row">
-                    <label for="city">Địa chỉ</label>
-                    <div class="col">
-                        <select required name="province" class="form-select form-select mb-3" id="city" aria-label=".form-select">
-                            <option value="" selected>Chọn tỉnh thành</option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <select required name="district" class="form-select form-select mb-3" id="district" aria-label=".form-select">
-                            <option value="" selected>Chọn quận huyện</option>
-                        </select>
-                    </div>
-
-                    <div class="col">
-                        <select required name="ward" class="form-select form-select" id="ward" aria-label=".form-select">
-                            <option value="" selected>Chọn phường xã</option>
-                        </select>
-                    </div>
-                </div>
+            <!-- Số Điện Thoại -->
+            <div class="mb-3 col">
+                <label for="phone" class="form-label">Số Điện Thoại</label>
+                <input type="tel" class="form-control" id="phone" name="phone" required>
             </div>
         </div>
 
-        <div class="appCard">
-            <h4 class="text-center mb-4">Thông Tin Sản Phẩm</h3>
+        <!-- Địa Chỉ -->
+        <div class="mb-3">
+            <div class="row">
+                <label for="city">Địa chỉ</label>
+                <div class="col">
+                    <select required name="province" class="form-select form-select mb-3" id="city" aria-label=".form-select">
+                        <option value="" selected>Chọn tỉnh thành</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select required name="district" class="form-select form-select mb-3" id="district" aria-label=".form-select">
+                        <option value="" selected>Chọn quận huyện</option>
+                    </select>
+                </div>
+
+                <div class="col">
+                    <select required name="ward" class="form-select form-select" id="ward" aria-label=".form-select">
+                        <option value="" selected>Chọn phường xã</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="appCard">
+        <h4 class="text-center mb-4">Thông Tin Sản Phẩm</h3>
             <table class="table">
                 <thead>
                     <tr>
@@ -92,6 +81,8 @@ $show_order_detail_query = mysqli_query($connect, $show_order_detail);
 
                     $productTotal = $row_order['unit_price'] * $row_order['quantity'];
                     $totalAmount += $productTotal;
+
+                    $product_ids[] = $row_order['product_id'];
 
                 ?>
                     <tr>
@@ -134,10 +125,10 @@ $show_order_detail_query = mysqli_query($connect, $show_order_detail);
                 }
                 ?>
             </table>
-        </div>
+    </div>
 
-        <div class="appCard">
-            <h4 class="text-center mb-4">Thông Tin Thanh Toán</h3>
+    <div class="appCard">
+        <h4 class="text-center mb-4">Thông Tin Thanh Toán</h3>
             <div class="row">
                 <div class="mb-3 col">
                     <label for="shippingMethod">Phương thức vận chuyển</label>
@@ -157,7 +148,7 @@ $show_order_detail_query = mysqli_query($connect, $show_order_detail);
                     <select class="form-select form-select mb-3" id="paymentMethod" name="paymentMethod" aria-label=".form-select">
                         <?php
                         while ($payment_option = mysqli_fetch_array($show_payment_query)) {
-                            if($payment_option['code'] == "#TM" ) {
+                            if ($payment_option['code'] == "#TM") {
                                 echo "<option selected value='{$payment_option['id']}'>{$payment_option['name']}</option>";
                                 continue;
                             }
@@ -180,10 +171,11 @@ $show_order_detail_query = mysqli_query($connect, $show_order_detail);
                 <input type="hidden" name="selectedCity" id="selectedCity" value="">
                 <input type="hidden" name="selectedDistrict" id="selectedDistrict" value="">
                 <input type="hidden" name="selectedWard" id="selectedWard" value="">
+                <input type="hidden" name="productIds" value="<?php echo implode(',', $product_ids); ?>">
 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3 mb-3">
                     <!-- Back button with Font Awesome icon -->
-                    <a  href="javascript:history.back()" class="btn back-btn btn-outline-success">
+                    <a href="javascript:history.back()" class="btn back-btn btn-outline-success">
                         <i class="fas fa-arrow-left"></i> Quay lại
                     </a>
 
@@ -192,91 +184,88 @@ $show_order_detail_query = mysqli_query($connect, $show_order_detail);
                         <i class="fas fa-cart-shopping"></i> Đặt hàng ngay
                     </button>
                 </div>
-            </div> 
-        </div>
-    </form>
-    <script>
-        function updateTotalPayment() {
-            var totalAmount = <?php echo $totalAmount; ?>;
-            var shippingFee = parseInt(document.getElementById("shippingMethod").value);
-            var totalPayment = totalAmount + shippingFee;
+            </div>
+    </div>
+</form>
+<script>
+    function updateTotalPayment() {
+        var totalAmount = <?php echo $totalAmount; ?>;
+        var shippingFee = parseInt(document.getElementById("shippingMethod").value);
+        var totalPayment = totalAmount + shippingFee;
 
-            // Hiển thị phí vận chuyển và tổng thanh toán
-            document.getElementById("shippingFee").innerText = numberFormat(shippingFee) + ' đ';
-            document.getElementById("totalPayment").innerText = numberFormat(totalPayment) + ' đ';
+        // Hiển thị phí vận chuyển và tổng thanh toán
+        document.getElementById("shippingFee").innerText = numberFormat(shippingFee) + ' đ';
+        document.getElementById("totalPayment").innerText = numberFormat(totalPayment) + ' đ';
+    }
+
+    function numberFormat(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    // Gọi hàm cập nhật tổng thanh toán khi trang được tải
+    window.onload = updateTotalPayment;
+</script>
+
+
+<!-- Sử dụng thư viện Bootstrap JS (nếu cần) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua/C68L9LOoy5YF+pc/3p0GVAfiqxFxFrQE0HqsOpI/6qJ2L+UDDUJwoA" crossorigin="anonymous"></script>
+<script>
+    var citis = document.getElementById("city");
+    var districts = document.getElementById("district");
+    var wards = document.getElementById("ward");
+
+    var selectedCityInput = document.getElementById("selectedCity");
+    var selectedDistrictInput = document.getElementById("selectedDistrict");
+    var selectedWardInput = document.getElementById("selectedWard");
+
+    var Parameter = {
+        url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+        method: "GET",
+        responseType: "application/json",
+    };
+    var promise = axios(Parameter);
+    promise.then(function(result) {
+        renderCity(result.data);
+    });
+
+    function renderCity(data) {
+        for (const x of data) {
+            citis.options[citis.options.length] = new Option(x.Name, x.Name);
         }
 
-        function numberFormat(number) {
-            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
+        citis.onchange = function() {
+            // Set the value of the hidden input
+            selectedCityInput.value = this.value;
 
-        // Gọi hàm cập nhật tổng thanh toán khi trang được tải
-        window.onload = updateTotalPayment;
-    </script>
+            district.length = 1;
+            ward.length = 1;
+            if (this.value != "") {
+                const result = data.filter(n => n.Name === this.value);
 
-
-    <!-- Sử dụng thư viện Bootstrap JS (nếu cần) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua/C68L9LOoy5YF+pc/3p0GVAfiqxFxFrQE0HqsOpI/6qJ2L+UDDUJwoA" crossorigin="anonymous"></script>
-    <script>
-        var citis = document.getElementById("city");
-        var districts = document.getElementById("district");
-        var wards = document.getElementById("ward");
-
-        var selectedCityInput = document.getElementById("selectedCity");
-        var selectedDistrictInput = document.getElementById("selectedDistrict");
-        var selectedWardInput = document.getElementById("selectedWard");
-
-        var Parameter = {
-            url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
-            method: "GET",
-            responseType: "application/json",
-        };
-        var promise = axios(Parameter);
-        promise.then(function(result) {
-            renderCity(result.data);
-        });
-
-        function renderCity(data) {
-            for (const x of data) {
-                citis.options[citis.options.length] = new Option(x.Name, x.Name);
+                for (const k of result[0].Districts) {
+                    district.options[district.options.length] = new Option(k.Name, k.Name);
+                }
             }
+        };
 
-            citis.onchange = function() {
-                // Set the value of the hidden input
-                selectedCityInput.value = this.value;
+        district.onchange = function() {
+            // Set the value of the hidden input
 
-                district.length = 1;
-                ward.length = 1;
-                if (this.value != "") {
-                    const result = data.filter(n => n.Name === this.value);
+            ward.length = 1;
+            const dataCity = data.filter((n) => n.Name === citis.value);
+            if (this.value != "") {
+                const dataWards = dataCity[0].Districts.filter(n => n.Name === this.value)[0].Wards;
 
-                    for (const k of result[0].Districts) {
-                        district.options[district.options.length] = new Option(k.Name, k.Name);
-                    }
+                for (const w of dataWards) {
+                    wards.options[wards.options.length] = new Option(w.Name, w.Name);
                 }
-            };
+            }
+            selectedDistrictInput.value = this.value;
+        };
 
-            district.onchange = function() {
-                // Set the value of the hidden input
-
-                ward.length = 1;
-                const dataCity = data.filter((n) => n.Name === citis.value);
-                if (this.value != "") {
-                    const dataWards = dataCity[0].Districts.filter(n => n.Name === this.value)[0].Wards;
-
-                    for (const w of dataWards) {
-                        wards.options[wards.options.length] = new Option(w.Name, w.Name);
-                    }
-                }
-                selectedDistrictInput.value = this.value;
-            };
-
-            wards.onchange = function() {
-                // Set the value of the hidden input
-                selectedWardInput.value = this.value;
-            };
-        }
-    </script>
-</body>
-
-</html>
+        wards.onchange = function() {
+            // Set the value of the hidden input
+            selectedWardInput.value = this.value;
+        };
+    }
+</script>

@@ -12,6 +12,7 @@ function generateCode()
     return $code;
 }
 if (isset($_POST['confirmBuy'])) {
+    $user_Id = $_GET['userId'];
     $order_id = $_POST['orderId'];
     $order_code = generateCode();
     $phone = $_POST['phone'];
@@ -20,18 +21,26 @@ if (isset($_POST['confirmBuy'])) {
 
     $ward = $_POST['ward'];
     $address = $ward . ", " . $district . ", " . $province;
-    echo $address . $_SESSION['userId'];
+    echo $address, "<br>";
+    echo $user_Id;
     $delivery_cost = $_POST['delivery'];
     $payment_method = $_POST['paymentMethod'];
-    date_default_timezone_set('Asia/Ho_Chi_Minh');
 
-    // Create a DateTime object for the current time in the specified time zone
-    $currentTime = new DateTime();
-    
-    // Format the current time as a string
-    $currentTimeString = $currentTime->format('Y-m-d H:i:s');
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    $currentTime = date("Y-m-d H:i:s");
 
     $sql = "INSERT INTO tbl_order (id, code, user_id, status_id, receive_phone, receive_address, delivery_cost, payment_id, description, createDate)
-    VALUES ('$order_id', '$order_code', '$_SESSION[userId]', 'f1e30780-f494-477d-8fba-63d280843c91', '$phone', '$address', $delivery_cost, '$payment_method', '', '$currentTimeString')";
+    VALUES ('$order_id', '$order_code', '$user_Id', 'f1e30780-f494-477d-8fba-63d280843c91', '$phone', '$address', $delivery_cost, '$payment_method', '', '$currentTime')";
 
+    mysqli_query($connect, $sql);
+    echo $order_id;
+
+    $product_ids_str = $_POST['productIds'];
+    $product_ids = explode(',', $product_ids_str);
+
+    foreach ($product_ids as $productId) {
+        $delSql = "DELETE FROM tbl_cart_detail WHERE product_id = '$productId'";
+        mysqli_query($connect, $delSql);
+    }
+    header('Location:../../userCommon/UserIndex.php?usingPage=done');
 }

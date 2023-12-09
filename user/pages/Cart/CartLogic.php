@@ -34,16 +34,9 @@ if (isset($_POST['deleteProduct'])) {
         $cartId = $tachChuoi[0];
         $productId = $tachChuoi[1];
         $sizeId = $tachChuoi[2];
-        echo "orderId : $order_id<br>";
-        echo "cartId : $cartId<br>";
-        echo "productId: $productId<br>";
-        echo "sizeId:  $sizeId<br>";
         $show_cart_sql = "SELECT * FROM tbl_cart_detail WHERE tbl_cart_detail.cart_id = '$cartId' AND product_id = '$productId' ";
         $show_cart_query = mysqli_query($connect, $show_cart_sql);
         $row_cart = mysqli_fetch_array($show_cart_query);
-
-        echo $row_cart['quantity'] . "\n";
-        echo $row_cart['unit_price'] . "\n";
         $insertSql = "INSERT INTO tbl_order_detail(order_id, product_id, size_id, quantity, unit_price) 
                         VALUES ('$order_id', '$productId', '$sizeId', $row_cart[quantity], $row_cart[unit_price])";
         mysqli_query($connect, $insertSql);
