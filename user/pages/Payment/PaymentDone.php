@@ -192,8 +192,8 @@
             <p>Cảm ơn bạn đã tin tưởng chúng mình.</p>
 
             <div class="button-container">
-                <a href="../../user/userCommon/UserIndex.php" class="btn btn-success mr-2">Trang chủ</a>
-                <button onclick="printBill()" class="btn btn-primary">In hoá đơn</button>
+                <a href="../../user/userCommon/UserIndex.php" class="btn btn-success mr-2"><i class="fa-solid fa-house mr-2"></i>Trang chủ</a>
+                <button onclick="printBill()" class="btn btn-warning"><i class="fa-solid fa-print mr-2"></i>In hoá đơn</button>
             </div>
         </div>
     </div>
