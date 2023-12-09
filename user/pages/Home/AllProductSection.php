@@ -43,10 +43,18 @@ $query_show_test = mysqli_query($connect, $sql_show_test);
                         </span>
                     </a>
                 </div>
-
             </li>
         <?php
         }
         ?>
     </ul>
+    <footer>
+        <div class="text-center mt-5">
+            <a href="../pages/AllProduct/AllProductIndex.php" class="btn btn-primary">Xem tất cả</a>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </footer>
 </div>
+

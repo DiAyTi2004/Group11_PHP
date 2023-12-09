@@ -17,7 +17,11 @@
         include("../pages/Searching/SearchingIndex.php");
     } else if ($usingPage == 'payment') {
         include("../pages/Payment/PaymentIndex.php");
-    } else {
+    }
+    else if($usingPage== 'allproduct'){
+        include("../pages/AllProduct/AllProductIndex.php");
+    } 
+    else {
         include("../pages/Home/HomeIndex.php");
     }
     ?>
