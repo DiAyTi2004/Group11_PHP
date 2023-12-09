@@ -1,8 +1,6 @@
-<!-- Include Bootstrap CSS and JS -->
 
-
-<!-- Your Modal HTML -->
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <?php
 $queryCategorySQL = "SELECT * FROM tbl_category";
 $categoryData = mysqli_query($connect, $queryCategorySQL);
