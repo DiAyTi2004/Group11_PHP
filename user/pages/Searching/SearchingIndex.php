@@ -1,5 +1,6 @@
 <?php
-$keywordNew = isset($_GET['keyword']) ? $_GET['keyword'] : $_POST['keyword'];
+$keywordNew = isset($_GET['keyword']) ? $_GET['keyword'] : (isset($_POST['keyword']) ? $_POST['keyword'] : '');
+
 //Phân trang
 $countAllSql = "SELECT * FROM tbl_product WHERE tbl_product.name LIKE '%" . $keywordNew . "%'";
 

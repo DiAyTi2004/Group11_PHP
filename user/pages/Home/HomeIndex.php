@@ -53,7 +53,7 @@ if ($total_event > 0) {
     if ($usingPage == "") { ?>
 
         <div class="new_product">
-            <h3>GIÁ SỐC HÔM NAY</h3>
+            <h3>CÁC SẢN PHẨM YÊU THÍCH</h3>
         </div>
     <?php
         include("../pages/Home/AllProductSection.php");

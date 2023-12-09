@@ -1,6 +1,7 @@
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <header>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
     <div class="px-3 bg-dark text-white">
         <div class="container px-0">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">

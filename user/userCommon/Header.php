@@ -9,9 +9,8 @@
 <?php
 $queryCategorySQL = "SELECT * FROM tbl_category";
 $categoryData = mysqli_query($connect, $queryCategorySQL);
-
 $keyword = "";
-if (isset($_POST['search'])) {
+if (isset($_POST['search']) && isset($_POST['keyword'])) {
     $keyword = $_POST['keyword'];
 }
 
@@ -174,7 +173,7 @@ if (isset($_SESSION['userImage'])) {
 </div>
 
 <style>
-    #myModol {
+    #myModal {
         padding:  0;
     }
     #myModal .modal-header {

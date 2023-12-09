@@ -18,9 +18,6 @@
     } else if ($usingPage == 'payment') {
         include("../pages/Payment/PaymentIndex.php");
     }
-    else if($usingPage== 'allproduct'){
-        include("../pages/AllProduct/AllProductIndex.php");
-    } 
     else {
         include("../pages/Home/HomeIndex.php");
     }
