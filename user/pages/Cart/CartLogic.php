@@ -40,9 +40,6 @@ if (isset($_POST['deleteProduct'])) {
         $insertSql = "INSERT INTO tbl_order_detail(order_id, product_id, size_id, quantity, unit_price) 
                         VALUES ('$order_id', '$productId', '$sizeId', $row_cart[quantity], $row_cart[unit_price])";
         mysqli_query($connect, $insertSql);
-
-        // $delSql = "DELETE FROM tbl_cart_detail WHERE product_id = '$productId'";
-        // mysqli_query($connect, $delSql);
     }
     header('Location:../../userCommon/UserIndex.php?usingPage=payment&orderId=' . $order_id);
 } else if (isset($_POST['editCart'])) {
