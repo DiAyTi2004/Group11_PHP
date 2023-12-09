@@ -173,6 +173,19 @@ $productByCategory = mysqli_query($connect, $findProductByCategoryIdSQL);
                 $query_show_event = mysqli_query($connect, $sql_show_event);
                 $row_event = mysqli_fetch_array($query_show_event);
             ?>
+            <?php
+             $check_end_date ;
+                 if($row_event['end_date'] >= date("Y-m-d"))
+                 {
+                    $check_end_date = 1;
+                   
+                 }
+                 else $check_end_date = 0;
+                     $class=''; 
+        if($check_end_date == 1)
+        $class='discount-overlay';
+        ?>
+
 
                 <li class="product_item col-xs-12 col-sm-4 col-md-3 pb-6">
                     <div class="productClass br-10">
@@ -194,7 +207,7 @@ $productByCategory = mysqli_query($connect, $findProductByCategoryIdSQL);
 
                                 if ($row_event['discount'] > 0 ) :
                                 ?>
-                                    <div class="discount-overlay"><?php echo "-" . $row_event['discount'] . '%'; ?></div>
+                                    <div class="<?php echo $class?>"><?php if($check_end_date == 1) echo "-" . $row_event['discount'] . '%'; ?></div>
                                 <?php endif; ?>
                             </div>
 
@@ -215,8 +228,8 @@ $productByCategory = mysqli_query($connect, $findProductByCategoryIdSQL);
                                     <?php if($row_event['end_date'] >= date("Y-m-d")) echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
                                 </span>
                                 
-                                <span>
-                                    <?php if($row_event['end_date'] <= date("Y-m-d")) echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
+                                <span style="color: black">
+                                <?php if($row_event['end_date'] <= date("Y-m-d")) echo number_format($row_pro['price'], 0, ',', '.') . ' đ' ?>
                                 </span>
                             </div>
                         </a>

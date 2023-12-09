@@ -113,7 +113,13 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
                  else $check_end_date = 0;
                 
                 ?>
-        <div class="product_price flex justify-between mt-3">
+
+        <?php $class=''; 
+        if($check_end_date == 1)
+        $class='product_price flex justify-between mt-3';
+        ?>
+
+        <div class="<?php echo $class?>">
             <div class="price mr-12">
                
                 <div class="current_price" >
@@ -139,15 +145,10 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
                         <?php if($check_end_date == 1) echo ' VNĐ '; ?>
                     </span>
                 </div>
-                <div class="current_price" >
-                    <span class="price">
-                    <?php if($check_end_date == 0) echo ' Giá: '; ?>
-                        
-                        <i ><?php if($check_end_date == 0) echo number_format($get_Price * ($get_Discount / 100) + $get_Price, 0, ',', '.') ?></i>
-                        <?php if($check_end_date == 0) echo ' VNĐ '; ?>
-                    </span>
-                </div>
             </div>
+
+           
+
             <div class="event">
                 <div class="event_name">
                     <span class="sale">
@@ -163,7 +164,12 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
                 </div>
             </div>
         </div>
-
+        <div class="current_price" >
+                    <span class="price">
+                    <p><?php if($check_end_date == 0) echo ' Giá: '; ?> <?php if($check_end_date == 0) echo number_format($get_Price, 0, ',', '.') ?><?php if($check_end_date == 0) echo ' VNĐ '; ?></p>
+                    
+                    </span>
+                </div>
         <div class="product_gift mt-3">
             <div class="gift_sale">
                 <i class="fa-solid fa-percent"></i>

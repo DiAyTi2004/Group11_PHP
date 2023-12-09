@@ -29,10 +29,10 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                     <legend class="text-center fw-bold">Quản lý giỏ hàng</legend>
                     <thead>
                         <tr>
-                            <th scope="col"></th>
+                            <th scope="col">Chọn</th>
+                            <th class="text-center align-middle" scope="col">Mã</th>
                             <th scope="col">Sản phẩm</th>
                             <th class="text-center align-middle" scope="col">Tên sản phẩm</th>
-                            <th class="text-center align-middle" scope="col">Mã</th>
                             <th class="text-center align-middle" scope="col">Size</th>
                             <th class="text-center align-middle" scope="col">Đơn giá</th>
                             <th class="text-center align-middle" scope="col">Số lượng</th>
@@ -64,8 +64,13 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                         $compositeKey = $rowCartId . "diayti" . $rowProductId . "diayti" . $rowSizeId;
                     ?>
                         <tr>
+                            <!-- Inside the while loop where you output the table rows -->
+                            <td style="height: 170px;" class="text-center align-middle d-flex justify-content-center align-items-center">
+                                <input style="padding: 9px;" class="form-check-input" type="checkbox" name="selectedPro[]" value="<?php echo $compositeKey; ?>">
+                            </td>
+
                             <td class="text-center align-middle">
-                                <input class="form-check-input float-start" type="checkbox" name="selectedPro[]" value="<?php echo $compositeKey; ?>">
+                                <?php echo $row_product['code']; ?>
                             </td>
                             <td class="text-center align-middle">
                                 <a style="text-decoration: none;" href="UserIndex.php?usingPage=product&id=<?php echo $row_cart['product_id'] ?>">
@@ -78,11 +83,8 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                                     </div>
                                 </a>
                             </td>
-                            <td style="max-width: 150px;" class="text-center align-middle">
+                            <td style="max-width: 150px; font-size: 15px;" class="text-center align-middle">
                                 <?php echo $row_product['name']; ?>
-                            </td>
-                            <td class="text-center align-middle">
-                                <?php echo $row_product['code']; ?>
                             </td>
                             <td class="text-center align-middle">
                                 <?php echo preg_replace('/\D/', '', $row_size['name']); ?>
