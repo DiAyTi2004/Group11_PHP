@@ -5,13 +5,16 @@ $show_order_detail_query = mysqli_query($connect, $show_order_detail);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<style>
+    .price_real, .span {
+        font-size: 15px;
+    }
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thông Tin Thanh Toán</title>
     <!-- Sử dụng thư viện Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 </head>
 
@@ -62,9 +65,9 @@ $show_order_detail_query = mysqli_query($connect, $show_order_detail);
             <table class="table">
                 <thead>
                     <tr>
+                        <th class="text-center align-middle" scope="col">Mã</th>
                         <th scope="col">Sản phẩm</th>
                         <th class="text-center align-middle" scope="col">Tên sản phẩm</th>
-                        <th class="text-center align-middle" scope="col">Mã sản phẩm</th>
                         <th class="text-center align-middle" scope="col">Size</th>
                         <th class="text-center align-middle" scope="col">Đơn giá</th>
                         <th class="text-center align-middle" scope="col">Số lượng</th>
@@ -93,6 +96,9 @@ $show_order_detail_query = mysqli_query($connect, $show_order_detail);
                 ?>
                     <tr>
                         <td class="text-center align-middle">
+                            <?php echo $row_product['code']; ?>
+                        </td>
+                        <td class="text-center align-middle">
                             <a style="text-decoration: none;" href="UserIndex.php?usingPage=product&id=<?php echo $row_order['product_id'] ?>">
                                 <div class="product_container flex">
                                     <?php
@@ -105,9 +111,6 @@ $show_order_detail_query = mysqli_query($connect, $show_order_detail);
                         </td>
                         <td class="text-center align-middle">
                             <?php echo $row_product['name']; ?>
-                        </td>
-                        <td class="text-center align-middle">
-                            <?php echo $row_product['code']; ?>
                         </td>
                         <td class="text-center align-middle">
                             <?php echo preg_replace('/\D/', '', $row_size['name']); ?>
@@ -154,6 +157,10 @@ $show_order_detail_query = mysqli_query($connect, $show_order_detail);
                     <select class="form-select form-select mb-3" id="paymentMethod" name="paymentMethod" aria-label=".form-select">
                         <?php
                         while ($payment_option = mysqli_fetch_array($show_payment_query)) {
+                            if($payment_option['code'] == "#TM" ) {
+                                echo "<option selected value='{$payment_option['id']}'>{$payment_option['name']}</option>";
+                                continue;
+                            }
                             echo "<option value='{$payment_option['id']}'>{$payment_option['name']}</option>";
                         }
                         ?>
@@ -174,10 +181,17 @@ $show_order_detail_query = mysqli_query($connect, $show_order_detail);
                 <input type="hidden" name="selectedDistrict" id="selectedDistrict" value="">
                 <input type="hidden" name="selectedWard" id="selectedWard" value="">
 
-                <button name="confirmBuy" type="submit" class="btn btn-success btn-lg mt-5">
-                    <i class="fa-solid fa-cart-shopping mr-2 ml-0"></i>
-                    Đặt hàng ngay
-                </button>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3 mb-3">
+                    <!-- Back button with Font Awesome icon -->
+                    <a  href="javascript:history.back()" class="btn back-btn btn-outline-success">
+                        <i class="fas fa-arrow-left"></i> Quay lại
+                    </a>
+
+                    <!-- Đặt hàng ngay button -->
+                    <button name="confirmBuy" type="submit" class="btn btn-success ml-2">
+                        <i class="fas fa-cart-shopping"></i> Đặt hàng ngay
+                    </button>
+                </div>
             </div> 
         </div>
     </form>
