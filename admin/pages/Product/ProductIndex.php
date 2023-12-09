@@ -108,30 +108,30 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     <td>
                         <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-pencil"></i>
-                            <!-- <div class="tooltip">
+                            <div class="tooltip">
                                 <p>Chỉnh sửa sản phẩm</p>
-                            </div> -->
+                            </div> 
                         </button>
 
                         <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-trash mr-1"></i>
-                            <!-- <div class="tooltip">
-                                <p>Xoá ảnh</p>
-                            </div> -->
+                            <div class="tooltip">
+                                <p>Xoá sản phẩm </p>
+                            </div> 
                         </button>
 
                         <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#exampleModalSize_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-ruler"></i>
-                            <!-- <div class="tooltip">
+                             <div class="tooltip">
                                 <p>Chỉnh sửa kích thước</p>
-                            </div> -->
+                            </div> 
                         </button>
 
                         <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#exampleModalImage_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-image mr-1"></i>
-                            <!-- <div class="tooltip">
+                             <div class="tooltip">
                                 <p>Chỉnh sửa ảnh</p>
-                            </div> -->
+                            </div> 
                         </button>
                     </td>
                 </tr>
