@@ -1,9 +1,11 @@
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <?php
 $queryCategorySQL = "SELECT * FROM tbl_category";
 $categoryData = mysqli_query($connect, $queryCategorySQL);
-
 $keyword = "";
-if (isset($_POST['search'])) {
+if (isset($_POST['search']) && isset($_POST['keyword'])) {
     $keyword = $_POST['keyword'];
 }
 
@@ -28,6 +30,7 @@ if (isset($_SESSION['userImage'])) {
 }
 
 ?>
+<!-- Popup xác nhận -->
 <header class="header w-100">
     <div class="container flex">
         <a href="UserIndex.php">
@@ -100,23 +103,25 @@ if (isset($_SESSION['userImage'])) {
                             <div class="subUserAction br-10 over-hidden">
                                 <ul class="m-0 p-0 w-100">
                                     <li class="sub__category__item w-100">
-                                        <a href="UserIndex.php?usingPage=account" class="w-100 p-2 py-3">
+                                        <a style="display: block;" href="UserIndex.php?usingPage=account" class="w-100 p-2 py-3" style="text-decoration: none">
                                             <i class="fa-solid fa-circle-user mr-2 ml-0"></i>
                                             Thông tin cá nhân
                                         </a>
                                     </li>
                                     <li class="sub__category__item w-100">
-                                        <a href="UserIndex.php?usingPage=cart" class="w-100 p-2 py-3">
+                                        <a style="display: block;" href="UserIndex.php?usingPage=cart" class="w-100 p-2 py-3" style="text-decoration: none">
                                             <i class="fa-solid fa-cart-shopping mr-2 ml-0"></i>
                                             Giỏ hàng
                                         </a>
                                     </li>
-                                    <li class="sub__category__item w-100">
-                                        <a href="UserIndex.php?dangxuat=true" class="w-100 p-2 py-3">
-                                            <i class="fa-solid fa-sign-out mr-2 ml-0"></i>
-                                            Đăng xuất
-                                        </a>
+
+                                    <li class="sub__category__item w-100 w-100 p-2 py-3" data-toggle="modal" data-target="#myModal">
+                                        <i class="fa-solid fa-sign-out mr-2 ml-0"></i>
+                                        Đăng xuất
                                     </li>
+
+            
+
                                 </ul>
                             </div>
                         </div>
@@ -142,11 +147,47 @@ if (isset($_SESSION['userImage'])) {
         </div>
     </div>
 </header>
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> <i class="fa-solid fa-sign-out mr-2 ml-0"></i>Đăng xuất</h4>
+                <button type="button" class="btn-close btn-close-white"  data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có muốn đăng xuất không? </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-dismiss="modal">Đóng</button>
+                <a href="UserIndex.php?dangxuat=true" class="btn btn-primary">
+                    <i class="fa-solid fa-sign-out mr-2 ml-0"></i>Đăng xuất
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
-<script>
-    const userActionElement = document.querySelector('.userAction');
-    userActionElement.onclick = function() {
-        window.location.assign("UserIndex.php?usingPage=account");
+<style>
+    #myModal {
+        padding:  0;
     }
-    // userActionElement.setAttribute('href', "UserIndex.php?usingPage=account");
-</script>
+    #myModal .modal-header {
+        background-color: #28A745;
+        /* Green background color */
+        color: #fff;
+        /* White text color */
+    }
+
+    #myModal .btn-primary {
+        background-color: red;
+        /* Red background color */
+        color: #fff;
+        font-weight: bold;
+        border: 0;
+        /* White text color */
+    }
+    #myModal .btn-primary:hover{
+        background-color: coral;
+        
+    }
+</style>

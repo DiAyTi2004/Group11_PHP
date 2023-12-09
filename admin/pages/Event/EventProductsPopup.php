@@ -44,7 +44,11 @@ $tableEventProductsData = mysqli_query($connect, $getAllEventProductsSQL);
                                     <?php echo $rowEventProductsData['name'] ?>
                                 </td>
                                 <td>
-                                    <img style="width: 150px; height: 150px" src="pages/ProductImage/<?php echo $rowEventProductsData['content'] ?>" alt="">
+                                    <img style="width: 150px; height: 150px" src="<?php
+                                                                                    if (!str_contains($rowEventProductsData['content'], "http"))
+                                                                                        echo "pages/ProductImage/" . $rowEventProductsData['content'];
+                                                                                    else echo $rowEventProductsData['content'];
+                                                                                    ?>" alt="">
                                 </td>
                                 <td>
                                     <?php echo $rowEventProductsData['price'] ?>

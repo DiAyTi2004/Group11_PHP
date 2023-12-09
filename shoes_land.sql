@@ -9,13 +9,10 @@ create table tbl_payment_type (
   code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-insert into tbl_payment_type values ('cc01ac4e-e003-430c-9076-236b55a8991c','Tiền mặt','#TM','Thanh toán trực tiếp bằng tiền mặt là một phương thức phổ biến, đặc biệt là trong các giao dịch hàng ngày, mua sắm tại cửa hàng truyền thống hoặc chợ.');
-insert into tbl_payment_type values ('78e09f60-bb2b-4bc7-86c2-ca27a33aa5c8','Chuyển khoản ngân hàng','#CKNN','Người mua có thể chuyển tiền trực tiếp từ tài khoản ngân hàng của họ sang tài khoản của người bán. Phương thức này thường được sử dụng cho các giao dịch lớn và trực tuyến.');
-insert into tbl_payment_type values ('2e198743-d03d-43db-ac59-3f2bb47d5de3','Thẻ tín dụng và thẻ ghi nợ','#TTD&GN','Thanh toán bằng thẻ tín dụng hoặc thẻ ghi nợ là một phương thức phổ biến cho mua sắm trực tuyến và offline. Visa và MasterCard là hai loại thẻ phổ biến tại Việt Nam.');
-insert into tbl_payment_type values ('fdc8f73c-e3f6-4cb9-add0-c5a661563c9d','Ví điện tử','#VĐT','Sử dụng ví điện tử như MoMo, ZaloPay, ViettelPay, AirPay là cách thanh toán tiện lợi và ngày càng phổ biến. Người dùng có thể liên kết ví điện tử với tài khoản ngân hàng hoặc thẻ tín dụng để thực hiện thanh toán.');
-insert into tbl_payment_type values ('8d3c67e6-a124-4a6d-857d-869815ad189a','Chuyển phát nhanh COD','#COD','Trong trường hợp mua sắm trực tuyến, người mua có thể thanh toán khi nhận hàng, tiền mặt hoặc qua thẻ tín dụng. Phương thức này giúp người mua kiểm tra sản phẩm trước khi thanh toán.');
-insert into tbl_payment_type values ('790a1183-21d3-4ca5-bb84-1f8d7349b014','Internet Banking và Mobile Banking','#BANKING','Sử dụng dịch vụ ngân hàng trực tuyến qua Internet Banking hoặc ứng dụng Mobile Banking để thực hiện các giao dịch thanh toán.');
-insert into tbl_payment_type values ('64473054-f544-4a9c-9480-3c1a4e13df1e','Thanh toán qua QR Code','#QR','Sử dụng ứng dụng ví điện tử hoặc ứng dụng thanh toán trực tuyến để quét mã QR Code và thực hiện thanh toán.');
+insert into tbl_payment_type values ('cc01ac4e-e003-430c-9076-236b55a8991c','Thanh toán khi nhận được hàng','#TM','Thanh toán trực tiếp bằng tiền mặt là một phương thức phổ biến, đặc biệt là trong các giao dịch hàng ngày, mua sắm tại cửa hàng truyền thống hoặc chợ.');
+insert into tbl_payment_type values ('78e09f60-bb2b-4bc7-86c2-ca27a33aa5c8','Thanh toán online','#CKNN','Người mua có thể chuyển tiền trực tiếp từ tài khoản ngân hàng của họ sang tài khoản của người bán. Phương thức này thường được sử dụng cho các giao dịch lớn và trực tuyến.');
+insert into tbl_payment_type values ('2e198743-d03d-43db-ac59-3f2bb47d5de3','Thanh toán trực tiếp tại cửa hàng','#TTD&GN','Thanh toán bằng thẻ tín dụng hoặc thẻ ghi nợ là một phương thức phổ biến cho mua sắm trực tuyến và offline. Visa và MasterCard là hai loại thẻ phổ biến tại Việt Nam.');
+
 
 create table tbl_size (
   id varchar(36) primary key not null,
@@ -397,8 +394,9 @@ create table tbl_order (
   user_id varchar(36) not null,
   status_id varchar(36) not null,
   receive_phone varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  receive_address varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  receive_address varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   delivery_cost float ,
+  payment_id varchar(36) not null,
   description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   createDate datetime
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

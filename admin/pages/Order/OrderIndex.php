@@ -96,17 +96,29 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo $row['description'] ?>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-pencil"></i>
+                            <div class="tooltip">
+                                <p>Chỉnh sửa đơn hàng</p>
+                            </div> 
                         </button>
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-trash mr-1"></i>
+                            <div class="tooltip">
+                                <p>Xóa đơn hàng</p>
+                            </div> 
                         </button>
-                        <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#orderDetail_<?php echo $row['id']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#orderDetail_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-circle-info"></i>
+                            <div class="tooltip">
+                                <p>Sản phẩm đơn hàng</p>
+                            </div> 
                         </button>
-                        <button type="button" class="btn btn-primary mb-2 mt-3" onclick="printElement('printOrder_<?php echo $row['id']; ?>')">
+                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" onclick="printElement('printOrder_<?php echo $row['id']; ?>')">
                             <i class="fa-solid fa-print"></i>
+                            <div class="tooltip">
+                                <p>In hóa đơn</p>
+                            </div> 
                         </button>
                     </td>
                 </tr>
@@ -134,12 +146,9 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <form action="" method="GET">
                     <label for="limitSelect">Rows per page:</label>
                     <select name="limit" id="limitSelect" onchange="updatePageAndLimit()">
-                        <option value="5" <?php if ($pageSize == 5)
-                                                echo 'selected'; ?>>5</option>
-                        <option value="10" <?php if ($pageSize == 10)
-                                                echo 'selected'; ?>>10</option>
-                        <option value="15" <?php if ($pageSize == 15)
-                                                echo 'selected'; ?>>15</option>
+                        <option value="5" <?php if ($pageSize == 5) echo 'selected'; ?>>5</option>
+                        <option value="10" <?php if ($pageSize == 10) echo 'selected'; ?>>10</option>
+                        <option value="15" <?php if ($pageSize == 15) echo 'selected'; ?>>15</option>
                     </select>
                 </form>
 
@@ -147,9 +156,8 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     function updatePageAndLimit() {
                         const selectedLimit = document.getElementById("limitSelect").value;
 
-                        // Tạo một URL mới với giá trị page và limit mới
                         const url = new URL(window.location.href);
-                        url.searchParams.set("page", "1"); // Đặt page thành 1
+                        url.searchParams.set("page", "1");
                         url.searchParams.set("limit", selectedLimit);
 
                         // Chuyển hướng đến URL mới
@@ -159,7 +167,10 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
                 <label class="mr-4">Showing
                     <?php
-                    echo $pageSize . " of " . $total_records . " results";
+                    $startItem = ($pageIndex - 1) * $pageSize + 1;
+                    $endItem = min($pageIndex * $pageSize, $total_records);
+
+                    echo "{$startItem} - {$endItem} of {$total_records} results";
                     ?>
                 </label>
             </div>
@@ -176,15 +187,39 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 </li>
 
                 <?php
+                $range = 3;
                 for ($i = 1; $i <= $total_page; $i++) {
                     if ($i == $pageIndex) {
                         echo '<li class="page-item light">
                         <span name="page" class="page-link text-reset text-white bg-dark" href="?workingPage=order&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </span>
                         </li>';
                     } else {
-                        echo '<li class="page-item light">
-                        <a name="page" class="page-link text-reset text-black" href="?workingPage=order&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
-                        </li>';
+                        // Hiển thị trang đầu tiên
+                        if ($i == 1) {
+                            echo '<li class="page-item light">
+                            <a name="page" class="page-link text-reset text-black" href="?workingPage=order&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                            </li>';
+                        }
+                        // Hiển thị các trang ở giữa
+                        else if ($i > $pageIndex - $range && $i < $pageIndex + $range) {
+                            echo '<li class="page-item light">
+                            <a name="page" class="page-link text-reset text-black" href="?workingPage=order&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                            </li>';
+                        }
+
+                        // Hiển thị trang cuối cùng
+                        else if ($i == $total_page) {
+                            echo '<li class="page-item light">
+                            <a name="page" class="page-link text-reset text-black" href="?workingPage=order&limit=' . ($pageSize) . '&page=' . ($i) . '"> ' . ($i) . ' </a>
+                            </li>';
+                        }
+
+                        // Thêm dấu "..." nếu cần thiết
+                        if (($i == $pageIndex - $range - 1 && $pageIndex - $range > 2) || ($i == $pageIndex + $range + 1 && $pageIndex + $range < $total_page - 1)) {
+                            echo '<li class="page-item light">
+                            <span class="page-link text-reset text-black"> ... </span>
+                            </li>';
+                        }
                     }
                 }
                 ?>

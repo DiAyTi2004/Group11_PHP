@@ -1,5 +1,5 @@
 <?php
-$countAllEvent = "SELECT * FROM tbl_event;";
+$countAllEvent = "SELECT * FROM tbl_event WHERE end_date  >= CURDATE();";
 $total_event = mysqli_num_rows(mysqli_query($connect, $countAllEvent));
 if ($total_event > 0) {
 ?>
@@ -43,8 +43,26 @@ if ($total_event > 0) {
     ?>
 
 </div>
+<div class="show_new appCard">
+    <?php //lấy qiamly từ menu truyền vào bằng phuongư thức GET
+    if (isset($_GET['usingPage'])) {
+        $usingPage = $_GET['usingPage'];
+    } else {
+        $usingPage = "";
+    }
+    if ($usingPage == "") { ?>
 
-<div class="show appCard">
+        <div class="new_product">
+            <h3>CÁC SẢN PHẨM YÊU THÍCH</h3>
+        </div>
+    <?php
+        include("../pages/Home/AllProductSection.php");
+    }
+    ?>
+
+</div>
+
+<!-- <div class="show appCard">
     <?php //lấy qiamly từ menu truyền vào bằng phuong thức GET
     if (isset($_GET['usingPage'])) {
         $usingPage = $_GET['usingPage'];
@@ -76,7 +94,7 @@ if ($total_event > 0) {
         $begin = ($page * 10) - 10;
     }
     // GET id là lấy id từ bên MENU.php 
-    $sql_show = "SELECT * FROM tbl_sanpham,tbl_danhmuc WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc ORDER BY tbl_sanpham.id_sanpham DESC LIMIT $begin,10";
+    $sql_show = "SELECT * FROM tbl_sanpham,tbl_danhmuc,tbl_event WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc and tbl_sanpham.id_event=tbl_event.id_event and end_date  >= CURDATE() ORDER BY tbl_sanpham.id_sanpham DESC LIMIT $begin,10";
     $query_show = mysqli_query($connect, $sql_show);
 
     ?>
@@ -129,4 +147,4 @@ if ($total_event > 0) {
 
     </ul>
 
-</div>
+</div> -->

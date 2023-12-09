@@ -12,10 +12,21 @@ if (isset($_POST['deleteProduct'])) {
     //viết logic để tạo ra 1 order
     // var_dump($_POST['selectedPro']);
     $selectedPro = $_POST['selectedPro'];
+    function generateUuid()
+    {
+        $data = random_bytes(16);
 
+        // Set the version (4) and variant bits (2)
+        $data[6] = chr(ord($data[6]) & 0x0F | 0x40);
+        $data[8] = chr(ord($data[8]) & 0x3F | 0x80);
+
+        // Format the UUID string
+        $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+
+        return $uuid;
+    }
+    $order_id = generateUuid();
     foreach ($selectedPro as $item) {
-        $order_id = generateUuid();
-        $order_code = generateCode();
         echo "các dòng được chọn: \n";
         $tachChuoi = explode("diayti", $item);
 
@@ -23,12 +34,15 @@ if (isset($_POST['deleteProduct'])) {
         $cartId = $tachChuoi[0];
         $productId = $tachChuoi[1];
         $sizeId = $tachChuoi[2];
-
-        echo "cartId : $cartId<br>";
-        echo "productId: $productId<br>";
-        echo "sizeId:  $sizeId<br>";
+        $show_cart_sql = "SELECT * FROM tbl_cart_detail WHERE tbl_cart_detail.cart_id = '$cartId' AND product_id = '$productId' ";
+        $show_cart_query = mysqli_query($connect, $show_cart_sql);
+        $row_cart = mysqli_fetch_array($show_cart_query);
+        $insertSql = "INSERT INTO tbl_order_detail(order_id, product_id, size_id, quantity, unit_price) 
+                        VALUES ('$order_id', '$productId', '$sizeId', $row_cart[quantity], $row_cart[unit_price])";
+        mysqli_query($connect, $insertSql);
     }
-} else if(isset($_POST['editCart'])) {
+    header('Location:../../userCommon/UserIndex.php?usingPage=payment&orderId=' . $order_id);
+} else if (isset($_POST['editCart'])) {
     $productId = $_GET['productId'];
     $newQuantity = $_POST['quantity'];
     $newSize = $_POST['size'];
