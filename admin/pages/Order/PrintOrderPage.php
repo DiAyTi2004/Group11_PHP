@@ -9,9 +9,8 @@ $currentMonth = date('m');
 $currentYear = date('Y');
 
 ?>
-<link rel="stylesheet" href="./styles/PrintOrderPageStyles.css">
 
-<!-- <div class="display-none"> -->
+<div class="display-none">
     <div id="printOrder_<?php echo $row['id']; ?>">
         <div class="orderContainer" style="align-items: center;">
             <div class="headerPrintOrder flex-center justify-between" style="padding: 0px 40px;">
@@ -25,18 +24,22 @@ $currentYear = date('Y');
                     <h4></h4>
                 </div>
             </div>
-            <div class="bodyPrintOrder">
+            <div class="bodyPrintOrder mb-20" style="font-size: 16px;">
                 <div class="orderInfo">
                     <div class="flex mb-3">
-                        <p><strong>Mã Đơn Hàng: </strong> <?php echo $row['code'] ?></p>
-                        <p class='justify-right'><strong>Điện Thoại Nhận Hàng:</strong> <?php echo $row['receive_phone'] ?></p>
+                        <p style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; display: inline-block; width: 100%; margin-bottom: 5px;">
+                            <strong>Mã Đơn Hàng: </strong> <?php echo $row['code'] ?>
+                        </p>
+                        <p style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; display: inline-block; width: 100%; margin-bottom: 5px;" class='justify-right'>
+                            <strong>Điện Thoại Nhận Hàng:</strong> <?php echo $row['receive_phone'] ?>
+                        </p>
                     </div>
                     <p><strong>Địa Chỉ Nhận:</strong> <?php echo $row['receive_address'] ?></p>
                     <p><strong>Mô Tả:</strong> <?php echo $row['description'] ?></p>
                 </div>
                 <div class="product-table">
-                    <table border="1" class="w-100">
-                        <thead class="table-head w-100">
+                    <table border="1" class="w-100 table">
+                        <thead class="table-head w-100" style="background-color: black;">
                             <tr>
                                 <th class='col-1' style="text-align: center;">STT</th>
                                 <th class='col-2' style="text-align: center;">Mã Sản Phẩm</th>
@@ -90,7 +93,7 @@ $currentYear = date('Y');
                     </table>
                 </div>
                 <div class="fbody flex justify-between">
-                    <div class="createDate">
+                    <div class="createDate text-center">
                         <p>
                             Ngày <?php echo $currentDay ?> tháng <?php echo $currentMonth ?> năm <?php echo $currentYear ?>
                         </p>
@@ -102,9 +105,9 @@ $currentYear = date('Y');
                     </div>
                 </div>
             </div>
-            <div class="footerPrintOrder flex-center">
+            <div class="footerPrintOrder flex-center" sty>
                 <h1><strong>Thank You</strong></h1>
             </div>
         </div>
     </div>
-<!-- </div> -->
+</div>
