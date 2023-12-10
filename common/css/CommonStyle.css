@@ -1514,6 +1514,17 @@ body {
     overflow: hidden;
 }
 
+@keyframes odsoky {
+    0% {
+        transform: translateY(6px);
+    }
+
+    100% {
+        transform: translateY(1px);
+    }
+
+}
+
 /*tooltip Box*/
 .con-tooltip {
 
@@ -1583,17 +1594,6 @@ body {
 
 }
 
-@keyframes odsoky {
-    0% {
-        transform: translateY(6px);
-    }
-
-    100% {
-        transform: translateY(1px);
-    }
-
-}
-
 /*hover ToolTip*/
 .left:hover {
     transform: translateX(-6px);
@@ -1611,8 +1611,6 @@ body {
     transform: translateX(6px);
 }
 
-
-
 /*left*/
 
 .left .tooltip {
@@ -1626,9 +1624,6 @@ body {
     transform: rotate(-90deg);
 }
 
-
-
-
 /*bottom*/
 
 .bottom .tooltip {
@@ -1641,8 +1636,6 @@ body {
     left: 40%;
     transform: rotate(180deg);
 }
-
-
 
 /*right*/
 

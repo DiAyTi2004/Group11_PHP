@@ -1,5 +1,12 @@
 <link rel="stylesheet" href="./styles/ProductStyles.css">
+<style>
+    .table-body .description {
+    max-width: 400px;
+    max-height: 3em; /* Adjust as needed */
+}
 
+
+</style>
 <?php
 $countAllSql = "SELECT * FROM tbl_product";
 $total_records = mysqli_num_rows(mysqli_query($connect, $countAllSql));
@@ -66,7 +73,6 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <th class="noWrap">STT</th>
                 <th class="noWrap">Mã sản phẩm</th>
                 <th class="noWrap">Tên sản phẩm</th>
-                <th class="noWrap">Ngày tạo</th>
                 <th class="noWrap">Mô tả</th>
                 <th class="noWrap">Giá gốc</th>
                 <th class="noWrap">Quản lý</th>
@@ -92,12 +98,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     <td class="tensanpham">
                         <?php echo $row['name'] ?>
                     </td>
-
-                    <td>
-                        <?php echo formatDateTime($row['createDate']); ?>
-                    </td>
-
-                    <td>
+                    <td class="description">
                         <?php echo $row['description'] ?>
                     </td>
 
@@ -106,28 +107,28 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     </td>
 
                     <td>
-                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip bottom" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-pencil"></i>
                             <div class="tooltip">
                                 <p>Chỉnh sửa sản phẩm</p>
                             </div> 
                         </button>
 
-                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip bottom" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-trash mr-1"></i>
                             <div class="tooltip">
                                 <p>Xoá sản phẩm </p>
                             </div> 
                         </button>
 
-                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#exampleModalSize_<?php echo $row['id']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip bottom" data-bs-toggle="modal" data-bs-target="#exampleModalSize_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-ruler"></i>
                              <div class="tooltip">
                                 <p>Chỉnh sửa kích thước</p>
                             </div> 
                         </button>
 
-                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#exampleModalImage_<?php echo $row['id']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip bottom" data-bs-toggle="modal" data-bs-target="#exampleModalImage_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-image mr-1"></i>
                              <div class="tooltip">
                                 <p>Chỉnh sửa ảnh</p>
