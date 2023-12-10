@@ -24,7 +24,7 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
         font-weight: bold;
         font-size: 20px;
         margin-left: 10px;
-        margin-top: 24px;
+        margin-top: 8px;
     }
 </style>
 <?php if ($cart_empty) : ?>

@@ -20,7 +20,7 @@
         font-weight: bold;
         font-size: 20px;
         margin-left: 10px;
-        margin-top: 24px;
+        margin-top: 8px;
     }
 </style>
 <?php
@@ -32,6 +32,17 @@ $get_Name = $row_details['name'];
 $get_EvenId = $row_details['event_id'];
 $get_Code = $row_details['code'];
 $get_Price = $row_details['price'];
+
+$sql_des = "SELECT * FROM tbl_product WHERE tbl_product.id = '$_GET[id]'";
+$sql_des_query = mysqli_query($connect, $sql_des);
+$row = mysqli_fetch_array($sql_des_query);
+$get_Des = $row['description'];
+
+$sql_category = "SELECT * FROM tbl_category WHERE tbl_category.id = '$row[category_id]'";
+$sql_category_query = mysqli_query($connect, $sql_category);
+$row_category = mysqli_fetch_array($sql_category_query);
+$get_Category_Name = $row_category['name'];
+
 
 $sql_details_event = "SELECT * FROM tbl_event WHERE id = '$get_EvenId'";
 $query_details_event = mysqli_query($connect, $sql_details_event);
@@ -65,7 +76,6 @@ $seconds = $time_left % 60;
 
 // Định dạng thời gian còn lại
 $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $hours, $minutes, $seconds);
-
 ?>
 <div class="appCard row m-0">
     <div class="col-4 detail_images">
@@ -354,6 +364,56 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
         </div>
     </div>
 </div>
+
+<div class="appCard">
+    <span>Thông số sản phẩm</span>
+    <table class="table table-bordered">
+        <tr>
+            <th style="background-color: #ccc; width: 200px;" class="">Size</th>
+            <td>
+                <?php
+                $sizes = array();
+                $sql_details_size = "SELECT * FROM tbl_product_size INNER JOIN tbl_size
+        ON tbl_size.id = tbl_product_size.size_id
+        WHERE product_id = '$_GET[id]'";
+                $query_details_size = mysqli_query($connect, $sql_details_size);
+
+                while ($row_details_size = mysqli_fetch_array($query_details_size)) {
+                    $size_name = $row_details_size['name'];
+                    $sizes[] = preg_replace('/\D/', '', $size_name);
+                }
+
+                // Use implode to join array elements with a comma
+                echo implode(', ', $sizes);
+                ?>
+            </td>
+
+        </tr>
+        <tr>
+            <th style="background-color: #ccc; width: 200px;" class="">Quà tặng</th>
+            <td colspan="<?php echo count($sizes); ?>">
+                Full box + tax + bill, Tặng tất
+            </td>
+        </tr>
+        <tr>
+            <th style="background-color: #ccc; width: 200px;" class="">Mô tả</th>
+            <td colspan="<?php echo count($sizes); ?>">
+                <?php echo $get_Des ?>
+            </td>
+        </tr>
+        <tr>
+            <th style="background-color: #ccc; width: 200px;" class="">Loại hàng</th>
+            <td colspan="<?php echo count($sizes); ?>">Siêu cấp</td>
+        </tr>
+        <tr>
+            <th style="background-color: #ccc; width: 200px;" class="">Thương hiệu</th>
+            <td colspan="<?php echo count($sizes); ?>">
+                <?php echo $get_Category_Name ?>
+            </td>
+        </tr>
+    </table>
+</div>
+
 
 <div class="show_new appCard">
     <div class="new_product">

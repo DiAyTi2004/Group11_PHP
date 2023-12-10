@@ -34,7 +34,7 @@ if ($total_event > 0) {
         font-weight: bold;
         font-size: 20px;
         margin-left: 10px;
-        margin-top: 24px;
+        margin-top: 8px;
     }
 </style>
 
