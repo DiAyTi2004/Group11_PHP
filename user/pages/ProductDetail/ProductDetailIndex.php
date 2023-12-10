@@ -78,6 +78,7 @@ $seconds = $time_left % 60;
 $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $hours, $minutes, $seconds);
 ?>
 <div class="appCard row m-0">
+<h4 class="title_event">THÔNG TIN SẢN PHẨM</h4>
     <div class="col-4 detail_images">
         <div class="ecommerce-gallery" data-mdb-zoom-effect="true" data-mdb-auto-height="true">
             <div class="row py-3 shadow-5">
@@ -366,10 +367,10 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
 </div>
 
 <div class="appCard">
-    <span>Thông số sản phẩm</span>
-    <table class="table table-bordered">
+    <h4 class="title_event">THÔNG SỐ SẢN PHẨM</h4>
+    <table class="table table-bordered ml-2 br-10">
         <tr>
-            <th style="background-color: #ccc; width: 200px;" class="">Size</th>
+            <th style="background-color: #ccccc18f; width: 230px;" class="">Size</th>
             <td>
                 <?php
                 $sizes = array();
@@ -390,23 +391,23 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
 
         </tr>
         <tr>
-            <th style="background-color: #ccc; width: 200px;" class="">Quà tặng</th>
+            <th style="background-color: #ccccc18f; width: 230px;" class="">Quà tặng</th>
             <td colspan="<?php echo count($sizes); ?>">
                 Full box + tax + bill, Tặng tất
             </td>
         </tr>
         <tr>
-            <th style="background-color: #ccc; width: 200px;" class="">Mô tả</th>
+            <th style="background-color: #ccccc18f; width: 230px;" class="">Mô tả</th>
             <td colspan="<?php echo count($sizes); ?>">
                 <?php echo $get_Des ?>
             </td>
         </tr>
         <tr>
-            <th style="background-color: #ccc; width: 200px;" class="">Loại hàng</th>
+            <th style="background-color: #ccccc18f; width: 230px;" class="">Loại hàng</th>
             <td colspan="<?php echo count($sizes); ?>">Siêu cấp</td>
         </tr>
         <tr>
-            <th style="background-color: #ccc; width: 200px;" class="">Thương hiệu</th>
+            <th style="background-color: #ccccc18f; width: 230px;" class="">Thương hiệu</th>
             <td colspan="<?php echo count($sizes); ?>">
                 <?php echo $get_Category_Name ?>
             </td>
@@ -426,7 +427,7 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
 
 <div class="show_new appCard">
     <div class="new_product">
-        <div class="row flex-center p-0 m-0" style="border-radius: 5px;background: linear-gradient(to bottom,#2D0798,#035aad);">
+        <div class="row flex-center p-0 m-0" style="border-radius: 5px; background: linear-gradient(to bottom, #006400, #00FF00);">
             <div class="col-8">
                 <span class="title_event mb-4">
                     <img src="https://tyhisneaker.com/wp-content/uploads/2021/08/giasoc.svg" alt="">
@@ -479,3 +480,32 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
     ?>
 
 </div>
+
+<!-- Add this code at the end of your body section -->
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content ">
+            <div class="modal-body p-0">
+                <img id="modalImage" class="img-fluid" src="" alt="Product Image">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add this script to handle modal opening -->
+<script>
+    $(document).ready(function () {
+        // Function to open the modal with the clicked image
+        function openModal(imageSrc) {
+            $('#modalImage').attr('src', imageSrc);
+            $('#imageModal').modal('show');
+        }
+
+        // Event listener for clicking on product images
+        $('.ecommerce-gallery-main-img, .ecommerce-gallery img').on('click', function () {
+            var imageSrc = $(this).attr('src');
+            openModal(imageSrc);
+        });
+    });
+</script>

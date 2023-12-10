@@ -79,7 +79,7 @@ if ($total_event > 0) {
     if ($usingPage == "") { ?>
 
         <div class="new_product">
-            <div class="row flex-center p-0 m-0" style="border-radius: 5px;background: linear-gradient(to bottom,#2D0798,#035aad);">
+            <div class="row flex-center p-0 m-0" style="border-radius: 5px; background: linear-gradient(to bottom, #006400, #00FF00);">
                 <div class="col-8">
                     <span class="title_event mb-4">
                         <img src="https://tyhisneaker.com/wp-content/uploads/2021/08/giasoc.svg" alt="">
