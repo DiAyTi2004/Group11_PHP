@@ -35,7 +35,7 @@ if ($total_event > 0) {
     if ($usingPage == "") { ?>
 
         <div class="new_product">
-            <h3>SẢN PHẨM MỚI</h3>
+            <h4 class="title_event">SẢN PHẨM MỚI</h4>
         </div>
     <?php
         include("../pages/Home/NewProductSection.php");
@@ -52,99 +52,84 @@ if ($total_event > 0) {
     }
     if ($usingPage == "") { ?>
 
-        <div class="new_product">
-            <h3>CÁC SẢN PHẨM YÊU THÍCH</h3>
+<style>
+    /* Additional CSS for styling the countdown units */
+    .countdown-section {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 13px;
+    }
+
+    .countdown-unit {
+        text-align: center;
+        margin: 10px;
+        padding: 4px;
+        border: none;
+        color: #000;
+    }
+
+    .title_event {
+        color: green;
+        font-weight: bold;
+        font-size: 20px;
+        margin-left: 10px;
+        margin-top: 24px;
+    }
+    
+</style>
+
+<div class="new_product">
+    <div class="row flex-center p-0 m-0" style="border-radius: 5px;background: linear-gradient(to bottom,#2D0798,#035aad);">
+        <div class="col-8">
+            <span class="title_event mb-4">
+                <img src="https://tyhisneaker.com/wp-content/uploads/2021/08/giasoc.svg" alt="">
+                <img src="https://tyhisneaker.com/wp-content/uploads/2021/08/homnay.svg" alt="">
+            </span>
         </div>
+        <div class="col-4">
+            <!-- Add the countdown timer div -->
+            <div id="countdown" class="countdown-section">
+                <!-- Countdown timer units will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code for the countdown timer
+        document.addEventListener('DOMContentLoaded', function () {
+            // Set the end date for the countdown (one month from now)
+            var endDate = new Date("December 18, 2023 23:59:59").getTime();
+            function updateCountdown() {
+                var currentTime = new Date();
+                var timeDifference = endDate - currentTime;
+
+                // Calculate days, hours, minutes, and seconds
+                var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+                // Display the countdown in the specified div
+                document.getElementById('countdown').innerHTML =
+                    '<div class="countdown-unit btn btn-light">' + days + ' Ngày</div>' +
+                    '<div class="countdown-unit btn btn-light">' + hours + ' Giờ</div>' +
+                    '<div class="countdown-unit btn btn-light">' + minutes + ' Phút</div>' +
+                    '<div class="countdown-unit btn btn-light">' + seconds + ' Giây</div>';
+
+                // Update the countdown every second
+                setTimeout(updateCountdown, 1000);
+            }
+
+            // Initial call to set up the countdown
+            updateCountdown();
+        });
+    </script>
+</div>
+
     <?php
         include("../pages/Home/AllProductSection.php");
     }
     ?>
 
 </div>
-
-<!-- <div class="show appCard">
-    <?php //lấy qiamly từ menu truyền vào bằng phuong thức GET
-    if (isset($_GET['usingPage'])) {
-        $usingPage = $_GET['usingPage'];
-    } else {
-        $usingPage = "";
-    }
-    if ($usingPage == "") {
-    ?>
-        <div class="new_product">
-            <h3>TẤT CẢ SẢN PHẨM</h3>
-        </div>
-
-
-    <?php
-
-    }
-
-    ?>
-
-    <?php
-    if (isset($_GET['trang'])) {
-        $page = $_GET['trang'];
-    } else {
-        $page = 1;
-    }
-    if ($page == '' || $page == 1) {
-        $begin = 0;
-    } else {
-        $begin = ($page * 10) - 10;
-    }
-    // GET id là lấy id từ bên MENU.php 
-    $sql_show = "SELECT * FROM tbl_sanpham,tbl_danhmuc,tbl_event WHERE tbl_sanpham.id_danhmuc=tbl_danhmuc.id_danhmuc and tbl_sanpham.id_event=tbl_event.id_event and end_date  >= CURDATE() ORDER BY tbl_sanpham.id_sanpham DESC LIMIT $begin,10";
-    $query_show = mysqli_query($connect, $sql_show);
-
-    ?>
-
-    <ul class="product_list">
-
-        <?php
-        while ($row = mysqli_fetch_array($query_show)) {
-        ?>
-            <li>
-                <a href="UserIndex.php?usingPage=product&id=<?php echo $row['id_sanpham'] ?>">
-                    <img src="../../admin/pages/Product/ProductImages/<?php echo $row['hinhanh'] ?>">
-                    <p></p>
-                    <h5 class="title_product"> <?php echo $row['tensanpham'] ?></h5>
-                    <h5 class="price_product">Giá: <?php echo number_format($row['giasanpham'], 0, ',', '.') . ' VNĐ' ?></h5>
-                    <p style="text-align: center;"><?php echo "Xem chi tiết" ?></p>
-                </a>
-
-            </li>
-
-        <?php
-        }
-        ?>
-    </ul>
-
-    <?php
-    $sql_trang = mysqli_query($connect, "SELECT * FROM tbl_sanpham");
-    $row_count = mysqli_num_rows($sql_trang);
-    $trang = ceil($row_count / 10);
-    ?>
-
-    <ul class="list_trang">
-
-        <?php
-
-        for ($i = 1; $i <= $trang; $i++) {
-        ?>
-            <li <?php if ($i == $page) {
-                    echo 'style="background: brown;"';
-                } else {
-                    echo '';
-                }  ?>>
-                <a href="UserIndex.php?trang=<?php echo $i ?>">
-                    <?php echo $i ?>
-                </a>
-            </li>
-        <?php
-        }
-        ?>
-
-    </ul>
-
-</div> -->

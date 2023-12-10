@@ -20,7 +20,9 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                 <legend class="text-center fw-bold">Quản lý giỏ hàng</legend>
 
             </h1>
-            <p>Giỏ hàng của bạn đang trống.</p>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd13XUAZxw6HVjjX4QJX9bjWd4tXmY1Uh4cQ&usqp=CAU" alt="">
+            <p>Giỏ hàng của bạn đang trống. Hãy quay lại xem các sản phẩm nhé!</p>
+            <a href="../../user/userCommon/UserIndex.php" class="btn btn-success mr-2"><i class="fa-solid fa-house mr-2"></i>Quay lại trang chủ</a>
         </div>
     <?php else : ?>
         <form action="../../user/pages/Cart/CartLogic.php" method="post">
