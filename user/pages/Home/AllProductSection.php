@@ -1,6 +1,6 @@
 <?php
 $sql_show_test = "SELECT * FROM tbl_product INNER JOIN tbl_product_image ON tbl_product.id = tbl_product_image.product_id
-WHERE tbl_product_image.main_image = 1 LIMIT 24";
+WHERE tbl_product_image.main_image = 1 and category_id = '3e1b10c3-9fce-4e00-8304-850cefb45b55' LIMIT 24";
 $query_show_test = mysqli_query($connect, $sql_show_test);
 ?>
 
@@ -92,7 +92,7 @@ $query_show_test = mysqli_query($connect, $sql_show_test);
 </div>
 <div class="search__section bg-white br-10 over-hidden px-1 flex-center">
     <form method="POST" action="UserIndex.php?usingPage=search">
-        <button type="submit" class="br-10 py-1 px-3 flex-grow-1" name="search">
+        <button type="submit" class="br-10 py-2 px-5 flex-grow-1" name="search">
             Xem tất cả
         </button>
     </form>

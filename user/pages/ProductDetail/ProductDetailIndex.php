@@ -1,5 +1,28 @@
 <link rel="stylesheet" href="../../user/styles/ProductDetailStyles.css">
+<style>
+    .countdown-section {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 13px;
+    }
 
+    .countdown-unit {
+        text-align: center;
+        margin: 10px;
+        padding: 4px;
+        border: none;
+        color: #000;
+    }
+
+    .title_event {
+        color: green;
+        font-weight: bold;
+        font-size: 20px;
+        margin-left: 10px;
+        margin-top: 24px;
+    }
+</style>
 <?php
 $sql_details = "SELECT * FROM tbl_product INNER JOIN tbl_product_image ON tbl_product.id = tbl_product_image.product_id
  WHERE tbl_product.id = '$_GET[id]'";
@@ -44,8 +67,8 @@ $seconds = $time_left % 60;
 $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $hours, $minutes, $seconds);
 
 ?>
-<div class="appCard row pb-3">
-    <div class="col col-4 detail_images">
+<div class="appCard row m-0">
+    <div class="col-4 detail_images">
         <div class="ecommerce-gallery" data-mdb-zoom-effect="true" data-mdb-auto-height="true">
             <div class="row py-3 shadow-5">
                 <div class="col-12 mb-1">
@@ -75,7 +98,7 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
     </div>
 
 
-    <div class="col col-5 detail_product">
+    <div class="col-5 detail_product">
         <div class="product_name">
             <p class="product_code">
                 <?php echo $get_Name ?>
@@ -103,73 +126,70 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
                 </div>
             </div>
         </div>
-        <?php 
-        $check_end_date ;
-                 if($row_event['end_date'] >= date("Y-m-d"))
-                 {
-                    $check_end_date = 1;
-                   
-                 }
-                 else $check_end_date = 0;
-                
-                ?>
+        <?php
+        $check_end_date;
+        if ($row_event['end_date'] >= date("Y-m-d")) {
+            $check_end_date = 1;
+        } else $check_end_date = 0;
 
-        <?php $class=''; 
-        if($check_end_date == 1)
-        $class='product_price flex justify-between mt-3';
         ?>
 
-        <div class="<?php echo $class?>">
+        <?php $class = '';
+        if ($check_end_date == 1)
+            $class = 'product_price flex justify-between mt-3';
+        ?>
+
+        <div class="<?php echo $class ?>">
             <div class="price mr-12">
-               
-                <div class="current_price" >
+
+                <div class="current_price">
                     <span class="price">
-                        <?php if($check_end_date == 1) echo ' Giá sale: '; ?>
-                        <i class="sale"><?php if($check_end_date == 1) echo number_format($get_Price, 0, ',', '.') ?></i>
-                        <?php if($check_end_date == 1) echo ' VNĐ '; ?>
+                        <?php if ($check_end_date == 1) echo ' Giá sale: '; ?>
+                        <i class="sale"><?php if ($check_end_date == 1) echo number_format($get_Price, 0, ',', '.') ?></i>
+                        <?php if ($check_end_date == 1) echo ' VNĐ '; ?>
                     </span>
                 </div>
                 <div class="fake_price">
                     <span class="price">
-                    <?php if($check_end_date == 1) echo ' Giá gốc: '; ?>
-                        
-                        <i class="fake"><?php if($check_end_date == 1) echo number_format($get_Price * ($get_Discount / 100) + $get_Price, 0, ',', '.') ?></i>
-                        <?php if($check_end_date == 1) echo ' VNĐ '; ?>
+                        <?php if ($check_end_date == 1) echo ' Giá gốc: '; ?>
+
+                        <i class="fake"><?php if ($check_end_date == 1) echo number_format($get_Price * ($get_Discount / 100) + $get_Price, 0, ',', '.') ?></i>
+                        <?php if ($check_end_date == 1) echo ' VNĐ '; ?>
                     </span>
                 </div>
                 <div class="save">
                     <span class="price">
-                    <?php if($check_end_date == 1) echo ' Tiết kiệm: '; ?>
-                        
-                        <i class="sale"><?php if($check_end_date == 1) echo number_format(($get_Price * ($get_Discount / 100) + $get_Price - $get_Price), 0, ',', '.') ?></i>
-                        <?php if($check_end_date == 1) echo ' VNĐ '; ?>
+                        <?php if ($check_end_date == 1) echo ' Tiết kiệm: '; ?>
+
+                        <i class="sale"><?php if ($check_end_date == 1) echo number_format(($get_Price * ($get_Discount / 100) + $get_Price - $get_Price), 0, ',', '.') ?></i>
+                        <?php if ($check_end_date == 1) echo ' VNĐ '; ?>
                     </span>
                 </div>
             </div>
 
-           
+
 
             <div class="event">
                 <div class="event_name">
                     <span class="sale">
-                        <i <?php if($check_end_date == 1) echo 'class="fa-regular fa-clock"'?> ></i>
-                        <?php if($check_end_date == 1) echo $get_EventName ?>
+                        <i <?php if ($check_end_date == 1) echo 'class="fa-regular fa-clock"' ?>></i>
+                        <?php if ($check_end_date == 1) echo $get_EventName ?>
                     </span>
                 </div>
 
                 <div class="event_time">
                     <span>
-                        <?php if($check_end_date == 1) echo $time_left_formatted; ?>
+                        <?php if ($check_end_date == 1) echo $time_left_formatted; ?>
                     </span>
                 </div>
             </div>
         </div>
-        <div class="current_price" >
-                    <span class="price">
-                    <p><?php if($check_end_date == 0) echo ' Giá: '; ?> <?php if($check_end_date == 0) echo number_format($get_Price, 0, ',', '.') ?><?php if($check_end_date == 0) echo ' VNĐ '; ?></p>
-                    
-                    </span>
-                </div>
+        <div class="current_price">
+            <span class="price">
+                <p><?php if ($check_end_date == 0) echo ' Giá: '; ?> <?php if ($check_end_date == 0) echo number_format($get_Price, 0, ',', '.') ?><?php if ($check_end_date == 0) echo ' VNĐ '; ?></p>
+
+            </span>
+        </div>
         <div class="product_gift mt-3">
             <div class="gift_sale">
                 <i class="fa-solid fa-percent"></i>
@@ -292,7 +312,7 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
 
     </div>
 
-    <div class="col col-3 detail_contact">
+    <div class="col-3 detail_contact">
         <div class="">
             <div class="seller-info flex-center">
                 <a style="text-decoration: none;" href="#" class="">
@@ -333,4 +353,69 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
             </div>
         </div>
     </div>
+</div>
+
+<div class="show_new appCard">
+    <div class="new_product">
+        <h4 class="title_event">SẢN PHẨM MỚI</h4>
+    </div>
+    <?php
+    include("../pages/Home/NewProductSection.php");
+    ?>
+</div>
+
+<div class="show_new appCard">
+    <div class="new_product">
+        <div class="row flex-center p-0 m-0" style="border-radius: 5px;background: linear-gradient(to bottom,#2D0798,#035aad);">
+            <div class="col-8">
+                <span class="title_event mb-4">
+                    <img src="https://tyhisneaker.com/wp-content/uploads/2021/08/giasoc.svg" alt="">
+                    <img src="https://tyhisneaker.com/wp-content/uploads/2021/08/homnay.svg" alt="">
+                </span>
+            </div>
+            <div class="col-4">
+                <!-- Add the countdown timer div -->
+                <div id="countdown" class="countdown-section">
+                    <!-- Countdown timer units will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // JavaScript code for the countdown timer
+            document.addEventListener('DOMContentLoaded', function() {
+                // Set the end date for the countdown (one month from now)
+                var endDate = new Date("December 18, 2023 23:59:59").getTime();
+
+                function updateCountdown() {
+                    var currentTime = new Date();
+                    var timeDifference = endDate - currentTime;
+
+                    // Calculate days, hours, minutes, and seconds
+                    var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+                    // Display the countdown in the specified div
+                    document.getElementById('countdown').innerHTML =
+                        '<div class="countdown-unit btn btn-light">' + days + ' Ngày</div>' +
+                        '<div class="countdown-unit btn btn-light">' + hours + ' Giờ</div>' +
+                        '<div class="countdown-unit btn btn-light">' + minutes + ' Phút</div>' +
+                        '<div class="countdown-unit btn btn-light">' + seconds + ' Giây</div>';
+
+                    // Update the countdown every second
+                    setTimeout(updateCountdown, 1000);
+                }
+
+                // Initial call to set up the countdown
+                updateCountdown();
+            });
+        </script>
+    </div>
+
+    <?php
+    include("../pages/Home/AllProductSection.php");
+    ?>
+
 </div>
