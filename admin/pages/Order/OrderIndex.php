@@ -100,25 +100,25 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                             <i class="fa-solid fa-pencil"></i>
                             <div class="tooltip">
                                 <p>Chỉnh sửa đơn hàng</p>
-                            </div> 
+                            </div>
                         </button>
                         <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-trash mr-1"></i>
                             <div class="tooltip">
                                 <p>Xóa đơn hàng</p>
-                            </div> 
+                            </div>
                         </button>
                         <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#orderDetail_<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-circle-info"></i>
                             <div class="tooltip">
                                 <p>Sản phẩm đơn hàng</p>
-                            </div> 
+                            </div>
                         </button>
                         <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" onclick="printElement('printOrder_<?php echo $row['id']; ?>')">
                             <i class="fa-solid fa-print"></i>
                             <div class="tooltip">
                                 <p>In hóa đơn</p>
-                            </div> 
+                            </div>
                         </button>
                     </td>
                 </tr>
