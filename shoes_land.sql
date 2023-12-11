@@ -65,15 +65,15 @@ create table tbl_event (
   banner LONGTEXT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 insert into tbl_event values ('8d7a68e9-1783-4aff-8c71-1814bcdbda46','2023-10-01 08:00:00 SA','2023-10-30 22:00:00 CH','50%','#1','Ưu đãi tháng 10','Sự kiện giảm giá và khuyến mãi đặc biệt cho mùa đông đã tới.','even1.png');
-insert into tbl_event values ('c271c6ed-6926-4be9-afc6-b11b3e957ef3','2023-10-15 08:00:00 SA','2023-10-30 22:00 CH','70%','#2','Flash Sale','Sale giá sốc-giảm đến 70%, freeship từ 2 đôi.','even2.png');
-insert into tbl_event values ('2d5d30f9-066f-4839-a973-2aa971803024','2023-11-01 08:00:00 SA','2023-11-10 22:00 CH','60%','#3','Ra mắt Sản phẩm Mới','Ra mắt sản phẩm mới cực hot. Bốc thăm giảm giá cực sốc cho 5 khách hàng may mắn.','even3.png');
-insert into tbl_event values ('452b9451-e86e-4048-a6ee-0d13dc857483','2023-11-11 08:00:00 SA','2023-11-21 22:00 CH','40%','#4','Mua càng nhiều giảm càng nhiều','Mua từ 3 đôi trở lên nhận giảm giá cực sốc.','even4.png');
-insert into tbl_event values ('f2822729-c278-4b25-9aba-6f2bd1a02133','2023-12-01 08:00:00 SA','2023-12-16 22:00 CH','30%','#5','Chương trình mua giày cặp đôi','Khách hàng là cặp đôi sẽ nhận về ưu đãi, giảm giá và quà tặng giá trị.','even5.png');
-insert into tbl_event values ('afcd72e9-6ec2-4d47-8a82-50477d6216dd','2023-12-17 08:00:00 SA','2023-12-30 22:00 CH','30%','#6','Ngày lễ kỉ niệm','Lễ kỉ niệm 40 năm của hãng Bitit, giảm giá sốc với các sản phẩm hãng Bitit.','even6.png');
+insert into tbl_event values ('c271c6ed-6926-4be9-afc6-b11b3e957ef3','2023-10-15 08:00:00 SA','2024-10-30 22:00 CH','70%','#2','Flash Sale','Sale giá sốc-giảm đến 70%, freeship từ 2 đôi.','even2.png');
+insert into tbl_event values ('2d5d30f9-066f-4839-a973-2aa971803024','2023-11-01 08:00:00 SA','2024-1-10 22:00 CH','60%','#3','Ra mắt Sản phẩm Mới','Ra mắt sản phẩm mới cực hot. Bốc thăm giảm giá cực sốc cho 5 khách hàng may mắn.','even3.png');
+insert into tbl_event values ('452b9451-e86e-4048-a6ee-0d13dc857483','2023-11-11 08:00:00 SA','2024-1-21 22:00 CH','40%','#4','Mua càng nhiều giảm càng nhiều','Mua từ 3 đôi trở lên nhận giảm giá cực sốc.','even4.png');
+insert into tbl_event values ('f2822729-c278-4b25-9aba-6f2bd1a02133','2023-12-01 08:00:00 SA','2024-1-16 22:00 CH','30%','#5','Chương trình mua giày cặp đôi','Khách hàng là cặp đôi sẽ nhận về ưu đãi, giảm giá và quà tặng giá trị.','even5.png');
+insert into tbl_event values ('afcd72e9-6ec2-4d47-8a82-50477d6216dd','2023-12-17 08:00:00 SA','2024-1-30 22:00 CH','30%','#6','Ngày lễ kỉ niệm','Lễ kỉ niệm 40 năm của hãng Bitit, giảm giá sốc với các sản phẩm hãng Bitit.','even6.png');
 insert into tbl_event values ('4cf28b83-1694-4e3d-af7b-5c0b3c4780a0','2023-10-13 08:00:00 SA','2023-10-14 22:00 CH','50%','#7','Sự kiện BlackFriday','Giảm giá cực sốc khi khách hàng đến với shoesland vào dịp này.','even7.jpg');
-insert into tbl_event values ('2bc0c41b-0c08-43b7-8c45-d2f8c5c1566e','2023-12-23 00:00:00 SA','2023-12-25 23:59 CH','50%','#8','Ngày lễ Giáng Sinh','Giảm giá cực sốc đối với các sản phẩm có màu đỏ và xanh lá.','even8.jpg');
-insert into tbl_event values ('d3950d8f-7e44-4786-8caf-f480f2b34540','2023-12-27 08:00:00 SA','2024-01-03 22:00 CH','50%','#9','Tết dương lịch','Giảm giá cực sốc khi khách hàng đến với shoesland vào dịp này.','even9.png');
-insert into tbl_event values ('11afef6c-bff6-432b-82eb-d44ba44743e2','2024-02-08 00:00:00 SA','2024-02-14 23:59 CH','50%','#10','Tết Nguyên Đán','Giảm giá cực sốc khi khách hàng đến với shoesland vào dịp này.','even10.png');
+insert into tbl_event values ('2bc0c41b-0c08-43b7-8c45-d2f8c5c1566e','2022-12-23 00:00:00 SA','2022-12-25 23:59 CH','50%','#8','Ngày lễ Giáng Sinh','Giảm giá cực sốc đối với các sản phẩm có màu đỏ và xanh lá.','even8.jpg');
+insert into tbl_event values ('d3950d8f-7e44-4786-8caf-f480f2b34540','2023-12-27 08:00:00 SA','2023-01-03 22:00 CH','50%','#9','Tết dương lịch','Giảm giá cực sốc khi khách hàng đến với shoesland vào dịp này.','even9.png');
+insert into tbl_event values ('11afef6c-bff6-432b-82eb-d44ba44743e2','2023-02-08 00:00:00 SA','2023-02-14 23:59 CH','50%','#10','Tết Nguyên Đán','Giảm giá cực sốc khi khách hàng đến với shoesland vào dịp này.','even10.png');
 
 create table tbl_product (
   id varchar(36) primary key not null,

@@ -1,6 +1,6 @@
 <?php
 $sql_show_test = "SELECT * FROM tbl_product INNER JOIN tbl_product_image ON tbl_product.id = tbl_product_image.product_id
-WHERE tbl_product_image.main_image = 1 and category_id = '3e1b10c3-9fce-4e00-8304-850cefb45b55' LIMIT 24";
+WHERE tbl_product_image.main_image = 1 and category_id = 'aa3166a2-6534-40a1-a1a6-cc6839cfa666' LIMIT 24";
 $query_show_test = mysqli_query($connect, $sql_show_test);
 ?>
 

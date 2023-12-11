@@ -78,7 +78,7 @@ $seconds = $time_left % 60;
 $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $hours, $minutes, $seconds);
 ?>
 <div class="appCard row m-0">
-<h4 class="title_event">THÔNG TIN SẢN PHẨM</h4>
+<h4 style="margin-left: -2px;" class="title_event">THÔNG TIN SẢN PHẨM</h4>
     <div class="col-4 detail_images">
         <div class="ecommerce-gallery" data-mdb-zoom-effect="true" data-mdb-auto-height="true">
             <div class="row py-3 shadow-5">
