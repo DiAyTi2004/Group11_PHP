@@ -94,14 +94,14 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                         <?php echo $row['description'] ?>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#editCategory<?php echo $row['id']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip top" data-bs-toggle="modal" data-bs-target="#editCategory<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-pencil"></i>
                             <div class="tooltip">
                                 <p>Chỉnh sửa danh mục</p>
                             </div> 
                         </button>
 
-                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#deleteCategory<?php echo $row['id']; ?>">
+                        <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip top" data-bs-toggle="modal" data-bs-target="#deleteCategory<?php echo $row['id']; ?>">
                             <i class="fa-solid fa-trash mr-1"></i>
                             <div class="tooltip">
                                 <p>Xóa danh mục</p>
