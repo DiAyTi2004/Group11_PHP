@@ -1650,7 +1650,7 @@ body {
     transform: rotate(90deg);
 }
 .top .tooltip {
-    top: -115%;
+    top: -125%;
     left: -100%;
 }
 
