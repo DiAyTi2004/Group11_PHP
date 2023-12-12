@@ -1649,3 +1649,13 @@ body {
     left: -12%;
     transform: rotate(90deg);
 }
+.top .tooltip {
+    top: -115%;
+    left: -100%;
+}
+
+.top .tooltip::after {
+    top: 90%;
+    left: 40%;
+    
+}

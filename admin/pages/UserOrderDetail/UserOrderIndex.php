@@ -86,11 +86,17 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     </td>
                     <td>
                         <div style="min-width: 150px;">
-                            <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip top" data-bs-toggle="modal" data-bs-target="#editPopup_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-pencil"></i>
+                                <div class="tooltip">
+                                <p>Xóa đơn hàng</p>
+                            </div>
                             </button>
-                            <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip left" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
+                            <button type="button" class="btn btn-primary mb-2 mt-3 con-tooltip top" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row['id']; ?>">
                                 <i class="fa-solid fa-trash mr-1"></i>
+                                <div class="tooltip">
+                                <p>Chỉnh sửa đơn hàng</p>
+                            </div>
                             </button>
                         </div>
                     </td>
