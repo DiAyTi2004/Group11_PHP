@@ -18,7 +18,8 @@ if (isset($_POST['confirmBuy'])) {
     $phone = $_POST['phone'];
     $province = $_POST['province'];
     $district = $_POST['district'];
-
+    // id của chờ xác nhận
+    $status_id = 'f1e30780-f494-477d-8fba-63d280843c91'; 
     $ward = $_POST['ward'];
     $address = $ward . ", " . $district . ", " . $province;
     echo $address, "<br>";
@@ -30,7 +31,7 @@ if (isset($_POST['confirmBuy'])) {
     $currentTime = date("Y-m-d H:i:s");
 
     $sql = "INSERT INTO tbl_order (id, code, user_id, status_id, receive_phone, receive_address, delivery_cost, payment_id, description, createDate)
-    VALUES ('$order_id', '$order_code', '$user_Id', 'f1e30780-f494-477d-8fba-63d280843c91', '$phone', '$address', $delivery_cost, '$payment_method', '', '$currentTime')";
+    VALUES ('$order_id', '$order_code', '$user_Id', '$status_id', '$phone', '$address', $delivery_cost, '$payment_method', '', '$currentTime')";
 
     mysqli_query($connect, $sql);
     echo $order_id;

@@ -103,15 +103,15 @@ if (isset($_SESSION['userImage'])) {
                             <div class="subUserAction br-10 over-hidden">
                                 <ul class="m-0 p-0 w-100">
                                     <li class="sub__category__item w-100">
-                                        <a style="display: block;" href="UserIndex.php?usingPage=account" class="w-100 p-2 py-3" style="text-decoration: none">
-                                            <i class="fa-solid fa-circle-user mr-2 ml-0"></i>
-                                            Thông tin cá nhân
-                                        </a>
-                                    </li>
-                                    <li class="sub__category__item w-100">
                                         <a style="display: block;" href="UserIndex.php?usingPage=cart" class="w-100 p-2 py-3" style="text-decoration: none">
                                             <i class="fa-solid fa-cart-shopping mr-2 ml-0"></i>
                                             Giỏ hàng
+                                        </a>
+                                    </li>
+                                    <li class="sub__category__item w-100">
+                                        <a style="display: block;" href="UserIndex.php?usingPage=account" class="w-100 p-2 py-3" style="text-decoration: none">
+                                        <i class="fa-solid fa-list mr-2 ml-0"></i>
+                                            Đơn hàng
                                         </a>
                                     </li>
 

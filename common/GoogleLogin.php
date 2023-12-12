@@ -59,7 +59,7 @@ if (isset($_GET['code'])) {
     //set session for google user
     $_SESSION['username'] = $username;
     $_SESSION['email'] = $email;
-    $_SESSION['userId'] = $username;
+    $_SESSION['userId'] = $userId;
     $_SESSION['userImage'] = $userImage;
 
     /**
