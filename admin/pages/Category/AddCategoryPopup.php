@@ -33,19 +33,7 @@
 
                         </tr>
                         <tr>
-                            <td>
-                                <div class="col-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                        <label class="form-check-label" for="invalidCheck">
-                                            Bạn chắc chắn về thông tin thêm danh mục?
-                                        </label>
-                                        <div class="invalid-feedback">
-                                            You must agree before submitting.
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
+                            <
                         </tr>
                     </table>
             </div>
