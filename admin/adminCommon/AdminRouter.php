@@ -18,7 +18,6 @@
             include("./pages/Event/AddEventPopup.php");
         } else if ($workingPage == 'user') {
             include("./pages/User/UserIndex.php");
-            include("./pages/User/AddUserPopup.php");
             include("./pages/User/UserOrderTable.php");
         } else if ($workingPage == 'order') {
             include("./pages/Order/OrderIndex.php");
