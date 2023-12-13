@@ -48,19 +48,6 @@
                             </td>
                             
                         </tr>
-
-                        
-                        <tr>
-                            <td class="row">
-                               
-                                <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">
-                                        ID
-                                    </label>
-                                    <input type="text" name="id" value="<?php echo $row['id'] ?>" class="form-control" id="exampleFormControlInput1">
-                                </div>
-                            </td>
-                        </tr>
                         <tr>
                             <td class="row">
                                
@@ -69,22 +56,6 @@
                                         Miêu tả
                                     </label>
                                     <input type="text" name="description" value="<?php echo $row['description'] ?>" class="form-control" id="exampleFormControlInput1">
-                                </div>
-                            </td>
-                        </tr>
-                      
-                        <tr>
-                            <td>
-                                <div class="col-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                        <label class="form-check-label" for="invalidCheck">
-                                            Bạn chắc chắn về thông tin sửa danh mục?
-                                        </label>
-                                        <div class="invalid-feedback">
-                                            You must agree before submitting.
-                                        </div>
-                                    </div>
                                 </div>
                             </td>
                         </tr>
