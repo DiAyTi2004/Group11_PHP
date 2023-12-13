@@ -90,7 +90,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                     <td class="hinhanh">
                         <img src="pages/Category/CategoryImages/<?php echo $row['category_image'] ?> " width="100%">
                     </td>
-                    <td>
+                    <td class="description">
                         <?php echo $row['description'] ?>
                     </td>
                     <td>

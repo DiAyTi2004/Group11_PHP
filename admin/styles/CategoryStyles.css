@@ -216,3 +216,8 @@ option {
   width: 100%;
   height: auto;
 }
+
+.description{
+  width: 50%;
+  height: auto;
+}
