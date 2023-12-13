@@ -49,8 +49,7 @@
                             
                         </tr>
 
-                        
-                        
+
                         <tr>
                             <td class="row">
                                
@@ -62,8 +61,7 @@
                                 </div>
                             </td>
                         </tr>
-                      
-                       
+
                     </table>
                 </div>
                 <div class="modal-footer">

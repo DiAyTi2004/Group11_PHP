@@ -42,12 +42,6 @@ $tableData = mysqli_query($connect, $getTableDataSql);
 
 ?>
 <div class="text-left flex justify-between">
-    <button type="button" class="btn btn-primary mb-2 mt-3" data-bs-toggle="modal" data-bs-target="#addUser">
-        <i class="fa-solid fa-plus"></i>
-        Thêm người dùng
-    </button>
-
-
     <div class="input-group mb-3 align-center mt-3 w-40">
         <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" name="search" id="search-input" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" id="search-button" onclick="performSearch()" name="ok">

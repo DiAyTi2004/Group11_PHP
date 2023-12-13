@@ -32,9 +32,12 @@
                             </td>
 
                         </tr>
+<<<<<<< HEAD
                         <tr>
                             <
                         </tr>
+=======
+>>>>>>> f7fe3944a151c6870ef9ba35f9c0309a8a59aa53
                     </table>
             </div>
             <div class="modal-footer">
