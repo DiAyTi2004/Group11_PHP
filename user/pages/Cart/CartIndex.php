@@ -209,10 +209,10 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                 </button>
             <?php } else {
             ?>
-                <button disabled name="confirmBuy" type="submit" class="btn btn-success p-3" id="buyButton">
+                <a href="UserLoginSignUp.php" type="button" class="btn btn-success p-3" id="buyButton">
                     <i class="fa-solid fa-cart-shopping mr-2 ml-0"></i>
                     Vui lòng đăng nhập để mua hàng
-                </button>
+                </a>
             <?php } ?>
         </div>
     </form>

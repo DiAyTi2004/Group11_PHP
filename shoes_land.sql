@@ -351,7 +351,7 @@ create table tbl_user (
   phonenumber int(11) NOT NULL,
   address LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   createDate datetime,
-  birthDate datetime,
+  birthDate date,
   gender tinyint(1)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

@@ -12,7 +12,7 @@ $pageSize = 16;
 $total_page = ceil($total_records / $pageSize);
 
 $start = ($pageIndex - 1) * $pageSize;
-$searchSql = "SELECT * FROM tbl_product WHERE tbl_product.name LIKE '%" . $keywordNew . "%' LIMIT $start, $pageSize ";
+$searchSql = "SELECT * FROM tbl_product WHERE tbl_product.name LIKE '%" . $keywordNew . "%' OR tbl_product.code LIKE '%" . $keywordNew . "%' LIMIT $start, $pageSize ";
 
 $searchData = mysqli_query($connect, $searchSql);
 

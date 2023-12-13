@@ -158,9 +158,9 @@ if (isset($_SESSION['userImage'])) {
                 <p>Bạn có muốn đăng xuất không? </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary pt-2 pb-2" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Đóng</button>
                 <a href="UserIndex.php?dangxuat=true" class="btn btn-primary">
-                    <i class="fa-solid fa-sign-out mr-2 ml-0"></i>Đăng xuất
+                    <i class="fa-solid fa-sign-out mr-2" style="padding-top: 6px; padding-bottom: 6px;"></i>Đăng xuất
                 </a>
             </div>
         </div>

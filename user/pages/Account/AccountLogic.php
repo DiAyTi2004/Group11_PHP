@@ -6,7 +6,7 @@ if (isset($_POST['changeInfor'])) {
     $phone = $_POST["phone"];
     $email = $_POST['email'];
     $address = $_POST['address'];
-    $birthDate = $_POST["birth"];
+    $birthDate = $_POST["birthDate"];
     $gender = $_POST["gender"];
     $userId = $_GET["userId"];
 

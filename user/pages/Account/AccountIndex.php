@@ -23,7 +23,7 @@ $sql_order_query = mysqli_query($connect, $sql_order);
         <h4 class="text-left title_event">Thông tin cá nhân</h4>
         <div class="row">
             <div class="col-md-4 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="<?php echo $userImage ?>"><span class="font-weight-bold"><?php echo $username ?></span><span class="text-black-50">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="<?php echo $userImage ?>"><span class="font-weight-bold"><?php echo $row['username'] ?></span><span class="text-black-50">
                         <?php echo $row['email'] ?>
                     </span><span> </span></div>
             </div>
@@ -35,7 +35,7 @@ $sql_order_query = mysqli_query($connect, $sql_order);
                         <div class="row mt-3">
                             <div class="col-md-6">
                                 <label class="labels">Chọn ảnh đại diện mới</label>
-                                <input type="file" class="form-control" name="avatarFile" accept="image/*" onchange="displayImage(this)">
+                                <input required type="file" class="form-control" name="avatarFile" accept="image/*" onchange="displayImage(this)">
                             </div>
                             <div class="col-md-6">
                                 <label class="labels">Ảnh đã chọn</label>
@@ -57,22 +57,22 @@ $sql_order_query = mysqli_query($connect, $sql_order);
                         </script>
                     <?php } ?>
                     <div class="row mt-2">
-                        <div class="col"><label class="labels">Tên</label><input name="fullName" type="text" class="form-control" placeholder="Tên của bạn" value="<?php echo $row['fullname'] ?>"></div>
+                        <div class="col"><label class="labels">Tên</label><input required name="fullName" type="text" class="form-control" placeholder="Tên của bạn" value="<?php echo $row['fullname'] ?>"></div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Số điện thoại</label><input name="phone" type="text" class="form-control" placeholder="Nhập số điện thoại" value="<?php echo $row['phonenumber'] ?>"></div>
+                        <div class="col-md-12"><label class="labels">Số điện thoại</label><input required name="phone" type="text" class="form-control" placeholder="Nhập số điện thoại" value="<?php echo $row['phonenumber'] ?>"></div>
                         <!--  -->
-                        <div class="col-md-12"><label class="labels">Email</label><input name="email" type="text" class="form-control" placeholder="Nhập email" value="<?php echo $row['email'] ?>"></div>
+                        <div class="col-md-12"><label class="labels">Email</label><input required name="email" type="text" class="form-control" placeholder="Nhập email" value="<?php echo $row['email'] ?>"></div>
 
-                        <div class="col-md-12"><label class="labels">Địa chỉ</label><input name="address" type="text" class="form-control" placeholder="Địa chỉ" value="<?php echo $row['address'] ?>"></div>
+                        <div class="col-md-12"><label class="labels">Địa chỉ</label><input required name="address" type="text" class="form-control" placeholder="Địa chỉ" value="<?php echo $row['address'] ?>"></div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-6"><label class="labels">Ngày sinh</label><input name="birth" type="date" class="form-control" placeholder="Nhập ngày sinh của bạn" value="<?php echo $row['birthDate'] ?>"></div>
+                        <div class="col-md-6"><label class="labels">Ngày sinh</label><input required name="birthDate" type="date" class="form-control" placeholder="Nhập ngày sinh của bạn" value="<?php echo $row['birthDate'] ?>"></div>
                         <div class="col-md-6">
                             <label class="labels">Giới tính</label>
                             <select name="gender" class="form-control">
-                                <option value="Nam" <?php echo ($row['gender'] == 'Nam') ? 'selected' : ''; ?>>Nam</option>
-                                <option value="Nữ" <?php echo ($row['gender'] == 'Nữ') ? 'selected' : ''; ?>>Nữ</option>
+                                <option value="0" <?php echo ($row['gender'] == '0') ? 'selected' : ''; ?>>Nam</option>
+                                <option value="1" <?php echo ($row['gender'] == '1') ? 'selected' : ''; ?>>Nữ</option>
                             </select>
                         </div>
                     </div>
