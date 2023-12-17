@@ -15,7 +15,7 @@ if ($row['user_image']) {
 }
 
 $sql_order = "SELECT * FROM tbl_order INNER JOIN tbl_order_detail ON tbl_order.id = tbl_order_detail.order_id
-WHERE tbl_order.user_id = '$_SESSION[userId]' GROUP BY order_id";
+WHERE tbl_order.user_id = '$_SESSION[userId]'";
 $sql_order_query = mysqli_query($connect, $sql_order);
 ?>
 <div class="appCard">
@@ -60,7 +60,9 @@ $sql_order_query = mysqli_query($connect, $sql_order);
                         <div class="col"><label class="labels">Tên</label><input required name="fullName" type="text" class="form-control" placeholder="Tên của bạn" value="<?php echo $row['fullname'] ?>"></div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Số điện thoại</label><input required name="phone" type="text" class="form-control" placeholder="Nhập số điện thoại" value="<?php echo $row['phonenumber'] ?>"></div>
+                        <div class="col-md-12"><label class="labels">Số điện thoại</label><input required name="phone" type="text" class="form-control" placeholder="Nhập số điện thoại" value="<?php if ($row['phonenumber']) {
+                                                                                                                                                                                                    echo "0" . $row['phonenumber'];
+                                                                                                                                                                                                } else echo "" ?>"></div>
                         <!--  -->
                         <div class="col-md-12"><label class="labels">Email</label><input required name="email" type="text" class="form-control" placeholder="Nhập email" value="<?php echo $row['email'] ?>"></div>
 
@@ -90,6 +92,7 @@ $sql_order_query = mysqli_query($connect, $sql_order);
             <table class="table">
                 <thead>
                     <tr>
+                        <th class="text-center align-middle" scope="col">Mã đơn hàng</th>
                         <th class="text-center align-middle" scope="col">Mã</th>
                         <th scope="col">Sản phẩm</th>
                         <th class="text-center align-middle" scope="col">Tên sản phẩm</th>
@@ -102,7 +105,6 @@ $sql_order_query = mysqli_query($connect, $sql_order);
                     </tr>
                 </thead>
                 <?php
-
                 while ($row_order = mysqli_fetch_array($sql_order_query)) {
                     $show_size_sql = "SELECT * FROM tbl_size
                     WHERE tbl_size.id = '$row_order[size_id]'";
@@ -124,8 +126,12 @@ $sql_order_query = mysqli_query($connect, $sql_order);
 
                     $show_status_query = mysqli_query($connect, "SELECT * FROM tbl_status WHERE id = '$row_order[status_id]'");
                     $row_status = mysqli_fetch_array($show_status_query);
+
                 ?>
                     <tr>
+                        <td class="text-center align-middle">
+                            <?php echo $row_order['code'] ?>
+                        </td>
                         <td class="text-center align-middle">
                             <?php echo $row_product['code']; ?>
                         </td>
@@ -165,9 +171,19 @@ $sql_order_query = mysqli_query($connect, $sql_order);
                             <?php echo $row_status['name'] ?>
                         </td>
                         <td class="text-center align-middle">
-                            <button type="button" class="btn btn-danger remove-btn" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row_order['product_id']; ?>">
-                                <i class="fa-solid fa-trash"></i>
-                                Huỷ đơn hàng</button>
+                            <?php
+                            if ($row_status['name'] == "Chờ xác nhận") {
+                            ?>
+                                <button name="cancel" type="submit" class="btn btn-danger remove-btn" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row_order['product_id']; ?>">
+                                    <input type="hidden" name="order_id" value="<?php echo $row_order['order_id'] ?>">
+                                    <input type="hidden" name="product_id" value="<?php echo $row_order['product_id'] ?>">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Huỷ đơn hàng</button>
+                            <?php } else { ?>
+                                <button disabled name="cancel" type="submit" class="btn btn-danger remove-btn" data-bs-toggle="modal" data-bs-target="#confirmPopup_<?php echo $row_order['product_id']; ?>">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Huỷ đơn hàng</button>
+                            <?php } ?>
                         </td>
                     </tr>
                 <?php
