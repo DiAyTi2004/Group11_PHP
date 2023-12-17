@@ -62,7 +62,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                 <th class="noWrap">Code</th>
                 <th class="noWrap">Tên danh mục</th>
                 <th class="noWrap">Hình ảnh </th>
-                <th class="noWrap">Miêu tả</th>
+                <th class="noWrap">Mô tả</th>
                 <th class="noWrap">Quản lý</th>
 
             </tr>

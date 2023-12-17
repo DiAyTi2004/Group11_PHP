@@ -25,7 +25,7 @@
                                     <input name="hinhanh" type="file" class="form-control" id="inputGroupFile02">
                                 </div>
                                 <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">Miêu tả</label>
+                                    <label for="exampleFormControlInput1" class="form-label">Mô tả</label>
                                     <input name="description" type="text" class="form-control" id="exampleFormControlInput1">
                                 </div>
 

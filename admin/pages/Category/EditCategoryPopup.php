@@ -55,7 +55,7 @@
                                
                                 <div class="mb-2 col">
                                     <label for="exampleFormControlInput1" class="form-label">
-                                        Miêu tả
+                                        Mô tả
                                     </label>
                                     <input type="text" name="description" value="<?php echo $row['description'] ?>" class="form-control" id="exampleFormControlInput1">
                                 </div>
