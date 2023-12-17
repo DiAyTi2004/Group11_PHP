@@ -193,21 +193,10 @@
 
             <div class="button-container">
                 <a href="../../user/userCommon/UserIndex.php" class="btn btn-success mr-2"><i class="fa-solid fa-house mr-2"></i>Trang chủ</a>
-                <button onclick="printBill()" class="btn btn-warning"><i class="fa-solid fa-print mr-2"></i>In hoá đơn</button>
+                <a href="../../user/userCommon/UserIndex.php?usingPage=account" class="btn btn-warning mr-2"><i class="fa-solid fa-list mr-2"></i>Xem đơn hàng</a>
             </div>
         </div>
     </div>
-    <script>
-        function printBill() {
-            window.print();
-        }
-        $("button").click(function() {
-            $(".check-icon").hide();
-            setTimeout(function() {
-                $(".check-icon").show();
-            }, 10);
-        });
-    </script>
 
 </body>
 
