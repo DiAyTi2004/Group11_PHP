@@ -2,6 +2,8 @@
 include "../../../common/config/Connect.php";
 
 if (isset($_POST['changeInfor'])) {
+    $avatarFile = $_POST['avatarFile'];
+    $upload_dir = "pages/User/UserImages/";
     $fullName = $_POST["fullName"];
     $phone = $_POST["phone"];
     $email = $_POST['email'];

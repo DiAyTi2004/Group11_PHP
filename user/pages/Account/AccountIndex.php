@@ -167,7 +167,6 @@ $sql_order_query = mysqli_query($connect, $sql_order);
                             </span>
                         </td>
                         <td class="text-center align-middle">
-
                             <?php echo $row_status['name'] ?>
                         </td>
                         <td class="text-center align-middle">
