@@ -12,7 +12,7 @@
                         <tr>
                             <td class="row">
                                 <div class="mb-2 col">
-                                    <label for="exampleFormControlInput1" class="form-label">Code</label>
+                                    <label for="exampleFormControlInput1" class="form-label">Mã danh mục</label>
                                     <input name="code" type="text" class="form-control" id="exampleFormControlInput1">
                                 </div>
                                 <div class="mb-2 col">
@@ -32,12 +32,7 @@
                             </td>
 
                         </tr>
-<<<<<<< HEAD
-                        <tr>
-                            <
-                        </tr>
-=======
->>>>>>> f7fe3944a151c6870ef9ba35f9c0309a8a59aa53
+
                     </table>
             </div>
             <div class="modal-footer">

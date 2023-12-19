@@ -24,7 +24,7 @@
                             <td class="row">
                                 <div class="mb-2 col">
                                     <label for="exampleFormControlInput1" class="form-label">
-                                        Code
+                                        Mã danh mục
                                     </label>
                                     <input type="text" value="<?php echo $row['code'] ?>" name="code" class="form-control" id="exampleFormControlInput1">
 
