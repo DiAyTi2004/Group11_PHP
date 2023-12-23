@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 <?php
 include "../../../common/config/Connect.php";
 
@@ -36,4 +34,3 @@ if (isset($_POST['changeInfor'])) {
     header('Location:../../userCommon/UserIndex.php?usingPage=account');
 }
 ?>
->>>>>>> ce2f3d0ac86aa4c5f914101bf1b1540d4eba559c

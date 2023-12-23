@@ -19,7 +19,7 @@ WHERE tbl_order.user_id = '$_SESSION[userId]'";
 $sql_order_query = mysqli_query($connect, $sql_order);
 ?>
 <div class="appCard">
-    <form action="../../user/Email/SendEmailIndex.php?userId=<?php echo $_SESSION['userId']; ?>" method="post">
+    <form action="../../user/pages/Account/AccountLogic.php?userId=<?php echo $_SESSION['userId']; ?>" method="post">
         <h4 class="text-left title_event">Thông tin cá nhân</h4>
         <div class="row">
             <div class="col-md-4 border-right">

@@ -8,10 +8,8 @@ if(isset($_SESSION['userId'])) {
     // Lấy userId từ biến session
     $userId = $_SESSION['userId'];
 }
-
 $sql = "SELECT email FROM tbl_user WHERE id = '$userId'";
 $query = mysqli_query($connect, $sql);
-// Lấy kết quả từ câu lệnh SQL
 $result = mysqli_fetch_assoc($query);
 $email = $result['email'];
 ?>
