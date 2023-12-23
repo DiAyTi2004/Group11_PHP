@@ -1,0 +1,1 @@
+<b>Đơn hàng của bạn đã được gửi vể mail thành công!</b>

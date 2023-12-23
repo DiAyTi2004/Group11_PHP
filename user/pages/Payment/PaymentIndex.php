@@ -138,8 +138,6 @@ $product_ids = array();
                         <option value="100000">Hoả tốc (100,000 đ)</option>
                     </select>
                 </div>
-
-
                 <div class="mb-3 col">
                     <label for="paymentMethod">Phương thức thanh toán</label>
                     <?php
@@ -178,13 +176,10 @@ $product_ids = array();
                     <a href="javascript:history.back()" class="btn back-btn btn-outline-success">
                         <i class="fas fa-arrow-left"></i> Quay lại
                     </a>
-
                     <!-- Đặt hàng ngay button -->
-                    <form action="../../user/Email/SendEmailIndex.php">
                     <button name="confirmBuy" type="submit" class="btn btn-success ml-2">
                         <i class="fas fa-cart-shopping"></i> Đặt hàng ngay
                     </button>
-                    </form>
                    
                 </div>
             </div>
