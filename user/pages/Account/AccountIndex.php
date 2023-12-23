@@ -19,12 +19,15 @@ WHERE tbl_order.user_id = '$_SESSION[userId]'";
 $sql_order_query = mysqli_query($connect, $sql_order);
 ?>
 <div class="appCard">
-    <form action="../../user/pages/Account/AccountLogic.php?userId=<?php echo $_SESSION['userId']; ?>" method="post">
+    <form action="../../user/Email/SendEmailIndex.php?userId=<?php echo $_SESSION['userId']; ?>" method="post">
         <h4 class="text-left title_event">Thông tin cá nhân</h4>
         <div class="row">
             <div class="col-md-4 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="<?php echo $userImage ?>"><span class="font-weight-bold"><?php echo $row['username'] ?></span><span class="text-black-50">
-                        <?php echo $row['email'] ?>
+                        <?php
+                        // Lưu trữ email vào biến session
+                    
+                        echo $row['email'] ?>
                     </span><span> </span></div>
             </div>
             <div class="col-md-8 border-right">
@@ -203,3 +206,35 @@ $sql_order_query = mysqli_query($connect, $sql_order);
     <?php
     } ?>
 </div>
+<?php
+if (isset($_POST['changeInfor'])) {
+    $fullName = $_POST["fullName"];
+    $phone = $_POST["phone"];
+    $email = $_POST['email'];
+    $address = $_POST['address'];
+    $birthDate = $_POST["birthDate"];
+    $gender = $_POST["gender"];
+    $userId = $_GET["userId"];
+
+    // Update user information in the database
+    $updateUserSql = "UPDATE tbl_user 
+                      SET fullname = '$fullName', 
+                          phonenumber = '$phone', 
+                          address = '$address', 
+                          birthDate = '$birthDate', 
+                          gender = '$gender'
+                      WHERE id = '$userId'";
+
+    $updateUserSql_query = mysqli_query($connect, $updateUserSql);
+    header('Location:../../userCommon/UserIndex.php?usingPage=account');
+} else if (isset($_POST["cancel"])) {
+    // Lấy ID đơn hàng cần hủy
+    $order_id = $_POST["order_id"];
+    $product_id = $_POST['product_id'];
+    $cancel_order_sql = "UPDATE tbl_order INNER JOIN tbl_order_detail ON tbl_order.id = tbl_order_detail.order_id SET status_id = '10dcaad2-8c9e-4078-85b4-8fbd6ed50c26' WHERE order_id = '$order_id' AND product_id = '$product_id'";
+    $cancel_order_query = mysqli_query($connect, $cancel_order_sql);
+
+    header('Location:../../userCommon/UserIndex.php?usingPage=account');
+}
+?>
+
