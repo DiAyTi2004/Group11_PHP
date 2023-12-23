@@ -180,9 +180,12 @@ $product_ids = array();
                     </a>
 
                     <!-- Đặt hàng ngay button -->
+                    <form action="../../user/Email/SendEmailIndex.php">
                     <button name="confirmBuy" type="submit" class="btn btn-success ml-2">
                         <i class="fas fa-cart-shopping"></i> Đặt hàng ngay
                     </button>
+                    </form>
+                   
                 </div>
             </div>
     </div>
