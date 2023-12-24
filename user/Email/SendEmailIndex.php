@@ -70,22 +70,24 @@ function GuiMail($email,$content,$username){
  ?>
 <?php
 if (isset($_POST['confirm'])){
-    $content = "<p>Tên khách hàng: ".$username."</p>".
-    "<p>Địa chỉ nhận hàng: ".$result_order['receive_address']."</p>".
-    "<p>Số điện thoại nhận hàng: ".$result_order['receive_phone']."</p>".
-    "<p>Mã đơn hàng: ".$result_order['code']."</p>".
-    "<p>Số tiền giao hàng: ".$result_order['delivery_cost']."</p>".
-    "<p>Mã sản phẩm:  ".$result_product['code']."</p>".
-    "<p>Tên sản phẩm:  ".$result_product['name']."</p>".
-    "<p>Cỡ sản phẩm: ".$result_size['name']."</p>".
-    "<p>Giá sản phẩm: ".$result_order_detail['unit_price']."đ</p>".
-    "<p>Số lượng: ".$result_order_detail['quantity']."(đôi)</p>".
-    "<p>Tổng tiền: ".$tongTien."đ</p>"
-    ;
+    ob_start(); 
+    $content = "<table border='1'>".
+    "<tr><th colspan='2'>Thông Tin Khách Hàng</th></tr>".
+    "<tr><td>Tên khách hàng:</td><td>".$username."</td></tr>".
+    "<tr><td>Địa chỉ nhận hàng:</td><td>".$result_order['receive_address']."</td></tr>".
+    "<tr><td>Số điện thoại nhận hàng:</td><td>".$result_order['receive_phone']."</td></tr>".
+    "<tr><td>Mã đơn hàng:</td><td>".$result_order['code']."</td></tr>".
+    "<tr><td>Số tiền giao hàng:</td><td>".$result_order['delivery_cost']."</td></tr>".
+    "<tr><th colspan='2'>Thông Tin Sản Phẩm</th></tr>".
+    "<tr><td>Mã sản phẩm:</td><td>".$result_product['code']."</td></tr>".
+    "<tr><td>Tên sản phẩm:</td><td>".$result_product['name']."</td></tr>".
+    "<tr><td>Cỡ sản phẩm:</td><td>".$result_size['name']."</td></tr>".
+    "<tr><td>Giá sản phẩm:</td><td>".$result_order_detail['unit_price']."đ</td></tr>".
+    "<tr><td>Số lượng:</td><td>".$result_order_detail['quantity']."(đôi)</td></tr>".
+    "<tr><td>Tổng tiền:</td><td>".$tongTien."đ</td></tr>".
+    "</table>";
     GuiMail($email,$content,$username);
     header('Location:../../user/pages/Payment/ConfirmEmail.php');
+    ob_end_flush();
 }
-?>
-<?php
-
 ?>
