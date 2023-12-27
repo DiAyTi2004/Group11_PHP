@@ -366,7 +366,7 @@ create table tbl_cart_detail (
   size_id varchar(36) not null,
   quantity int,
   unit_price float ,
-  primary key (cart_id, product_id)
+  primary key (cart_id, product_id, size_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 create table tbl_status (
