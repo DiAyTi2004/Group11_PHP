@@ -97,3 +97,22 @@ $query_show_test = mysqli_query($connect, $sql_show_test);
         </button>
     </form>
 </div>
+<style>
+    .carousel-control-next, .carousel-control-prev {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 9%;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+    background: 0 0;
+    border: 0;
+    opacity: .5;
+    transition: opacity .15s ease;
+}
+</style>

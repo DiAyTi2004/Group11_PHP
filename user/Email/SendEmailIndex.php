@@ -15,21 +15,6 @@ $sql_order  = "SELECT * FROM tbl_order WHERE user_id = '$userId'";
 $query_order = mysqli_query($connect, $sql_order);
 $result_order = mysqli_fetch_assoc($query_order);
 
-$sql_order_detail = "SELECT * FROM tbl_order_detail WHERE order_id = '$result_order[id]'";
-$query_order_detail = mysqli_query($connect, $sql_order_detail);
-$result_order_detail = mysqli_fetch_assoc($query_order_detail);
-
-$sql_product = "SELECT * FROM tbl_product WHERE id = '$result_order_detail[product_id]'";
-$query_product = mysqli_query($connect, $sql_product);
-$result_product = mysqli_fetch_assoc($query_product);
-
-$sql_product_size = "SELECT * FROM tbl_product_size WHERE product_id = '$result_product[id]'";
-$query_product_size = mysqli_query($connect, $sql_product_size);
-$result_product_size = mysqli_fetch_assoc($query_product_size);
-
-$sql_size = "SELECT * FROM tbl_size WHERE id = '$result_product_size[size_id]'";
-$query_size = mysqli_query($connect, $sql_size);
-$result_size = mysqli_fetch_assoc($query_size);
 
 $getAllOrderSQL = "SELECT * FROM tbl_product
                     INNER JOIN tbl_order_detail ON tbl_order_detail.product_id = tbl_product.id
