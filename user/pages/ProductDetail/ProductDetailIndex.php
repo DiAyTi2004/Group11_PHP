@@ -78,7 +78,7 @@ $seconds = $time_left % 60;
 $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $hours, $minutes, $seconds);
 ?>
 <div class="appCard row m-0">
-<h4 style="margin-left: -2px;" class="title_event">THÔNG TIN SẢN PHẨM</h4>
+    <h4 style="margin-left: -2px;" class="title_event">THÔNG TIN SẢN PHẨM</h4>
     <div class="col-4 detail_images">
         <div class="ecommerce-gallery" data-mdb-zoom-effect="true" data-mdb-auto-height="true">
             <div class="row py-3 shadow-5">
@@ -446,7 +446,9 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
             // JavaScript code for the countdown timer
             document.addEventListener('DOMContentLoaded', function() {
                 // Set the end date for the countdown (one month from now)
-                var endDate = new Date("December 18, 2023 23:59:59").getTime();
+                var endDate = new Date();
+                endDate.setDate(endDate.getDate() + 1);
+                endDate.setHours(23, 59, 59);
 
                 function updateCountdown() {
                     var currentTime = new Date();
@@ -495,7 +497,7 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
 
 <!-- Add this script to handle modal opening -->
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Function to open the modal with the clicked image
         function openModal(imageSrc) {
             $('#modalImage').attr('src', imageSrc);
@@ -503,7 +505,7 @@ $time_left_formatted = sprintf('%d Ngày %d Giờ %d Phút %d Giây', $days, $ho
         }
 
         // Event listener for clicking on product images
-        $('.ecommerce-gallery-main-img, .ecommerce-gallery img').on('click', function () {
+        $('.ecommerce-gallery-main-img, .ecommerce-gallery img').on('click', function() {
             var imageSrc = $(this).attr('src');
             openModal(imageSrc);
         });

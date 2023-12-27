@@ -65,7 +65,9 @@ $cart_empty = mysqli_num_rows($show_cart_query) == 0; // Check if the cart is em
                 // JavaScript code for the countdown timer
                 document.addEventListener('DOMContentLoaded', function() {
                     // Set the end date for the countdown (one month from now)
-                    var endDate = new Date("December 18, 2023 23:59:59").getTime();
+                    var endDate = new Date();
+                    endDate.setDate(endDate.getDate() + 1);
+                    endDate.setHours(23, 59, 59);
 
                     function updateCountdown() {
                         var currentTime = new Date();
