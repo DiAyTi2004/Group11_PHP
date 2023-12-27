@@ -165,6 +165,7 @@ $product_ids = array();
                 <span>Tổng thanh toán: <span class="price_real" id="totalPayment"><?php echo number_format($totalAmount, 0, ',', '.') . ' đ'; ?></span></span><br>
                 <!-- Thêm trường ẩn để lưu order_id -->
                 <input type="hidden" name="orderId" value="<?php echo $order_id; ?>">
+                <input type="hidden" name="totalAmount" id="totalAmountInput" value="">
                 <!-- Add these hidden input fields inside your form -->
                 <input type="hidden" name="selectedCity" id="selectedCity" value="">
                 <input type="hidden" name="selectedDistrict" id="selectedDistrict" value="">
@@ -194,6 +195,9 @@ $product_ids = array();
         // Hiển thị phí vận chuyển và tổng thanh toán
         document.getElementById("shippingFee").innerText = numberFormat(shippingFee) + ' đ';
         document.getElementById("totalPayment").innerText = numberFormat(totalPayment) + ' đ';
+
+        // Cập nhật giá trị của totalAmountInput
+        document.getElementById("totalAmountInput").value = totalAmount;
     }
 
     function numberFormat(number) {
