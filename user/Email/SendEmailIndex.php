@@ -3,6 +3,7 @@ include "../../common/config/Connect.php";
 session_start();
 if(isset($_SESSION['userId'])) {
     $userId = $_SESSION['userId'];
+    include('../../user/Email/UpdateEmailPopup.php');
 }
 
 $sql = "SELECT * FROM tbl_user WHERE id = '$userId'";
@@ -64,7 +65,8 @@ function GuiMail($email, $content, $username) {
 <?php
 if (isset($_POST['confirm'])) {
     ob_start(); 
-    $content = "<div class='orderContainer display-flex' style='align-items: center; flex-direction: column;'>
+    
+        $content = "<div class='orderContainer display-flex' style='align-items: center; flex-direction: column;'>
     <div class='headerPrintOrder flex-center justify-between' style='padding: 0px 40px;'>
         <div class='logo w-300 h-300'>
             <img src='https://scontent.xx.fbcdn.net/v/t1.15752-9/385531793_665092928850659_9049026433017091781_n.jpg?stp=dst-jpg_p206x206&_nc_cat=111&ccb=1-7&_nc_sid=510075&_nc_ohc=lgHPtfIooO0AX9Lgia2&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdSJ0IjzJmukql67fujDBhjSqxH66Y9EJQSe_IEKM58l9Q&oe=659C4C0D'>
@@ -144,6 +146,8 @@ if (isset($_POST['confirm'])) {
 
     GuiMail($email, $content, $username);
     header('Location:../../user/pages/Payment/ConfirmEmail.php');
+    
+    
     ob_end_flush();
 }
 ?>

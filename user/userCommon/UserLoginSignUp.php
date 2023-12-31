@@ -94,6 +94,7 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
 } else if (isset($_POST['signUp'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $email = $_POST['email'];
     $passwordConfirmation = $_POST['passwordConfirmation'];
 
     $findByUsernameSQL = "SELECT * FROM tbl_user WHERE username = '$username'";
@@ -108,8 +109,8 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
     } else {
         $userId =  generateUuid();
         $userCode =  generateCode();
-        $createUser = "INSERT INTO tbl_user(id, code, username, password) 
-         VALUES ('" . $userId . "','" . $userCode . "','" . $username . "','" . $password . "')";
+        $createUser = "INSERT INTO tbl_user(id, code, username, password,email) 
+         VALUES ('" . $userId . "','" . $userCode . "','" . $username . "','" . $password . "','" . $email . "')";
         $res = mysqli_query($connect, $createUser);
 
         if ($res) {
@@ -172,11 +173,15 @@ if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['passwor
                         <input required name="username" type="text" placeholder="Tên tài khoản" />
                     </label>
                     <label>
+                        <input required name="email" type="text" placeholder="Email người dùng" />
+                    </label>
+                    <label>
                         <input required name="password" type="password" placeholder="Mật khẩu" />
                     </label>
                     <label>
                         <input required name="passwordConfirmation" type="password" placeholder="Xác nhận mật khẩu" />
                     </label>
+                    
                     <button style="margin-top: 9px" name="signUp">Đăng ký</button>
                 </form>
             </div>
