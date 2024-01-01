@@ -483,6 +483,60 @@ CREATE TABLE `tbl_product_image` (
 -- Đang đổ dữ liệu cho bảng `tbl_product_image`
 --
 
+<<<<<<< HEAD
+=======
+create table tbl_cart_detail (
+  cart_id varchar(36) not null,
+  product_id varchar(36) not null,
+  size_id varchar(36) not null,
+  quantity int,
+  unit_price float ,
+  primary key (cart_id, product_id, size_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+create table tbl_status (
+  id varchar(36) primary key not null, 
+  code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  name varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+insert into tbl_status (id, code, name, description) values
+('f1e30780-f494-477d-8fba-63d280843c91','S1','Chờ xác nhận','Trạng thái đầu tiên khi khách hàng đặt hàng thành công và hệ thống ghi nhận thông tin đơn hàng.'),
+('30928569-9d4c-4e24-a2f5-447a1cc895b5','S2','Chờ lấy hàng','Sản phẩm đã đóng gói xong và chờ đối tác vận chuyển đến lấy.'),
+('6e5f0c4f-bec1-4766-9af6-8f5928f56287','S3','Đang giao hàng','Đơn hàng đã rời kho và đang trên đường để được giao đến địa chỉ của khách hàng.'),
+('2fb6fe9b-c49c-4358-8dc1-943e20f5f094','S4','Đã giao hàng','Đơn hàng đã được giao thành công đến tay khách hàng.'),
+('10dcaad2-8c9e-4078-85b4-8fbd6ed50c26','S5','Đã hủy','Trạng thái này xảy ra khi đơn hàng bị hủy bởi khách hàng hoặc do các lý do khác.');
+
+create table tbl_order (
+  id varchar(36) primary key not null,
+  code varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  user_id varchar(36) not null,
+  status_id varchar(36) not null,
+  receive_phone varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  receive_address varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  delivery_cost float ,
+  payment_id varchar(36) not null,
+  description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  createDate datetime
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+create table tbl_order_detail (
+  order_id varchar(36) not null,
+  product_id varchar(36) not null,
+  size_id varchar(36) not null,
+  quantity int,
+  unit_price float ,
+  primary key (order_id, product_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+create table tbl_product_image (
+  id varchar(36) primary key not null,
+  product_id varchar(36) not null,
+  description LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  content varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+   main_image TINYINT(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+>>>>>>> d530d7c6e4ca9b4d6845127fd958c0c090a2cc68
 INSERT INTO `tbl_product_image` (`id`, `product_id`, `description`, `content`, `main_image`) VALUES
 ('7f0f5819-7962-401c-b98f-5d7bfd921001', '7f0f5819-7962-401c-b98f-5d7bfd92a001', '', 'https://tyhisneaker.com/wp-content/uploads/2023/08/giay-nike-air-jordan-1-low-se-reverse-ice-blue-w-like-auth-1.jpg', 1),
 ('7f0f5819-7962-401c-b98f-5d7bfd921002', '7f0f5819-7962-401c-b98f-5d7bfd92a002', '', 'https://tyhisneaker.com/wp-content/uploads/2023/08/nike-wmns-dunk-low-orange-pearl-dd1503-102.jpg', 1),
