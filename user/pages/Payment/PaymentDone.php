@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+$orderId=  $_GET['orderId'];
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -194,7 +196,7 @@
             <div class="button-container">
                 <a href="../../user/userCommon/UserIndex.php" class="btn btn-success mr-2"><i class="fa-solid fa-house mr-2"></i>Trang chủ</a>
                 <a href="../../user/userCommon/UserIndex.php?usingPage=account" class="btn btn-warning mr-2"><i class="fa-solid fa-list mr-2"></i>Xem đơn hàng</a>
-                <form action="../../user/Email/SendEmailIndex.php" method="post" style="margin-top: 10px;background-color: green;width: 200px; margin: 20px auto;height: 40px; border-radius: 10px;">
+                <form action="../../user/Email/SendEmailIndex.php?orderId=<?php echo $orderId ?>" method="post" style="margin-top: 10px;background-color: green;width: 200px; margin: 20px auto;height: 40px; border-radius: 10px;">
                     <i class="fa-solid fa-envelope-circle-check" style="height: 40px;color: white"></i>
                     <input type="submit" name= "confirm" value="Gửi đơn hàng về mail" style="color: white;background-color: green; border: 0px;height: 40px; border-radius :10px">
                 </form>
