@@ -2,8 +2,10 @@
 include "../../../common/config/Connect.php";
 
 if (isset($_POST['changeInfor'])) {
-    $avatarFile = $_POST['avatarFile'];
-    $upload_dir = "pages/User/UserImages/";
+   
+    //$file = $_FILES['avatarFile'];
+    //$avatarFile = $_FILES['avatarFile'];
+    //$upload_dir = "admin/pages/User/UserImages/";
     $fullName = $_POST["fullName"];
     $phone = $_POST["phone"];
     $email = $_POST['email'];
@@ -12,10 +14,20 @@ if (isset($_POST['changeInfor'])) {
     $gender = $_POST["gender"];
     $userId = $_GET["userId"];
 
+    $file = $_FILES['hinhanh'];
+$hinhanh = $file['name'] || "";
+$hinhanh_tmp = $_FILES['hinhanh']['tmp_name'];
+if (isset($_FILES['hinhanh']) && ($file['type'] == 'image/jpeg' || $file['type'] == 'image/jpg' || $file['type'] == 'image/png')) {
+    move_uploaded_file($hinhanh_tmp, '../../../admin/pages/User/UserImages/' . $hinhanh);
+}
+
     // Update user information in the database
     $updateUserSql = "UPDATE tbl_user 
-                      SET fullname = '$fullName', 
+                      SET 
+                        user_image = '" . $hinhanh . "',
+                            fullname = '$fullName', 
                           phonenumber = '$phone', 
+                          email = '$email',
                           address = '$address', 
                           birthDate = '$birthDate', 
                           gender = '$gender'
@@ -33,4 +45,5 @@ if (isset($_POST['changeInfor'])) {
 
     header('Location:../../userCommon/UserIndex.php?usingPage=account');
 }
+
 ?>

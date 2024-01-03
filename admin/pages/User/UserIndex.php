@@ -102,7 +102,7 @@ $tableData = mysqli_query($connect, $getTableDataSql);
                             echo '<i class="fa-solid fa-circle-user"></i>';
                         } else {
                             if ($_SESSION['userImage'] != 1) {
-                                echo '<img class="userLogoImage" src=' . $imageLink . ' alt="UserImg">';
+                                echo '<img class="hinhanh" src=' . $imageLink . ' alt="UserImg">';
                             } else {
                         ?>
                                 <img style="width: 120px; height: 160px" class="userLogoImage" src="pages/User/UserImages/<?php echo $row["user_image"] ?>" alt="">
