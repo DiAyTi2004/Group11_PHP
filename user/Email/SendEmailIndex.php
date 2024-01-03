@@ -144,7 +144,7 @@ if (isset($_POST['confirm'])) {
 </div>";
 
     GuiMail($email, $content, $username);
-    header('Location:../../user/pages/Payment/ConfirmEmail.php');
+    header('Location: ../../user/userCommon/UserIndex.php?usingPage=mail');
     
     
     ob_end_flush();
