@@ -192,7 +192,7 @@ if (isset($_POST['confirmBuy'])) {
             header('Location: ' . $jsonResult['payUrl']);
 
     } else {
-        header('Location:../../userCommon/UserIndex.php?usingPage=done');
+        header('Location:../../userCommon/UserIndex.php?usingPage=done&orderId='.$order_id);
     }
 }
 ?>

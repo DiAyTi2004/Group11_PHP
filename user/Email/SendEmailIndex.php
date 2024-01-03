@@ -3,9 +3,8 @@ include "../../common/config/Connect.php";
 session_start();
 if(isset($_SESSION['userId'])) {
     $userId = $_SESSION['userId'];
-    include('../../user/Email/UpdateEmailPopup.php');
 }
-
+$orderId = $_GET['orderId'];
 $sql = "SELECT * FROM tbl_user WHERE id = '$userId'";
 $query = mysqli_query($connect, $sql);
 $result = mysqli_fetch_assoc($query);
@@ -19,7 +18,7 @@ $result_order = mysqli_fetch_assoc($query_order);
 
 $getAllOrderSQL = "SELECT * FROM tbl_product
                     INNER JOIN tbl_order_detail ON tbl_order_detail.product_id = tbl_product.id
-                    WHERE tbl_order_detail.order_id = '$result_order[id]';";
+                    WHERE tbl_order_detail.order_id = '$orderId';";
 
 $tableOrderData = mysqli_query($connect, $getAllOrderSQL);
 
