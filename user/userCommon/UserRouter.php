@@ -19,6 +19,8 @@
         include("../pages/Payment/PaymentIndex.php");
     } else if ($usingPage == 'done') {
         include("../pages/Payment/PaymentDone.php");
+    } else if ($usingPage == 'mail') {
+        include("../pages/Payment/ConfirmEmail.php");
     }
     else {
         include("../pages/Home/HomeIndex.php");

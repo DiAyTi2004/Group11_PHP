@@ -8,10 +8,6 @@ $orderId=  $_GET['orderId'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thank You for Your Booking</title>
     <style>
-        /**
- * Extracted from: SweetAlert
- * Modified by: Istiak Tridip
- */
         .success-checkmark {
             width: 80px;
             height: 115px;

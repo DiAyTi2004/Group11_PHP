@@ -38,7 +38,7 @@ if ($total_event > 0) {
     }
 </style>
 
-<div class="show_category_slide appCard">
+<div class="show_category_slide appCard mt-5">
     <?php
     if (isset($_GET['usingPage'])) {
         $usingPage = $_GET['usingPage'];
